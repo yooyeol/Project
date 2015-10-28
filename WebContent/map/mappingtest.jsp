@@ -10,16 +10,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제발좀 나와라</title>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
 </head>
-
 <body>
-
 	<!-- GoogoleMap Asynchronously Loading the API ********************************************* -->
 	<script type="text/javascript">
 		var x = "37.4837121";
@@ -46,7 +42,7 @@
 			};
 			var marker;
 	<%		JSONDAO JSONMapping = new JSONDAO();
-			String sql = "select TourSiteMapx, TourSiteMapy from eztour.toursite limit 0, 100;";
+			String sql = "select TourSiteMapx, TourSiteMapy from eztour.toursite limit 0, 30000;";
 			try {
 				JSONObject datas = (JSONObject) JSONMapping.getJSONObject(sql);
 				JSONArray items = (JSONArray) datas.get("datas");
