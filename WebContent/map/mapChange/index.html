@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+      <object id="svgMap" data="skorea-provinces-v3.1.svg" type="image/svg+xml" width="500" height=500>Your browser doesn't support SVG</object>
+      <h1 id="h1"></h1>
+  </body> 
+  <script>
+  var svgMap;
+  var svgG;
+  var svgLayer;
+  window.onload=function(){
+	  	var a = document.getElementById("svgMap");
+	  	svgMap = a.contentDocument;
+	  	svgG = svgMap.getElementsByTagName("g");
+  }
+  </script>
+</html>
