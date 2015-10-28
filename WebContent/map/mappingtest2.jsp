@@ -33,15 +33,13 @@
         var map = new google.maps.Map(document.getElementById("map-canvas"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
             mapOptions);
          
-        var size_x = 60; // 마커로 사용할 이미지의 가로 크기
-        var size_y = 60; // 마커로 사용할 이미지의	 세로 크기
-         
         // 마커로 사용할 이미지 주소
-        var image = new google.maps.MarkerImage( 'http://www.larva.re.kr/home/img/boximage3.png',
-                            new google.maps.Size(size_x, size_y),
-                            '',
-                            '',
-                            new google.maps.Size(size_x, size_y));
+			var image = {
+				url : 'beachflag.png',
+				size : new google.maps.Size(20, 32),
+				origin : new google.maps.Point(0, 0),
+				anchor : new google.maps.Point(0, 32)
+			};
          
         var marker;
         marker = new google.maps.Marker({

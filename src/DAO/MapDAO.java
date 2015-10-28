@@ -49,6 +49,31 @@ public class MapDAO {
 		}
 		return mapList;
 	}
+	public Vector<MapBean> getmapList(String area){
+		Vector<MapBean> mapList = new Vector<MapBean>();
+		try{
+			con = pool.getConnection();
+			sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAddr like '?%' limit 0,500";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, area);
+//			pstmt.setInt(2, 10);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MapBean bean = new MapBean();
+				bean.setTourSiteTitle(rs.getString(1));
+				bean.setTourSiteMapX(rs.getDouble(2));
+				bean.setTourSiteMapY(rs.getDouble(3));
+				mapList.add(bean);
+				//System.out.println(rs.getString(1));
+			}			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return mapList;
+	}
 /*	public static void main(String[] args) {
 		MapDAO m = new MapDAO();
 		
