@@ -8,13 +8,32 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+    .container{
+    	width:80%;
+    }
+  	#includeMap{
+  		height:500px;
+  		border:1px solid black;
+  		padding:10px;
+  	}
+  	#mapList{
+  		height:500px;
+  		border:1px solid black;
+  	}
+  </style>
 </head>
 <body>
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#mapSelect">지역선택</a></li>
-		<li><a data-toggle="tab" href="#mapShow">지도보기</a></li>
-	</ul>
+	<div class="row">
+		<div id="includeMap"class="col-lg-5">
+			<%@include file="../mappingtest.jsp" %>
+		</div>
+		<div id="mapList"class="col-lg-5">
+			순서정하기
+		</div>
+	</div>
 </div>
+
 </body>
 </html>

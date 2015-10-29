@@ -64,6 +64,6 @@
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-	<div id="map-canvas" style="width: 100%; height: 920px"></div>
+	<div id="map-canvas" style="width: 100%; height: 480px"></div>
 </body>
 </html>
