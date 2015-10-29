@@ -38,6 +38,7 @@ public class JSONDAO {
 			rs = pstmt.executeQuery();
 			ResultSetMetaData metaData = rs.getMetaData();
 			int size = metaData.getColumnCount();
+			Math.random();
 			while(rs.next()){
 				JSONArray item = new JSONArray();
 				for (int i = 1; i <= size; i++) {
