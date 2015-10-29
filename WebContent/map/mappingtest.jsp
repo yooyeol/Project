@@ -42,7 +42,7 @@
 			};
 			var marker;
 	<%		JSONDAO JSONMapping = new JSONDAO();
-			String sql = "select TourSiteMapx, TourSiteMapy from eztour.toursite limit 0, 30000;";
+			String sql = "select * from eztour.toursite limit 0, 100000;";
 			try {
 				JSONObject datas = (JSONObject) JSONMapping.getJSONObject(sql);
 				JSONArray items = (JSONArray) datas.get("datas");
@@ -51,12 +51,12 @@
 					JSONArray item = (JSONArray) items.get(i);
 					%>
 					marker = new google.maps.Marker({
-						position : new google.maps.LatLng(<%=Double.valueOf(item.get(1).toString())%>,<%=Double.valueOf(item.get(0).toString())%>),
+						position : new google.maps.LatLng(<%=Double.valueOf(item.get(4).toString())%>,<%=Double.valueOf(item.get(3).toString())%>),
 						map : map,
 						draggable : false,
 						icon : image
 					});
-	<%			System.out.println("(" + item.get(1) + ", " + item.get(0) + ")");
+	<%			//System.out.println("(" + item.get(4) + ", " + item.get(3) + ")");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
