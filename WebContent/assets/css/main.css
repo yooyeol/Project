@@ -1,3 +1,4 @@
+
 @import url("font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 
@@ -391,7 +392,7 @@
 	}
 
 	.\34 u, .\34 u\24 {
-		width: 50%;
+		width: 33.3333333333%;
 		clear: none;
 		margin-left: 0;
 	}
@@ -454,15 +455,15 @@
 	}
 
 	.\-5u {
-		margin-left: 41.66667%;
+		margin-left: 30%;
 	}
 
 	.\-4u {
-		margin-left: 50%;
+		margin-left: 33.33333%;
 	}
 
 	.\-3u {
-		margin-left: 25%;
+		margin-left: 30%;
 	}
 
 	.\-2u {
@@ -2555,6 +2556,213 @@
 			}
 
 	}
+
+
+
+
+/* main1 */
+
+	#main1 {
+		/* margin-left: 375px; */
+	}
+
+		#main1 > section {
+			margin: 0;
+			overflow: hidden;
+			padding: 4em 0;
+			box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.025);
+			text-align: center;
+			background-image: url("images/overlay.png");
+		}
+
+			#main1 > section.dark {
+				color: #ddd;
+				color: rgba(255, 255, 255, 0.75);
+			}
+
+				#main1 > section.dark h2, #main1 > section.dark h3, #main1 > section.dark h4, #main1 > section.dark h5, #main1 > section.dark h6 {
+					color: inherit;
+				}
+
+				#main1 > section.dark strong {
+					color: #fff;
+					border-color: inherit;
+				}
+
+				#main1 > section.dark a {
+					color: #fff;
+					border-color: inherit;
+				}
+
+					#main1 > section.dark a:hover {
+						border-bottom-color: rgba(255, 255, 255, 0);
+					}
+
+			#main1 > section.cover {
+				padding: 6em 0;
+				background-size: cover;
+				background-position: center center;
+			}
+
+			#main1 > section.one {
+				background-color: #81918E;
+				background-image: url("../../images/banner.jpg");
+			}
+
+			#main1 > section.two {
+				background-color: #f5fafa;
+			}
+
+			#main1 > section.three {
+				background-color: #ecf1f1;
+			}
+
+			#main1 > section.four {
+				background-color: #e8edec;
+			}
+
+/* Wide */
+
+	@media screen and (min-width: 961px) and (max-width: 1880px) {
+
+		/* Basic */
+
+			body, input, textarea, select {
+				font-size: 17pt;
+			}
+
+		/* Header */
+
+			#header {
+				width: 300px;
+			}
+
+		/* Footer */
+
+			#footer {
+				margin-left: 300px;
+			}
+
+		/* main1 */
+
+			#main1 {
+				margin-left: 300px;
+			}
+
+	}
+
+/* Normal */
+
+	@media screen and (min-width: 961px) and (max-width: 1620px) {
+
+		/* main1 */
+
+			#main1 > section {
+				padding: 3em 0;
+			}
+
+			#main1 section.cover {
+				padding: 5em 0;
+			}
+
+	}
+
+/* Narrow */
+
+	@media screen and (min-width: 961px) and (max-width: 1320px) {
+
+		/* Basic */
+
+			body, input, textarea, select {
+				font-size: 16pt;
+			}
+
+			.container {
+				padding: 0 2em 0 2em;
+			}
+
+		/* List */
+
+			ul.icons li a {
+				width: 1.75em;
+			}
+
+		/* Item */
+
+			.item {
+				margin-bottom: 20px;
+			}
+
+		/* Header */
+
+			#header {
+				width: 20%;
+			}
+
+			#logo .image {
+				position: relative;
+				margin: 0 0 0.5em 0;
+			}
+
+			#nav ul li a {
+				font-size: 0.8em;
+				padding-top: 0.5em;
+				padding-bottom: 0.5em;
+			}
+
+				#nav ul li a span {
+					padding-right: 2.25em;
+				}
+
+					#nav ul li a span:before {
+						left: 100%;
+						margin-left: -1.25em;
+						line-height: 2.25em;
+					}
+
+		/* Footer */
+
+			#footer {
+				margin-left: 20%;
+			}
+
+		/* main1 */
+
+			#main1 {
+				margin-left: 20%;
+			}
+
+	}
+
+
+/* Item */
+
+	.item {
+		box-shadow: 0 0.05em 0.15em 0 rgba(0, 0, 0, 0.05);
+		margin-bottom: 40px;
+	}
+
+		.item header {
+			background: #fff;
+			margin: 0;
+			padding: 1em 0 1em 0;
+			font-size: 0.8em;
+		}
+
+			.item header h3 {
+				font-size: 1em;
+			}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Mobile */
 

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -9,7 +10,7 @@
 <html>
 		<head>
 		<title>요기조기 - 여행경로 만들기</title>
-		<meta charset="utf-8" />
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -84,7 +85,7 @@
 								
 									<!-- 지도띄워야징 -->
 					<div class="container" id="courseMap">
-					<%@include file="\css\yooyeolmap.jsp"%>
+					<%@include file="\css\mappingtest.jsp"%>
 					</div>
 					<!-- 지도띄워야징 -->
 					
