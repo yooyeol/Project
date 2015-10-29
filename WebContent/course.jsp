@@ -85,7 +85,7 @@
 								
 									<!-- 지도띄워야징 -->
 					<div class="container" id="courseMap">
-					<%@include file="\css\mappingtest.jsp"%>
+					<%@include file="\map\mappingtest.jsp"%>
 					</div>
 					<!-- 지도띄워야징 -->
 					
