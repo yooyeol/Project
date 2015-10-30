@@ -48,7 +48,7 @@ public class MapDAO {
 		}
 		return mapList;
 	}
-	
+
 	
 	public Vector<MapBean> getmapList(String area){
 		Vector<MapBean> mapList = new Vector<MapBean>();
