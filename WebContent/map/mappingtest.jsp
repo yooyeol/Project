@@ -5,6 +5,9 @@
 <%@page import="org.json.simple.parser.ParseException"%>
 <%@page import="DAO.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%
+	String uri=request.getContextPath();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -34,14 +37,14 @@
 
 			// 마커로 사용할 이미지 주소
 			var image = {
-				url : 'beachflag.png',
+				url : '<%=uri%>/map/beachflag.png',
 				size : new google.maps.Size(20, 32),
 				origin : new google.maps.Point(0, 0),
 				anchor : new google.maps.Point(0, 32)
 			};
 			var marker;
 	<%		JSONDAO JSONMapping = new JSONDAO();
-			String sql = "select * from eztour.toursite limit 0, 100000;";
+			String sql = "select * from eztour.toursite;";
 			try {
 				JSONObject datas = (JSONObject) JSONMapping.getJSONObject(sql);
 				JSONArray items = (JSONArray) datas.get("datas");
