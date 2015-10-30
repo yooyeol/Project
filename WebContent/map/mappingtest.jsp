@@ -48,7 +48,7 @@
 				System.out.println(items.size());
 				for (int i = 0; i < items.size(); i++) {
 					JSONArray item = (JSONArray) items.get(i);
-					%>
+	%>
 					marker = new google.maps.Marker({
 						position : new google.maps.LatLng(<%=Double.valueOf(item.get(4).toString())%>,<%=Double.valueOf(item.get(3).toString())%>),
 						map : map,

@@ -9,29 +9,40 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <style>
-    .container{
-    	width:80%;
-    }
   	#includeMap{
-  		height:500px;
+  		height:50%;
   		border:1px solid black;
   		padding:10px;
   	}
   	#mapList{
-  		height:500px;
+  		height:50%;
+  		border:1px solid black;
+  	}
+  	#mapListShow{
+  		height:100%;
+  		border:1px solid black;
+  	}
+  	#mapSurrounding{
+  		height:100%;
   		border:1px solid black;
   	}
   </style>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div id="includeMap"class="col-lg-5">
-			<%@include file="../mappingtest.jsp" %>
+<div class="container-fluid">
+	<div class="col-lg-4">
+		<div id="includeMap" class="row">
+			<jsp:include page="../mappingtest.jsp"></jsp:include>
 		</div>
-		<div id="mapList"class="col-lg-5">
-			순서정하기
+		<div id="mapList" class="row">
+			mapList
 		</div>
+	</div>
+	<div id="mapListShow" class="col-lg-4">
+		mapListShow
+	</div>
+	<div id="mapSurrounding" class="col-lg-4">
+		mapSurrounding
 	</div>
 </div>
 

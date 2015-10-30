@@ -24,14 +24,13 @@ public class MapDAO {
 		}
 	}
 	
-	public Vector<MapBean> mapList(){
+	public Vector<MapBean> mapList(String sendSql, int areaCode){
 		Vector<MapBean> mapList = new Vector<MapBean>();
 		try{
 			con = pool.getConnection();
-			sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite limit 0,1000";
+			sql = sendSql;
 			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, 0);
-//			pstmt.setInt(2, 10);
+			pstmt.setInt(1, areaCode);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -49,6 +48,8 @@ public class MapDAO {
 		}
 		return mapList;
 	}
+	
+	
 	public Vector<MapBean> getmapList(String area){
 		Vector<MapBean> mapList = new Vector<MapBean>();
 		try{
