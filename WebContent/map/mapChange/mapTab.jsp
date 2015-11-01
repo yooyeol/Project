@@ -11,25 +11,18 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="jquery.sortable.js"></script>
+<script src="js/jquery.sortable.js"></script>
 <style>
 	#label{
 		text-align:center;
 		margin:auto;
 		padding:10px;
 	}
-	li{
-		list-style:none;
-		border:1px solid black;
-		margin:5px;
-		height:40px;
-	}
 	#includeMap{
 		height:50%;
 		padding:10px;
 	}
 	#mapList{
-		border:1px solid black;
 		height:50%;
 		padding:10px;
 	}
@@ -39,23 +32,39 @@
 	#mapSurrounding{
 		padding:10px;
 	}
+	.delete{
+		float:right;
+	}
 </style>
 <script>
 	$(document).ready(function(){
 		$('.sortable').sortable();
 		
-		$("#categoryCode1").children('option:gt(0)').hide();
-	    
-		$("#content_select").change(function() {
-	    	$("#categoryCode1").val("col0");
-	        $("#categoryCode1").children('option').hide();
-	        $("#categoryCode1").children("option[value^=" + $(this).val() + "]").show();
-	        //$("#h2").text($("#content_select option:selected").val());
+		$("#contentType").change(function() {
+	        if($("#contentType option:selected").val() == "col0"){
+		        $("#h1").text("검색 결과가 없습니다.");
+	        }else{
+	        	var str1;
+	        	var str2;
+	        	xhttp = new XMLHttpRequest();
+	        	xhttp.onreadystatechange = function() {
+	        	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	        	      document.getElementById("txtHint").innerHTML = xhttp.responseText;
+	        	    }
+	        	  }
+	        	xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2, true);
+	        	xhttp.send();
+	        }
+	        
 	    });
 		$("#areaSelect").click(function(){
 			var url="<%=uri%>/map/mapChange/svgMap.jsp";
 			window.open(url, "","width=520 height=550");
 		});
+		$(".delete").click(function(){
+			$(this).parent().remove();
+		});
+		
 	});
 </script>
 </head>
@@ -67,20 +76,15 @@
 			<button id="areaSelect" type="button" class="btn btn-primary">지역선택</button>
 		</div>
 		<div id="mapList" class="row">
-			<ul class="sortable list">
-				<li>Item 1</li>
-				<li>Item 2</li>
-				<li>Item 3</li>
-				<li>Item 4</li>
-				<li>Item 5</li>
-				<li>Item 6</li>
-				<li>Item 7</li>
-				<li>Item 8</li>
-				<li>Item 9</li>
-				<li>Item 10</li>
-				<li>Item 11</li>
-				<li>Item 12</li>
-				<li>Item 13</li>
+			<ul class="sortable list list-group">
+				<li class="list-group-item">
+				출발지
+				<span class="glyphicon glyphicon-remove-circle delete"></span> 
+				</li>
+				<li class="list-group-item">
+				Item 2
+				<span class="glyphicon glyphicon-remove-circle delete"></span>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -91,11 +95,11 @@
 			</div>
 			<form name="mapFrm" method="post">
 				<div class="col-lg-1">
-					<input type="text" name="areaCode" class="form-control">
+					<input id="areaCode" type="text" name="areaCode" class="form-control" disabled>
 					<!-- 나중에 type="hidden"으로 바꾸기 -->
 				</div>
 				<div class="col-lg-2">
-				<select class="form-control" name="content_select" id="content_select">	
+				<select class="form-control" name="contentType" id="contentType">	
 				<option value="col0">타입 선택</option>
 				<option value="12">관광지</option>
 				<option value="14">문화시설</option>
@@ -107,42 +111,11 @@
 				<option value="39">음식점</option>
 			</select>
 			</div>
-			<div class="col-lg-2">
-				<select class="form-control" name="categoryCode1" id="categoryCode1">
-					<!--기본 분류-->
-					<option value="col0">대분류</option>
-
-					<!--관광지 선택 시-->
-					<option value="12_A01">자연</option>
-					<option value="12_A02">인문(문화/예술/역사)</option>
-
-					<!--문화시설 선택 시-->
-					<option value="14_A02">인문(문화/예술/역사)</option>
-		
-					<!-- 축제공연행사 선택 시 -->
-					<option value="15_A02">인문(문화/예술/역사)</option>
-		
-					<!-- 여행코스 선택 시 -->
-					<option value="25_C01">추천코스</option>
-		
-					<!-- 레포츠 선택 시 -->
-					<option value="28_A03">레포츠</option>
-		
-					<!-- 숙박 선택 시 -->
-					<option value="32_B02">숙박</option>
-		
-					<!-- 쇼핑 선택 시 -->
-					<option value="38_A04">쇼핑</option>
-		
-					<!-- 음식점 선택 시 -->
-					<option value="39_A05">음식</option>
-				</select>
-			</div>
 			</form>
 		</div>
 		<div class="row">
 			<div id="mapListShow" class="col-lg-4">
-				mapListShow
+				<h1 id="h1"></h1>
 			</div>
 			<div id="mapSurrounding" class="col-lg-4">
 				mapSurrounding

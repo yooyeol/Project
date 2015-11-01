@@ -44,7 +44,7 @@
 			};
 			var marker;
 	<%		JSONDAO JSONMapping = new JSONDAO();
-			String sql = "select * from eztour.toursite;";
+			String sql = "select * from eztour.toursite limit 0,100;";
 			try {
 				JSONObject datas = (JSONObject) JSONMapping.getJSONObject(sql);
 				JSONArray items = (JSONArray) datas.get("datas");

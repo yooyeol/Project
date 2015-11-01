@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//왜 커밋 안되냐
 public class JSONDAO {
 	Connection conn = null;
 	ResultSet rs = null;
@@ -24,7 +23,7 @@ public class JSONDAO {
 	}
 	String id = "root";
 	String pw = "root";
-	String url = "jdbc:mysql://192.168.25.44:3306/eztour";
+	String url = "jdbc:mysql://localhost:3306/eztour";
 		
 	@SuppressWarnings("unchecked")
 	public JSONObject getJSONObject(String sql) {
@@ -38,7 +37,6 @@ public class JSONDAO {
 			rs = pstmt.executeQuery();
 			ResultSetMetaData metaData = rs.getMetaData();
 			int size = metaData.getColumnCount();
-			Math.random();
 			while(rs.next()){
 				JSONArray item = new JSONArray();
 				for (int i = 1; i <= size; i++) {
@@ -60,5 +58,10 @@ public class JSONDAO {
 		if(rs != null) try{ rs.close();} catch(Exception e){ e.printStackTrace(); }
 		if(pstmt != null) try{ pstmt.close();} catch(Exception e){ e.printStackTrace(); }
 		if(conn != null) try{ conn.close();} catch(Exception e){ e.printStackTrace(); }
+	}
+	
+	public static void main(String[] args) {
+		JSONDAO j = new JSONDAO();
+		System.out.println(j.getJSONObject("select * from toursite limit 0,10").toJSONString());
 	}
 }

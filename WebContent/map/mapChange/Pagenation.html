@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="js/jquery.bootstrap.min.js"></script>
+<script 9src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/jquery.sortable.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/jquery.dataTables.min.css">
+<style>
+
+</style>
+</head>
+<body>
+	<div id="content"></div>
+	<p id="pagination-here"></p>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			
+			$('#pagination-here').bootpag({
+				total : 23,
+				maxVisible : 10
+			}).on('page', function(event, num) {
+				$("#content").html("Page " + num); // or some ajax content loading...
+			});
+			
+			$("sorted_table").sortable({
+					containerSelector : 'table',
+					itemPath : '> tbody',
+					itemSelector : 'tr',
+					placeholder : '<tr class="placeholder"/>',
+				    group: 'list',
+				   
+				    isValidTarget: function  ($item, container) {
+				    if($item)
+				      return true;
+				    else
+				      return $item.parent("table")[0] == container.el[0];
+				  },
+				  onDrop: function ($item, container, _super) {
+				    $('#serialize_output').text(
+				      group.sortable("serialize").get().join("\n"));
+				    _super($item, container);
+				  },
+				  serialize: function (parent, children, isContainer) {
+				    return isContainer ? children.join() : parent.text();
+				  },
+				  tolerance: 6,
+				  distance: 10
+				});
+			$('.sorted_table').sortable({
+				containerSelector : 'table',
+				itemPath : '> tbody',
+				itemSelector : 'tr',
+				placeholder : '<tr class="placeholder"/>'
+			}); 
+		});
+	</script>
+
+	<div class="container">
+		<table class="table table-striped table-bordered table-hover sorted_table list">
+			<thead>
+				<tr>
+					<th>A Column</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>A Item 1</td>
+				</tr>
+				<tr>
+					<td>A Item 2</td>
+				</tr>
+				<tr>
+					<td>A Item 3</td>
+				</tr>
+				<tr>
+					<td>A Item 4</td>
+				</tr>
+				<tr>
+					<td>A Item 5</td>
+				</tr>
+				<tr>
+					<td>A Item 6</td>
+				</tr>
+				<tr>
+					<td>A Item 7</td>
+				</tr>
+				<tr>
+					<td>A Item 8</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover sorted_table list">
+			<thead>
+				<tr>
+					<th>A Column</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>A Item 1</td>
+				</tr>
+				<tr>
+					<td>A Item 2</td>
+				</tr>
+				<tr>
+					<td>A Item 3</td>
+				</tr>
+				<tr>
+					<td>A Item 4</td>
+				</tr>
+				<tr>
+					<td>A Item 5</td>
+				</tr>
+				<tr>
+					<td>A Item 6</td>
+				</tr>
+				<tr>
+					<td>A Item 7</td>
+				</tr>
+				<tr>
+					<td>A Item 8</td>
+				</tr>
+			</tbody>
+		</table>
+		<pre id="serialize_output"></pre>
+	</div>
+	<div class="container">
+		<div class="col-lg-3">
+			<ul class="limited_drop_targets vertical">
+				<li class="highlight">Item 1</li>
+				<li>Item 2</li>
+				<li class="highlight">Item 3</li>
+				<li>Item 4</li>
+				<li class="highlight">Item 5</li>
+				<li>Item 6</li>
+			</ul>
+		</div>
+		<div class="col-lg-3">
+			<ul class="limited_drop_targets vertical">
+                <li class="" style="">Item 1</li>
+                <li class="">Item 2</li>
+                <li class="">Item 3</li>
+                <li class="highlight">Item 5</li>
+                <li class="highlight" style="">Item 4</li>
+                <li class="highlight">Item 6</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -3,7 +3,11 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.Vector;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import Bean.MapBean;
 import DBConn.DBConnectionMgr;
@@ -11,10 +15,6 @@ import DBConn.DBConnectionMgr;
 public class MapDAO {
 	
 	private DBConnectionMgr pool;
-	private Connection con = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private String sql = null;
 	
 	public MapDAO(){
 		try{
@@ -24,8 +24,47 @@ public class MapDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONObject getJSONObject(String sql, String areaCode, int contentType){
+		JSONObject result = null;
+		JSONArray datas = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			result = new JSONObject();
+			datas = new JSONArray();
+			result.put("datas", datas);
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, areaCode);
+			pstmt.setInt(2, contentType);
+			rs = pstmt.executeQuery();
+			ResultSetMetaData metaData = rs.getMetaData();
+			int size = metaData.getColumnCount();
+			while(rs.next()){
+				JSONArray data = new JSONArray();
+				for(int i=1;i<=size;i++){
+					data.add(rs.getString(i));
+				}
+				datas.add(data);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
+	
 	public Vector<MapBean> mapList(String sendSql, int areaCode){
 		Vector<MapBean> mapList = new Vector<MapBean>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
 		try{
 			con = pool.getConnection();
 			sql = sendSql;
@@ -52,6 +91,10 @@ public class MapDAO {
 	
 	public Vector<MapBean> getmapList(String area){
 		Vector<MapBean> mapList = new Vector<MapBean>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
 		try{
 			con = pool.getConnection();
 			sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAddr like '?%' limit 0,500";
@@ -75,14 +118,4 @@ public class MapDAO {
 		}
 		return mapList;
 	}
-/*	public static void main(String[] args) {
-		MapDAO m = new MapDAO();
-		
-		for(int i=0;i<m.mapList().size();i++){
-			System.out.println(m.mapList().get(i).getTourSiteTitle());
-			System.out.println(m.mapList().get(i).getTourSiteMapX());
-			System.out.println(m.mapList().get(i).getTourSiteMapY());
-			System.out.println("=========================");
-		}
-	}*/
 }
