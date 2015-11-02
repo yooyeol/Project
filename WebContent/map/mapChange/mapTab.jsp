@@ -36,20 +36,23 @@
 		float:right;
 	}
 </style>
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('.sortable').sortable();
 		
 		$("#contentType").change(function() {
 	        if($("#contentType option:selected").val() == "col0"){
-		        $("#h1").text("검색 결과가 없습니다.");
+		        $("#mapListShowUl").text("검색 결과가 없습니다.");
 	        }else{
-	        	var str1;
-	        	var str2;
+	        	var str1 = $("#areaCode").val();
+	        	var str2 = $("#contentType option:selected").val();
 	        	xhttp = new XMLHttpRequest();
 	        	xhttp.onreadystatechange = function() {
 	        	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	        	      document.getElementById("txtHint").innerHTML = xhttp.responseText;
+	        	    	jsonObject = JSON.parse(xhttp.responseText);
+	        	    	
+	        	    	
+	        	      document.getElementById("mapListShowUl").innerHTML = xhttp.responseText;
 	        	    }
 	        	  }
 	        	xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2, true);
@@ -115,7 +118,9 @@
 		</div>
 		<div class="row">
 			<div id="mapListShow" class="col-lg-4">
-				<h1 id="h1"></h1>
+				<ul id="mapListShowUl">
+					
+				</ul>
 			</div>
 			<div id="mapSurrounding" class="col-lg-4">
 				mapSurrounding

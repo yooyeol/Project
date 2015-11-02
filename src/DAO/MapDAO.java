@@ -25,7 +25,7 @@ public class MapDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject getJSONObject(String sql, String areaCode, int contentType){
+	public JSONObject getJSONObject(String sql, String areaCode, String contentType){
 		JSONObject result = null;
 		JSONArray datas = null;
 		Connection con = null;
@@ -38,7 +38,7 @@ public class MapDAO {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, areaCode);
-			pstmt.setInt(2, contentType);
+			pstmt.setInt(2, Integer.parseInt(contentType));
 			rs = pstmt.executeQuery();
 			ResultSetMetaData metaData = rs.getMetaData();
 			int size = metaData.getColumnCount();
@@ -49,15 +49,14 @@ public class MapDAO {
 				}
 				datas.add(data);
 			}
+			System.out.println(result);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			pool.freeConnection(con, pstmt, rs);
 		}
-		
 		return result;
 	}
-	
 	
 	public Vector<MapBean> mapList(String sendSql, int areaCode){
 		Vector<MapBean> mapList = new Vector<MapBean>();
