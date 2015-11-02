@@ -8,15 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>맵 탭</title>
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="http://code.jquery.com/qunit/qunit-1.13.0.css">
+<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"	href="http://code.jquery.com/qunit/qunit-1.13.0.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery.sortable.js"></script>
 <script src="js/jquery.twbsPagination.js"></script>
 <style>
@@ -65,15 +61,16 @@ $(document).ready(function(){
     		    xhttp.onreadystatechange = function() {
     		    	if (xhttp.readyState == 4 && xhttp.status == 200) {
     		    	var jsonObject = JSON.parse(xhttp.responseText);
-
+					
     		        for(var i in jsonObject.datas){
     		        	console.log("title : " + jsonObject.datas[i]);
     					var list = '<li class="list-group-item">' + jsonObject.datas[i] + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
     		        	$("#mapListShowUl").append(list);
     		        }
+    		        $()
     		        $(".connected").sortable({
     						connectWith:'.connected'
-    					});
+    				});
     		        	    	
     		        	$(".delete").click(function(){
     		        		$(this).parent().remove();
@@ -97,13 +94,15 @@ $(document).ready(function(){
 		<div class="col-lg-4">
 			<div id="includeMap" class="row">
 				<jsp:include page="../mappingtest.jsp"></jsp:include>
+				<!-- jsp:param name:"이름"(,) value="값" -->
+			</div>
+			<div class="row">
 				<button id="areaSelect" type="button" class="btn btn-primary">지역선택</button>
 				<button id="startSelect" type="button" class="btn btn-primary">출발지 입력</button>
 			</div>
 			<div id="mapList" class="row">
 				<ul id="tourPath" class="sortable list list-group connected">
-					<li class="list-group-item">출발지 <span
-						class="glyphicon glyphicon-remove-circle delete"></span>
+					<li class="list-group-item disabled">출발지 <span class="glyphicon glyphicon-remove-circle delete"></span>
 					</li>
 				</ul>
 			</div>

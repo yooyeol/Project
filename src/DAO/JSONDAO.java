@@ -23,7 +23,7 @@ public class JSONDAO {
 	}
 	String id = "root";
 	String pw = "root";
-	String url = "jdbc:mysql://192.168.25.44:3306/eztour";
+	String url = "jdbc:mysql://kitri.iptime.org:3306/eztour";
 		
 	@SuppressWarnings("unchecked")
 	public JSONObject getJSONObject(String sql) {
