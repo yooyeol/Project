@@ -7,7 +7,7 @@ import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "org.gjt.mm.mysql.Driver",
-    _url = "jdbc:mysql://localhost:3306/eztour?useUnicode=true&characterEncoding=UTF-8",
+    _url = "jdbc:mysql://192.168.25.44:3306/eztour?useUnicode=true&characterEncoding=UTF-8",
     _user = "root",
     _password = "root";
     

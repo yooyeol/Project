@@ -32,6 +32,7 @@ public class MapDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try{
+			System.out.println(sql);
 			result = new JSONObject();
 			datas = new JSONArray();
 			result.put("datas", datas);
@@ -44,6 +45,7 @@ public class MapDAO {
 			int size = metaData.getColumnCount();
 			while(rs.next()){
 				JSONArray data = new JSONArray();
+				JSONArray item = new JSONArray();
 				for(int i=1;i<=size;i++){
 					data.add(rs.getString(i));
 				}
