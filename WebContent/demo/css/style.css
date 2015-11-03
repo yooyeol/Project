@@ -777,6 +777,7 @@ h3.side-title-head {
 .accordation_menu label {
 	line-height:43px;
 	font-weight:400;
+	
 }
 .accordation_menu label{
 	display: block;
@@ -796,6 +797,29 @@ h3.side-title-head {
 .accordation_menu input{
 	display: none;
 }
+/**sdsdsdsd**/
+
+.dd label {
+	line-height:43px;
+	font-weight:400;
+	
+}
+.dd label{
+	display: block;
+	position: relative;
+	padding:0px 20px;
+	height:45px;
+	
+	z-index: 20;
+	transition: background-color .7s;
+	-webkit-transition: background-color .7s;
+	-moz-transition: background-color .7s;
+	-o-transition: background-color .7s;
+	-ms-transition: background-color .7s;
+	margin-bottom: 1px;
+	border-bottom: 1px solid #84754e;
+}
+
 /*** Right Icon ***/
 .accordation_menu label i.i-right1,
 .accordation_menu label i.i-right2{
@@ -843,7 +867,7 @@ h3.side-title-head {
 	font-size:10px;
 }
 .accordation_menu input:checked ~ div.content{
-	height:300px;
+	height:600px;
 	background:#f9f9f9;
 }
 /*** For Change Animation Effects ****/
@@ -1182,7 +1206,7 @@ a.pp-title:hover {
 }
 .scrollbar{
 	float: left;
-	height:300px;
+	height:580px;
 	width:100%;
 	overflow-y: scroll;
 }
@@ -1443,8 +1467,8 @@ div#myTabContent {
 	padding: 0 0 2em 0em;
 }
 p.artext {
-	color: #9F9F9F;
-    font-size: 1.1em;
+	color: black;
+    font-size: 1.3em;
     line-height: 2em;
     font-weight: 400;
 	margin-top: 1.5em;
@@ -1586,14 +1610,14 @@ ul.categories li a:hover {
 	margin-bottom:1.5em;
 }
 .related-posts{
-	margin:4em 0;	
+	margin:1em 0;	
 }
 .thumbnail {
 	border-radius:0;
 	margin-bottom: 14px;
 }
 .related-grids h5 a {
-    color: #B1B0AE;
+    color: #2B2720;
 	font-size: 1em;
 }
 .related-grids h5 a:hover {
@@ -2401,6 +2425,17 @@ address a:hover {
 	}
 }
 @media screen and (max-width: 1080px) {
+	
+	#header-wrapper {
+		position: relative;
+		padding: 4em 0 2em 0;
+		background-image: url("images/easy traveling.jpg");
+		
+		background-color: #348cb2;
+		background-size: 100% 620%;
+		background-size: 128px 128px, 100% 620%, auto;
+		background-repeat: repeat, no-repeat, no-repeat;
+	}
 	.logo a img {
 		width: 25%;
 	}
@@ -2831,6 +2866,7 @@ address a:hover {
 	}
 	.main-body {
 		padding: 0px 0 4em 0;
+	
 	}
 	.col-md-3.col-xs-12.footer-grid {
 		margin-top: 3em;
@@ -3206,7 +3242,7 @@ address a:hover {
 	}
 	.related-grids {
 		width: 50%;
-		margin-top: 1em;
+		margin-top: 0em;
 	}
 	.related-posts h4 {
 		margin-bottom: 0.5em;
@@ -3215,7 +3251,7 @@ address a:hover {
 		font-size: 1.9em;
 	}
 	p.artext {
-		font-size: 1em;
+		font-size: 2em;
 	}
 	.thumbnail {
 		padding: 2px;
@@ -3539,7 +3575,7 @@ address a:hover {
 		margin-top: 25px;
 	}
 	.related-posts {
-		margin: 1em 0 2em 0;
+		margin: 0em 0 2em 0;
 	}
 	.share_grid ul li a i {
 		margin-left: 10px;

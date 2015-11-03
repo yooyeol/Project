@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
 
 
-<!DOCTYPE html>
-<html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- web-fonts -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='styleseet' type'text/css'>
 <script src="js/responsiveslides.min.js"></script>
 	<script>
 		$(function () {
@@ -63,8 +63,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="header-bottom">
 			<div class="logo text-center">
-				<a href="main.jsp"><img src="images/logo.jpg" alt="" /></a>
-			</div>
+			
+				<a href="main.jsp"><img " src="images/mainLogo.jpg" alt="" /></a> 
+				
+			</div> 
+			
 			<div class="navigation">
 				<nav class="navbar navbar-default" role="navigation">
 		   <div class="wrap">
@@ -156,13 +159,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	
-	
+	<!-- header-section-ends-here ---------------------------------------------------------------------->
 	
 	
 	<!-- content-section-starts-here -->
 	<div class="main-body">
 		<div class="wrap">
-			<div class="col-md-8 content-left">
+		
+			<div class="single-page">
+			
+			<div class="col-md-8 content-left single-post">
+				<div class="blog-posts">
+			<h3 class="post">Donald Trump News - Donald Trump Special Reports -글 제목</h3></br>
+				<div class="last-article">
+					
+					
 				<div class="slider">
 					<div class="callbacks_wrap">
 						<ul class="rslides" id="slider">
@@ -187,10 +198,213 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</ul>
 					</div>
 				</div>
-				</div>
-			<div  class="col-md-4 side-bar">
-			<div class="first_half">
 				
+						
+				<div class="row related-posts">
+					
+					<div class="col-xs-6 col-md-3 related-grids">
+						<a href="single.html" class="thumbnail">
+							<img src="images/f2.jpg" alt=""/>
+						</a>
+						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
+					</div>	
+					<div class="col-xs-6 col-md-3 related-grids">
+						<a href="single.html" class="thumbnail">
+							<img src="images/f1.jpg" alt=""/>
+						</a>
+						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
+					</div>
+					<div class="col-xs-6 col-md-3 related-grids">
+						<a href="single.html" class="thumbnail">
+							<img src="images/f3.jpg" alt=""/>
+						</a>
+						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
+					</div>
+					<div class="col-xs-6 col-md-3 related-grids">
+						<a href="single.html" class="thumbnail">
+							<img src="images/f6.jpg" alt=""/>
+						</a>
+						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
+					</div>					
+				</div>
+				
+					<p class="artext">The premier was meeting with Queen Elizabeth II at Buckingham Palace as the Conservatives reached the 326-seat threshold that allows them
+						to ditch their Liberal Democrat coalition partners and govern alone in the 650-seat Parliament.</p>
+						<p class="artext">The premier was meeting with Queen Elizabeth II at Buckingham Palace as the Conservatives reached the 326-seat threshold that allows them
+						to ditch their Liberal Democrat coalition partners and govern alone in the 650-seat Parliament.
+						사용자 주절주절주절어어어어얼
+						</p>
+						
+					<ul class="categories">
+						<li><a href="#">댓글</a></li>
+						<li><a href="#">good <p class="glyphicon glyphicon-thumbs-up"></p></a></li>
+						<li><a href="#">별로 <span class="glyphicon glyphicon-thumbs-down"></span>bad</a></li>
+						<li><a href="#">경로바구니로 <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+				
+					</ul>
+					
+					
+					<div class="blog-posts">
+					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
+					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로</h2>
+					
+					
+					</div>
+					
+
+ 			
+					<div style="padding: 1em">
+						<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
+					</button>
+					
+					<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
+					</button>
+					<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
+					</button>
+					</div>
+					
+					<div class="clearfix"></div>
+					<!--related-posts-->
+			
+				<!--//related-posts-->
+
+				<section class="accordation_menu">
+				<div class="response">
+				<div class="scrollbar" id="style-2">
+				 <label for="label-1" id="item1"><i class="ferme"> </i>Responses<i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
+					
+					<div class="media response-info">
+						<div class="media-left response-text-left">
+							<a href="#">
+								<img style="width: 80px"class="media-object" src="images/c1.jpg" alt=""/>
+							</a>
+							<h5><a href="#"><%out.print(session.getAttribute("idKey")); %></a></h5>
+						</div>
+						<div class="media-body response-text-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<ul>
+								<li>Sep 21, 2015</li>
+								<li><a href="single.html">Reply</a></li>
+							</ul>
+							<div class="media response-info">
+								<div class="media-left response-text-left">
+									<a href="#">
+										<img class="media-object" src="images/c2.jpg" alt=""/>
+									</a>
+									<h5><a href="#">Username</a></h5>
+								</div>
+								<div class="media-body response-text-right">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									<ul>
+										<li>July 17, 2015</li>
+										<li><a href="single.html">Reply</a></li>
+									</ul>		
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="media response-info">
+						<div class="media-left response-text-left">
+							<a href="#">
+								<img class="media-object" src="images/c3.jpg" alt=""/>
+							</a>
+							<h5><a href="#">Username</a></h5>
+						</div>
+						<div class="media-body response-text-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<ul>
+								<li>June 21, 2015</li>
+								<li><a href="single.html">Reply</a></li>
+							</ul>		
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="media response-info">
+						<div class="media-left response-text-left">
+							<a href="#">
+								<img class="media-object" src="images/c4.jpg" alt=""/>
+							</a>
+							<h5><a href="#">Username</a></h5>
+						</div>
+						<div class="media-body response-text-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<ul>
+								<li>Mar 28, 2015</li>
+								<li><a href="single.html">Reply</a></li>
+							</ul>
+							<div class="media response-info">
+								<div class="media-left response-text-left">
+									<a href="#">
+										<img class="media-object" src="images/c5.jpg" alt=""/>
+									</a>
+									<h5><a href="#">Username</a></h5>
+								</div>
+								<div class="media-body response-text-right">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									<ul>
+										<li>Feb 19, 2015</li>
+										<li><a href="single.html">Reply</a></li>
+									</ul>		
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="media response-info">
+						<div class="media-left response-text-left">
+							<a href="#">
+								<img class="media-object" src="images/c6.jpg" alt=""/>
+							</a>
+							<h5><a href="#">Username</a></h5>
+						</div>
+						<div class="media-body response-text-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<ul>
+								<li>Jan 20, 2015</li>
+								<li><a href="single.html">Reply</a></li>
+							</ul>		
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>	
+				</section>
+				</div>
+				
+				
+	<div class="clearfix"></div>
+				<div class="coment-form">
+				<h2 >Leave your comment</h2></br>
+					
+				
+					<form>
+						<h4><%out.print("ID : "+session.getAttribute("idKey")); %></h4>
+						<textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Comment...';}" required="">Your Comment...</textarea>
+						<input type="submit" value="Submit Comment" >
+					</form>
+				</div>	
+				
+				
+				
+			</div>
+		</div>
+
+				</div>
+			<div class="col-md-4 side-bar">
+			<div class="first_half">
+			
+			
 				<div class="list_vertical">
 		         	 	<section class="accordation_menu">
 						  <div>
@@ -297,26 +511,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 						    </div>
 						  </div>
-						  <div>
-						 
+						  </div>
 						</section>
-					 </div>
-				
-					 </div>
 					 
 					
+					  </div>
+				
+					<div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
+		</div>
 	</div>
 	<!-- content-section-ends-here -->
-	
-	
-	
-	
 	<!-- footer-section-starts-here -->
 	<div class="footer">
-		<div class="footer-top">
+	<div class="footer-top">
 			<div class="wrap">
 				<div class="col-md-3 col-xs-6 col-sm-4 footer-grid">
 					<h4 class="footer-head">About Us</h4>
