@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="Bean.MapBean" %>
+<%@ page import="java.util.Vector" %>
+<jsp:useBean id="mapDAO" class="DAO.MapDAO"></jsp:useBean>
 <%
 	String uri = request.getContextPath();
+	request.setCharacterEncoding("UTF-8");
+	String sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAreaCode=? limit 0,50";
+	int areaCode = 1;
+	Vector<MapBean> mapList = mapDAO.mapList(sql, areaCode);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -72,10 +79,14 @@ li:hover{
 </style>
 <script type="text/javascript">
 var test;
+var change;
 $(document).ready(function(){
+	change = $("#contentType").change(function(){
+		
+	});
 		$("#contentType").change(function() {
 	        if($("#contentType option:selected").val() == "col0"){
-
+				
 	        }else{
 	        	$("#mapListShowUl").contents().remove();
 	        	$('#pagination').twbsPagination({
@@ -132,13 +143,19 @@ $(document).ready(function(){
 		});
 });
 
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
 function listAdd(jsonObject){
 	var list
 	for(var i in jsonObject.datas){
 		list += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
-		
 	}
-	
 	return list;
 }
 </script>
@@ -149,20 +166,8 @@ function listAdd(jsonObject){
 			<div id="includeMap" class="row">
 				<div id="map"></div>
 				<!-- 구글맵 자바스크립트 시작 -->
-				
-<script>
-
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2g9najY884bSPUcq93hp8KMQ6PVw3EZM&callback=initMap"></script>				
-       	<!-- 구글맵 자바스크립트 끝 -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2g9najY884bSPUcq93hp8KMQ6PVw3EZM&callback=initMap"></script>
+       			<!-- 구글맵 자바스크립트 끝 -->
 			</div>
 			<div class="row">
 				<button id="areaSelect" type="button" class="btn btn-primary">지역선택</button>
