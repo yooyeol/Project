@@ -25,6 +25,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='styleseet' type'text/css'>
+  
+  
+ 
 <script src="js/responsiveslides.min.js"></script>
 	<script>
 		$(function () {
@@ -48,9 +51,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 </script>
+<body style="height:1500px">
 </head>
 <body>
 	<!-- header-section-starts-here -->
+	
+
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
 			<div class="wrap">
@@ -136,10 +144,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!--/.navbar-collapse-->
 	 <!--/.navbar-->
 			</div>
-		</nav>
+		
 		</div>
 	</div>
-	
+	</nav>
 	<div class="wrap">
 		<div class="move-text">
 			<div class="breaking_news">
@@ -158,7 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</script>
 		</div>
 	</div>
-	
+	</nav>
 	<!-- header-section-ends-here ---------------------------------------------------------------------->
 	
 	
@@ -246,13 +254,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					<div class="blog-posts">
 					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
-					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로</h2>
+					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					
+					<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
+					</button>
 					
+					<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
+					</button>
+					<button type="button" class="btn btn-default btn-lg">
+ 						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
+					</button>
+					</h2>
 					</div>
 					
 
- 			
+ 			<!-- 
 					<div style="padding: 1em">
 						<button type="button" class="btn btn-default btn-lg">
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
@@ -264,7 +282,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="btn btn-default btn-lg">
  						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
 					</button>
-					</div>
+					</div> -->
 					
 					<div class="clearfix"></div>
 					<!--related-posts-->
