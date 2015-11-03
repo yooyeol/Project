@@ -14,7 +14,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery.sortable.js"></script>
-<script src="js/jquery.twbsPagination.js"></script>
+<script type="text/javascript" src="js/jquery.pajinate.js"></script>
 <style>
 #label {
 	text-align: center;
@@ -45,7 +45,26 @@
 }
 li:hover{
 	cursor:pointer;
+	border:1px solid;
 }
+.list-group-item{
+	margin-top:10px;
+	margin-bottom: 10px;
+}
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color:#DB5C04;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}	
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -67,16 +86,23 @@ $(document).ready(function(){
     					var list = '<li class="list-group-item">' + jsonObject.datas[i] + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
     		        	$("#mapListShowUl").append(list);
     		        }
-    		        $()
+    		        $('#mapListShow').pajinate({
+    		        	num_page_links_to_display:6
+    		        });
+    		        
     		        $(".connected").sortable({
     						connectWith:'.connected'
     				});
     		        	    	
-    		        	$(".delete").click(function(){
-    		        		$(this).parent().remove();
-    		        	});
+    		        $(".delete").click(function(){
+    		        	$(this).parent().remove();
+    		        });
+    		        $(".list-group-item").click(function(){
+    		        	window.open("detailPage.jsp","","width=520 height=550");
+    		        });
+    		        
     		        }
-    		        }
+    		    }
     		        xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2, true);
     		        xhttp.send();
 	        }//else
@@ -133,11 +159,12 @@ $(document).ready(function(){
 				</form>
 			</div>
 			<div class="row">
-				<div id="mapListShow" class="col-lg-4">
-					<ul id="mapListShowUl" class="sortable list list-group connected">
+				<div id="mapListShow" class="container col-lg-4">
+					<div class="page_navigation"></div>
+					<br/>
+					<ul id="mapListShowUl" class="content list list-group connected">
 
 					</ul>
-					<ul id="pagination" class="pagination-sm"></ul>
 				</div>
 				<div id="mapSurrounding" class="col-lg-4">mapSurrounding</div>
 			</div>

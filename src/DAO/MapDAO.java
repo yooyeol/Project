@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Vector;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -27,15 +28,16 @@ public class MapDAO {
 	@SuppressWarnings("unchecked")
 	public JSONObject getJSONObject(String sql, String areaCode, String contentType){
 		JSONObject result = null;
-		JSONArray datas = null;
+		JSONArray dataArray = null;
+		JSONObject data = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try{
 			System.out.println(sql);
-			result = new JSONObject();
-			datas = new JSONArray();
-			result.put("datas", datas);
+			//result.put("datas", datas);
+			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, areaCode);
@@ -43,14 +45,29 @@ public class MapDAO {
 			rs = pstmt.executeQuery();
 			ResultSetMetaData metaData = rs.getMetaData();
 			int size = metaData.getColumnCount();
+
+			result = new JSONObject();
+			dataArray = new JSONArray();
+			
 			while(rs.next()){
-				JSONArray data = new JSONArray();
-				JSONArray item = new JSONArray();
-				for(int i=1;i<=size;i++){
-					data.add(rs.getString(i));
-				}
-				datas.add(data);
+				data = new JSONObject();
+				data.put("TourSiteContentID", rs.getString(1));
+				System.out.println("TourSiteContentID : " + rs.getString(1));
+				
+				/*data.put("TourSiteTitle", rs.getString(2));
+				System.out.println("TourSiteTitle : " + rs.getString(2));
+				data.put("TourSiteAddr", rs.getString(3));
+				System.out.println("TourSiteAddr : " + rs.getString(3));
+				data.put("TourSiteMapX", rs.getString(4));
+				System.out.println("TourSiteMapX : " + rs.getString(4));
+				data.put("TourSiteMapY", rs.getString(5));
+				System.out.println("TourSiteMapY : " + rs.getString(5));
+				data.put("TourSiteFirstImage", rs.getString(6));
+				System.out.println("TourSiteFirstImage : " + rs.getString(6));*/
+				dataArray.add(data);
 			}
+			result.put("datas", dataArray);
+			System.out.println(size);
 			System.out.println(result);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -58,6 +75,10 @@ public class MapDAO {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return result;
+	}
+	public static void main(String args[]){
+		MapDAO m = new MapDAO();
+		m.getJSONObject("SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=? LIMIT 0,10", "32", "12");
 	}
 	
 	public Vector<MapBean> mapList(String sendSql, int areaCode){
