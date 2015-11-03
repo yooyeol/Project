@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String uri = request.getContextPath();
 %>
 <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
 <jsp:useBean id="bean" class="Bean.MemberBean"></jsp:useBean>
@@ -12,7 +13,7 @@
 %>
 <script type="text/javascript">
 	alert("회원가입을 하였습니다.");
-	location.href="main.html";
+	location.href="<%=uri%>/main/LoginMain.jsp";
 </script>
 <%
 	}else{

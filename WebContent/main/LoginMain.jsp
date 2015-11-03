@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String uri = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>	
 <head>
@@ -7,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <meta name="keywords" content="User Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
-<link href="cssLogin/style.css" rel='stylesheet' type='text/css' />
+<link href="<%=uri %>/cssLogin/style.css" rel='stylesheet' type='text/css' />
 <!--web-fonts-->
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
@@ -17,17 +20,17 @@
 <!--User-Login-->
 <h1>User Login</h1>
 <div class="avtar">
-	<img src="images/avtar.png" />
+	<img src="<%=uri%>/images/avtar.png" />
 </div>
 
 
 
 	<div class="login-form">
-		<p>New user?<a href="loginProc.jsp">Register here!</a></p>
-			<form>
+		<p>처음 오셨습니까?<a href="<%=uri%>/member/register.jsp">여기</a>를 클릭하세요.</p>
+			<form method="post" action="<%=uri%>/member/loginProc.jsp">
 				<div class="form-text">
-					<input type="text" class="text" value="Input your E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" >
-					<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+					<input type="text" name="emil" class="text" value="Input your E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" >
+					<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 				</div>
 					<input type="submit"value="GO" >
 			</form>
@@ -36,7 +39,7 @@
 <!--/User-Login-->
 <!--start-copyright-->
 <div class="copy-right">
-	<p>Template by <a href="http://w3layouts.com"> 요기조기<p> 
+	<p>Template by <a href="#"> 요기조기<p> 
 </div>
 <!--//end-copyright-->	
 </body>

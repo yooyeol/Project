@@ -111,7 +111,7 @@ public class MemberDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "select MemberEmail, MemberPass from member where id=? amd pass=PASSWORD(?)";
+			sql = "select MemberEmail, MemberPass from member where MemberEmail=? and MemberPass=PASSWORD(?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, pass);
