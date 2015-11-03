@@ -7,14 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>맵 탭</title>
+<title>여행경로 구성</title>
 <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet"	href="http://code.jquery.com/qunit/qunit-1.13.0.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery.sortable.js"></script>
-<script type="text/javascript" src="js/jquery.pajinate.js"></script>
+<script type="text/javascript" src="js/jquery.twbsPagination.js"></script>
 <style>
 #label {
 	text-align: center;
@@ -65,46 +65,59 @@ li:hover{
 	background-color:white !important;
 	color:black !important;
 }	
+#map {
+        height: 500px;
+        width:500px;
+}
 </style>
 <script type="text/javascript">
+var test;
 $(document).ready(function(){
 		$("#contentType").change(function() {
 	        if($("#contentType option:selected").val() == "col0"){
-		        $("#mapListShowUl").text("검색 결과가 없습니다.");
+
 	        }else{
 	        	$("#mapListShowUl").contents().remove();
-				var str1 = $("#areaCode").val();
-    		    var str2 = $("#contentType option:selected").val();
-    		    xhttp = new XMLHttpRequest();
+	        	$('#pagination').twbsPagination({
+		            totalPages: 35,
+		            visiblePages: 5,
+		            onPageClick: function (event, page) {
+		            	//페이지 시작
+		            	
+						var str1 = $("#areaCode").val();
+    		    		var str2 = $("#contentType option:selected").val();
+    		   			xhttp = new XMLHttpRequest();
     		        	
-    		    xhttp.onreadystatechange = function() {
-    		    	if (xhttp.readyState == 4 && xhttp.status == 200) {
-    		    	var jsonObject = JSON.parse(xhttp.responseText);
-					
-    		        for(var i in jsonObject.datas){
-    		        	console.log("title : " + jsonObject.datas[i]);
-    					var list = '<li class="list-group-item">' + jsonObject.datas[i] + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
-    		        	$("#mapListShowUl").append(list);
-    		        }
-    		        $('#mapListShow').pajinate({
-    		        	num_page_links_to_display:6
-    		        });
+    		    		xhttp.onreadystatechange = function() {
+    		    			if (xhttp.readyState == 4 && xhttp.status == 200) {
+    		    				var jsonObject = JSON.parse(xhttp.responseText);
+
+    		    				var list = listAdd(jsonObject);
+						
+    		       				document.getElementById("mapListShowUl").innerHTML = list;
     		        
-    		        $(".connected").sortable({
-    						connectWith:'.connected'
-    				});
+    		        			$(".connected").sortable({
+    								connectWith:'.connected'
+    							});
     		        	    	
-    		        $(".delete").click(function(){
-    		        	$(this).parent().remove();
-    		        });
-    		        $(".list-group-item").click(function(){
-    		        	window.open("detailPage.jsp","","width=520 height=550");
-    		        });
+    		        			$(".delete").click(function(){
+    		        				$(this).parent().remove();
+    		        			});
+    		        	
+    		        			$(".list-group-item").click(function(){
+    		        				var url = "detailPage.jsp?value="+$(this).attr("value");
+    		        				window.open(url,"","width=520 height=550");
+    		        			});
     		        
-    		        }
-    		    }
-    		        xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2, true);
-    		        xhttp.send();
+    		        		}
+    		    		}
+    		        		xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2 + "&paging="+page, true);
+    		        		xhttp.send();
+		            
+		            	
+		            }//페이지 끝
+		        });//pagination 끝
+	        	
 	        }//else
 	    });
 		
@@ -112,25 +125,56 @@ $(document).ready(function(){
 			var url="<%=uri%>/map/mapChange/svgMap.jsp";
 			window.open(url, "", "width=520 height=550");
 		});
+		
+		$("#startSelect").click(function(){
+			var url = "<%=uri%>/map/mapChange/startSelect.jsp?check=y";
+			window.open(url,"","width=520 height=550");
+		});
 });
+
+function listAdd(jsonObject){
+	var list
+	for(var i in jsonObject.datas){
+		list += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
+		
+	}
+	
+	return list;
+}
 </script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="col-lg-4">
 			<div id="includeMap" class="row">
-				<jsp:include page="../mappingtest.jsp"></jsp:include>
-				<!-- jsp:param name:"이름"(,) value="값" -->
+				<div id="map"></div>
+				<!-- 구글맵 자바스크립트 시작 -->
+				
+<script>
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2g9najY884bSPUcq93hp8KMQ6PVw3EZM&callback=initMap"></script>				
+       	<!-- 구글맵 자바스크립트 끝 -->
 			</div>
 			<div class="row">
 				<button id="areaSelect" type="button" class="btn btn-primary">지역선택</button>
 				<button id="startSelect" type="button" class="btn btn-primary">출발지 입력</button>
 			</div>
 			<div id="mapList" class="row">
+			<form name="pathFrm" method="post" action="">
 				<ul id="tourPath" class="sortable list list-group connected">
-					<li class="list-group-item disabled">출발지 <span class="glyphicon glyphicon-remove-circle delete"></span>
+					<li id="startPath" class="list-group-item disabled">출발지</span>
 					</li>
 				</ul>
+			</form>	
 			</div>
 		</div>
 		<div class="col-lg-8">
@@ -159,14 +203,17 @@ $(document).ready(function(){
 				</form>
 			</div>
 			<div class="row">
+				<ul id="pagination" class="pagination-sm"></ul>
 				<div id="mapListShow" class="container col-lg-4">
-					<div class="page_navigation"></div>
 					<br/>
+					<label id="page-content"></label>
 					<ul id="mapListShowUl" class="content list list-group connected">
 
 					</ul>
 				</div>
-				<div id="mapSurrounding" class="col-lg-4">mapSurrounding</div>
+				<div id="mapSurrounding" class="col-lg-4">mapSurrounding
+					<label id="test"></label>
+				</div>
 			</div>
 		</div>
 	</div>

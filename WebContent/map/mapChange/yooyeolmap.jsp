@@ -4,8 +4,9 @@
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="mapDAO" class="DAO.MapDAO"></jsp:useBean>
 <%
+	String uri = request.getContextPath();
 	request.setCharacterEncoding("UTF-8");
-	String sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAreaCode=?";
+	String sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAreaCode=? limit 0,50";
 	int areaCode = 1;
 	Vector<MapBean> mapList = mapDAO.mapList(sql, areaCode);
 %>
@@ -60,7 +61,7 @@ var beaches = [
 
 function setMarkers(map) {
   var image = {
-    url: 'beachflag.png',
+    url: '<%=uri%>/map/beachflag.png',
     size: new google.maps.Size(20, 32),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(0, 32)
@@ -85,5 +86,6 @@ function setMarkers(map) {
 </script>
     
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2g9najY884bSPUcq93hp8KMQ6PVw3EZM&signed_in=true&callback=initMap"></script>
+  
   </body>
 </html>

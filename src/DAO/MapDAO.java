@@ -52,18 +52,17 @@ public class MapDAO {
 			while(rs.next()){
 				data = new JSONObject();
 				data.put("TourSiteContentID", rs.getString(1));
-				System.out.println("TourSiteContentID : " + rs.getString(1));
-				
-				/*data.put("TourSiteTitle", rs.getString(2));
-				System.out.println("TourSiteTitle : " + rs.getString(2));
+				//System.out.println("TourSiteContentID : " + rs.getString(1));
+				data.put("TourSiteTitle", rs.getString(2));
+				//System.out.println("TourSiteTitle : " + rs.getString(2));
 				data.put("TourSiteAddr", rs.getString(3));
-				System.out.println("TourSiteAddr : " + rs.getString(3));
+				//System.out.println("TourSiteAddr : " + rs.getString(3));
 				data.put("TourSiteMapX", rs.getString(4));
-				System.out.println("TourSiteMapX : " + rs.getString(4));
+				//System.out.println("TourSiteMapX : " + rs.getString(4));
 				data.put("TourSiteMapY", rs.getString(5));
-				System.out.println("TourSiteMapY : " + rs.getString(5));
+				//System.out.println("TourSiteMapY : " + rs.getString(5));
 				data.put("TourSiteFirstImage", rs.getString(6));
-				System.out.println("TourSiteFirstImage : " + rs.getString(6));*/
+				//System.out.println("TourSiteFirstImage : " + rs.getString(6));
 				dataArray.add(data);
 			}
 			result.put("datas", dataArray);
@@ -76,10 +75,10 @@ public class MapDAO {
 		}
 		return result;
 	}
-	public static void main(String args[]){
+/*	public static void main(String args[]){
 		MapDAO m = new MapDAO();
-		m.getJSONObject("SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=? LIMIT 0,10", "32", "12");
-	}
+		m.getJSONObject("SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=? LIMIT 0,100", "32", "12");
+	}*/
 	
 	public Vector<MapBean> mapList(String sendSql, int areaCode){
 		Vector<MapBean> mapList = new Vector<MapBean>();

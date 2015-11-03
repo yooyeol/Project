@@ -29,7 +29,7 @@
 		<p>처음 오셨습니까?<a href="<%=uri%>/member/register.jsp">여기</a>를 클릭하세요.</p>
 			<form method="post" action="<%=uri%>/member/loginProc.jsp">
 				<div class="form-text">
-					<input type="text" name="emil" class="text" value="Input your E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" >
+					<input type="text" name="email" class="text" value="Input your E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" >
 					<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 				</div>
 					<input type="submit"value="GO" >
