@@ -22,6 +22,7 @@
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery.sortable.js"></script>
 <script type="text/javascript" src="js/jquery.twbsPagination.js"></script>
+<script type="text/javascript" src="js/mapTabJs.js"></script>
 <style>
 #label {
 	text-align: center;
@@ -71,19 +72,16 @@ li:hover{
 .active_page{
 	background-color:white !important;
 	color:black !important;
-}	
+}
 #map {
         height: 500px;
-        width:500px;
+        width:100%;
 }
 </style>
 <script type="text/javascript">
+var tourPath = new Array();
 var test;
-var change;
 $(document).ready(function(){
-	change = $("#contentType").change(function(){
-		
-	});
 		$("#contentType").change(function() {
 	        if($("#contentType option:selected").val() == "col0"){
 				
@@ -99,10 +97,13 @@ $(document).ready(function(){
     		    		var str2 = $("#contentType option:selected").val();
     		   			xhttp = new XMLHttpRequest();
     		        	
+    		   			xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2 + "&paging="+page, true);
+		        		xhttp.send();
+		        		
     		    		xhttp.onreadystatechange = function() {
     		    			if (xhttp.readyState == 4 && xhttp.status == 200) {
     		    				var jsonObject = JSON.parse(xhttp.responseText);
-
+								
     		    				var list = listAdd(jsonObject);
 						
     		       				document.getElementById("mapListShowUl").innerHTML = list;
@@ -110,25 +111,19 @@ $(document).ready(function(){
     		        			$(".connected").sortable({
     								connectWith:'.connected'
     							});
-    		        	    	
+    		        			
     		        			$(".delete").click(function(){
     		        				$(this).parent().remove();
     		        			});
-    		        	
+    		        			
     		        			$(".list-group-item").click(function(){
     		        				var url = "detailPage.jsp?value="+$(this).attr("value");
     		        				window.open(url,"","width=520 height=550");
     		        			});
-    		        
     		        		}
-    		    		}
-    		        		xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2 + "&paging="+page, true);
-    		        		xhttp.send();
-		            
-		            	
+    		    		}	
 		            }//페이지 끝
 		        });//pagination 끝
-	        	
 	        }//else
 	    });
 		
@@ -141,22 +136,30 @@ $(document).ready(function(){
 			var url = "<%=uri%>/map/mapChange/startSelect.jsp?check=y";
 			window.open(url,"","width=520 height=550");
 		});
+		
+		$("#tourPath").mouseover(function(){
+			var size = $("#tourPath > li").size();
+			//document.getElementById("test").innerHTML = $("#tourPath > li").size();
+			for(var i=0;i<size;i++){
+				tourPath[i] = $("#tourPath").children().eq(i).attr("id");
+			}
+			document.getElementById("test").innerHTML = tourPath;
+			//mapSearch(tourPath);
+		});
 });
 
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
-
-function listAdd(jsonObject){
-	var list
-	for(var i in jsonObject.datas){
-		list += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
+function mapSearch(tourPath){
+	xhttp = new XMLHttpRequest();
+	
+	xhttp.open("GET", "getTourList.jsp?tourPath=" + tourPath, true);
+	xhttp.send();
+	
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && xhttp.status == 200){
+			var tourPathObject = JSON.parse(xhttp.responseText);
+			
+		}
 	}
-	return list;
 }
 </script>
 </head>
@@ -176,7 +179,7 @@ function listAdd(jsonObject){
 			<div id="mapList" class="row">
 			<form name="pathFrm" method="post" action="">
 				<ul id="tourPath" class="sortable list list-group connected">
-					<li id="startPath" class="list-group-item disabled">출발지</span>
+					<li id="startPath" class="list-group-item disabled" value="startPath">출발지</span>
 					</li>
 				</ul>
 			</form>	
