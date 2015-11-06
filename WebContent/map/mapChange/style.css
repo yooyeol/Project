@@ -17,3 +17,8 @@ path.region {
 path.region:hover {
     fill: #ff6347;
 }
+
+#map {
+        height: 500px;
+        width:100%;
+}

@@ -53,7 +53,7 @@ var i=0;
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: {lat: 37, lng: 127}
+    center: {lat: 37.5661932511, lng: 126.9827595315}
   });
 
   setMarkers(map);

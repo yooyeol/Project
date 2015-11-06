@@ -870,6 +870,7 @@ public class restMain {
 					}
 
 					pstmt1.execute();
+					break;
 				} catch (ParseException e) {
 					System.out.println();
 					System.out.println("ParseException==================");
