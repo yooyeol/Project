@@ -25,9 +25,26 @@
       #map {
         height: 100%;
       }
+      #floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
     </style>
   </head>
   <body>
+  <div id="floating-panel">
+      <input onclick="hideMarker();" type=button value="Hide Markers">
+      <input onclick="showMarker();" type=button value="Show All Markers">
+    </div>
     <div id="map"></div>
     
 <script>
@@ -40,6 +57,10 @@ function initMap() {
   });
 
   setMarkers(map);
+  
+  map.addListener('click', function(event){
+	 addMarker(event.latLng); 
+  });
 }
 
 var beaches = [
@@ -67,7 +88,7 @@ function setMarkers(map) {
     anchor: new google.maps.Point(0, 32)
   };
   var shape = {
-    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    //coords: [1, 1, 1, 20, 18, 20, 18, 1],
     type: 'poly'
   };
   for (var i = 0; i < beaches.length; i++) {
@@ -81,6 +102,24 @@ function setMarkers(map) {
       zIndex: beach[3]
     });
   }
+}
+
+function addMarker(location){
+	
+}
+
+function hideMarker(){
+	setMapOnAll(null);
+}
+
+function showMarker(){
+	setMapOnAll(map);
+}
+
+function setMapOnAll(map){
+	for(var i=0;i<beaches.length;i++){
+		beaches[i].setMarkers(map);
+	}
 }
 
 </script>

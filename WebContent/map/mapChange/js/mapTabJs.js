@@ -15,6 +15,9 @@ function initMap() {
 	    zoom: 8
 	  });
 }
+function markMap(){
+	
+}
 
 function listAdd(jsonObject){
 	var list

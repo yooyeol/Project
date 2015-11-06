@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -23,6 +25,54 @@ public class MapDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	@SuppressWarnings("unchecked")
+	public JSONObject getJSONObject(String sql, String tourPath){
+		JSONObject item = null;
+		JSONArray itemArray = null;
+		JSONArray dataArray = null;
+		JSONObject data = null;
+		JSONObject result = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		StringTokenizer st = new StringTokenizer(tourPath, ",");
+		List<String> list = new ArrayList<String>();
+		while(st.hasMoreTokens()){
+			list.add(st.nextToken());
+		}
+		try{
+			con = pool.getConnection();
+
+			itemArray = new JSONArray();
+			result = new JSONObject();
+			for(int i=0;i<list.size();i++){
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, list.get(i));
+				rs = pstmt.executeQuery();
+				
+				item = new JSONObject();
+				dataArray = new JSONArray();
+				while(rs.next()){
+					data = new JSONObject();
+					data.put("TourSiteContentID", rs.getString(1));
+					data.put("TourSiteMapX", rs.getString(2));
+					data.put("TourSiteMapY", rs.getString(3));
+					data.put("TourSiteFirstImage", rs.getString(4));
+					dataArray.add(data);
+				}
+				itemArray.add(dataArray);
+			}
+			result.put("items", itemArray);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")

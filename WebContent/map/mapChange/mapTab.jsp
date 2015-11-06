@@ -140,27 +140,29 @@ $(document).ready(function(){
 		$("#tourPath").mouseover(function(){
 			var size = $("#tourPath > li").size();
 			//document.getElementById("test").innerHTML = $("#tourPath > li").size();
-			for(var i=0;i<size;i++){
+			for(var i=1;i<size;i++){
+				tourPath[0] = $("#tourPath").children().eq(0).text();
 				tourPath[i] = $("#tourPath").children().eq(i).attr("id");
 			}
 			document.getElementById("test").innerHTML = tourPath;
-			//mapSearch(tourPath);
+			mapSearch(tourPath);
 		});
 });
 
 function mapSearch(tourPath){
 	xhttp = new XMLHttpRequest();
 	
-	xhttp.open("GET", "getTourList.jsp?tourPath=" + tourPath, true);
+	xhttp.open("GET", "getMapXY.jsp?tourPath=" + tourPath, true);
 	xhttp.send();
 	
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && xhttp.status == 200){
 			var tourPathObject = JSON.parse(xhttp.responseText);
-			
+			test = xhttp.responseText;
 		}
 	}
 }
+
 </script>
 </head>
 <body>
