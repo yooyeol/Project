@@ -29,75 +29,93 @@
   	svgItem = svgDoc.getElementsByClassName("region");
   	
 	$(svgItem[0]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[0].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[0].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[0].getAttribute("data-region_id");
  		self.close();
 	});
    	$(svgItem[1]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[1].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[1].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[1].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[2]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[2].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[2].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[2].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[3]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[3].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[3].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[3].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[4]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[4].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[4].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[4].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[5]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[5].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[5].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[5].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[6]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[6].getAttribute("data-region_id");
-		self.close();
+ 		opener.selectAreaCode(svgItem[6].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[6].getAttribute("data-region_id");
+ 		self.close();
    	});
    	$(svgItem[7]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[7].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[7].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[7].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[8]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[8].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[8].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[8].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[9]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[9].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[9].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[9].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[10]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[10].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[10].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[10].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[11]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[11].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[11].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[11].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[12]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[12].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[12].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[12].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[13]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[13].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[13].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[13].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[14]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[14].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[14].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[14].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[15]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[15].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[15].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[15].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[16]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[16].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[16].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[16].getAttribute("data-region_id");
 		self.close();
    	});
    	$(svgItem[17]).click(function(){
- 		opener.document.mapFrm.areaCode.value=svgItem[17].getAttribute("data-region_id");
+ 		opener.selectAreaCode(svgItem[17].getAttribute("data-region_id"));
+ 		opener.document.mapFrm.areaCode.value = svgItem[17].getAttribute("data-region_id");
 		self.close();
    	});
 }

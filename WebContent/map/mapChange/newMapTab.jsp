@@ -12,34 +12,11 @@
 <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=uri%>/map/mapChange/js/mapTabJs.js"></script>
+<script src="<%=uri%>/map/mapChange/js/paging.js"></script>
 
-<script type="text/javascript">
-var map;
-var lat, lng;
-var popup;
-$(document).ready(function(){
-	$("#areaSelect").click(function(){
-		var url="<%=uri%>/map/mapChange/svgMap.jsp";
-		popup = window.open(url, "", "width=520 height=550");
-	});
-	$("#areaSelect").click(function(){
-		popup.onbeforeunload = function(){ // 팝업창 닫혔을 때 이벤트
-			if($("#areaCode").attr("value") == 1){
-				document.getElementById("test").innerHTML = "123";
-			}
-		}
-	});
-	
-});
-
-function moveToLocation(lat, lng){
-	var center = new google.maps.LatLng(lat, lng);
-	map.panTo(center);
-}
-
-</script>
 </head>
 <body>
 <label id="test"></label>
@@ -82,7 +59,7 @@ function moveToLocation(lat, lng){
 								<th>나의 경로</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="addListTable">
 							<tr>
 								<td>출발지</td>
 							</tr>
@@ -91,7 +68,27 @@ function moveToLocation(lat, lng){
 				</div>
 			</div>
 			<div class="col-lg-8">
-				리스트 표시
+			<div class="pagination">
+				
+			</div>
+				<table id="tourList" class="table table-bordered table-hover ">
+					<thead>
+						<tr>
+							<th colspan="3">여행지</th>
+						</tr>
+					</thead>
+					<tbody id="listTable">
+						<tr>
+							<td rowspan="3" class="col-lg-3">1*1</td>
+						</tr>
+						<tr>
+							<td>테스트<span class="glyphicon glyphicon-plus addition"></span></td>
+						</tr>
+						<tr>
+							<td>주소</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div class="row">

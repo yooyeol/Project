@@ -97,7 +97,7 @@ $(document).ready(function(){
     		    		var str2 = $("#contentType option:selected").val();
     		   			xhttp = new XMLHttpRequest();
     		        	
-    		   			xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2 + "&paging="+page, true);
+    		   			//xhttp.open("GET", "getTourList.jsp?areaCode="+str1+"&contentType="+str2 + "&paging="+page, true);
 		        		xhttp.send();
 		        		
     		    		xhttp.onreadystatechange = function() {
@@ -113,6 +113,7 @@ $(document).ready(function(){
     							});
     		        			
     		        			$(".delete").click(function(){
+    		        				alert("test");
     		        				$(this).parent().remove();
     		        			});
     		        			
@@ -149,6 +150,14 @@ $(document).ready(function(){
 		});
 });
 
+
+function listAdd(jsonObject){
+	var list
+	for(var i in jsonObject.datas){
+		list += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-remove-circle delete"></span></li>';
+	}
+	return list;
+}
 function mapSearch(tourPath){
 	xhttp = new XMLHttpRequest();
 	

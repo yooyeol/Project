@@ -6,12 +6,12 @@
 <%
 	String areaCode = request.getParameter("areaCode");
 	String contentType = request.getParameter("contentType");
- 	String paging = request.getParameter("paging");
+/*  String paging = request.getParameter("paging");
 	int lastIndex = Integer.parseInt(paging) * 20;
 	int firstIndex = lastIndex - 20;
 	String index = String.valueOf(firstIndex) + ", " + String.valueOf(lastIndex);
-	System.out.println("page : " + paging);
-	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=? LIMIT "+index;
+	System.out.println("page : " + paging); */
+	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=?";
 	String result = listGet.getJSONObject(sql, areaCode, contentType).toString();
 %>
 <%=result%>

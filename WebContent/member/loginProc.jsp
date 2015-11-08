@@ -6,7 +6,7 @@
 	String pass = request.getParameter("password");
 	boolean flag = mMgr.loginMember(email, pass);
 	String uri = request.getContextPath();
-	
+	String userInfo[] = new String[2];
 	String msg = "로그인에 실패 하였습니다.";
 	
 	if(flag){

@@ -130,8 +130,12 @@ public class MapDAO {
 		m.getJSONObject("SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=? LIMIT 0,100", "32", "12");
 	}*/
 	
-	public Vector<MapBean> mapList(String sendSql, int areaCode){
-		Vector<MapBean> mapList = new Vector<MapBean>();
+	@SuppressWarnings("unchecked")
+	public JSONObject mapList(String sendSql, int areaCode){
+		JSONObject result = null;
+		JSONArray dataArray = null;
+		JSONObject data = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -143,20 +147,23 @@ public class MapDAO {
 			pstmt.setInt(1, areaCode);
 			rs = pstmt.executeQuery();
 			
+			result = new JSONObject();
+			dataArray = new JSONArray();
+			
 			while(rs.next()){
-				MapBean bean = new MapBean();
-				bean.setTourSiteTitle(rs.getString(1));
-				bean.setTourSiteMapX(rs.getDouble(2));
-				bean.setTourSiteMapY(rs.getDouble(3));
-				mapList.add(bean);
-				//System.out.println(rs.getString(1));
-			}			
+				data = new JSONObject();
+				data.put("TourSiteTitle", rs.getString(1));
+				data.put("TourSiteMapX", rs.getString(2));
+				data.put("TourSiteMapY", rs.getString(3));
+				dataArray.add(data);
+			}
+			result.put("datas", dataArray);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return mapList;
+		return result;
 	}
 
 	

@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Bean.MapBean" %>
-<%@ page import="java.util.Vector" %>
+<%@ page import="org.json.simple.parser.*" %>
+<%@ page import="org.json.simple.*" %>
 <jsp:useBean id="mapDAO" class="DAO.MapDAO"></jsp:useBean>
 <%
 	String uri = request.getContextPath();
 	request.setCharacterEncoding("UTF-8");
 	String sql = "select TourSiteTitle, TourSiteMapX, TourSiteMapY from toursite where TourSiteAreaCode=? limit 0,50";
 	int areaCode = 1;
-	Vector<MapBean> mapList = mapDAO.mapList(sql, areaCode);
+	String mapList = mapDAO.mapList(sql, areaCode).toString();
+	JSONParser result = null;
+	JSONObject jsonObject = null;
+	JSONArray jsonArray = null;
 %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +27,7 @@
         padding: 0;
       }
       #map {
-        height: 100%;
+        height: 90%;
       }
       #floating-panel {
   position: absolute;
@@ -57,24 +61,19 @@ function initMap() {
   });
 
   setMarkers(map);
-  
-  map.addListener('click', function(event){
-	 addMarker(event.latLng); 
-  });
 }
 
 var beaches = [
 <%
-	for(int i=0;i<mapList.size();i++){
-		MapBean bean = mapList.get(i);
-		String rTitle = bean.getTourSiteTitle();
-		Double rX = bean.getTourSiteMapX();
-		Double rY = bean.getTourSiteMapY();
-		
-		if(i == mapList.size()-1){
-			out.println("[\'" + rTitle + "\', " + rY + ", " + rX + ", " + (i+1) + "]");
+	result = new JSONParser();
+	jsonObject = (JSONObject)result.parse(mapList);
+	jsonArray = (JSONArray)jsonObject.get("datas");
+	for(int i=0;i<jsonArray.size();i++){
+		JSONObject data = (JSONObject)jsonArray.get(i);
+		if(i == jsonArray.size()-1){
+			out.println("[\'" + data.get("TourSiteTitle") + "\', " + data.get("TourSiteMapY") + ", " + data.get("TourSiteMapX") + ", " + (i+1) + "]");
 		}else{
-			out.println("[\'" + rTitle + "\', " + rY + ", " + rX + ", " + (i+1) + "],");
+			out.println("[\'" + data.get("TourSiteTitle") + "\', " + data.get("TourSiteMapY") + ", " + data.get("TourSiteMapX") + ", " + (i+1) + "],");
 		}
 	}
 %>
@@ -103,25 +102,6 @@ function setMarkers(map) {
     });
   }
 }
-
-function addMarker(location){
-	
-}
-
-function hideMarker(){
-	setMapOnAll(null);
-}
-
-function showMarker(){
-	setMapOnAll(map);
-}
-
-function setMapOnAll(map){
-	for(var i=0;i<beaches.length;i++){
-		beaches[i].setMarkers(map);
-	}
-}
-
 </script>
     
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2g9najY884bSPUcq93hp8KMQ6PVw3EZM&signed_in=true&callback=initMap"></script>
