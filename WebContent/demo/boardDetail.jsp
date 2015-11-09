@@ -60,6 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <%
 	  request.setCharacterEncoding("UTF-8");
+out.print(request.getParameter("num"));
 int num=Integer.parseInt(request.getParameter("num"));
 	  String nowPage = request.getParameter("nowPage");
 	  String keyField = request.getParameter("keyField");
@@ -75,7 +76,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 	  
 	  int filesize = bean.getFilesize();
 	  String ip = bean.getIp();
-	  int count = bean.getCount();
+	  int count = bean.getReadCount();
 	  session.setAttribute("bean", bean);//게시물을 세션에 저장
 %>
 <title>JSPBoard</title>
@@ -251,7 +252,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 						
 						<img src="<%=filename%>" alt="">
 						
-						
+						<%out.print(request.getParameter("num"));%>
 						<p>뭐너</p>
 					<img src="http://localhost/imgView.jsp" >
 <%-- 						
@@ -393,7 +394,8 @@ int num=Integer.parseInt(request.getParameter("num"));
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					<span> ||| 게시자 평점 : </span>
 					
-					<button type="submit" class="btn btn-default btn-lg" name="good">
+					<button id=read type="submit" class="btn btn-default btn-lg" name="good" onclick="<%bMgr.upHeart(num);%>">
+					
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
 					</button>
 					

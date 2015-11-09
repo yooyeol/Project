@@ -129,6 +129,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		document.readFrm.submit();
 	}
 	
+	function readHeart(num){
+		document.readFrm.num.value=num;
+		document.readFrm.action="boardDetail.jsp";
+		document.readFrm.submit();
+	}
+	
 	function check() {
 	     if (document.searchFrm.keyWord.value == "") {
 	   alert("검색어를 입력하세요.");
@@ -285,7 +291,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 							
 							int depth = bean.getDepth();
-							int count = bean.getCount();
+							int count = bean.getReadCount();
+							int heart = bean.getHeartCount();
 					%>
 					
 						
@@ -311,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<a class="span_link1" href="javascript:comment('<%=num%>')">
 										 <span class="glyphicon glyphicon-comment"></span> 0</a>
 											
-										<a class="span_link1" href="javascript:">
+										<a class="span_link1" href="javascript:readHeart('<%=num%>')">
 										 <span class="glyphicon glyphicon-heart-empty"></span> 0</a>
 										<a class="span_link1" href="javascript:">
 										 <span class="glyphicon glyphicon-thumbs-down"></span> 0</a>
@@ -422,7 +429,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 							
 							int depth = bean.getDepth();
-							int count = bean.getCount();
+							int count = bean.getReadCount();
 					%>
 		
 														<div class="post-img">

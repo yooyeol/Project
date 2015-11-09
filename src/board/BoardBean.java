@@ -13,7 +13,9 @@ public class BoardBean {
 	private String regdate;     
 	private String pass;          
 	private String  ip;
-	private int count;        
+	private int readCount;   
+	private int heartCount;   
+	
 	private String filename; 
 	private int filesize;
 	private String img;
@@ -78,12 +80,19 @@ public class BoardBean {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public int getCount() {
-		return count;
+	public int getReadCount() {
+		return readCount;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
 	}
+	public int getHeartCount() {
+		return heartCount;
+	}
+	public void getHeartCount(int heartCount) {
+		this.heartCount = heartCount;
+	}
+	
 	public String getFilename() {
 		return filename;
 	}

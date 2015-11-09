@@ -68,7 +68,7 @@ public class BoardMgr {
 				bean.setRef(rs.getInt("ref"));
 				bean.setDepth(rs.getInt("depth"));
 				bean.setRegdate(rs.getString("regdate"));
-				bean.setCount(rs.getInt("count"));
+				bean.setReadCount(rs.getInt("count"));
 				vlist.add(bean);
 			}
 		} catch (Exception e) {
@@ -225,7 +225,7 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			con = pool.getConnection();
-			sql = "select max(num)  from reply";
+			sql = "select max(ReplyID)  from reply";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			int ref = 1;
@@ -287,7 +287,7 @@ public class BoardMgr {
 				bean.setDepth(rs.getInt("depth"));
 				bean.setRegdate(rs.getString("regdate"));
 				bean.setPass(rs.getString("pass"));
-				bean.setCount(rs.getInt("count"));
+				bean.setReadCount(rs.getInt("count"));
 				bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 				System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
 				bean.setFilesize(rs.getInt("filesize"));
@@ -320,6 +320,23 @@ public class BoardMgr {
 		}
 	}
 
+	//좋아요 증가
+	public void upHeart(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "update tblboard set heart=heart+1 where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
 	// 게시물 삭제
 	public void deleteBoard(int num) {
 		Connection con = null;
