@@ -53,6 +53,7 @@
 				</div>
 				<div class="row">
 				<br/>
+				<form method="post" action="">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -60,11 +61,14 @@
 							</tr>
 						</thead>
 						<tbody id="addListTable">
-							<tr>
-								<td>출발지</td>
+							<tr >
+								<td id="startPath">출발지</td>
 							</tr>
 						</tbody>
 					</table>
+					<button type="submit" class="btn btn-danger">경로 저장하기</button>
+				</form>
+					
 				</div>
 			</div>
 			<div class="col-lg-8">

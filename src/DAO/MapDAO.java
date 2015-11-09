@@ -26,47 +26,66 @@ public class MapDAO {
 			e.printStackTrace();
 		}
 	}
-	@SuppressWarnings("unchecked")
-	public JSONObject getJSONObject(String sql, String tourPath){
-		JSONObject item = null;
-		JSONArray itemArray = null;
+	
+	public JSONObject getDetailPage(String sql){
+		JSONObject result = null;
 		JSONArray dataArray = null;
 		JSONObject data = null;
-		JSONObject result = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		StringTokenizer st = new StringTokenizer(tourPath, ",");
-		List<String> list = new ArrayList<String>();
-		while(st.hasMoreTokens()){
-			list.add(st.nextToken());
-		}
 		try{
 			con = pool.getConnection();
-
-			itemArray = new JSONArray();
-			result = new JSONObject();
-			for(int i=0;i<list.size();i++){
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, list.get(i));
-				rs = pstmt.executeQuery();
-				
-				item = new JSONObject();
-				dataArray = new JSONArray();
-				while(rs.next()){
-					data = new JSONObject();
-					data.put("TourSiteContentID", rs.getString(1));
-					data.put("TourSiteMapX", rs.getString(2));
-					data.put("TourSiteMapY", rs.getString(3));
-					data.put("TourSiteFirstImage", rs.getString(4));
-					dataArray.add(data);
-				}
-				itemArray.add(dataArray);
-			}
-			result.put("items", itemArray);
+			pstmt = con.prepareStatement(sql);
 			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject getJSONObject(String sql, String tourSiteContentID){
+		JSONObject result = null;
+		JSONArray dataArray = null;
+		JSONObject data = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			System.out.println(sql);
+			//result.put("datas", datas);
+			
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, tourSiteContentID);
+			rs = pstmt.executeQuery();
+			ResultSetMetaData metaData = rs.getMetaData();
+			int size = metaData.getColumnCount();
+
+			result = new JSONObject();
+			dataArray = new JSONArray();
+			
+			while(rs.next()){
+				data = new JSONObject();
+				data.put("TourSiteContentID", rs.getString(1));
+				System.out.println("TourSiteContentID : " + rs.getString(1));
+				data.put("TourSiteTitle", rs.getString(2));
+				System.out.println("TourSiteTitle : " + rs.getString(2));
+				data.put("TourSiteMapX", rs.getString(3));
+				System.out.println("TourSiteMapX : " + rs.getString(3));
+				data.put("TourSiteMapY", rs.getString(4));
+				System.out.println("TourSiteMapY : " + rs.getString(4));
+				dataArray.add(data);
+			}
+			result.put("datas", dataArray);
+			System.out.println(size);
+			System.out.println(result);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

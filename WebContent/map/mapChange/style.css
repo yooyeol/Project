@@ -18,9 +18,12 @@ path.region:hover {
     height: 500px;
     width:100%;
 }
-.addition{
+.delete{
 	float:right;
 	cursor: pointer;
+}
+.addition{
+	float:right;
 }
 img{
 	width:auto;
