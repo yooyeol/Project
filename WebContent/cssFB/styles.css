@@ -174,7 +174,7 @@ h1,h2,h3 {
 
 .panel textarea, .well textarea, textarea.form-control
 {
-   resize: none;
+   resize: auto;
 }
   
 .badge{
@@ -227,9 +227,11 @@ h1,h2,h3 {
 
 .modal-body textarea.form-control
 {
+	
    resize: none;
    border:0;
    box-shadow:0 0 0;
+   
 }
 
 small.text-muted {

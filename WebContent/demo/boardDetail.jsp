@@ -1,8 +1,12 @@
+<%@page import="javafx.scene.web.WebView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
+<%-- <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
+ --%>
+<%@page import="board.BoardBean"%>
 
-
+<%@ page import="java.io.*,java.util.zip.*" %>
+<jsp:useBean id="bMgr" class="board.BoardMgr" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +56,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			});
 </script>
 <body style="height:1500px">
+
+
+<%
+	  request.setCharacterEncoding("UTF-8");
+int num=Integer.parseInt(request.getParameter("num"));
+	  String nowPage = request.getParameter("nowPage");
+	  String keyField = request.getParameter("keyField");
+	  String keyWord = request.getParameter("keyWord");
+	  bMgr.upCount(num);//조회수 증가
+
+ BoardBean bean = bMgr.getBoard(num);//게시물 가져오기
+	  String name = bean.getName();
+	  String subject = bean.getSubject();
+      String regdate = bean.getRegdate();
+	  String content = bean.getContent();
+	  String filename = bean.getFilename();
+	  
+	  int filesize = bean.getFilesize();
+	  String ip = bean.getIp();
+	  int count = bean.getCount();
+	  session.setAttribute("bean", bean);//게시물을 세션에 저장
+%>
+<title>JSPBoard</title>
+<!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+<script type="text/javascript">
+	function list(){
+	 	document.listFrm.action="board.jsp";
+	    document.listFrm.submit();
+	 } 
+	
+	function down(filename){
+		 document.downFrm.filename.value=filename;
+		 document.downFrm.submit();
+	}
+</script>
+
 </head>
 <body>
 	<!-- header-section-starts-here -->
@@ -178,21 +218,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 			<div class="col-md-8 content-left single-post">
 				<div class="blog-posts">
-			<h3 class="post">Donald Trump News - Donald Trump Special Reports -글 제목</h3></br>
+			<h3 class="post"><%=subject%></h3></br>
 				<div class="last-article">
 					
+					<% if( filename !=null && !filename.equals("")) {%>
+  		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
+  		 &nbsp;&nbsp;<font color="blue">(<%=filesize%>KBytes)</font>  
+  		 <%} else{%> 등록된 파일이 없습니다.<%}%>
 					
 				<div class="slider">
 					<div class="callbacks_wrap">
-						<ul class="rslides" id="slider">
+						<%-- <ul class="rslides" id="slider">
 							<li>
-								<img src="images/3.jpg" alt="">
+								<img src="C:\Jsp\myapp\WebContent\ch14\fileupload\<%=filename%>" alt="">
 								<div class="caption">
 									<a href="single.html">Lorem Ipsum is simply dummy text of the printing and typesetting industry</a>
 								</div>
 							</li>
 							<li>
-								<img src="images/2.jpg" alt="">
+								<img src="<% %>" alt="">
 								<div class="caption">
 									<a href="single.html">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</a>
 								</div>
@@ -203,7 +247,110 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="single.html">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</a>
 								</div>
 							</li>
-						</ul>
+						</ul> --%>
+						
+						<img src="<%=filename%>" alt="">
+						
+						
+						<p>뭐너</p>
+					<img src="http://localhost/imgView.jsp" >
+<%-- 						
+<%!  
+
+  void sendImage( HttpServletResponse response , byte[] imgContentsArray ) {       
+
+    ServletOutputStream  svrOut = null ;   BufferedOutputStream outStream = null ;
+
+     try {                  
+
+         svrOut = response.getOutputStream(); 
+
+         outStream =  new BufferedOutputStream( svrOut );                   
+
+         outStream.write(  imgContentsArray, 0, imgContentsArray.length );     
+
+         outStream.flush();                      
+
+       } catch( Exception writeException ) {
+
+         writeException.printStackTrace();
+
+       } finally {
+
+          try {            
+
+             if ( outStream != null ) outStream.close(); 
+
+           } catch( Exception closeException ) {
+
+            closeException.printStackTrace();
+
+           }   
+
+       }
+
+  }
+
+  byte[] readImage() throws Exception
+
+  {   
+    String filePath = "C:/Jsp/myapp/WebContent/ch14/fileupload/aaaaaaaaaa1.jpg" ;     int BUF_SIZE  ;    byte[] buf = null ;   
+
+    DataInputStream in =  null ;
+
+    try {         
+
+    File imgFile= new File(filePath) ;
+
+    BUF_SIZE = (int)imgFile.length() ;   
+
+    buf = new byte[BUF_SIZE] ;  
+
+    in = new DataInputStream(new FileInputStream(imgFile));      
+
+    in.readFully(buf);       
+
+    } finally {
+
+      in.close();
+
+    }
+
+    return   buf;
+
+  }
+
+ 
+
+%><% 
+
+ 
+
+  try {    
+
+      
+
+     sendImage( response ,  readImage() ) ;
+
+    
+
+   } catch ( Exception e )  {
+
+      e.printStackTrace();
+
+   }
+
+  
+
+%>
+						
+						
+						
+		 --%>				
+							<%-- <%@include file="imgView.jsp" %> --%>
+					<%-- <div col-md-4>
+					<%@include file="imgView.jsp" %>
+					</div> --%>
 					</div>
 				</div>
 				
@@ -236,53 +383,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>					
 				</div>
 				
-					<p class="artext">The premier was meeting with Queen Elizabeth II at Buckingham Palace as the Conservatives reached the 326-seat threshold that allows them
-						to ditch their Liberal Democrat coalition partners and govern alone in the 650-seat Parliament.</p>
-						<p class="artext">The premier was meeting with Queen Elizabeth II at Buckingham Palace as the Conservatives reached the 326-seat threshold that allows them
-						to ditch their Liberal Democrat coalition partners and govern alone in the 650-seat Parliament.
-						사용자 주절주절주절어어어어얼
-						</p>
+					<p class="artext"><%=content%></p>
 						
-					<ul class="categories">
-						<li><a href="#">댓글</a></li>
-						<li><a href="#">good <p class="glyphicon glyphicon-thumbs-up"></p></a></li>
-						<li><a href="#">별로 <span class="glyphicon glyphicon-thumbs-down"></span>bad</a></li>
-						<li><a href="#">경로바구니로 <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 				
-					</ul>
 					
 					
 					<div class="blog-posts">
 					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
+					<span> ||| 게시자 평점 : </span>
 					
-					<button type="button" class="btn btn-default btn-lg">
+					<button type="submit" class="btn btn-default btn-lg" name="good">
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
 					</button>
 					
-					<button type="button" class="btn btn-default btn-lg">
+					<button type="submit" class="btn btn-default btn-lg" name="bad">
  						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
 					</button>
-					<button type="button" class="btn btn-default btn-lg">
+					<button type="submit" class="btn btn-default btn-lg" name="cart">
  						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
 					</button>
 					</h2>
 					</div>
 					
 
- 			<!-- 
-					<div style="padding: 1em">
-						<button type="button" class="btn btn-default btn-lg">
- 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
-					</button>
-					
-					<button type="button" class="btn btn-default btn-lg">
- 						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
-					</button>
-					<button type="button" class="btn btn-default btn-lg">
- 						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
-					</button>
-					</div> -->
+ 	
 					
 					<div class="clearfix"></div>
 					<!--related-posts-->
@@ -402,14 +527,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				
 	<div class="clearfix"></div>
-				<div class="coment-form">
+				<div class="coment-form"  method="post" action="commentProc.jsp" enctype="multipart/form-data">
 				<h2 >Leave your comment</h2></br>
 					
 				
-					<form>
+					<form name="postFrm" method="post" action="commentInputProc.jsp" enctype="multipart/form-data">
 						<h4><%out.print("ID : "+session.getAttribute("idKey")); %></h4>
-						<textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Comment...';}" required="">Your Comment...</textarea>
-						<input type="submit" value="Submit Comment" >
+						 <div class="form-group" style="padding:14px;">
+						 <input type="hidden" id="num" value="<%=num%>">
+                                      <textarea id="textArea" class="form-control"  name="content"> </textarea>
+                                 
+                                    </div>
+						<input type="submit" value="Submit Comment" onClick="javascript:location.href='boardDetail.jsp'">
 					</form>
 				</div>	
 				

@@ -1779,6 +1779,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     font-size: 1.5em;
     font-weight: 400;
     text-transform: none;
+    
 }
 .fashion-right  h3  a:hover,.fashion-left  h3  a:hover {
 	color: #84754e;
@@ -1795,7 +1796,8 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .fashion-left {
 	margin-bottom: 2.5em;
     width: 48%;
-    float: left;		
+    float: left;
+    padding: 1em;		
 }
 .fashion-right{
 	margin-bottom: 2.5em;
