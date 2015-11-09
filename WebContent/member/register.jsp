@@ -4,20 +4,57 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	String uri = request.getContextPath();
+%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
 
-    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="./dist/css/formValidation.css"/>
+<!--헤더링크 시작  -->
 
+<link href="../demo/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../demo/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="../demo/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Express News Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- for bootstrap working -->
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- web-fonts -->
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='styleseet' type'text/css'>
+  
+  
+<!--헤더링크 끝  -->
+
+   <!--  <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="./dist/css/formValidation.css"/>
+ -->
     <script type="text/javascript" src="./vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="./vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./dist/js/formValidation.js"></script>
     <script type="text/javascript" src="./dist/js/framework/bootstrap.js"></script>
-
+<script type="text/javascript" src="js/easing.js"></script>
+<!--/script-->
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+				});
+			});
+</script>
 <script type="text/javascript">
 function idCheck(memberEmail) {
 	frm = document.regFrm;
@@ -35,9 +72,148 @@ function zipCheck(){
 }
 
 </script>
-
+<body style="height:1500px">
 </head>
 <body>
+<%-- <%@include file="../demo/mainHeader.jsp" %> --%>
+<%-- 
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="header">
+		<div class="header-top">
+			<div class="wrap">
+				
+				<div class="num">
+					<p> Call us : 032 2352 782</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="header-bottom">
+			<div class="logo text-center">
+			
+		
+			
+				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
+			
+			</div> 
+			
+	
+		
+		</div>
+	</div>
+	
+	<div class="header-top">
+			<div class="wrap">
+				
+				<div class="num">
+					<p> Call us : 032 2352 782</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</nav> --%>
+	
+		<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="header">
+		<div class="header-top">
+			<div class="wrap">
+				
+				<div class="num">
+					<p> Call us : 032 2352 782</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="header-bottom">
+			<div class="logo text-center">
+			
+				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
+			</div> 
+			
+			<div class="navigation">
+				<nav class="navbar navbar-default" role="navigation">
+		   <div class="wrap">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+			</div>
+			<!--/.navbar-header-->
+		
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					 <li><a href="main.jsp">Home</a></li>
+						<li ><a href="course.jsp">GO TRAVELING</a></li>
+				 		<li ><a href="notify.jsp">공지사항</a></li>
+						<li><a href="board.jsp">게시판</a></li>
+					  <li class="dropdown">
+						<a href="mypage.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
+						<ul class="dropdown-menu multi-column columns-2">
+							<div class="row">
+								<div class="col-sm-4">
+									<ul class="multi-column-dropdown">
+										<li><a href="mypage.jsp.html">내 정보 조회</a></li>
+										<li class="divider"></li>
+										<li><a href="memberUpdate.jsp">회원정보 수정</a></li>
+									    <li class="divider"></li>
+										<li><a href="memberCourse.jsp">나의 경로 보기</a></li>
+										<li class="divider"></li>
+										<li><a href="memberPreCourse.jsp">경로 바구니</a></li>
+										<li class="divider"></li>
+										<li><a href="memberOut.jsp">탈퇴하기</a></li>
+									</ul>
+								</div>
+								
+							</div>
+						</ul>
+					</li>
+					
+				</ul>
+				<div class="search">
+					<!-- start search-->
+				    <div class="search-box">
+					    <div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+								<input class="sb-search-submit" type="submit" value="">
+								<span class="sb-icon-search"> </span>
+							</form>
+						</div>
+				    </div>
+					<!-- search-scripts -->
+					<script src="js/classie.js"></script>
+					<script src="js/uisearch.js"></script>
+						<script>
+							new UISearch( document.getElementById( 'sb-search' ) );
+						</script>
+					<!-- //search-scripts -->
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!--/.navbar-collapse-->
+	 <!--/.navbar-->
+			</div>
+		
+		</div>
+	</div>
+
+	</nav>
+	
+	
+	<div class="main-body">
+		<div class="wrap">
+
+			<div class="privacy-page">
+			
+				<div class="col-md-8">
+    
+    
+    
     <div class="container">
         <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
@@ -110,7 +286,13 @@ function zipCheck(){
             </div>
         </div>
     </div>
-
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
 <script type="text/javascript">
 $(document).ready(function() {
     $('#defaultForm').formValidation({

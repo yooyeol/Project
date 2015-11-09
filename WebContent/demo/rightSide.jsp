@@ -4,10 +4,6 @@
 <%@page import="board.BoardBean"%>
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="bMgr" class="board.BoardMgr" /> 
-<%
-	String uri = request.getContextPath();
-%>
-
 <%-- <%
 	String uri = request.getContextPath();
 %>
@@ -18,12 +14,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>요기조기 게시판</title>
-<link href="<%=uri %>css/bootstrap.css" rel='stylesheet' type='text/css' />
+<title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="<%=uri %>css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -134,141 +130,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 </head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
 <body>
-	<!-- header-section-starts-here -->
-	
-<%@include file="mainHeader.jsp" %>
 
-	<!-- content-section-starts-here -->	<!-- content-section-starts-here -->	<!-- content-section-starts-here -->	<!-- content-section-starts-here -->
-		<!-- content-section-starts-here -->	<!-- content-section-starts-here -->	<!-- content-section-starts-here -->	<!-- content-section-starts-here -->
-	<div class="main-body">
-		<div class="wrap">
-
-			<div class="privacy-page">
-			
-				<div class="col-md-8">
-			<%
-				  vlist = bMgr.getBoardList(keyField, keyWord, start, end);
-				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
-				  if (vlist.isEmpty()) {
-					out.println("등록된 게시물이 없습니다.");
-				  } else {
-			%>
-				
-				
-					<%
-						  for (int i = 0;i<numPerPage; i++) {
-							if (i == listSize) break;
-							BoardBean bean = vlist.get(i);
-							int num = bean.getNum();
-							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
-							String name = bean.getName();
-							String subject = bean.getSubject();
-							String regdate = bean.getRegdate();
-							String content=beanContent.getContent();
-							
-							
-							int depth = bean.getDepth();
-							int count = bean.getReadCount();
-					%>
-					
-						
-		
-
-
-					<div class="fashion">
-						<div class="fashion-top">
-						
-					
-						<div class="fashion-left">
-						
-					
-						
-								<a href="javascript:read('<%=num%>')"><img src="http://localhost/imgView.jsp" 
-									class="img-responsive" alt=""></a>
-								<div class="blog-poast-info">
-									<p class="fdate">
-										<span>작성자 : <%=name%></span>
-										<span class="glyphicon glyphicon-time"></span><%=regdate%>
-										<span>조회수 : <%=count%></span>
-										
-										<a class="span_link1" href="javascript:comment('<%=num%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
-											
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-heart-empty"></span> 0</a>
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-thumbs-down"></span> 0</a>
-									</p>
-								</div>
-								<h3>
-								 <a href="javascript:read('<%=num%>')"><%=subject%></a>
-								
-								</h3>
-								<p><%=content %></p>
-								<a class="reu" href="javascript:read('<%=num%>')"><img src="images/more.png"
-									alt=""></a>
-							</div>
-							
-						
-						
-						</div>
-				</div>
-																				
-<%}//for%>
-				 <%
- 			}//if
- 		%>
- 		
- 		<div class="clearfix"></div>
- 		<ul class="pagination">
- 		<%
-   				  int pageStart = (nowBlock -1)*pagePerBlock + 1 ; //하단 페이지 시작번호
-   				  int pageEnd = ((pageStart + pagePerBlock ) <= totalPage) ?  (pageStart + pagePerBlock): totalPage+1; 
-   				  //하단 페이지 끝번호
-   				  if(totalPage !=0){
-    			  	if (nowBlock >= 1) {%>
-    			  	
-    			  
-						<li><a href="javascript:block('<%=nowBlock-1%>')">Prev</a></li><%}%>&nbsp; 
-    			  		<%for ( ; pageStart < pageEnd; pageStart++){%>
-    			  		<li><a href="javascript:pageing('<%=pageStart %>')">
-    			  		<%if(pageStart==nowPage) {%><font color="red"> <%}%>
-    			  		<%=pageStart %>
-    			  		<%if(pageStart==nowPage) {%></font> <%}%></a> 
-    			  		<%}//for%>&nbsp; 
-    			  		<%if (totalBlock > nowBlock ) {%>
-    			  		<a href="javascript:block('<%=nowBlock+1%>')">NEXT</a>
-    			  		<%}%>&nbsp;  
-   						<%}%>
-    			  		</a></li>
-    			  		</ul>
-    			  		
-    		
- 				<!-- 페이징 및 블럭 처리 End-->
-				
- 		
-				
-				
-				
-											
-				</div>
-				
-				
-				
-				
-				<div style="float:right;"class="col-md-4 side-bar">
+		<div style="float:right;"class="col-md-4 side-bar">
 					<div class="first_half">
-						<div class="newsletter">
+						<!-- <div class="newsletter">
 
 							<form action="boardPost.jsp">
 
 								<input type="submit" value="POST">
 							</form>
-						</div>
+						</div> -->
 
 
-					<div class="list_vertical">
+						<div class="list_vertical">
 							<section class="accordation_menu">
 								<div>
 									<input id="label-1" name="lida" type="radio" checked="">
@@ -582,7 +460,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</section>
-						</div> 
+						</div>
 
 					</div>
 					<div class="side-bar-articles">
@@ -600,54 +478,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 				</div>
-				<div class="secound_half"></div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-<%@include file="mainFooter.jsp" %>
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear' 
-			};
-			 */
-			$().UItoTop({
-				easingType : 'easeOutQuart'
-			});
-		});
-	</script>
-	<a href="#to-top" id="toTop" style="display: none;"><span
-		id="toTopHover"></span><span id="toTopHover"></span><span
-		id="toTopHover"></span><span id="toTopHover"></span><span
-		id="toTopHover"></span> <span id="toTopHover" style="opacity: 1;">
-	</span></a>
-	<!---->
 
-	<a href="#" id="toTop">To Top</a>
-	<a href="#" id="toTop">To Top</a>
-	<a href="#" id="toTop">To Top</a>
-	<a href="#" id="toTop">To Top</a>
 
-	<a href="#" id="toTop">To Top</a>
-	
-	
-	<form name="listFrm" method="post">
-		<input type="hidden" name="reload" value="true"> 
-		<input type="hidden" name="nowPage" value="1">
-	</form>
-	<form name="readFrm" method="get">
-		<input type="hidden" name="num"> 
-		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
-		<input type="hidden" name="keyField" value="<%=keyField%>"> 
-		<input type="hidden" name="keyWord" value="<%=keyWord%>">
-	</form>
-	
+
 </body>
 </html>

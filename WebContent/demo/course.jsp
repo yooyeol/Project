@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>요기조기 여행추천</title>
+<title>요기조기 경로만들기</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
@@ -43,33 +43,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- content-section-starts-here -->
 	<div class="main-body">
 		<div class="wrap">
-			<div class="col-md-8 content-left">
-				<div class="slider">
-					<div class="callbacks_wrap">
-						<ul class="rslides" id="slider">
-							<li>
-								<img src="images/3.jpg" alt="">
-								<div class="caption">
-									<a href="single.html">Lorem Ipsum is simply dummy text of the printing and typesetting industry</a>
-								</div>
-							</li>
-							<li>
-								<img src="images/2.jpg" alt="">
-								<div class="caption">
-									<a href="single.html">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</a>
-								</div>
-							</li>
-							<li>
-								<img src="images/1.jpg" alt="">
-								<div class="caption">
-									<a href="single.html">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				</div>
-		<%@include file="rightSide.jsp" %>
+			<h2>경로만들기</h2>
+		
 			<div class="clearfix"></div>
 		</div>
 	</div>
