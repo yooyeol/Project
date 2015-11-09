@@ -14,10 +14,40 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="../cssFB/styles.css" rel="stylesheet">
-		 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		
+
+		   
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript">
+<script>
+       $( document ).ready(function() {
+            $("#imagefile").change(function ()
+              {
+                     $("#img").show();
+                     $("#img").attr("src",'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif');
+                     if (typeof(FileReader)!="undefined"){
+                       
+                         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png)$/;
+                         $($(this)[0].files).each(function () {
+                             var getfile = $(this);
+                             if (regex.test(getfile[0].name.toLowerCase())) {
+                                 var reader = new FileReader();
+                                 reader.onload = function (e) {
+                                     $("#img").attr("src",e.target.result);
+                                 }
+                                 reader.readAsDataURL(getfile[0]);
+                             } else {
+                                 alert(getfile[0].name + " is not image file.");
+                                 return false;
+                             }
+                         });
+                     }
+                     else {
+                         alert("Browser does not supportFileReader.");
+                     }
+            });
+        });
+    </script>
+	
+	<!-- <script type="text/javascript">
 var test;
 var index;
 $(document).ready(function(){
@@ -33,23 +63,6 @@ $(document).ready(function(){
                     $('#blah').attr('src', e.target.result);
                    
                     index++;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-</script>
-	
-	<!-- <script type="text/javascript">
-var test;
-$(document).ready(function(){
-	test = $("#blah")
-});
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -74,17 +87,23 @@ $(document).ready(function(){
                           
                          <!-- main col left --> 
                          
-                   
                               <div class="well"> 
-                                   <form class="form-horizontal" role="form" name="postFrm" method="post" action="boardPostProc.jsp" enctype="multipart/form-data">
+                                   <form class="form-horizontal" role="form" name="postFrm" method="post" action="boardInputProc.jsp" enctype="multipart/form-data">
                                     <h3><bold>What's New</h3></br>
                                      <div class="form-group" style="padding-left: 14px;padding-bottom:0;">
 									<input style="padding:10px;"type="text" name="subject" size="50" maxlength="30" placeholder="subject">
                                     </div>
-                                     <div class="form-group" style="padding:14px;">
-                                      <textarea id="textArea" class="form-control"  name="content" ></textarea>
-                                 
+                                     <div class="form-group" style="padding:14px;  border:1px; color: grey;">
+                                     <span>사진 올리기</span>
+                                      <div id="showfile"  name="img_1">
+                                      <img src="" width="200" height="200" id="img" style="display: none;"></div>
+                                      <input id="imagefile" type="file" multiple="multiple" value="이미지.1" name="filename"/>
+                                      
                                     </div>
+                                    <div class="form-group" style="padding:14px;">
+                                      <textarea id="textArea" class="form-control"  name="content"> </textarea> 
+                                    </div>
+                                    
                                     
                                     <button style="margin: 5px;" class="btn btn-primary pull-right" type="submit">Post</button>
                                     <button style="margin: 5px;"class="btn btn-primary pull-right" type="reset">다시쓰기</button>
@@ -108,35 +127,27 @@ $(document).ready(function(){
                                  		
                                  		<div style="float: right;" class="col-sm-5">
   
-  <span style="font-weight: bold; ">추천 경로 평점 </span>
+  					<span style="font-weight: bold; ">추천 경로 평점 </span>
   
-    <label class="radio-inline">
-      <input type="radio" name="star" value="5" >5점
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="star" value="4">4점
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="star" value="3">3점
-    </label>
- <label class="radio-inline">
-      <input type="radio" name="star" value="2">2점
-    </label>
-     <label class="radio-inline">
-      <input type="radio" name="star" value="1">1점
-    </label>
+    					<label class="radio-inline">
+      							<input type="radio" name="star" value="5" >5점
+    					</label>
+    					<label class="radio-inline">
+     							 <input type="radio" name="star" value="4">4점
+   						 </label>
+   						 <label class="radio-inline">
+     							 <input type="radio" name="star" value="3">3점
+   						 </label>
+ 						<label class="radio-inline">
+     							 <input type="radio" name="star" value="2">2점
+    					</label>
+     					<label class="radio-inline">
+    							  <input type="radio" name="star" value="1">1점
+    					</label>
 </div>
 </div>
                         
-									
-									  <div class="form-group" style="padding:14px;">
-									 <input type="file" name="filename" size="50" maxlength="50" onchange="readURL(this);" />
-     									
-        <!-- <img id="blah" src="readURL(this)" alt="your image" />
-         -->
-        <input name="filename" value="" type="hidden"/> 
-									  </div>
-									
+
 					
 									<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
                                   </form>
