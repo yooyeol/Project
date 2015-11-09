@@ -9,7 +9,7 @@
 
 
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />

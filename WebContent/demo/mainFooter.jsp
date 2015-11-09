@@ -10,7 +10,7 @@
 <body>
 	<!-- footer-section-starts-here -->
 	<div class="footer">
-		<div class="footer-top">
+		<div class="footer-top"> 
 			<div class="wrap">
 				<div class="col-md-3 col-xs-6 col-sm-4 footer-grid">
 					<h4 class="footer-head">About Us</h4>

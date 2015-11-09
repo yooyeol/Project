@@ -387,7 +387,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="clearfix"></div>
-			</div>
+			</div> 
 		</div>
 	</div>
 	<!-- footer-section-ends-here -->
