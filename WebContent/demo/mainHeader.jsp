@@ -125,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="row">
 								<div class="col-sm-4">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage.jsp.html">내 정보 조회</a></li>
+										<li><a href="mypage.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
 										<li><a href="memberUpdate.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>

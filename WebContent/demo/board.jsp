@@ -4,9 +4,7 @@
 <%@page import="board.BoardBean"%>
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="bMgr" class="board.BoardMgr" /> 
-<%
-	String uri = request.getContextPath();
-%>
+
 
 <%-- <%
 	String uri = request.getContextPath();
@@ -19,11 +17,11 @@
 <html>
 <head>
 <title>요기조기 게시판</title>
-<link href="<%=uri %>css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="<%=uri %>css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
