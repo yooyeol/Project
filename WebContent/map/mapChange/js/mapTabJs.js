@@ -1,10 +1,14 @@
 /**
- * 
+ * https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?hl=ko
  */
 var map;
+var marker;
 var lat, lng;
 var popup;
-var mapTest;
+var mapLatLng = [];
+var mapPath=[];
+var userTourPath;
+var index;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
@@ -12,15 +16,18 @@ var mapTest;
   });
 } */
 $(document).ready(function(){
+	//지역 선택 시
 	$("#areaSelect").click(function(){
 		var url="svgMap.jsp";
 		popup = window.open(url, "", "width=520 height=550");
+		selectAreaCode(areaCode);
 	});
-	$("#areaSelect").click(function(){
-		//popup.onbeforeunload = function(){ // 팝업창 닫혔을 때 이벤트
-			selectAreaCode(areaCode);
-		//}
+	//출발지 선택 시
+	$("#startSelect").click(function(){
+		var url = "startSelect.jsp?check=y";
+		window.open(url,"","width=520 height=550");
 	});
+	//콘텐츠 타입(셀렉터) 선택 시
 	$("#contentType").change(function(){
 		$("#listTable").contents().empty();
 		if($("#contentType option:selected").val == "col0"){
@@ -31,8 +38,9 @@ $(document).ready(function(){
 			requestAjax(str1, str2);
 		}
 	});
-
 });
+
+//콘텐츠 타입 선택 시 호출되는 Ajax
 function requestAjax(str1, str2){
 	xhttp = new XMLHttpRequest();
 	
@@ -47,48 +55,106 @@ function requestAjax(str1, str2){
 		}
 	}
 }
-function requestTour(TourSiteContentID){
-	xhttp = new XMLHttpRequest();
-	var url = "getMapXY?TourSiteContentID="+TourSiteContentID;
-	xhttp.open("GET, url");
-	xhttp.send();
-	
-	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && xhttp.status == 200){
-			
-		}
-	}
-}
+//콘텐츠 타입 선택시 호출되는 Ajax에서 오른쪽 리스트 추가하는 부분
 function listAdd(jsonObject){
 	var tableList = "";
 	for(var i in jsonObject.datas){
 		tableList += '<tr><td rowspan="3" class="col-lg-3"><img src="' 
-			+ jsonObject.datas[i].TourSiteFirstImage+'"/></td></tr><tr><td>'
-			+ jsonObject.datas[i].TourSiteTitle+'<button id="'+jsonObject.datas[i].TourSiteContentID+'" class="btn btn-default addition">경로추가</button></td></tr><tr><td>'
+			+ jsonObject.datas[i].TourSiteFirstImage+'"/></td></tr><tr><td><a href="javascript:detailPage('+ jsonObject.datas[i].TourSiteContentID +')">'
+			+ jsonObject.datas[i].TourSiteTitle+'</a><button id="'+jsonObject.datas[i].TourSiteContentID+'" class="btn btn-default addition">경로추가</button></td></tr><tr><td>'
 			+ jsonObject.datas[i].TourSiteAddr+'<input class="'
 			+ jsonObject.datas[i].TourSiteContentID+'" value="'+jsonObject.datas[i].TourSiteMapX+'" type="hidden"/><input class="'
 			+ jsonObject.datas[i].TourSiteContentID+'" value="'+jsonObject.datas[i].TourSiteMapY+'" type="hidden"/></td></tr>';
 //		tableList += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-plus add" style="float:right;"></span></li>';
 	}
 	document.getElementById("listTable").innerHTML = tableList;
-	$(".btn btn-default addition").click(function(){
-		alert("test");
-		mapTest = $(this);
-	});
+	//리스트 페이징(잘 안되고 있음)
 	$('#tourList').paging({
-		limit:24,
-		activePage:1
+		limit:21,
+		acrivePage:1
 	});
 }
-function addList(){
-	alert(mapTest);
+//리스트의 관광지를 클릭했을 때 나오는 상세 페이지
+function detailPage(TourSiteContentID){
+	var url = "detailPage.jsp?contentID="+TourSiteContentID;
+	window.open(url,"","width=520 height=550");
 }
 
+//경로추가 버튼을 클릭했을 때 실행
+$(document).on('click',".addition",function(){
+	var TourSiteContentID = $(this).attr("id");
+	requestTour(TourSiteContentID);
+});
+//삭제 버튼을 클릭했을 때 실행
+$(document).on("click",".delete",function(){
+	$(this).parent().remove();
+});
+
+//경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
+function requestTour(TourSiteContentID){
+	xhttp = new XMLHttpRequest();
+	var url = "getMapXY.jsp?TourSiteContentID="+TourSiteContentID;
+	xhttp.open("GET", url);
+	xhttp.send();
+	
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && xhttp.status == 200){
+			var jsonObject = JSON.parse(xhttp.responseText);
+			tourListAdd(jsonObject);
+		}
+	}
+}
+//내가가는 여행지 목록에 추가되는 부분
+function tourListAdd(jsonObject){
+	var tableList = '<tr><td id="'+jsonObject.datas[0].TourSiteContentID+'">'
+		+ jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></span></td></tr>';
+	$("#addListTable").append(tableList)
+	
+	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
+}
+//구글맵 지역이동
 function moveToLocation(lat, lng){
 	var center = new google.maps.LatLng(lat, lng);
 	map.panTo(center);
 }
+//구글맵 마커 추가
+function addMarker(title, lng, lat){
+	index = 0;
+	var image = {
+		    url: '../beachflag.png',
+		    size: new google.maps.Size(20, 32),
+		    origin: new google.maps.Point(0, 0),
+		    anchor: new google.maps.Point(0, 32)
+		  };
+	
+	marker = new google.maps.Marker({
+		position : {lat:Number(lat),lng:Number(lng)},
+		map : map,
+		icon: image,
+		title: title,
+		zIndex:index
+	});
+	mapPath.push({lat:Number(lat), lng:Number(lng)});
+	mapLatLng.push(marker);
+	drawLine();
+}
+//구글맵 마커 삭제
+function removeMarker(){
+	
+}
+//구글맵 경로 선
+function drawLine(){
+	userTourPath = new google.maps.Polyline({
+		path:mapPath,
+		geodesic:true,
+		strokeColor:'#FF0000',
+		strokeOpacity:1.0,
+		strokeWeight:2
+	});
+	userTourPath.setMap(map);
+}
 
+//지역 선택 시 구글맵 이동을 위한 좌표 구분
 function selectAreaCode(areaCode){
 	if(areaCode == 1){//서울특별시
 		lat = 37.5661932511;
@@ -153,9 +219,10 @@ function selectAreaCode(areaCode){
 	}
 }
 
+//구글맵 생성
 function initMap() {
 	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
+	    center: {lat: 37.5661932511, lng: 126.9827595315},
 	    zoom: 11
 	  });
 }

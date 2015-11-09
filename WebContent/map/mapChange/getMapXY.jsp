@@ -5,10 +5,9 @@
 <%@page import="org.json.simple.parser.*" %>
 <%@page import="java.util.*" %>
 <%
-	String tourPath = request.getParameter("tourPath");
-	String sql = "SELECT TourSiteTitle, TourSiteMapX, TourSiteMapY, TourSiteFirstImage From toursite WHERE TourSiteContentID=?";
-
-	String result = mapGet.getJSONObject(sql, tourPath).toString();
+	String tourSiteContentID = request.getParameter("TourSiteContentID");
+	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteMapX, TourSiteMapY From toursite WHERE TourSiteContentID=?";
+	String result = mapGet.getJSONObject(sql, tourSiteContentID).toString();
 
 %>
 <%=result %>
