@@ -273,7 +273,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="num">
-					<ul><a href="main.jsp">LOGOUT</a></ul>
+					<ul><a href="main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -357,7 +357,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="wrap">
 		<div class="move-text">
 			<div class="breaking_news">
-				<h2>Breaking News</h2>
+				<h2>공지사항</h2>
 			</div>
 			<div class="marquee"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
 				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;The standard chunk of Lorem Ipsum used since the 1500s is reproduced..</a></div>

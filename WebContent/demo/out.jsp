@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	alert("탈퇴 되었습니다.")
-	location.href = "LoginMain.jsp";
+	location.href = "main/LoginMain.jsp";
 </script>
 </head>
 <body>
