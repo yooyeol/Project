@@ -1,20 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=EUC-KR">
-		<meta charset="EUC-KR">
-		<title>Faceboot - A Facebook style template for Bootstrap</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<title>ÏöîÍ∏∞Ï°∞Í∏∞ Í≤åÏãúÎ¨ºÏûëÏÑ±ÌïòÍ∏∞</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="../cssFB/bootstrap.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
+		<link href="../demo/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='styleseet' type'text/css'>
+  
+  
+	<!-- 	<link href="../cssFB/bootstrap.min.css" rel="stylesheet">
+		 --><!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="../cssFB/styles.css" rel="stylesheet">
-
+		<!-- <link href="../cssFB/styles.css" rel="stylesheet">
+ -->
 		   
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
@@ -73,106 +77,86 @@ $(document).ready(function(){
 	</head>
 	<body>
 
-           
+           <%@include file="mainHeader.jsp" %>
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11" id="main">
-                
-                
-              
-                <div class="padding">
-                  
-                      
-                        <!-- content -->                      
-                      	<div class="row">
-                          
-                         <!-- main col left --> 
+          <div class="main-body">
+		<div class="wrap">
+          
+            <div class="col-md-12" >
+           
                          
-                              <div class="well"> 
-                                   <form class="form-horizontal" role="form" name="postFrm" method="post" action="boardInputProc.jsp" enctype="multipart/form-data">
+                              <div class="well" style="padding-bottom: 50px;"> 
+                                   <form class="form-horizontal" role="form" name="postFrm" method="post" action="boardPostProc.jsp" enctype="multipart/form-data">
                                     <h3><bold>What's New</h3></br>
                                      <div class="form-group" style="padding-left: 14px;padding-bottom:0;">
-									<input style="padding:10px;"type="text" name="subject" size="50" maxlength="30" placeholder="subject">
+									<input style="padding:10px;"type="text" name="MessageTitle" size="50" maxlength="30" placeholder="subject">
                                     </div>
                                      <div class="form-group" style="padding:14px;  border:1px; color: grey;">
-                                     <span>ªÁ¡¯ ø√∏Æ±‚</span>
+                                     <span>ÏÇ¨ÏßÑ Ïò¨Î¶¨Í∏∞</span>
                                       <div id="showfile"  name="img_1">
                                       <img src="" width="200" height="200" id="img" style="display: none;"></div>
-                                      <input id="imagefile" type="file" multiple="multiple" value="¿ÃπÃ¡ˆ.1" name="filename"/>
+                                      <input id="imagefile" type="file" multiple="multiple" value="Ïù¥ÎØ∏ÏßÄ.1" name="filename"/>
                                       
                                     </div>
                                     <div class="form-group" style="padding:14px;">
-                                      <textarea id="textArea" class="form-control"  name="content"> </textarea> 
+                                      <textarea id="textArea" class="form-control"  name="MessageContent" style="height: 600px;"> </textarea> 
                                     </div>
                                     
-                                    
-                                    <button style="margin: 5px;" class="btn btn-primary pull-right" type="submit">Post</button>
-                                    <button style="margin: 5px;"class="btn btn-primary pull-right" type="reset">¥ŸΩ√æ≤±‚</button>
-                                    <button style="margin: 5px;"class="btn btn-primary pull-right" type="button" onclick="javascript:location.href='board.jsp'">∏Ò∑œ∫∏±‚</button>
-                                    
+                                   
                                        <div class="btn-group" role="group" aria-label="...">
   										<button type="button" class="btn btn-default">
-  											<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ∞Ê∑ŒµÓ∑œ
+  											<span class="glyphicon glyphicon-map-marker" aria-hidden="true" name="TourCourseID"></span> Í≤ΩÎ°úÎì±Î°ù
   										</button>
- 										<button type="button" class="btn btn-default" name="filename" size="50" maxlength="50" onchange="readURL(this);">
- 											 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> ªÁ¡¯æ˜∑ŒµÂ
- 										</button>
+ 									<!-- 	<button type="button" class="btn btn-default" name="filename" size="50" maxlength="50" onchange="readURL(this);">
+ 											 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> ÏÇ¨ÏßÑÏóÖÎ°úÎìú
+ 										</button> -->
 									</div>
 									
 									
 									
 
 
- <div class="form-group" style="padding:14px;">
-                                      <input class="form-control"  placeholder="Update your route" name="mymap"></input>
+ 				<div class="form-group" style="padding:14px;">
+                                      <input class="form-control"  placeholder="Update your route" name="TourCourseID"></input>
                                  		
-                                 		<div style="float: right;" class="col-sm-5">
+                         <div style="float: right;" class="col-sm-5">
   
-  					<span style="font-weight: bold; ">√ﬂ√µ ∞Ê∑Œ ∆Ú¡° </span>
+  								<span style="font-weight: bold; ">Ï∂îÏ≤ú Í≤ΩÎ°ú ÌèâÏ†ê </span>
   
-    					<label class="radio-inline">
-      							<input type="radio" name="star" value="5" >5¡°
-    					</label>
-    					<label class="radio-inline">
-     							 <input type="radio" name="star" value="4">4¡°
-   						 </label>
-   						 <label class="radio-inline">
-     							 <input type="radio" name="star" value="3">3¡°
-   						 </label>
- 						<label class="radio-inline">
-     							 <input type="radio" name="star" value="2">2¡°
-    					</label>
-     					<label class="radio-inline">
-    							  <input type="radio" name="star" value="1">1¡°
-    					</label>
-</div>
-</div>
+    								<label class="radio-inline">
+      									<input type="radio" name="MessageSiteGrade" value="5" >5Ï†ê
+    								</label>
+    								<label class="radio-inline">
+     							 		<input type="radio" name="MessageSiteGrade" value="4">4Ï†ê
+   						 			</label>
+   						 			<label class="radio-inline">
+     									 <input type="radio" name="MessageSiteGrade" value="3">3Ï†ê
+   						 			</label>
+ 									<label class="radio-inline">
+     							 		<input type="radio" name="MessageSiteGrade" value="2">2Ï†ê
+    								</label>
+     								<label class="radio-inline">
+    							  		<input type="radio" name="MessageSiteGrade" value="1">1Ï†ê
+    								</label>
+						</div>
+				</div>
                         
-
+ 
+                                    <button style="margin: 5px;" class="btn btn-primary pull-right" type="submit">Post</button>
+                                    <button style="margin: 5px;"class="btn btn-primary pull-right" type="reset">Îã§ÏãúÏì∞Í∏∞</button>
+                                    <button style="margin: 5px;"class="btn btn-primary pull-right" type="button" onclick="javascript:location.href='board.jsp'">Î™©Î°ùÎ≥¥Í∏∞</button>
+                                    
 					
-									<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
+									<input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>">
                                   </form>
                               </div>
                      
-                    
-                      
-                  
-                      
-                   
-                        
-                     
-                </div><!-- /padding -->
-            </div>
-            <!-- /main -->
+         
           
     
-
-
-
-
-
-	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<!-- <script src="js/scripts.js"></script> -->
+</div>
+	<div class="clearfix"></div>
+</div>
+ <%@include file="mainFooter.jsp" %>
 	</body>
 </html>

@@ -308,13 +308,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="row">
 								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="business.html">회원정보</a></li>
+										<li><a href="mypage1.jsp">회원정보</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">경로조회</a></li>
+										<li><a href="mypage2.jsp">비밀번호변경</a></li>
 									    <li class="divider"></li>
-										<li><a href="business.html">경로바구니</a></li>
+										<li><a href="mypage3.jsp">회원탈퇴</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">Reviews</a></li>
+										<li><a href="business.html">경로바구니</a></li>
 										<li class="divider"></li>
 										<li><a href="shortcodes.html">Short codes</a></li>
 									</ul>
@@ -399,13 +399,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  
 <%
-		String id = session.getAttribute("studentID").toString();
+		String id = session.getAttribute("idKey").toString();
 		
-		String sql = "select STUD_ID, STUD_PW from student where STUD_ID=id";
+		
+		String sql = "select memberEmail,memberTel,memberZipCode,memberAddr from member where memberEmail=?";
 		
 
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -417,28 +418,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 		try {
 
-			String url = "jdbc:mysql://localhost:3306/mysql";
+			String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
 			String userId = "root";
-			String userPass = "mysql";
+			String userPass = "root";
 
 			conn = DriverManager.getConnection(url, userId, userPass);
 
 
-				stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
 				String subemail = "";
 				String subphone = "";
-				String subaddr = "";
-
-
-				//out.println(subcode);
-
-				rs = stmt.executeQuery(sql);
+				String subaddr1 = "";
+				String subaddr2 = "";
+				
 
 				while (rs.next()) {
-					rs.next();
+					
 					subemail = rs.getString(1);
 					subphone = rs.getString(2);
-
+					subaddr1 = rs.getString(3);
+					subaddr2 = rs.getString(4);
+					
 					
 	%> 
 <div class="set_myinfo clear_g">
@@ -452,7 +454,81 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 
- <%
+ 
+	
+
+<div class="set_myinfo clear_g">
+
+    <div class="cont_myinfo">
+        <dl class="list_myinfo">
+            <dt class="txt_comm txt_contact">연락처</dt>
+
+            <dd class="desc_myinfo">
+            
+                <span class="contact_info"><span class="ico_comm ico_phone">핸드폰 번호</span>
+                                                            <%=subphone%>
+                                            
+                <button type="button" id="changePhoneBtn" class="btn_comm btn_change"><span class="screen_out">변경</span></button>
+            </dd>
+            <form id="nicknameForm" action="updatePhone.jsp" method="post">
+                <dd id="phoneChangeDiv" class="desc_myinfo" style="display: none">
+                    <div class="area_nickname">
+                        <input type="text" id="daumname" name="memberPhone" class="tf_f" value="">
+                        <span id="daumnamePlaceHolder" class="lab_nick screen_out">핸드폰 번호를 입력해주세요. </span>
+                    </div>
+                    <button type="submit" class="btn_comm btn_save"><span class="screen_out">저장</span></button>
+                    <button type="button" id="changePhoneCancelBtn" class="btn_comm btn_cancle"><span class="screen_out">취소</span></button>
+                   
+                </dd>
+            </form>
+        </dl>
+     
+    </div>
+</div>
+
+
+
+
+
+
+<div class="set_myinfo clear_g">
+
+    <div class="cont_myinfo">
+        <dl class="list_myinfo">
+            <dt class="txt_comm txt_address">주소</dt>
+            <dd class="desc_myinfo emph_myinfo">
+			<span class="contact_info"><span class=""></span>
+               <%=subaddr1 %><br><%=subaddr2 %>
+                
+                <button type="button" id="changeAddrBtn" class="btn_comm btn_change" onClick="zipCheck()" ><span class="screen_out">변경</span></button>
+                
+           </dd>
+           <form name="regFrm" id="defaultForm" method="post" class="form-horizontal fv-form fv-form-bootstrap" action="updateAddr.jsp" novalidate="novalidate"><button type="submit" class="fv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button><button type="submit" class="fv-hidden-submit disabled" style="display: none; width: 0px; height: 0px;" disabled="disabled"></button>
+            
+                <dd id="addrChangeDiv" class="desc_myinfo" style="display: none">
+                    <div class="area_nickname">
+                        <input type="text" id="addr1" name="memberZipCode" name="daumname" value="<%=subaddr1 %>"  class="tf_g" >
+                        <input type="text" id="addr2" name="memberAddr"  name="daumname" value="<%=subaddr2 %>"  class="tf_h">
+
+                        <span id="daumnamePlaceHolder" class="lab_nick screen_out">주소를 입력해주세요. </span>
+                    </div>
+                    
+                 	
+
+                    
+                    <button type="submit" class="btn_comm btn_save"><span class="screen_out">저장</span></button>
+                    <button type="button" id="changeAddrCancelBtn" class="btn_comm btn_cancle"><span class="screen_out">취소</span></button>
+                   
+                </dd>
+            </form>
+        </dl>
+     </div>
+</div>
+
+
+				
+				
+<%
 		}
 	%>
 	
@@ -465,77 +541,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		} finally {
 			if (rs != null)
 				rs.close();
-			if (stmt != null)
-				stmt.close();
+			if (pstmt != null)
+				pstmt.close();
 			if (conn != null)
 				conn.close();
 		}
 	%> 		
-	
-
-<div class="set_myinfo clear_g">
-
-    <div class="cont_myinfo">
-        <dl class="list_myinfo">
-            <dt class="txt_comm txt_contact">연락처</dt>
-
-            <dd class="desc_myinfo">
-            
-                <span class="contact_info"><span class="ico_comm ico_phone">핸드폰 번호</span>
-                                                            왜안돼냐고
-                                            
-                <button type="button" id="changePhoneBtn" class="btn_comm btn_change"><span class="screen_out">변경</span></button>
-            </dd>
-            <form id="nicknameForm" action="/my/basic.daum" method="post">
-                <dd id="phoneChangeDiv" class="desc_myinfo" style="display: none">
-                    <div class="area_nickname">
-                        <input type="text" id="daumname" name="daumname" class="tf_g" value="010-8***-***6">
-                        <span id="daumnamePlaceHolder" class="lab_nick screen_out">핸드폰 번호를 입력해주세요. </span>
-                    </div>
-                    <button type="submit" class="btn_comm btn_save"><span class="screen_out">저장</span></button>
-                    <button type="button" id="changeNicknameCancelBtn" class="btn_comm btn_cancle"><span class="screen_out">취소</span></button>
-                   
-                </dd>
-            </form>
-        </dl>
-     
-    </div>
-</div>
-
-
-
-<div class="set_myinfo clear_g">
-
-    <div class="cont_myinfo">
-        <dl class="list_myinfo">
-            <dt class="txt_comm txt_address">주소</dt>
-            <dd class="desc_myinfo emph_myinfo">
-			<span class="contact_info"><span class=""></span>
-                왜안돼냐고
-                
-                <button type="button" id="changeAddrBtn" class="btn_comm btn_change"><span class="screen_out">변경</span></button>
-           </dd>
-            <form id="nicknameForm" action="/my/basic.daum" method="post">
-                <dd id="addrChangeDiv" class="desc_myinfo" style="display: none">
-                    <div class="area_nickname">
-                        <input type="text" id="daumname" name="daumname" class="tf_g" value="010-8***-***6">
-                        <span id="daumnamePlaceHolder" class="lab_nick screen_out">주소를 입력해주세요. </span>
-                    </div>
-                    <button type="submit" class="btn_comm btn_save"><span class="screen_out">저장</span></button>
-                    <button type="button" id="changeNicknameCancelBtn" class="btn_comm btn_cancle"><span class="screen_out">취소</span></button>
-                   
-                </dd>
-            </form>
-        </dl>
-     
-    </div>
-</div>
 				
 				
-
-				
-				
-				
+		
 				
 				
 <div class="set_myinfo clear_g">
@@ -550,7 +564,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<dd class="desc_myinfo  txt_none">수신안함</dd>
 		</dl>
 	</div>
-	<a href="/my/emailnoti.daum" class="btn_comm link_modify">정보수정</a>
+	<a href="" class="btn_comm link_modify">정보수정</a>
 </div>
 
 			</div><!--// mArticle -->
@@ -720,6 +734,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         enableShield: false
     }
 </script>
+
+
+
+
+
+
+
 <script src="https://go.daum.net/jsa_minidaum_pc.daum" charset="utf-8" type="text/javascript"></script>
 <script type="text/javascript" src="https://s1.daumcdn.net/svc/original/U03/cssjs/jquery/jquery-1.10.2.min.js"></script>
 
@@ -729,6 +750,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="content/validate.options.js"></script>
 <script type="text/javascript" src="content/messages.js"></script>
 <script type="text/javascript">
+
+function zipCheck(){
+	var url = "zipCheck.jsp?check=y";
+	window.open(url,"주소 검색","width=500, height=300, scrollbars=yes");
+}
+
 $focus = null;
 
 $(document).ready(function() {
@@ -776,30 +803,36 @@ $(document).ready(function() {
     });
 
     $("#changePhoneBtn").on("click", function(){
-        $("#daumname").val("유유");
+        $("#daumname").val("");
         $("#daumnamePlaceHolder").addClass("screen_out");
         $("#phoneChangeDiv").removeClass("desc_wrong");
         $("#daumnameDesc").text("한글 15자, 영문 대소문자 2~30자, 숫자, ‘-‘, ‘_’ 를 사용할 수 있습니다. (혼용가능)");
-        $("#nicknameDiv").hide();
+        $("#phoneDiv").hide();
         $("#phoneChangeDiv").show();
     });
     
     $("#changeAddrBtn").on("click", function(){
-        $("#daumname").val("유유");
+        $("#daumname").val("");
         $("#daumnamePlaceHolder").addClass("screen_out");
-        $("#phoneChangeDiv").removeClass("desc_wrong");
+        $("#addrChangeDiv").removeClass("desc_wrong");
         $("#daumnameDesc").text("한글 15자, 영문 대소문자 2~30자, 숫자, ‘-‘, ‘_’ 를 사용할 수 있습니다. (혼용가능)");
-        $("#nicknameDiv").hide();
+        $("#addrDiv").hide();
         $("#addrChangeDiv").show();
     });
     
     
     
     
-    $("#changeNicknameCancelBtn").on("click", function(){
+    $("#changePhoneCancelBtn").on("click", function(){
 
-        $("#nicknameDiv").show()
+        $("#phoneDiv").show()
         $("#phoneChangeDiv").hide();
+    });
+    
+    $("#changeAddrCancelBtn").on("click", function(){
+
+        $("#addrDiv").show()
+        $("#addrChangeDiv").hide();
     });
 
     $("#changeMobileBtn").on("click", function(){

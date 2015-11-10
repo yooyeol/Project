@@ -15,7 +15,7 @@
 %>
 		<script>
 		alert("<%=msg%>");
-		location.href="<%=uri%>/demo/main.jsp"
+		location.href="<%=uri%>/demo/main1.jsp"
 		</script>
 <%
 	}else{
