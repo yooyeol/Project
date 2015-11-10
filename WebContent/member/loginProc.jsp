@@ -4,6 +4,7 @@
 <%
 	String email = request.getParameter("email");
 	String pass = request.getParameter("password");
+	String name = mMgr.getName(email);
 	boolean flag = mMgr.loginMember(email, pass);
 	String uri = request.getContextPath();
 	String userInfo[] = new String[2];
@@ -12,6 +13,7 @@
 	if(flag){
 		msg = "로그인에 성공 하였습니다.";
 		session.setAttribute("idKey", email);
+		session.setAttribute("nameKey",name);
 %>
 		<script>
 		alert("<%=msg%>");

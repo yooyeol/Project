@@ -28,6 +28,7 @@
 			<div class="col-lg-6">
 				<div class="row">
 					<div id="map">지역을 먼저 선택해 주세요.</div>
+					<div id="right-panel"></div>
 				</div>
 				<div class="row" align="center">
 				<br/>

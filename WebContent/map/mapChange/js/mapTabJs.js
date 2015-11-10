@@ -8,7 +8,7 @@ var popup;
 var mapLatLng = [];
 var mapPath=[];
 var userTourPath;
-var index;
+var zindex=1, index = 1;
 var test;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
@@ -102,6 +102,7 @@ $(document).on("click",".delete",function(){
 //list 클릭시
 $(document).on("click",".list-group-item",function(){
 	test = $(this).index();
+	alert(test);
 })
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
@@ -123,6 +124,7 @@ function tourListAdd(jsonObject){
 	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>'
 	$("#addListUl").append(UlList);
 	
+	//list 드래그 시 sortable(애니메이션 방식)
 	$("#addListUl").sortable();
 	
 	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
@@ -146,11 +148,11 @@ function addMarker(title, lng, lat){
 		map : map,
 		icon: image,
 		title: title,
-		zIndex:index
+		zIndex: zindex
 	});
 	
-	index++;
-	mapPath.push({lat:Number(lat), lng:Number(lng)});
+	mapPath.push({index:zindex , lat:Number(lat), lng:Number(lng)});
+	zindex++;
 	mapLatLng.push(marker);
 	drawLine();
 	moveToLocation(lat, lng);
@@ -265,8 +267,12 @@ function selectAreaCode(areaCode){
 
 //구글맵 생성
 function initMap() {
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var directionsService = new google.maps.DirectionsService;
 	  map = new google.maps.Map(document.getElementById('map'), {
 	    center: {lat: 37.5661932511, lng: 126.9827595315},
-	    zoom: 11
+	    zoom: 10
 	  });
+	  directionsDisplay.setMap(map);
+	  directionsDisplay.setPanel(document.getElementById("right-panel"));
 }

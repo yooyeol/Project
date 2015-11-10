@@ -24,6 +24,30 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	//이름 가져오기
+	public String getName(String email){
+		String name = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT MemberName FROM member where MemberEmail=?";
+		try{
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				name = rs.getString(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return name;
+	}
 	
 	//중복검사
 	public boolean checkMail(String Email){
