@@ -119,37 +119,35 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			con = pool.getConnection();
-			sql = "select max(num)  from tblboard";
+			sql = "select max(num)  from message";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			int ref = 1;
+			/*int ref = 1;
 			if (rs.next())
-				ref = rs.getInt(1) + 1;
+				ref = rs.getInt(1) + 1;*/
 			File file = new File(SAVEFOLDER);
 			if (!file.exists())
 				file.mkdirs();
 			multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
 					new DefaultFileRenamePolicy());
 
-			if (multi.getFilesystemName("filename") != null) {
+			/*if (multi.getFilesystemName("filename") != null) {
 				filename = multi.getFilesystemName("filename");
 				filesize = (int) multi.getFile("filename").length();
-			}
-			String content = multi.getParameter("content");
+			}*/
+			String content = multi.getParameter("MessageContent");
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}*/
-			sql = "insert tblboard(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
-			sql += "values(?, ?, ?, ?, 0, 0, now(), ?, 0, ?, ?, ?)";
+			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MessageGoodCount,MessagePoorCount,MemberID,MessageCount,TourCourseID)";
+			sql += "values(?, ?, now(), ?, 0, 0, ?, 0, ?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, multi.getParameter("name"));
+			pstmt.setString(1, multi.getParameter("MessageTitle"));
 			pstmt.setString(2, content);
-			pstmt.setString(3, multi.getParameter("subject"));
-			pstmt.setInt(4, ref);
-			pstmt.setString(5, multi.getParameter("pass"));
-			pstmt.setString(6, multi.getParameter("ip"));
-			pstmt.setString(7, filename);
-			pstmt.setInt(8, filesize);
+			pstmt.setInt(3, Integer.parseInt(multi.getParameter("MessageSiteGrade")));
+			pstmt.setString(4, multi.getParameter("MemberID"));
+			pstmt.setString(5, multi.getParameter("TourCourseID"));
+			
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {

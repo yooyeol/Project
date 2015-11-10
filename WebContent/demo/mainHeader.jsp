@@ -120,12 +120,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 		<li ><a href="notify.jsp">공지사항</a></li>
 						<li><a href="board.jsp">게시판</a></li>
 					  <li class="dropdown">
-						<a href="mypage.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
+						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
 							<div class="row">
 								<div class="col-sm-4">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage.jsp.html">내 정보 조회</a></li>
+										<li><a href="mypage.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
 										<li><a href="memberUpdate.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>

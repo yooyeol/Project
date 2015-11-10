@@ -1,0 +1,1406 @@
+@charset "utf-8";
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0}
+fieldset,img{border:0 none}
+dl,ul,ol,menu,li {list-style:none}
+blockquote, q {quotes: none}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
+input,select,textarea,button {vertical-align:middle}
+input::-ms-clear {display:none}
+button {border:0 none;background-color:transparent;cursor:pointer}
+body {background:#fff}
+body,th,td,input,select,textarea,button {font-size:12px;line-height:1.5;font-family:'돋움',dotum,sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
+a {color:#333;text-decoration:none}
+a:active, a:hover {text-decoration:underline}
+a:active {background-color:transparent}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+
+/* global */
+#daumIndex {overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0} /* 스킵네비게이션 */
+.ir_pm {display:block;overflow:hidden;font-size:0px;line-height:0;text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir_wa {display:block;overflow:hidden;position:relative;width:100%;height:100%;z-index:-1} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.screen_out {display:block;overflow:hidden;position:absolute;left:-9999px;width:1px;height:1px;font-size:0;line-height:0;text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+.screen_hide {font-size:0;line-height:0;visibility:hidden} /* screen_out클래스를 사용할 수 없으며, 해당 텍스트를 숨겨야 할때 */
+
+.f_l {float:left}
+.f_r {float:right}
+.cl_b {clear:both;width:0;height:0;font-size:0;line-height:0}
+.show {display:block}
+.hide {display:none}
+.tbl {border-collapse:collapse;border-spacing: 0} /* 테이블 초기화 */
+.clear_g {display:block;overflow:visible;width:auto;clear:both;*zoom:1}
+.clear_g:after {display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+
+/* layout */
+#daumWrap {position:relative;width:100%}
+#mArticle {min-height:574px}
+
+/* daumHead */
+#daumHead {width:100%;padding-top:51px;border-bottom:2px solid #424447}
+#daumHead .inner_head {width:978px;height:58px;margin:0 auto}
+#daumHead:after {display:block;visibility:hidden;height:0;content:'';font-size:0;clear:both}
+#daumHead h1 {display:inline;float:left;margin-left:4px;font-weight:bold;font-size:24px;line-height:28px;letter-spacing:-1px}
+#daumServiceLogo {display:block;width:78px;height:29px;margin:6px 40px 23px 0;background:url(https://i1.daumcdn.net/id/member/2014/img_gnb_userinfo2014.gif) no-repeat}
+
+#daumContent {width:978px;margin:0 auto}
+.userinfo_type1 #cMain {overflow:hidden;width:978px;background:url(https://i1.daumcdn.net/id/member/2014/bg_aside.gif) 100% 0 repeat-y}
+.userinfo_type1 .cont_home #cMain {background:url(https://i1.daumcdn.net/id/member/2014/bg_aside2.gif) 100% 0 repeat-y}
+.userinfo_type1 #mArticle {float:left;width:699px}
+.userinfo_type1 #mAside {float:right;width:279px}
+
+/* gnb */
+#daumGnb {float:left;position:relative;width:468px;height:43px;background:url(https://i1.daumcdn.net/id/member/2014/img_gnb_userinfo2014.gif) no-repeat 0 -40px}
+#daumGnb li {float:left}
+#daumGnb .gnb_comm {float:left}
+.gnb_comm .link_gnb, .gnb_with .link_gnb {display:block;height:43px;margin-right:19px;line-height:43px;font-weight:bold;font-size:14px;background:url(https://i1.daumcdn.net/id/member/2014/img_gnb_userinfo2014.gif) no-repeat;letter-spacing:-1px;text-align:center}
+.gnb_comm .link_gnb1 {width:66px;background-position:0 -40px}
+.gnb_comm .link_gnb2 {width:79px;background-position:-85px -40px}
+.gnb_comm .link_gnb3 {width:81px;background-position:-183px -40px}
+.gnb_comm .link_gnb4 {width:94px;margin-right:0;background-position:-283px -40px}
+.gnb_comm .link_gnb1:hover, .gnb_comm .link_gnb1:focus {background-position:0 -100px}
+.gnb_comm .link_gnb2:hover, .gnb_comm .link_gnb2:focus {background-position:-85px -100px}
+.gnb_comm .link_gnb3:hover, .gnb_comm .link_gnb3:focus {background-position:-183px -100px}
+.gnb_comm .link_gnb4:hover, .gnb_comm .link_gnb4:focus {background-position:-283px -100px}
+.gnb_comm .on .link_gnb1, .gnb_comm .on .link_gnb1:hover, .gnb_comm .on .link_gnb1:focus {background-position:0 -100px}
+.gnb_comm .on .link_gnb2, .gnb_comm .on .link_gnb2:hover, .gnb_comm .on .link_gnb2:focus {background-position:-85px -100px}
+.gnb_comm .on .link_gnb3, .gnb_comm .on .link_gnb3:hover, .gnb_comm .on .link_gnb3:focus {background-position:-183px -100px}
+.gnb_comm .on .link_gnb4, .gnb_comm .on .link_gnb4:hover, .gnb_comm .on .link_gnb4:focus {background-position:-283px -100px}
+#daumGnb .gnb_with {display:inline;float:left;margin-left:31px}
+.gnb_with .link_gnb1 {width:60px;margin-right:0;background-position:-408px -40px}
+.gnb_with .link_gnb1:hover, .gnb_with .link_gnb1:focus {background-position:-408px -100px}
+.gnb_with .on .link_gnb1, .gnb_with .on .link_gnb1:hover, .gnb_with .on .link_gnb1:focus {background-position:-408px -100px}
+
+/* PC전사 이미지 */
+.ico_search {background-image:url(https://i1.daumcdn.net/svc/image/U03/common_icon/5265025001055B0001)}
+/* search bar 기본 */
+#daumSearch {float:right;position:relative;z-index:999;width:310px;margin-top:3px}
+#daumSearch .box_searchbar {float:left;background:url(https://i1.daumcdn.net/svc/image/U03/common_icon/5265025001055B0001) no-repeat;background-position:0 0}
+#daumSearch .search_on {position:relative;background-position:0 -50px}
+#daumSearch .tf_keyword {display:inline;float:left;width:370px;height:18px;margin:11px 10px 0;padding:0;border:0 none;font-weight:bold;font-size:16px;line-height:18px;font-family:'돋움',dotum,sans-serif;background-color:transparent;outline:none}
+#daumSearch .btn_search {float:left;overflow:hidden;width:66px;height:39px;border:0 none;background-position:0 -300px;cursor:pointer}
+#daumSearch .btn_search:hover  {background-position:-70px -300px}
+
+/* search bar 내부검색창 */
+#daumSearch .fld_inside {position:relative;width:100%;height:31px}
+#daumSearch .fld_inside .box_searchbar {width:310px;background-position:0 -200px}
+#daumSearch .fld_inside .tf_keyword {width:242px;height:18px;margin:7px 9px 0;font-weight:normal;font-size:12px;line-height:1.5}
+#daumSearch .fld_inside .btn_search {width:50px;height:31px;background-position:100% -200px}
+#daumSearch .fld_inside .btn_search:hover {background-position:100% -300px}
+#daumSearch .fld_inside .bg_on {background:url(https://i1.daumcdn.net/svc/image/U03/common_icon/5265025001055B0001) no-repeat 2px -422px}
+#daumSearch .fld_inside .search_on {background-position:0 -250px}
+#daumSearch .fld_inside .search_on .btn_search {background-position:100% -250px}
+#daumSearch .fld_inside .search_on .btn_search:hover {background-position:100% -300px}
+
+/* search bar 옵션이 있을경우 */
+#daumSearch .opt_on .tf_keyword {width:146px;margin:7px 5px 0}
+#daumSearch .opt_search {float:left;width:104px;height:31px;line-height:14px}
+#daumSearch .opt_search .search_option {height:31px}
+#daumSearch .opt_search .tf_opt {width:82px;height:18px;margin:7px 0 0 10px;border:0 none;background-color:transparent;outline:none;cursor:pointer}
+#daumSearch .opt_search .btn_opt {position:absolute;top:0;left:1px;width:104px;height:31px;;background-image:url(data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==)}
+#daumSearch .opt_search .ico_arrow {float:right;overflow:hidden;width:10px;height:15px;margin-top:8px;border-right:1px solid #d9d9d9;background-position:0 -350px;text-indent:-9999px}
+#daumSearch .opt_search .layer_opt {display:none;overflow:hidden;position:absolute;top:29px;left:0;width:103px;border:1px solid #a5a6ac;border-top:0 none;background-color:#fff}
+#daumSearch .opt_search .list_opt {float:left;width:100%;margin-top:1px;padding:2px 0 3px;border-top:1px solid #e8e8ea}
+#daumSearch .opt_search .lab_opt {display:block;position:relative;z-index:1;width:100%;padding:5px 0 3px;background-color:#fff;text-indent:9px;cursor:pointer}
+#daumSearch .opt_search .inp_opt {position:absolute;width:100%;height:22px;opacity:0;filter:alpha(opacity=0)}
+#daumSearch .opt_open .btn_opt {top:0;left:0;width:104px;height:29px;border-top:1px solid #a5a6ac;border-left:1px solid #a5a6ac}
+#daumSearch .opt_open .ico_arrow {margin:0;height:29px;border-color:#a5a6ac;background-position:0 -375px}
+#daumSearch .opt_open .layer_opt {display:block}
+#daumSearch .list_opt li {float:left;width:100%}
+#daumSearch .on .lab_opt {font-weight:bold;background-color:#f0f0f0;letter-spacing:-1px}
+
+/* 공통이미지 */
+/* 2014-12-16 수정 시작 */
+.btn_comm {display:inline-block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/btn_comm_150831.gif) 0 0 no-repeat;font-size:0;line-height:0;vertical-align:top} /* 2015-08-31 수정 */
+.ico_comm {display:inline-block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/ico_comm_150107.png) 0 0 no-repeat;text-indent:-9999px;vertical-align:top} /* 2014-12-16 수정 */
+.tit_comm {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/tit_comm_150831.gif) 0 0 no-repeat;text-indent:-9999px} /* 2015-08-31 수정 */
+/* .txt_comm {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/txt_comm_140820.gif) 0 0 no-repeat;text-indent:-9999px} 2014-08-06 수정 2014-06-02 수정/UPTUSERSVC-772 */
+.txt_comm {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/txt_comm_150902.gif) 0 0 no-repeat;text-indent:-9999px} /* 2015-01-22 수정 UPTTRDRFM-86 */ /* 2015-08-31 수정 */
+.bg_user {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/bg_user2014_150107.png) 0 0 no-repeat} /* 2015-01-07 */
+.bg_intro {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/bg_tit_150917.gif) 0 0 no-repeat} /* 2014-09-05 수정 */ /* 2015-09-17 수정 */
+.bg_box {display:block;overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/bg_box_150123.gif) 0 0 no-repeat} /* 2015-01-23 수정 UAPDLOGINKP-625 */
+.bg_pwlayer {display:block;overflow:hidden;height:156px;margin-top:10px;padding:29px 0 34px 135px;border-bottom:1px solid #d2d4dc;background:url(https://i1.daumcdn.net/id/member/2014/bg_pwlayer.gif) 77px 0 no-repeat} /* 2014-08-06 추가 */
+.tit_topname {overflow:hidden;background:url(https://i1.daumcdn.net/id/member/2014/title_member.gif);background-repeat:no-repeat;font-size:0;line-height:0;text-indent:-9999px}/* 2015-03-11 추가 */
+/* 2014-12-16 수정 끝 */
+
+/* 공통색상 */
+.desc_add {color:#777}
+.emph_info {color:#3d8aea}
+.emph_notice {color:#ea4e43}
+.emph_b {display:inline-block;color:#3d88ee;line-height:normal;border-bottom:1px solid #3d88ee} /* 2014-11-20-v1 */
+
+/* 상단 타이틀 */
+.myinfo_intro {overflow:hidden;width:100%;height:147px}
+.myinfo_intro .bg_intro {float:left;width:154px;height:147px}
+.myinfo_intro .cont_intro {float:left;padding-top:37px}
+.myinfo_intro .cont_intro .desc_g {line-height:22px;color:#57595c;background-color:#fff} /* 2014-06-09 수정/UPTUSERSVC-829 */
+.myinfo_intro .tit_comm {height:26px;margin-bottom:14px}
+.myinfo_intro .emph_info {letter-spacing:-1px}
+.intro_phoneid .bg_intro {background-position:0 0}
+.intro_phoneid .tit_comm {width:188px;background-position:0 0}
+.intro_connect .bg_intro {background-position:0 -160px}
+.intro_connect .tit_comm {width:221px;background-position:0 -120px}
+.intro_nick .bg_intro {background-position:-320px 0}
+.intro_nick .tit_comm {width:138px;background-position:0 -60px}
+.intro_name .bg_intro {background-position:-480px 0}
+.intro_name .tit_comm {width:145px;background-position:0 -90px}
+.intro_email .bg_intro {background-position:-160px 0}
+.intro_email .tit_comm {width:186px;background-position:0 -30px}
+.intro_notice .bg_intro {background-position:-160px -160px}
+.intro_notice .tit_comm {width:93px;background-position:0 -150px}
+.intro_country .bg_intro {background-position:-320px -160px}
+.intro_country .tit_comm {width:190px;background-position:0 -180px} /* 2014-06-11 수정/UPTUSERSVC-831 */
+.intro_ip .bg_intro {background-position:-480px -160px}
+.intro_ip .tit_comm {width:200px;background-position:0 -210px}
+.intro_release .bg_intro {background-position:0 -320px}
+.intro_release .tit_comm {width:159px;background-position:0 -390px}
+.intro_set .bg_intro {background-position:0 -320px}
+.intro_set .tit_comm {width:112px;background-position:0 -360px} /* 2014-06-11 수정/UPTUSERSVC-831 */
+.intro_reconfirm .bg_intro {background-position:-160px -320px}
+.intro_reconfirm .tit_comm {width:157px;background-position:0 -480px}
+.intro_certify .bg_intro {background-position:0 -320px}
+.intro_certify .tit_comm {width:110px;background-position:0 -510px}
+
+/* 2014-08-20 추가 시작 */
+.intro_modifypw .bg_intro {width:128px;background-position:0 -600px} /* 2014-09-05 수정 */
+.intro_modifypw .tit_modifypw {width:704px;background-position:0 -1465px}
+.intro_out .bg_intro {width:130px;background-position:-160px -600px} /* 2014-09-05 수정 */
+.intro_out .tit_outagree {width:622px;background-position:0 -1565px}
+.intro_out .tit_termination {width:754px;background-position:0 -1615px}
+.intro_out .tit_outpw {width:501px;margin-top:-16px;background-position:0 -1665px}/* 2014-10-14 수정 */
+/* 2014-08-20 추가 끝 */
+/* 2014-11-20 추가시작 */
+.intro_namecheck .bg_intro {width:128px;margin-right:24px;background-position:-480px 0}
+.intro_namecheck .tit_comm {width:704px;background-position:0 -1775px}
+.intro_namecheck .emph_info  {font-weight:bold}
+.intro_namecheck .check_notice {margin-top:6px;color:#777} /* 2014-11-20-v1 */
+/* //2014-11-20 추가끝 */
+/* 2015-08-31 추가시작 */
+.intro_addphone .tit_comm {width:170px;background-position:0 -2190px}
+.intro_addemail .tit_comm {width:167px;background-position:0 -2240px}
+.intro_addemail .bg_intro {background-position:-460px -600px} /* 2015-09-17 수정 */
+/* 2015-08-31 추가 끝 */
+.intro_addphone .bg_intro {background-position:-300px -600px} /* 2015-09-17 추가 */
+
+
+/* 입력 타이틀 */
+.info_detail .txt_phoneid {width:81px;height:14px;background-position:0 0}
+.info_detail .txt_certificate {width:51px;height:14px;background-position:0 -20px}
+.info_detail .txt_email {width:80px;height:14px;background-position:0 -40px}
+.info_detail .txt_nick {float:left;width:37px;height:14px;background-position:0 -60px}
+.info_detail .txt_contact {float:left;width:37px;height:14px;background-position:0 -80px}
+.info_detail .txt_address {width:26px;height:14px;background-position:0 -100px}
+.info_detail .txt_name {float:left;width:25px;height:14px;background-position:0 -120px}
+.info_detail .txt_date {width:51px;height:14px;background-position:0 -140px}
+.info_detail .txt_gender {width:25px;height:14px;background-position:0 -260px}
+.info_detail .txt_adver {width:79px;height:16px;background-position:0 -160px}
+.info_detail .txt_pw {width:97px;height:14px;background-position:0 -180px}
+.info_detail .txt_allow {width:80px;height:14px;margin-top:1px;background-position:0 -200px} /* 2014-05-27 수정/UPTUSERSVC-771 */
+.info_detail .txt_identity {width:81px;height:14px;margin-top:2px;background-position:0 -220px} /* 2014-05-27 수정/UPTUSERSVC-771 */
+.info_detail .txt_block {width:68px;height:14px;background-position:0 -240px}
+.info_detail .txt_releaseemail {width:36px;height:14px;background-position:0 -440px}
+.info_detail .txt_set {width:89px;height:14px;background-position:0 -300px}
+.info_detail .txt_setphone {width:66px;height:14px;background-position:0 -320px}
+.info_detail .txt_setreception {width:52px;height:14px;background-position:0 -340px}
+.info_detail .txt_setemail {width:101px;height:14px;background-position:0 -360px}
+.info_detail .txt_setpw {float:left;width:127px;height:14px;background-position:0 -380px}
+.info_detail .txt_numreception {width:101px;height:14px;background-position:0 -400px}
+.info_detail .txt_phonenum {width:66px;height:14px;background-position:0 -420px}
+.info_detail .txt_daumid {width:78px;height:14px;background-position:0 -460px}
+.info_detail .txt_pwreconfirm {width:51px;height:14px;background-position:0 -480px}
+.info_detail .txt_pwreconfirm {width:51px;height:14px;background-position:0 -480px}
+/* 2014-08-20 추가 시작 */
+.info_detail .txt_id {width:37px;height:14px;background-position:-41px -460px}
+.info_detail .txt_pwcurrent {width:81px;height:14px;background-position:0 -1200px}
+.info_detail .txt_pwnew {width:69px;height:14px;background-position:0 -1220px}
+/* 2014-08-20 추가 끝 */
+.info_detail .txt_addemail {width:70px;height:14px;background-position:0 -1300px} /* 2015-08-31 추가 */
+
+/* form 공통 영역 */
+.fld_comm .info_comm {position:relative;padding:35px 42px 19px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_comm .txt_notice {position:absolute;top:18px;right:25px;width:108px;height:11px;background-position:0 -280px}
+.info_comm .info_detail {display:block;overflow:visible;width:100%;margin-bottom:19px;clear:both;*zoom:1} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_comm .info_detail:after {display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.info_detail .tit_detail {overflow:hidden;float:left;width:107px;padding:12px 0 0 5px}
+.info_detail .ico_require {display:inline;float:left;width:11px;height:8px;margin:2px 0 0 7px;background-position:0 0}
+.info_detail .input_info {float:left;position:relative;width:780px} /* 2014-06-19 수정/UAPDLOGINKP-446 */
+.info_detail .bg_user {position:relative;height:38px;padding:1px 7px 0 14px;border:0 none} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_detail .bg_basic {width:324px;background-position:0 0}
+.info_detail .desc_add {margin-top:14px;line-height:14px} /* 2014-09-30 수정 */
+.info_detail .desc_apply {margin:14px 0 2px;color:#666;background-color:#fbfbfb} /* 2014-05-27 수정/UPTUSERSVC-777, 2014-07-02 수정/UPTUSERSVC-889 */
+.info_detail .bg_user .btn_del {display:inline;float:right;width:20px;height:20px;margin:9px 3px 0 0;background-position:-327px -77px}
+.info_detail .input_on {background-position:0 -50px}
+.info_detail .input_wrong {background-position:0 -100px}
+.info_detail .input_none {background-position:0 -930px}
+.info_detail .input_ok {background-position:0 -1330px} /* 2014-08-20 추가 */
+.info_detail .txt_num {float:left;margin-right:6px;font-weight:bold;line-height:16px;font-family:Tahoma;color:#888}
+.ico_focused {outline:1px dotted #000;outline:-webkit-focus-ring-color auto 5px} /* 2014-06-03 추가/UPTUSERSVC-810, 2014-06-11 수정 */
+
+/* 하단 버튼 공통 */
+.wrap_btn {overflow:hidden;width:100%;padding:20px 0 70px;text-align:center} /* 2014-05-26 수정/UPTUSERSVC-770 */
+.wrap_btn .link_prev {width:93px;height:46px;margin-right:2px;background-position:-50px 0}
+.wrap_btn .btn_confirm {width:97px;height:46px;font-size:0;line-height:0;text-indent:0;background-position:-150px 0}
+.wrap_btn .btn_next {width:97px;height:46px;font-size:0;line-height:0;text-indent:0;background-position:-320px -150px}
+.wrap_btn .btn_save {width:97px;height:46px;font-size:0;line-height:0;text-indent:0;background-position:-300px -240px}
+.wrap_btn .link_certify {width:145px;height:46px;margin-right:2px;background-position:0 -200px}
+.wrap_btn .link_service {width:141px;height:41px;margin-right:2px;background-position:-150px -200px}
+
+/** 내정보 홈 **/
+/* 내정보 서비스 리스트 */
+.info_servicelist {overflow:hidden;width:656px;padding:32px 0 48px}
+.info_servicelist .bg_box {float:left;width:277px;height:95px;margin:0 8px 7px 0;padding:27px 0 0 25px}
+.info_servicelist .bg_box:hover {text-decoration:none}
+.info_servicelist .box_tit {width:313px;height:223px}
+.info_servicelist .box_off {background-position:0 -1075px} /* 2015-01-23 수정 UAPDLOGINKP-625 */
+.info_servicelist .box_on {background-position:0 -400px}
+.info_servicelist .box_off2 {width:140px;background-position:0 -540px}
+.info_servicelist .box_on2 {width:140px;background-position:-170px -540px}
+/* UAPDLOGINKP-459 추가 시작 */
+.info_servicelist .box_off3 {width:140px;background-position:0 -680px}
+.info_servicelist .box_on3 {width:140px;background-position:-170px -680px}
+/* UAPDLOGINKP-459 추가 끝  */
+/* 2014-12-04 수정 */
+.info_servicelist .box_off4 {width:313px;background-position:0 -1215px} /* 2015-01-23 수정 UAPDLOGINKP-625*/
+.info_servicelist .box_on4 {width:313px;background-position:0 -950px}
+/* //2014-12-04 수정 */
+
+.box_tit .set_recommend {display:block;margin:0 0 14px 3px;padding:2px 0 0 15px;font-size:12px;line-height:14px;color:#4f6282;background-position:0 -497px;letter-spacing:-1px;text-indent:0}
+.box_tit .tit_comm {height:120px;margin-bottom:33px}
+.info_servicelist .info_set {background-position:0 -540px}
+.info_servicelist .info_safe {background-position:0 -660px}
+.info_servicelist .info_allow {background-position:0 -780px}
+.info_servicelist .info_noticepw {height:80px;margin-bottom:73px;background-position:0 -900px}
+.info_servicelist .info_modifypw {background-position:0 -980px}
+.info_servicelist .info_login {background-position:0 -2075px} /* 2014-12-04 */
+.box_tit .txt_safe {height:13px;margin-bottom:0;background-position:0 -1290px}
+
+.info_servicelist .tit_set {width:94px;height:21px;background-position:0 -1100px}
+.info_servicelist .tit_allow {width:159px;height:21px;background-position:0 -1130px}
+.info_servicelist .tit_blockip {width:160px;height:21px;background-position:0 -1160px}
+/* .info_servicelist .tit_noticepw {width:99px;height:41px;background-position:0 -1190px} */
+.info_servicelist .tit_noticepw {width:200px;height:21px;background-position:0 -2025px} /* 2014-12-04 */
+.info_servicelist .tit_modifypw {width:63px;height:41px;background-position:0 -1240px}
+.info_servicelist .txt_desc {display:block;margin-top:14px;font-size:11px;line-height:18px;color:#8c9099;letter-spacing:-1px} /* 2014-06-11 수정/UAPDLOGINKP-409 */
+.info_servicelist .tit_login {width:112px;height:21px;background-position:0 -2000px} /* 2014-12-04 */
+.info_servicelist .tit_pw {width:158px;height:21px;background-position:0 -2050px} /* 2014-12-04 */
+
+
+/* .list_service {overflow:hidden;width:678px;height:116px;margin:0 0 52px 16px;background:url(https://i1.daumcdn.net/id/member/2014/bg_userhome_140611.gif) no-repeat 0 0} 2014-06-11 수정/UAPDLOGINKP-409 */
+.list_service {overflow:hidden;width:678px;height:116px;margin:0 0 52px 16px;background:url(https://i1.daumcdn.net/id/member/2014/bg_userhome_150123.gif) no-repeat 0 0} /* 2014-12-04 */ /* 2015-01-23 수정 UAPDLOGINKP-625 */
+.list_service li {float:left;width:161px;height:116px;margin-right:65px}
+.list_service .link_more {display:block;width:50px;height:16px;margin-top:95px}
+/* 프로필 정보 */
+.wing_userinfo {overflow:hidden;padding:32px 34px 0}
+.section_myinfo {overflow:hidden;width:211px;position:relative;margin-bottom:35px}
+.section_myinfo .link_profile {overflow:hidden;float:left;width:76px;height:76px;margin-right:16px;padding:5px;background:url(https://i1.daumcdn.net/id/member/2014/bg_frame.png) no-repeat 0 0}
+.section_myinfo .profile_edit {position:absolute;left:5px;bottom:5px;width:76px;height:20px;padding-top:3px;font-size:11px;text-align:center;background-color:#000;letter-spacing:-1px;opacity:0.6;filter:alpha(opacity:60)}
+.section_myinfo .txt_bar {display:inline-block;padding:0 8px;color:#fff;opacity:0.1;filter:alpha(opacity:10)}
+.section_myinfo .link_edit {display:inline-block;color:#cecdcc}
+.section_myinfo .link_edit:hover {color:#fff}
+
+.section_myinfo .profile_info {float:left;letter-spacing:-1px}
+.section_myinfo .link_user {display:block;margin:5px 0 6px;font-weight:bold;font-size:14px}
+.section_myinfo .btn_manage {width:70px;height:22px;margin:0 0 14px 2px;background-position:-420px -174px}
+.section_myinfo .link_policy {display:block;font-size:11px;line-height:15px;color:#777f8e}
+/* 내 활동 내역 */
+.section_info {overflow:hidden;position:relative;width:211px;padding:40px 0 36px;border-top:1px solid #e8e9ed} /* 2014-06-02 수정/UPTUSERSVC-790 */
+.wing_manage .fst {border-top:0 none} /* 2014-06-03 추가/UPTUSERSVC-790 */
+.section_info .txt_activity {height:14px;margin-bottom:18px;background-position:0 -1020px}
+/* .list_activity {overflow:hidden} 2014-06-25 삭제 */
+.section_activity {overflow:visible;z-index:2} /* 2014-06-25 추가 */
+.section_faq {z-index:1} /* 2014-06-25 추가 */
+.list_activity li {width:211px;margin-bottom:18px} /* 2014-06-23 수정 */
+.list_activity .lst {margin-bottom:0}
+/* .list_activity .ico_dot {float:left;width:3px;height:11px;margin-right:10px;background-position:0 -517px;color:#373949;text-indent:0} */
+.list_activity .ico_dot {float:left;width:3px;height:11px;margin-right:10px;background-position:0 9px;color:#373949;text-indent:0} /* 2015-01-20 UAPDLOGINKP-624 */
+.list_activity .txt_desc {display:block;margin-left:13px;line-height:18px} /* 2014-06-25 수정 */
+.list_activity .emph_info {font-weight:bold}
+.list_activity .link_service {padding:2px 7px 0 3px;font-size:11px;line-height:15px;color:#777f8e;background-position:100% -544px;letter-spacing:-1px;text-indent:0}
+/* 2014-06-23 추가 시작 */
+/* 2014-06-25 수정 시작 */
+.list_activity .desc_activity {display:inline-block;position:relative}
+.list_activity .wrap_tip {position:static}
+.list_activity .layer_certify {left:0;top:100%;width:153px;margin-top:3px;padding-top:11px;padding-bottom:11px}
+.list_activity .wrap_tip .btn_help {margin-left:0}
+.list_activity .layer_certify .link_layer {margin-top:0}
+/* .list_activity .layer_certify .bg_point {margin-left:78px} 2014-06-25 삭제 */
+.list_activity .layer_certify .btn_close {right:6px;top:6px;background-position:-328px -98px}
+/* 2014-06-25 수정 끝 */
+/* 2014-06-23 추가 끝 */
+/* 자주 찾는 도움말 */
+.section_info .txt_help {background-position:0 -1040px}
+.section_faq .txt_help {height:14px;margin:10px 0 18px}
+.section_info .list_faq {overflow:hidden;height:98px} /* 2014-06-25 수정 */
+.list_faq li {height:24px}
+.list_faq .link_faq {float:left;overflow:hidden;width:190px;color:#373949;letter-spacing:-1px;white-space:nowrap;text-overflow:ellipsis} /* 2014-06-17 수정/UAPDLOGINKP-447 */
+.list_faq .ico_comm {float:left;width:8px;height:9px;margin:4px 9px 0 0}
+.list_faq .ico_num1 {background-position:0 -575px}
+.list_faq .ico_num2 {background-position:0 -600px}
+.list_faq .ico_num3 {background-position:0 -625px}
+.list_faq .ico_num4 {background-position:0 -650px}
+.list_faq .ico_dot {width:3px;height:11px;margin-right:9px;background-position:0 4px} /* 2015-01-23 추가 UAPDLOGINKP-625 */
+.section_info .link_more {position:absolute;top:42px;right:0;padding-right:8px;font-size:11px;line-height:15px;color:#777f8e;background-position:100% -546px;letter-spacing:-1px;text-indent:0}
+.section_faq .link_more {top:52px;right:5px}
+
+/** 내정보 관리 홈 **/
+.section_my {width:600px;padding:44px 0 34px;border-bottom:1px solid #e8e9ed} /* 2014-06-05 수정/UPTUSERSVC-790 */
+.section_my .tit_manage {width:391px;height:26px;margin:0 0 14px 5px;background-position:0 -1340px}
+.section_my .desc_manage {width:413px;height:14px;background-position:3px -1370px}
+.set_myinfo {position:relative;width:600px;padding:31px 0 18px 5px;border-bottom:1px solid #e8e9ed} /* 2014-06-02 수정/UPTUSERSVC-790 */
+.set_myinfo .txt_comm {display:inline;float:left;width:178px;height:16px;margin-top:4px} /* 2014-06-02 수정/UPTUSERSVC-790 */
+.set_myinfo .tit_id2 {background-position:0 -1060px}
+.set_myinfo .tit_nick {background-position:0 -520px}
+.set_myinfo .tit_name {background-position:0 -540px}
+.set_myinfo .tit_alarm {background-position:0 -560px}
+.set_myinfo .cont_myinfo {float:left;width:457px}
+.cont_myinfo .list_myinfo {float:left;width:100%;margin-bottom:11px}
+.list_myinfo .txt_comm {width:130px;height:13px;margin-left:0}
+.list_myinfo .txt_daumid {background-position:0 -640px}
+.list_myinfo .txt_phoneid {background-position:0 -880px}
+.list_myinfo .txt_emailid {background-position:0 -900px}
+.list_myinfo .txt_nick {background-position:0 -740px}
+.list_myinfo .txt_contact {background-position:0 -760px}
+.list_myinfo .txt_address {background-position:0 -780px}
+.list_myinfo .txt_name {background-position:0 -840px}
+/* .list_myinfo .txt_blindness {background-position:0 -860px} */
+.list_myinfo .txt_blindness {background-position:0 -1280px} /* 2015-01-22 수정 UPTTRDRFM-86 */
+.list_myinfo .txt_adver {background-position:0 -800px}
+.list_myinfo .txt_pw {background-position:0 -820px}
+.list_myinfo .desc_myinfo {float:left;width:327px;line-height:22px;color:#25478e} /* 2014-06-16 수정/UAPDLOGINKP-488 */ /* 2015-08-31 수정 */
+.list_myinfo .emph_myinfo {font-weight:bold}
+.list_myinfo .desc_myinfo .txt_myinfo {display:inline-block}
+.list_myinfo .contact_info {display:block;margin-bottom:6px;line-height:23px; width: 550px} /*  2015-08-31 수정 */
+.cont_myinfo .list_contact {margin-bottom:3px}
+.list_myinfo .contact_info .ico_comm {font-size:0;line-height:0;text-indent:0}
+.list_myinfo .contact_info .ico_phone {width:10px;height:15px;margin:4px 11px 0 2px;background-position:0 -425px} /* 2014-06-03 수정/UPTUSERSVC-789 */
+.list_myinfo .contact_info .ico_email {width:14px;height:10px;margin:7px 10px 0 0;background-position:0 -450px}
+.list_myinfo .contact_info .ico_cable {width:13px;height:14px;margin:5px 10px 0 0;background-position:0 -475px} /* 2014-06-03 수정/UPTUSERSVC-789 */
+.list_myinfo .txt_none {color:#959595}
+.list_myinfo .btn_enroll {width:37px;height:22px;margin-right:9px;background-position:-120px -170px}
+.list_myinfo .btn_name {width:36px;height:22px;margin-left:9px;background-position:-280px -170px} /* 2014-06-05 수정/UPTUSERSVC-807 */
+.list_myinfo .btn_question {width:19px;height:22px;margin-right:5px;background-position:-477px -150px}
+.list_myinfo .btn_blindness {width:57px;height:22px;background-position:-420px -150px}
+.list_myinfo .btn_edit {width:37px;height:22px;margin-left:4px;background-position:-200px -170px}
+.list_myinfo .btn_change {width:37px;height:22px;margin-left:4px;background-position:-240px -170px} /* 2014-06-05 추가/UPTUSERSVC-796 */
+.list_myinfo .btn_del {width:37px;height:22px;margin-left:3px;background-position:-160px -170px}
+.list_myinfo .btn_save {width:37px;height:22px;margin:2px 0 0 4px;background-position:0 -535px} /* 2015-08-31 추가 */
+.list_myinfo .btn_cancle {width:37px;height:22px;margin:2px 0 0 4px;background-position:-40px -535px} /* 2015-08-31 추가 */
+
+.set_myinfo .txt_add {display:inline-block;font-size:11px;line-height:22px;letter-spacing:-1px;color:#959595}
+.set_myinfo .link_modify {position:absolute;top:35px;right:6px;width:37px;height:22px;background-position:-380px -200px;text-indent:-9999px} /* 2014-06-23 수정 */
+/* .set_myinfo .link_modify:hover {background-position:-410px -200px} 2014-06-23 삭제 */
+.cont_home .lst {border-bottom:0 none}
+.list_contact .emph_contact {color:#474a51}
+/* 2015-08-31 추가 시작 */
+.list_myinfo .desc_myinfo .tf_f {display:inline-block;width:160px;height:23px;padding:5px;border:1px solid #b5b5b5;font-size:11px;color:#474a51;line-height:19px} /* 2015-09-14 수정 */
+.list_myinfo .desc_myinfo .tf_g {display:inline-block;width:60px;height:23px;padding:5px;border:1px solid #b5b5b5;font-size:11px;color:#474a51;line-height:19px} 
+.list_myinfo .desc_myinfo .tf_h {display:inline-block;width:240px;height:23px;padding:5px;border:1px solid #b5b5b5;font-size:11px;color:#474a51;line-height:19px}
+.list_myinfo .desc_myinfo .txt_caution {display:block;height:35px;padding:5px 5px 0 5px;font-size:11px;line-height:15px;color:#959595}
+.list_myinfo .desc_on .tf_g {border-color:#5c9ef0;font-size:12px;font-weight:bold} /* 2015-09-14 수정 */
+.list_myinfo .desc_wrong .tf_g {border-color:#f2685e;background-color:#fff6f6}
+.list_myinfo .desc_wrong .txt_caution {color:#ff0000}
+/* 2015-08-31 추가 끝 */
+/* 2015-09-15 추가 시작 */
+.list_myinfo .desc_myinfo .area_nickname {display:inline-block;position:relative}
+.list_myinfo .desc_myinfo .lab_nick {position:absolute;top:3px;left:7px;font-size:11px;color:#959595}
+/* 2015-09-15 추가 끝 */
+
+/* 내정보 관리 홈 - 법인 */
+.set_myinfo .tit_corporation {background-position:0 -500px}
+.list_myinfo .txt_corporation {background-position:0 -660px}
+.list_myinfo .txt_business {background-position:0 -680px}
+.list_myinfo .txt_agent {background-position:0 -700px}
+.list_myinfo .txt_person {background-position:0 -720px}
+
+/* 내정보 관리 홈 우측 영역 */
+.wing_manage {padding:0 34px}
+.section_info .txt_comm {margin-bottom:15px} /* 2014-06-02 수정/UPTUSERSVC-790 */
+.section_info .tit_sns {background-position:0 -920px}
+.section_info .list_sns {overflow:hidden;width:191px;margin:0 0 15px 18px}
+.section_info .list_sns li {float:left;width:45px;margin-right:12px}
+.section_info .list_sns .btn_comm {float:left;width:45px;height:45px}
+.section_info .list_sns .btn_facebook {background-position:0 -250px}
+.section_info .list_sns .btn_twi {background-position:-50px -250px}
+.section_info .list_sns .btn_tistory {background-position:-100px -250px} /* 2014-06-24 수정/티스토리 BI 변경 */
+.section_info .list_sns .btn_facebook_off {background-position:-150px -250px}
+.section_info .list_sns .btn_twi_off {background-position:-200px -250px}
+.section_info .list_sns .btn_tistory_off {background-position:-250px -250px} /* 2014-06-24 수정/티스토리 BI 변경 */
+.section_info .list_sns .btn_facebook:hover {background-position:-150px -300px}
+.section_info .list_sns .btn_twi:hover {background-position:-200px -300px}
+.section_info .list_sns .btn_tistory:hover {background-position:-250px -300px} /* 2014-06-24 수정/티스토리 BI 변경 */
+.section_info .list_sns .btn_facebook_off:hover {background-position:0 -300px}
+.section_info .list_sns .btn_twi_off:hover {background-position:-50px -300px}
+.section_info .list_sns .btn_tistory_off:hover {background-position:-100px -300px} /* 2014-06-24 수정/티스토리 BI 변경 */
+.section_info .desc_info {font-size:11px;line-height:18px;color:#909090;letter-spacing:-1px}
+.section_info .tit_connect {margin-bottom:10px;background-position:0 -940px}
+.section_info .list_connect {overflow:hidden;margin-bottom:10px}
+.section_info .list_connect li {overflow:hidden;width:100%;line-height:24px}
+.section_info .list_connect .txt_name {overflow:hidden;float:left;width:155px;text-overflow:ellipsis;white-space:nowrap;color:#373949}
+.section_info .list_connect .txt_date {float:right;font-size:11px;font-family:Tahoma, sans-serif;color:#909090}
+.section_info .desc_none {margin:20px 0 18px;color:#909090} /* 2014-06-03 추가/UPTUSERSVC-788, 2014-06-11 수정/UAPDLOGINKP-413 */
+
+/** 내정보 관리 **/
+/* 폰번호 아이디 등록 */
+/* .fld_comm .info_phoneid {padding-bottom:19px} 2014-05-27 삭제/UPTUSERSVC-777 */
+.info_detail .input_info .lab_g {position:absolute;top:11px;left:14px;color:#959595} /* 2014-05-30 수정/UPTUSERSVC-791 */
+.info_detail .input_info .tf_g {float:left;width:270px;height:18px;margin-top:10px;border:0 none;font-weight:bold;line-height:18px;background:transparent;outline:0}
+.info_detail .input_info .tf_num {width:220px}
+.info_detail .input_info .btn_certify {display:inline;overflow:hidden;float:right;width:81px;height:24px;margin-top:7px;background-position:-110px -50px;text-indent:-9999px}
+.info_detail .input_info .btn_resend {display:inline;overflow:hidden;float:right;width:93px;height:24px;margin-top:7px;background-position:-290px -50px;text-indent:-9999px}
+.info_detail .input_info .btn_confirm {display:inline;overflow:hidden;float:right;width:38px;height:24px;margin-top:7px;background-position:-400px -240px;text-indent:-9999px}
+.info_detail .input_on .btn_certify {background-position:-200px -50px}
+.info_detail .input_on .btn_confirm {background-position:-440px -240px}
+
+/* 이메일 아이디 등록 */
+/* .fld_comm .info_email {padding-bottom:19px} 2014-05-27 삭제/UPTUSERSVC-777 */
+.fld_comm .link_rel {display:inline-block;margin-top:7px;color:#3d8aea;text-decoration:underline} /* 2014-05-26 수정/UPTUSERSVC-776, 2014-05-27 수정/UPTUSERSVC-777 */
+
+/* 닉네임/연락처 */
+.info_detail .input_nick .ico_comm {float:left;width:18px;margin-right:9px} /* 2014-06-11 수정 */
+.info_detail .input_info .ico_phone {margin-top:9px;height:20px;background-position:0 -25px}
+.info_detail .input_info .ico_cable {margin-top:11px;height:15px;background-position:0 -50px}
+.info_detail .input_info .ico_email {margin-top:12px;height:13px;background-position:0 -75px}
+.info_detail .desc_add2 {margin-bottom:15px} /* 2014-05-26 추가/UPTUSERSVC-770, 2014-05-27 수정/UPTUSERSVC-777 */
+.info_detail .input_nick .lab_g {left:41px}
+.input_nick .inner_nick {margin-bottom:7px;padding-bottom:6px}
+.input_nick .inner_nick .bg_user {margin-bottom:7px} /* 2014-05-27 추가/UPTUSERSVC-777 */
+.input_nick .inner_nick .desc_add {margin-bottom:19px} /* 2014-05-29 추가/UPTUSERSVC-770 */
+.input_nick .inner_nick .desc_add2 {margin-bottom:12px} /* 2014-05-29 추가/UPTUSERSVC-770 */
+.input_nick .bg_line {display:block;width:345px;height:1px;background-color:#e8e8e8}
+.input_nick .bg_nick {margin-top:12px}
+.info_detail .input_info .address_btn {overflow:hidden;width:100%;margin-bottom:7px}
+.info_detail .address_btn .btn_domestic {width:47px;height:30px;background-position:0 -80px}
+.info_detail .address_btn .btn_abroad {width:47px;height:30px;background-position:-50px -80px}
+.info_detail .input_info .bg_address {width:469px;margin-bottom:7px;background-position:0 -150px} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_detail .bg_address .tf_g {width:464px}
+.info_detail .input_address .input_on {background-position:0 -200px}
+.input_address .bg_user .tf_g {width:415px;font-weight:bold}
+.input_address .bg_user .btn_clear {float:right;width:47px;height:24px;margin-top:6px;background-position:-70px -170px;text-indent:-9999px} /* 2014-05-26 수정/UPTUSERSVC-770 */
+.info_comm .info_address {padding-top:15px;margin-bottom:10px} /* 2014-05-27 수정/UPTUSERSVC-777 */
+
+
+/* 이름/연령 확인 */
+.info_detail .select_birth {float:left;width:100%;height:46px}
+.info_detail .select_birth .tf_year {width:90px}
+.info_detail .select_birth .inner_birth {float:left}
+.info_detail .input_info .opt_year {overflow:visible;float:left;width:90px;margin-right:7px;background-position:0 -250px}
+.info_detail .input_info .opt_comm {overflow:visible;float:left;width:89px;margin-right:7px;background-position:-120px -250px}
+.info_detail .opt_year .tf_g {width:34px;font-weight:bold}
+.info_detail .select_birth .inner_year .input_on {background-position:0 -300px}
+.select_birth .opt_open .opt_comm {background-position:-120px -300px}
+.select_birth .input_on .lab_g {left:80px}
+.select_birth .bg_user .txt_year {display:inline;float:left;margin:10px 0 0 37px;font-weight:bold}
+.select_birth .box_keyword {display:none;position:absolute;top:39px;left:0;width:110px;height:208px;background:url(https://i1.daumcdn.net/id/member/2014/bg_user2014.png) no-repeat 0 -430px;z-index:1}
+.select_birth .list_keyword {display:block;overflow-x:hidden;overflow-y:scroll;width:108px;height:200px;margin-top:1px;padding:6px 0 0 1px}
+.select_birth .list_keyword li {height:28px}
+.select_birth .list_keyword .on {background-color:#ececec}
+.select_birth .list_keyword .link_txt {display:block;line-height:28px;font-weight:bold;padding:0 13px}
+.select_birth .opt_open .box_keyword {display:block}
+.info_detail .input_info .link_date {display:block;line-height:39px;color:#959595} /* 2014-08-19 수정 */
+.info_detail .input_info .link_date:hover {text-decoration:none}
+.select_birth .opt_open .link_date {font-weight:bold;color:#333}
+/*.info_detail .info_gender {overflow:hidden}  2014-05-28 삭제/UPTUSERSVC-778 */
+.info_comm .info_select {margin-bottom:22px} /* 2014-05-28 추가/UPTUSERSVC-778 */
+.info_comm .notice_info {overflow:hidden;width:100%;padding:25px 0 19px;border-top:1px solid #e8e8e8} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_comm .desc_notice {display:inline-block;float:left;margin-right:8px;padding-left:6px;line-height:24px;color:#777} /* 2014-05-28 수정/UPTUSERSVC-778 */
+.info_comm .link_name {float:left;width:108px;height:22px;background-position:0 -50px}
+.info_detail .focus_out .link_date {font-weight:bold;color:#333}
+.info_detail .focus_out .txt_year {margin-left:0}
+.info_detail .desc_name {margin-top:0;padding-top:48px} /* 2014-05-27 추가/UPTUSERSVC-777 */
+.notice_info .check_notice {margin-left:7px}
+
+/* 외부연결 */
+.tbl_connect {border-top:1px solid #d4d4d4;border-bottom:1px solid #d4d4d4}
+.tbl_connect th {height:35px;border-bottom:1px solid #e3e3e3;font-weight:normal;background-color:#fbfbfb}
+.tbl_connect th.cell_site {text-align:left;padding-left:80px}
+/* 2014-06-12 수정 시작 */
+.tbl_connect td {padding:15px 0 10px;border-top:1px solid #eee}
+.tbl_connect .cell_thumb {vertical-align:top}
+.tbl_connect .thumb_app {display:inline;float:left;overflow:hidden;position:relative;width:30px;height:30px;margin:0 21px 0 29px}
+.tbl_connect .img_thumb {vertical-align:top}
+.tbl_connect .frame_g {position:absolute;top:0;left:0;width:28px;height:28px;border:1px solid #000;opacity:0.1;filter:alpha(opacity=10)}
+.tbl_connect .info_site {float:left}
+.tbl_connect .txt_site {font-weight:bold}
+.tbl_connect .site_history {display:block;font-size:11px;line-height:16px;color:#888;letter-spacing:-1px}
+/* 2014-06-12 수정 끝 */
+.tbl_connect .cell_date {color:#666;text-align:center} /* 2014-05-28 수정/UPTUSERSVC-779 */
+.tbl_connect .btn_release {display:block;width:39px;height:22px;margin:0 auto;background-position:-390px -50px}
+.tbl_connect .cell_none {padding:52px 0 65px;font-weight:bold;text-align:center;color:#666}
+.tbl_connect .ico_none {display:block;width:46px;height:46px;margin:0 auto 12px;background-position:0 -125px}
+
+/* 알림 설정 */
+.info_notice .tit_detail {width:130px;padding-top:0}
+.info_notice .input_info {width:759px}
+.check_notice {position:relative;overflow:hidden}
+.check_notice .tf_check {position:absolute;top:0;left:0;z-index:-1;width:16px;height:16px;border:none;opacity:0.01}
+.check_notice .lab_check {display:inline-block;padding-left:26px;cursor:pointer}
+.lab_check .ico_comm {position:absolute;top:0;left:0;width:16px;height:16px;background-position:0 -300px}
+.info_notice .desc_add {margin:11px 0 19px 25px} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.check_on .lab_check {font-weight:bold}
+.check_on .ico_comm {background-position:0 -325px}
+.check_notice .tf_check:checked + .lab_check {font-weight:bold}  /* 2015-08-31 추가 */
+.check_notice .tf_check:checked + .lab_check .ico_comm {background-position:0 -325px}
+.check_notice .link_agree {color:#3d88ee;text-decoration:underline} /* 2015-08-31 추가 */
+.info_detail .contact_email {margin:5px 0 4px 25px;line-height:22px;color:#777} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_detail .contact_email .emph_info {display:inline-block;margin-right:4px;color:#3784e3} /* 2014-08-04 수정 */
+.info_detail .contact_email .txt_none {color:#959595}
+.info_detail .btn_change {width:37px;height:22px;margin-left:5px;background-position:-440px -50px;text-indent:-9999px}
+.info_detail .btn_enroll {width:37px;height:22px;margin-left:5px;background-position:-450px -80px}
+.info_detail .bg_email {width:308px;height:30px;margin:15px 0 8px 27px;padding-left:9px;background-position:0 -390px}
+.info_detail .input_email .input_on {background-position:0 -850px}
+.info_detail .input_email .input_wrong {background-position:0 -890px}
+.info_detail .input_email .ico_email {float:left;width:18px;margin:8px 9px 0 0} /* 2014-06-19 수정 */
+.info_detail .input_email .lab_g {left:35px;top:7px}
+.info_detail .input_email .tf_g {height:14px;margin-top:8px;line-height:14px}
+.input_email .desc_add {margin:0 0 0 24px;font-size:11px;letter-spacing:-1px}
+.info_detail .input_email .tf_basic {color:#777} /* 2015-08-31 추가 */
+
+/* 비밀번호 재확인 */
+.info_comm .info_daumid {margin-top:5px;margin-bottom:24px} /* 2014-05-30 수정/UPTUSERSVC-787 */
+.info_detail .input_daumid {font-family:Arial, sans-serif;font-size:16px;line-height:16px;font-weight:bold}
+.info_pwreconfirm .input_info .tf_g {width:280px} /* 2014-07-01 추가/UPTUSERSVC-812 */ /* 2015-01-27 수정 */
+
+/* 2단계 인증 안내 */
+/* 2014-06-05 수정 시작/UPTUSERSVC-828 */
+.userinfo_basic {padding:49px 44px 39px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb} /* 2014-05-30 수정/UPTUSERSVC-800 */
+.userinfo_basic .certify_explain {overflow:hidden;width:882px;margin-top:43px;font-size:0;line-height:0;text-indent:-9999px;background:url(https://i1.daumcdn.net/id/member/2014/bg_certifyinfo_140605.gif) 0 0 no-repeat}
+.userinfo_basic .certify_mean {margin-top:0;height:239px;background-position:0 0}
+.userinfo_basic .certify_good {height:192px;background-position:0 -260px}
+/* .userinfo_basic .certify_setting {height:108px;padding-bottom:34px;border-bottom:1px solid #e8e8e8;background-position:0 -438px} 2014-05-30 수정/UPTUSERSVC-800, 2014-06-05 삭제/UPTUSERSVC-828 */
+/* 2014-06-05 수정 끝/UPTUSERSVC-828 */
+.userinfo_basic .check_explain {padding:29px 0 0 3px;border-top:1px solid #fff} /* 2014-05-30 추가/UPTUSERSVC-800 */
+.userinfo_basic .check_explain .lab_check {background-color:#fbfbfb} /* 2014-07-02 추가/UPTUSERSVC-889 */
+
+/* 2015-01-07 수정시작 */
+/* 내정보 보호 홈 - 인증전 */
+/* .cont_myinfo .desc_certify {margin:3px 0 15px 1px;line-height:20px;color:#777}
+.cont_myinfo .list_step {overflow:hidden;width:456px;height:107px;margin-bottom:15px;font-size:0;line-height:0;background-position:2px -480px;text-indent:-9999px} */
+.cont_myinfo .desc_certify {margin:3px 0 25px 1px;line-height:20px;color:#777}
+.cont_myinfo .list_step {overflow:hidden;width:456px;height:107px;margin-bottom:25px;font-size:0;line-height:0;background-position:2px -480px;text-indent:-9999px}
+.cont_myinfo .set_nation {paggiing-top:41px}
+.set_nation .cont_privacy {margin-top:10px}
+.set_myinfo .btn_start {position:absolute;top:36px;right:6px;width:74px;height:31px;background-position:-300px -200px}
+.set_notice {height:53px;padding-left:73px;margin:24px 0 54px 5px;background-position:0 -1375px}
+.set_notice .inner_notice {margin-top:18px;padding-left:23px;color:#444;line-height:19px;background-position:0 -1400px;text-indent:0}
+.set_notice .emph_txt {color:#25478e}
+/* 2015-01-07 수정끝 */
+
+/* 내정보 보호 홈 */
+.section_my .tit_privacy {width:463px;height:26px;margin:0 0 14px 3px;background-position:0 -1309px} /* 2014-06-05 수정/UPTUSERSVC-790 */
+.section_my .desc_privacy {width:407px;height:14px;background-position:3px -1390px} /* 2014-06-05 수정/UPTUSERSVC-790 */
+.set_myinfo .cont_privacy .txt_comm {width:130px}
+.set_myinfo .tit_certify {background-position:0 -580px}
+.set_myinfo .tit_country {background-position:0 -600px}
+.set_myinfo .tit_ip {background-position:0 -620px}
+.list_myinfo .txt_setcertify {background-position:0 -1080px}
+.list_myinfo .txt_setphone {background-position:0 -1100px}
+.list_myinfo .txt_email {background-position:0 -1120px}
+.list_myinfo .txt_app {background-position:0 -1140px}
+.list_myinfo .txt_country {background-position:0 -1160px}
+.list_myinfo .txt_ip {background-position:0 -1180px}
+.list_myinfo .txt_date {font-weight:normal;color:#777}
+.cont_myinfo .desc_login {padding-left:4px;line-height:18px}
+.txt_slash {color:#959595}
+.section_country {padding-bottom:30px} /* 2014-06-02 추가/UPTUSERSVC-790 */
+.section_country .cont_myinfo .list_myinfo {margin-bottom:6px} /* 2014-06-02 수정/UPTUSERSVC-790 */
+.section_country .desc_myinfo {margin-top:1px;line-height:20px}
+
+/* 내정보 보호 홈 우측 영역 */
+.section_info .tit_login {background-position:0 -960px}
+.section_info .tit_history {background-position:0 -980px}
+.section_info .tit_lost {background-position:0 -1000px}
+.section_info .link_pw {padding-right:8px;letter-spacing:-1px;text-indent:0;color:#373949;background-position:100% -544px}
+.section_info .lost_info {float:left}
+.section_info .desc_lost {margin-bottom:4px;line-height:17px}
+.section_info .bg_lost {float:right;width:71px;height:69px;margin-top:3px;background-position:-550px -320px}
+.section_info .txt_tools {display:block;margin-bottom:10px}
+.list_history {margin-bottom:8px}
+.list_history li {line-height:24px}
+.list_history .txt_date {padding-right:10px}
+.list_history .txt_name {font-weight:bold}
+.list_history .txt_slash {font-weight:normal}
+
+/* 2015-08-31 추가시작 */
+/* 휴대폰 번호 등록 */
+.info_addphone .check_notice {margin-left:10px;}
+.info_addphone .bg_basic {float:left}
+.info_addphone .desc_add {clear:both;padding-top:14px;}
+.input_info .btn_numcertify {float:left;width:111px;height:38px;margin-left:10px;background-position:-80px -575px}
+.input_info .btn_numcertify.on {background-position:-80px -535px}
+.input_info .btn_again {float:left;width:124px;height:38px;margin-left:10px;background-position:-195px -575px}
+.input_info .btn_again.on {background-position:-195px -535px}
+.input_info .btn_numok {float:left;width:60px;height:38px;margin-left:10px;background-position:-325px -575px}
+.input_info .btn_numok.on {background-position:-325px -535px}
+
+/* 이메일 주소 등록 */
+.info_addemail .bg_basic {float:left}
+.info_addemail .desc_add {clear:both;padding-top:14px}
+.fld_comm .info_addemail .check_email{clear:both;padding-top:4px}/* 2015-09-21 추가 */
+/* .fld_comm .info_addemail .link_rel {display:block;clear:both;padding-top:11px} 2015-09-21 삭제 */
+/* 2015-08-31 추가 끝 */
+/** 내정보 보호 **/
+/* 국가별 로그인 허용 설정 */
+.info_detail .choice_comm {display:inline-block;overflow:hidden;position:relative;margin-right:22px}
+.info_detail .choice_comm .inp_comm {position:absolute;top:0;left:0;z-index:-1;width:16px;height:16px;border:none;opacity:0.01}
+.info_detail .choice_comm .lab_comm {display:inline-block;padding-left:21px;cursor:pointer}
+.info_detail .lab_on .lab_comm {font-weight:bold}
+.info_detail .choice_comm .ico_comm {position:absolute;top:0;left:0;width:16px;height:16px;background-position:0 -250px}
+.info_detail .lab_on .txt_allow {font-weight:bold}
+.info_detail .lab_on .ico_comm {background-position:0 -275px}
+.info_detail .choice_comm .inp_comm:checked + .lab_comm .ico_comm {background-position:0 -275px}
+.nation_setting {overflow:hidden;width:100%;padding:12px 0 2px} /* 2014-05-27 수정/UPTUSERSVC-771 */
+.nation_setting .serach_nation {float:left;overflow:hidden;width:251px}
+.nation_setting .box_nation {overflow:hidden;position:relative;width:236px;height:27px;margin-bottom:5px;padding:1px 0 0 13px;border:1px solid #b5b5b5;background-color:#fff}
+.nation_setting .box_nation .search_on {float:left;width:16px;height:17px;margin:5px 10px 0 0;background-position:-440px -200px}
+.nation_setting .box_nation .search_off {float:left;width:16px;height:17px;margin:5px 10px 0 0;background-position:-460px -200px}
+.nation_setting .box_nation .lab_g {left:38px;top:6px}
+.nation_setting .box_nation .tf_g {width:170px;margin-top:5px}
+.nation_setting .box_nation .btn_del {display:inline;float:right;width:20px;height:20px;margin:4px 5px 0 0;background-position:-481px -196px;text-indent:-9999px}
+.nation_setting .search_result {overflow:hidden;overflow-y:scroll;width:249px;height:187px;padding-top:7px;border:1px solid #bbb;background-color:#fff}
+.nation_setting .search_no {margin-top:54px;text-align:center;letter-spacing:-1px}
+.nation_setting .search_no .desc_add {margin-top:4px;color:#777;letter-spacing:0}
+.nation_setting .list_nation {overflow:hidden}
+.nation_setting .list_nation li {overflow:hidden;padding:0 2px;height:26px}
+.nation_setting .list_nation .link_nation {display:block;padding-left:11px;line-height:26px}
+.nation_setting .link_nation:hover {background-color:#ececec}
+.nation_setting .list_nation .link_on {background-color:#ececec}
+.nation_setting .btn_addition {float:left;width:48px;height:49px;margin:86px 14px 0;background-position:0px 0}
+.nation_setting .list_mynation {float:left;overflow:hidden;width:442px;height:229px;border:1px solid #ababab;background-color:#fff}
+.nation_setting .list_mynation li {float:left;overflow:hidden;width:100%;height:45px;line-height:45px;border-bottom:1px solid #eeedf0} /* 2014-05-27 수정/UPTUSERSVC-771 */
+.nation_setting .list_mynation .txt_nation {float:left;width:211px;padding-left:18px;font-weight:bold;letter-spacing:-1px}
+.nation_setting .list_mynation .txt_sanction {float:left;width:178px;padding-right:7px;color:#666;text-align:right}
+.nation_setting .list_mynation .btn_del {float:left;width:19px;height:18px;margin:11px 5px 0 0;background-position:-270px -80px;text-indent:-9999px}
+.info_detail .tit_space {padding-top:0}
+.info_comm .info_break {margin-top:31px;margin-bottom:15px;padding-top:34px;border-top:1px solid #e8e8e8} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_break .tit_detail {padding-top:0}
+.info_break .desc_add {margin:0 0 9px 0;background-color:#fbfbfb} /* 2014-05-27 수정/UPTUSERSVC-777, 2014-07-01 수정/UPTUSERSVC-889 */
+.info_break .emph_info {font-weight:bold;text-decoration:underline}
+/* 2014-08-20 수정 시작 */
+.info_detail .list_info {overflow:hidden;width:100%;margin-left:1px;line-height:25px}
+.info_detail .list_info .tit_info {float:left;width:115px;padding-left:9px;font-weight:bold;color:#424242;background:url(https://i1.daumcdn.net/id/member/2014/ico_dot.gif) 0 12px no-repeat}
+.info_detail .list_info .txt_info {display:block;margin-left:124px} /* 2014-06-09 수정/UPTUSERSVC-829 */
+.info_detail .list_info .txt_none {color:#959595}
+/* 2014-08-20 수정 끝 */
+
+/* 특정 IP 로그인 차단 */
+.info_ip .tit_detail {padding-top:7px}
+.info_detail .box_ip {overflow:hidden;width:100%;height:35px}
+.box_ip .bg_user {float:left;width:182px;height:29px;padding-right:14px;border-right:1px solid #b5b5b5;background-position:0 -350px}
+.box_ip .bg_user .lab_g {top:7px}
+.box_ip .bg_user .tf_g {float:none;width:180px;margin-top:5px}
+.box_ip .btn_add {width:47px;height:30px;margin:0 7px 0 4px;background-position:-150px -80px}
+.box_ip .link_myinfo {display:inline-block;padding-top:6px;font-weight:bold;color:#3d8aea;letter-spacing:-1px;text-decoration:underline}
+.info_detail .list_ip {overflow:hidden;width:632px;padding-top:5px}
+.info_detail .list_ip li {float:left;width:316px;padding-top:7px}
+.info_detail .list_ip .txt_ip {float:left;width:228px}
+.info_detail .list_ip .ip_date {color:#666}
+.info_detail .list_ip .btn_del {float:left;width:17px;height:16px;margin-left:4px;background-position:-300px -80px}
+
+/* 2단계 인증 설정 */
+.info_set .info_detail {height:40px;margin-bottom:0} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_set .info_reception {margin-bottom:5px} /* 2014-06-02 추가/UPTUSERSVC-780 */
+.info_set .info_break {height:auto;margin-top:0;margin-bottom:15px;padding-top:29px} /* 2014-08-04 수정 */
+.info_set .tit_detail {width:159px;padding-top:2px}
+.info_set .input_info {width:728px}
+.info_detail .area_txt {display:inline-block;line-height:22px}
+.info_detail .emph_item {font-weight:bold;color:#25478e}
+.info_detail .area_txt .emph_item {letter-spacing:-1px}
+.info_detail .info_date {color:#777}
+.info_set .txt_setemail {margin-top:3px}
+.info_set .contact_email {margin:0}
+.info_set .emph_info {font-weight:normal}
+.info_set .bg_email {margin:0 0 7px 0}
+.info_set .input_email .check_notice {margin-bottom:5px} /* 2014-06-02 추가/UPTUSERSVC-780 */
+.info_set .check_notice .lab_check {font-size:11px;color:#777;letter-spacing:-1px}
+.info_set .txt_setpw {margin-top:2px}
+.info_set .info_apppw {height:auto;margin-bottom:21px} /* 2014-08-04 수정 */
+.info_set .info_apppw .tit_detail {overflow:visible;padding-top:6px} /* 2014-08-04 수정 */
+.info_set .info_apppw .wrap_tip {float:left} /* 2014-06-23 추가 */
+/* 2014-08-04 삭제 시작 */
+/* .list_apppw {overflow:hidden;margin-top:5px}
+.list_apppw li {overflow:hidden;padding-top:8px}
+.list_apppw .txt_app {float:left;width:287px} */ /*2014-06-03 수정/UPTUSERSVC-808 */
+/* .list_apppw .app_date {color:#666}
+.list_apppw .btn_del {float:left;width:17px;height:16px;margin-left:4px;background-position:-300px -80px;text-indent:-9999px} */
+/* 2014-08-04 삭제 끝 */
+.info_apppw .desc_app {margin:16px 0 17px 29px;color:#777} /* 2014-08-04 수정 */
+.info_apppw .input_info .lab_g {top:6px;left:13px} /* 2014-08-13 추가 */
+/* 2014-08-04 추가 시작 */
+.info_detail .inner_app .opt_app {overflow:visible;float:left;width:165px;height:30px;padding:0;background-position:0 -980px}
+.info_detail .inner_app .link_app {display:block;height:21px;margin:1px;padding:7px 29px 0 10px;color:#333;background-position:104px -88px;background-color:#fff;text-indent:0;text-decoration:none} /* 2014-08-12 수정 */
+.info_detail .inner_app .list_opt {display:none;overflow-y:auto;position:absolute;left:0;top:29px;width:163px;margin:0;padding-bottom:3px;border:1px solid #b5b5b5;background-color:#fff}
+.info_detail .inner_app .fst {border-top:1px solid #f0f0f0}
+.info_detail .inner_app .link_option {display:block;height:25px;padding-left:9px;line-height:26px;text-decoration:none;color:#444}
+.info_detail .inner_app .link_option:hover {background-color:#ececec}
+.info_detail .inner_app .opt_open {z-index:10;border-color:#a6a6a6}
+.info_detail .opt_app .link_date {height:24px;padding:7px 29px 0 9px;line-height:18px;background-position:102px -88px;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;text-indent:0} /* 2014-08-19 추가 */
+.info_detail .opt_open .link_selected {background-position:100% -212px}
+.info_detail .opt_open .list_opt {display:block}
+.info_detail .tit_apppw {display:block;padding-top:16px;font-size:14px;line-height:24px;letter-spacing:-1px;clear:both}
+.info_detail .txt_nowapp {color:#3c77eb}
+.info_detail .desc_apppw {padding:2px 0 14px;color:#777}
+.info_detail .copy_apppw {font-size:24px}
+.info_detail .btn_pwcopy {width:70px;height:32px;margin:2px 0 0 20px;background-position:-360px -315px;text-indent:-9999px}
+.tbl_apppw {width:636px;margin-top:18px;border:1px solid #d2d2d2;background-color:#fff;text-align:left}
+.tbl_apppw th {padding:10px 0 9px;border-bottom:1px solid #d2d2d2;font-size:11px;font-weight:bold;color:#57595c;background-color:#f2f2f2;text-align:left;text-indent:31px}
+.tbl_apppw td {padding:19px 0 16px;border-top:1px solid #e8e8e8;color:#888;text-indent:30px} /* 2014-08-13 수정 */
+/* 2014-08-12 추가 시작 */
+.tbl_apppw .tit_date {text-indent:27px}
+.tbl_apppw .tit_state {text-align:center;text-indent:5px}
+.tbl_apppw .item_date {text-indent:27px}
+.tbl_apppw .item_state {font-weight:bold;color:#57595c;text-align:center;text-indent:0} /* 2014-08-13 수정 */
+.tbl_apppw .item_not {font-weight:normal} /* 2014-08-13 추가 */
+/* 2014-08-12 추가 끝 */
+.tbl_apppw .fst {font-weight:bold;color:#333;text-indent:29px}
+.tbl_apppw .lst {text-indent:36px}
+/* .tbl_apppw .info_apppw {border-bottom:1px solid #e8e8e8}  2014-08-13 삭제 */
+.tbl_apppw .recent_apppw {border-bottom:0 none;background-color:#fcfcfc}
+.tbl_apppw .recent_apppw .fst {color:#3c77eb}
+.area_howto {overflow:hidden;width:630px;height:135px;margin-top:20px;padding:17px 20px 20px 19px;border:1px solid #b5b5b5;text-align:left;background-color:#fff}
+.area_howto .tit_howto {width:709px;height:17px;margin-bottom:19px;color:#333;background-position:0 -460px}
+.area_howto .info_howto {float:left;width:401px;color:#777}
+.area_howto .info_howto .desc_howto {margin:11px 1px 10px 0;line-height:22px}
+.area_howto .desc_howto .emph_info {display:block;padding-top:6px;text-decoration:underline}
+.area_howto .ex_howto {float:left;width:229px;height:138px;padding:0;background-position:0 -1020px}
+/* 2014-08-06 삭제 시작 */
+/* .area_howto .txt_howto {display:block;margin:18px 0 16px 56px;font-weight:bold;letter-spacing:-1px}
+.area_howto .txt_ex {float:left;width:58px;margin:7px 0 0 17px;font-weight:bold;color:#555;letter-spacing:-1px}
+.area_howto .info_ex {margin-top:6px}
+.area_howto .ex_howto .bg_user {width:113px;height:25px;padding:6px 11px 0;color:#959595;background-position:0 -1170px}
+.area_howto .ex_howto .txt_exinput {font-weight:bold;color:#5089ed;background-position:0 -1210px} */
+/* 2014-08-06 삭제 끝 */
+/* 2014-08-06 추가 시작 */
+.ex_howto .txt_howto {display:block;margin:18px 0 16px 44px;font-weight:bold;letter-spacing:-1px}
+.ex_howto .txt_ex {float:left;width:58px;margin:8px 0 0 17px;font-weight:bold;color:#555;letter-spacing:-1px} /* 2014-08-21 수정 */
+.ex_howto .info_ex {margin-top:6px}
+.ex_howto .bg_user {width:113px;height:23px;padding:8px 11px 0;color:#959595;background-position:0 -1170px} /* 2014-08-21 수정 */
+.ex_howto .txt_exinput {font-weight:bold;color:#5089ed;background-position:0 -1210px}
+/* 2014-08-06 추가 끝 */
+.input_info .box_apppw {overflow:hidden;float:left;position:relative;width:152px;height:30px;padding:1px 0 0 13px;background-position:0 -980px}
+.input_info .box_apppw .tf_g {width:120px;margin-top:5px;padding:0}
+.input_info .box_apppw .btn_del {display:inline;float:right;width:20px;height:20px;margin:3px 5px 0 0;background-position:-454px -285px;text-indent:-9999px} /* 2014-08-13 수정 */
+/* 2014-08-04 추가 끝 */
+
+/* 2015-08-31 추가 시작 */
+.info_step2 .input_email .ico_email {margin-top:12px;}
+.info_step2 .input_email .input_on{background-position:0 -50px}/* 2015-09-23 추가 */
+.info_step2 .input_email .input_wrong{background-position:0 -100px}/* 2015-09-23 추가 */
+.info_step2 .input_email .lab_g{left:38px;top:12px;color:#777}/* 2015-09-23 추가 */
+.info_step2 .input_email .tf_basic {margin-top:12px;color:#000}/* 2015-09-23 수정 */
+.info_step2 .input_email .desc_add{margin:11px 0 0 0}/* 2015-09-23 추가 */
+/* 2015-08-31 추가 끝 */
+
+
+/* 버튼 */
+.info_detail .btn_termination {width:61px;height:22px;margin-left:5px;background-position:0 -170px;text-indent:-9999px}
+/* .info_detail .btn_help {float:left;width:18px;height:18px;margin-left:2px;background-position:0 -350px} 2014-06-23 삭제 */
+.wrap_tip {display:inline-block;position:relative;z-index:10;background-color:#fff}/* 2014-06-23 수정 */
+.wrap_tip .btn_help {width:18px;height:18px;margin-left:2px;background-position:0 -350px;text-indent:0} /* 2014-06-23 추가 */
+.info_detail .btn_newenroll {width:61px;height:22px;margin-left:5px;background-position:-410px -120px;text-indent:-9999px}
+/* 2014-08-04 추가 시작 */
+.info_detail .btn_issue {width:50px;height:30px;margin-left:4px;background-position:-300px -315px;text-indent:-9999px}
+.info_detail .btn_reissue {width:47px;height:22px;background-position:-440px -315px;text-indent:-9999px}
+.info_detail .btn_del {width:17px;height:16px;margin:3px 0 0 17px;background-position:-300px -80px;text-indent:-9999px}
+/* 2014-08-04 추가 끝 */
+
+/* 2단계 인증 설정_step */
+.fld_comm .info_step {padding-top:27px}
+/* 2014-06-02 수정 시작/UPTUSERSVC-784 */
+.list_set {overflow:hidden;height:43px;margin:0 5px 27px;padding-bottom:20px;border-bottom:1px solid #e8e8e8;background:url(https://i1.daumcdn.net/id/member/2014/bg_set_140602.gif) no-repeat 0 0}
+.list_set li {float:left;width:260px;height:43px;text-indent:-9999px}
+.list_set .on {background-image:url(https://i1.daumcdn.net/id/member/2014/bg_set_140602.gif);background-repeat:no-repeat}
+.list_set .set_step1 {background-position:0 -70px}
+.list_set .set_step2 {background-position:-260px -70px}
+.list_set .set_step3 {width:151px;background-position:-520px -70px}
+/* 2014-06-02 수정 끝/UPTUSERSVC-784 */
+/* .info_step .info_break {margin-top:20px;margin-bottom:19px} 2014-05-27 수정/UPTUSERSVC-777, 2014-06-02 삭제/UPTUSERSVC-781 */
+.info_step .tit_detail {width:129px}
+.info_step .input_info {width:760px}
+/* .info_phone .bg_user {margin-bottom:14px} 2014-05-27 삭제/UPTUSERSVC-777 */
+.info_step .check_notice {margin-top:10px} /* 2014-05-27 추가/UPTUSERSVC-777, 2014-06-02 수정/UPTUSERSVC-781 */
+.info_detail .check_set {overflow:visible}
+/* .info_detail .check_notice .btn_help {float:none} 2014-06-23 삭제 */
+/* 2014-08-06 추가 시작 */
+.info_comm .info_step2 {margin-bottom:0;padding-bottom:28px;border-bottom:1px solid #e8e8e8}
+.info_comm .desc_logout {display:block;padding:36px 0 16px 134px;border-top:1px solid #fff;letter-spacing:-1px}
+/* 2014-08-06 추가 끝 */
+
+/* 설정 완료 */
+.info_complete {padding:98px 0 112px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;text-align:center;background-color:#fbfbfb}
+/* 2014-08-06 삭제 시작 */
+/* .info_complete .tit_complete {display:block;margin-bottom:11px;font-size:14px}
+.info_complete .desc_complete {color:#777;line-height:20px}
+.info_complete .desc_complete .emph_info {text-decoration:underline} */
+/* 2014-08-06 삭제 끝 */
+.set_complete {padding:26px 42px} /* 2014-06-02 수정/UPTUSERSVC-784 */
+.set_complete .list_set {margin-bottom:0} /* 2014-06-09 추가/UPTUSERSVC-784 */
+.set_complete .area_complete {margin:0 5px;padding:29px 0 25px;border-top:1px solid #fff} /* 2014-08-06 수정 */
+/* 2014-08-04 삭제 시작 */
+/* 2014-06-05 수정 시작/UPTUSERSVC-827 */
+/* .set_complete .area_apppw {overflow:hidden;height:183px;margin:0 5px;padding:32px 38px 0;border:1px solid #e8e8e8;text-align:left;background-color:#fff}
+.area_apppw .tit_apppw {width:709px;height:17px;margin-bottom:19px;background-position:0 -460px}
+.area_apppw .bg_apppw {display:inline;float:left;width:226px;height:93px;margin:12px 38px 0 6px;background-position:-320px -320px}
+.area_apppw .info_advance {float:left;width:530px;color:#777} */ /* 2014-06-16 수정//UAPDLOGINKP-476 */
+/* .area_apppw .info_advance .desc_complete {line-height:22px;background-color:#fff} *//* 2014-07-01 수정/UPTUSERSVC-889 */
+/* .area_apppw .desc_pw {display:inline-block;margin-top:8px;letter-spacing:-1px}
+.area_apppw .btn_apppw {width:145px;height:22px;margin:5px 0 0 8px;background-position:-300px -290px} */
+/* 2014-06-05 수정 끝/UPTUSERSVC-827 */
+/* 2014-08-04 삭제 끝 */
+/* 2014-08-06 추가 시작 */
+.set_complete .area_apppw {overflow:hidden;padding:50px 38px 45px;border:1px solid #e8e8e8;text-align:left;background-color:#fff}
+.info_complete .tit_complete {width:294px;height:21px;margin:0 auto;background-position:0 -1415px}
+.info_complete .desc_complete {margin-top:9px;font-weight:bold;color:#666;letter-spacing:-1px;text-align:center}
+.info_certi {overflow:hidden;height:50px}
+.info_certi .tit_certi {float:left;width:218px;height:14px;margin:6px 0 0 7px;background-position:0 -1445px}
+.info_certi .quest_certi {float:left;padding-left:27px;text-align:left}
+.info_certi .quest_certi .link_certi {display:block;font-size:13px;line-height:25px;color:#777;text-decoration:underline}
+/* 2014-08-06 추가 끝 */
+
+/* 마이피플앱 설치방법 레이어 */
+.inner_set_layer {width:638px;padding-top:37px;border:1px solid #444;background-color:#fff}
+.inner_set_layer .info_join {padding:0 41px 32px}
+.inner_set_layer .tit_layer {display:block;font-size:14px;line-height:24px}
+.inner_set_layer .desc_info {margin-top:1px;line-height:20px;color:#777}
+.inner_set_layer .info_method {padding:29px 41px 42px;border-top:1px solid #e5e5e5;background-color:#f3f4f7}
+.inner_set_layer .tit_install {width:122px;height:17px;margin-bottom:21px;background-position:0 -420px}
+.inner_set_layer .list_install {overflow:hidden;width:557px;height:133px;background:url(https://i1.daumcdn.net/id/member/2014/bg_install.gif) no-repeat 0 0;text-indent:-9999px}
+.inner_set_layer .list_install li {float:left;width:185px;height:133px}
+.inner_set_layer .list_install .img_qrcode {display:block;width:81px;height:81px;margin:34px 0 0 37px}
+.inner_set_layer .list_install .btn_send {float:left;margin:75px 0 0 44px;width:97px;height:38px;background-position:-210px -120px;text-indent:-9999px}
+.inner_set_layer .btn_close {position:absolute;right:17px;top:16px;display:block;width:22px;height:22px;background-position:-240px -80px;text-indent:-9999px;cursor:pointer}
+
+/* 애플리케이션 비밀번호 발급 레이어 */
+.inner_set_layer1 {width:578px;padding-top:42px}
+.inner_set_layer1 .emph_notice {padding:5px 0 19px}
+.info_app {overflow:hidden;padding-bottom:10px} /* 2014-05-27 수정/UPTUSERSVC-777 */
+.info_app .tit_detail {width:146px;padding-left:1px}
+.info_app .input_info {width:300px}
+.info_app .bg_app {float:left;width:204px;margin-right:5px;background-position:0 -650px}
+.info_app .input_on {background-position:0 -700px}
+.info_app .input_wrong {background-position:0 -750px}
+.info_app .input_none {background-position:0 -800px}
+.info_app .bg_app .tf_g {width:180px}
+.info_app .btn_comm {float:left}
+.info_detail .btn_advance {width:62px;height:38px;background-position:-70px -120px}
+.info_detail .btn_copy {width:62px;height:38px;background-position:-140px -120px}
+.inner_set_layer1 .info_method {padding:25px 41px 21px}
+.inner_set_layer1 .tit_method {width:195px;height:17px;margin-bottom:14px;background-position:0 -440px}
+.inner_set_layer1 .list_method {overflow:hidden;font-size:11px;line-height:21px;color:#666;letter-spacing:-1px}
+.inner_set_layer1 .list_method .emph_info {line-height:18px} /* 2014-05-26 추가/UPTUSERSVC-773 */
+
+/* 2014-08-20 추가 시작 */
+/** 비밀번호 변경 **/
+.intro_modifypw .cont_intro {padding-top:52px} /* 2014-09-05 수정 */
+.info_modifypw .info_detail {height:62px} /* 2014-08-25 추가 */
+.info_modifypw .tit_detail {width:128px}
+.info_modifypw .input_info {width:761px}
+.info_modifypw .info_break {height:auto;margin-top:37px} /* 2014-08-25 수정 */
+.input_info .btn_hide {float:right;width:44px;height:29px;margin-top:4px;background-position:-90px -410px}
+.input_info .btn_view {float:right;width:44px;height:29px;margin-top:4px;background-position:-140px -410px}
+.info_detail .txt_pass {display:block;margin-top:12px;padding-left:16px;color:#549b08;background:url(https://i1.daumcdn.net/id/member/2014/ico_comm_141001.png) no-repeat 0 -1050px} /* 2014-09-30 수정 */
+
+.info_detail .info_rule {overflow:hidden;padding:4px 0 42px 40px}
+.info_detail .ico_tip {float:left;width:54px;height:54px;margin-right:38px;background-position:0 -800px}
+.info_detail .info_tip {float:left;width:582px;height:64px;background:url(https://i1.daumcdn.net/id/member/2014/bg_tip.gif) no-repeat}
+
+/* 비밀번호 변경_완료 */
+.intro_done {padding:45px 0 52px}
+.intro_done .inner_done {overflow:hidden;width:568px;margin:0 auto}
+.intro_done .ico_comm {float:left;width:65px;height:65px;margin-right:20px;background-position:0 -875px} /* 2014-09-16 수정 */
+.intro_done .tit_modifyend {height:28px;margin-top:16px;background-position:0 -1515px}
+
+.info_done {overflow:hidden;padding:38px 126px 50px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb}
+.info_done .desc_done {padding:25px 0 24px;border:1px solid #dfdfdf;line-height:22px;color:#57595c;background-color:#fff;text-align:center}
+.info_done .link_more {display:inline-block;font-weight:bold;color:#3d8aea;text-decoration:underline}
+
+.info_done .info_detail {overflow:hidden}
+.info_detail .desc_user {overflow:hidden;padding:43px 0 16px 135px;color:#666}
+.info_done .txt_identity {float:left;margin:5px 32px 0 0}
+.info_detail .txt_user {display:block;overflow:hidden;margin-left:113px;line-height:22px}/* 2014-10-14 수정 */
+
+.info_detail .list_done {float:left;width:auto;padding-left:248px;line-height:24px}/* 2014-10-14 수정 */
+.info_detail .list_done .tit_info {width:102px;background-position:0 10px}
+.info_detail .list_done .txt_info {margin:0 0 6px 111px}
+
+.info_detail .wrap_btn {padding:36px 0 0}
+.wrap_btn .btn_home {width:116px;height:38px;margin-right:2px;background-position:-200px -360px}
+.wrap_btn .btn_main {width:116px;height:38px;background-position:-320px -360px}
+/* 박스 하단 문구 */
+.desc_safe {padding:21px 0 106px;text-align:center;color:#666;line-height:22px}
+.desc_safe .txt_safe {letter-spacing:-1px}
+.desc_safe .emph_g {color:#f56a4f}
+.desc_safe .link_more {display:inline-block;font-weight:normal;color:#3d8aea;text-decoration:underline}
+
+/** 회원탈퇴 **/
+/* 회원탈퇴_안내동의 */
+.info_agree {overflow:hidden;padding:42px 50px 29px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb}
+.info_agree .info_user {overflow:hidden;position:relative;width:793px;margin-bottom:20px;padding:27px 37px 40px 45px;border:1px solid #dfdfdf;background-color:#fff;color:#444} /* 2014-08-27 수정 */
+.info_user .tit_agree {display:block;margin-right:30px;padding-bottom:13px;font-size:14px;line-height:24px;letter-spacing:-1px}
+.info_user .txt_agree {line-height:22px}
+.info_user .emph_g {color:#f56a4f}
+.info_agree .list_agree {overflow:hidden;margin:31px 0 0 18px;padding:0;line-height:24px}
+.info_agree .list_agree .link_service {display:inline-block;color:#666;text-decoration:underline} /* 2014-09-15 추가 */
+.info_agree .list_agree .tit_service {float:left;width:88px;padding-bottom:0;font-weight:bold;font-size:12px;color:#666;text-indent:0;text-decoration:underline;clear:both}
+.info_agree .list_agree .txt_service {margin:0 0 6px 88px;color:#818181}
+.info_agree .list_agree .lst {margin-bottom:0}
+/* 동의 체크박스 */
+.info_agree .check_notice {position:absolute;top:32px;right:37px}
+.info_agree .lab_check {display:block;overflow:hidden;width:30px;padding:35px 0 0 0;text-align:center}
+.info_agree .check_on .lab_check {font-weight:normal;color:#5a95ed}
+.info_agree .tf_check {width:30px;height:30px}
+.info_agree .ico_check {display:block;width:30px;height:30px;background-position:0 -700px}
+.info_agree .check_on .ico_check {background-position:0 -750px}
+.info_agree .check_notice .tf_check:checked + .lab_check .ico_comm {background-position:0 -750px}
+.wrap_btn .btn_cancel {width:93px;height:46px;margin-right:2px;background-position:-100px -360px}
+
+/* 회원탈퇴_별도해지서비스 */
+.info_termination {overflow:hidden;width:978px}
+
+.list_termination {overflow:hidden;padding:26px 50px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb}
+.list_termination li {overflow:hidden;width:878px;padding:36px 0 35px 0;border-bottom:1px solid #e1e1e1}
+.list_termination .lst {border-bottom:0 none}
+
+.list_termination .tit_service {float:left;width:161px;padding-left:25px;font-size:14px;color:#444;letter-spacing:-1px}
+.list_termination .desc_service {float:left;width:585px;line-height:20px;color:#666}
+.list_termination .txt_service {display:block;margin-bottom:4px;font-weight:bold;letter-spacing:-1px}
+.list_termination .btn_termination {float:left;width:80px;height:30px;margin-top:18px;background-position:0 -410px}
+.list_termination .btn_transfer {float:left;width:80px;height:30px;margin-top:18px;background-position:-190px -410px} /* 2014-08-25 추가 */
+
+/* 회원탈퇴_완료 */
+.intro_out .cont_intro {padding-top:53px}/* 2014-10-14 수정 */
+.intro_out .ico_comm {display:block;width:87px;height:87px;margin:59px auto 0;background-position:0 -950px}
+.intro_out .tit_outend {width:334px;height:28px;margin:28px auto 52px;background-position:0 -1715px}
+
+.info_out {overflow:hidden;padding:46px 0;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb;text-align:center}
+.info_out .desc_done {padding-bottom:30px;color:#666}
+.info_out .txt_done {display:block;padding-bottom:6px;font-weight:bold;font-size:16px;color:#1b1b1b}
+.info_out .btn_main {width:116px;height:38px;background-position:-320px -360px}
+/* 2014-08-20 추가 끝 */
+
+/* 2014-11-20 수정시작 */
+/* 이름변경_완료 */
+.info_name {overflow:hidden;width:614px;margin:70px auto;padding:68px 0 75px;border:1px solid #e1e1e1;border-right-color:#ededed;border-left-color:#ededed;background-color:#fbfbfb;text-align:center}
+.info_name .desc_done {display:block;padding-bottom:47px;color:#666;letter-spacing:-1px}
+.info_name .txt_done {display:block;padding-bottom:24px;color:#333;font-weight:bold;font-size:24px;line-height:32px}
+.info_name .btn_ok {width:86px;height:38px;background-position:-375px -400px;margin-left:-8px}
+.info_name .txt_id {color:#4b88f7}
+/* //2014-11-20 수정시작 */
+
+/* Layer */
+.layer_certify {display:none;position:absolute;left:50%;top:26px;z-index:10;padding:15px 22px 10px 17px;border:1px solid #8f8f8f;font-size:11px;line-height:18px;color:#777;background-color:#fff;letter-spacing:-1px} /* 2014-06-19 수정/UAPDLOGINKP-475 */
+.layer_certify .bg_point {position:absolute;left:50%;top:-7px;width:11px;height:7px;margin-left:-14px;background-position:0 -375px}
+.layer_certify .link_layer {display:inline-block;margin-top:6px;color:#3784e3;text-decoration:underline} /* 2014-06-23 수정 */
+.layer_certify .btn_close {display:block;position:absolute;right:12px;top:10px;width:16px;height:15px;background-position:0 -195px;text-indent:-9999px} /* 2014-06-23 수정 */
+
+/* Layer2 */
+.layer_open {z-index:20} /* 2014-06-16 추가/UAPDLOGINKP-488 */
+.layer_userinfo {padding:8px 10px;line-height:16px}
+.layer_userinfo .bg_point {left:22px;margin-left:0}
+.layer_userinfo .bg_point2 {position:absolute;left:22px;bottom:-7px;width:11px;height:7px;background-position:0 -400px}
+
+/* 2단계 인증 해제 */
+.release_way {width:100%;height:152px;border-top:1px solid #e1e1e1;border-bottom:1px solid #d9d9d9;background-color:#fbfbfb}
+.release_way .list_way {overflow:hidden;padding:27px 0 0 57px}
+.release_way .list_way li {float:left}
+.release_way .list_way .link_way {overflow:hidden;float:left;width:319px;height:91px;margin-right:94px;font-size:0;line-height:0;background:url(https://i1.daumcdn.net/id/member/2014/bg_way_140612.gif) 0 0 no-repeat;text-indent:-9999px} /* 2014-06-13 */ /* 2014-05-26 수정/UPTUSERSVC-775 */
+.release_way .list_way .link_phone {background-position:0 0}
+.release_way .list_way .link_email {background-position:-330px 0}
+.release_way .list_way .link_phone:hover {background-position:0 -100px}
+.release_way .list_way .link_email:hover {background-position:-330px -100px}
+.info_detail .emph_g {display:block;margin:0 0 4px 4px;letter-spacing:-1px}
+.info_detail .emph_g .emph_info {letter-spacing:0} /* 2014-05-29 추가/UPTUSERSVC-785 */
+.info_detail .desc_g {margin:0 0 23px 4px;color:#777}
+/* .info_comm .info_releaseemail {margin-bottom:10px} 2014-05-29 삭제/UPTUSERSVC-786 */
+
+/* footer */
+/* .footer_comm {width:978px;margin:0 auto;padding:21px 0 10px;border-top:1px solid #bcbcbc;font-size:12px;line-height:18px;font-family:'돋움',dotum,sans-serif;text-align:center;clear:both;color:#a5a5a5} 2014-06-02 수정/UPTUSERSVC-813
+.footer_comm .link_info {font-weight:bold;color:#666}
+.footer_comm .link_daum {color:#666}
+.footer_comm .txt_copyright {display:block;padding-top:5px;font-size:11px;font-style:normal;color:#666} */
+/* footer */
+.footer_comm {width:978px;margin:0 auto;padding:21px 0 10px;border-top:1px solid #bcbcbc;font-size:12px;line-height:18px;font-family:'돋움',dotum,sans-serif;text-align:center;clear:both;color:#a5a5a5} /* 2014-06-02 수정/UPTUSERSVC-813 */
+.footer_comm .link_info {font-weight:bold;color:#666}
+.footer_comm .link_daum {color:#666}
+.footer_comm .txt_copyright {display:block;padding-top:5px;font-size:11px;font-style:normal;color:#666}
+
+
+/* 레이어 공통 */
+.dimmed_layer {position:fixed;left:0;top:0;z-index:9999999;width:100%;height:100%;background-color:#000;opacity:0.5;filter:alpha(opacity=50)}
+.userinfo_layer {position:absolute;left:50%;z-index:9999999}
+.userinfo_layer .inner_userinfo_layer {position:absolute;left:50%;top:0;background-color:#fff}
+.inner_userinfo_layer .layer_head {height:42px;border-top:1px solid #40444f;border-bottom:1px solid #1b1c21;font-size:16px;background-color:#3a3e48;color:#fff}
+.inner_userinfo_layer .layer_body {padding:0 27px;border-top:1px solid #d6d6d6;border-bottom:1px solid #808080}
+.inner_userinfo_layer .wrap_btn {padding:71px 0 37px}
+.inner_userinfo_layer .wrap_btn .link_close {width:64px;height:38px;background-position:0 -120px}
+.inner_userinfo_layer .btn_close {position:absolute;right:0px;top:0px;width:70px;height:43px}
+.inner_userinfo_layer .btn_close .inner_close {width:18px;height:17px;margin:13px 0 0 26px;background-position:-420px -80px}
+.inner_userinfo_layer .tit_domestic {width:85px;height:16px;margin:14px 0 0 24px;background-position:0 -320px}
+.inner_userinfo_layer .tit_foreign {width:85px;height:16px;margin:14px 0 0 24px;background-position:0 -340px}
+
+/* 주소검색 레이어 */
+.userinfo_layer .inner_userinfo_layer1 {width:610px;margin-left:-305px}
+.inner_userinfo_layer1 .info_address {padding-top:24px;font-weight:bold;line-height:14px;letter-spacing:-1px}
+.inner_userinfo_layer1 .info_address .txt_example {display:block;padding-top:6px;font-weight:normal;color:#777;letter-spacing:0}
+.inner_userinfo_layer1 .search_address {height:33px;padding-top:14px}
+.inner_userinfo_layer1 .search_address .btn_search {float:left;width:59px;height:33px;background-position:-350px -80px}
+.tab_layer {height:39px;padding-top:22px}
+.tab_layer li {float:left;width:278px;height:39px}
+.tab_layer .fst {width:277px}
+.tab_layer .link_tab {display:block;width:276px;height:25px;padding-top:12px;border:1px solid #7a7c82;background-color:#8e929d;text-align:center}
+.tab_layer .fst .link_tab {width:276px;border-right:0 none}
+.tab_layer .on .link_tab {height:26px;border-bottom:0 none;background-color:#fff}
+.tab_layer .tit_street {display:block;width:90px;height:14px;margin:0 auto;background-position:0 -240px}
+.tab_layer .on .tit_street {background-position:0 -260px}
+.tab_layer .tit_lotnum {display:block;width:79px;height:14px;margin:0 auto;background-position:0 -280px}
+.tab_layer .on .tit_lotnum {background-position:0 -300px}
+.inner_userinfo_layer1 .opt_address {position:relative;float:left;width:169px;margin-right:6px;border:1px solid #c4c4c4;line-height:14px}
+.inner_userinfo_layer1 .opt_address .link_selected {display:block;overflow:hidden;height:23px;padding:8px 29px 0 9px;font-weight:bold;background-position:100% -187px;background-color:#fff;text-decoration:none;color:#444;text-overflow:ellipsis;white-space:nowrap;text-indent:0}
+.inner_userinfo_layer1 .opt_address .list_opt {display:none;overflow-y:auto;position:absolute;left:-1px;top:31px;width:100%;max-height:130px;margin:0;padding:4px 0 3px;border:1px solid #a6a6a6;background-color:#fff} /* 2014-06-24 수정/UPTUSERSVC-846 */
+.inner_userinfo_layer1 .opt_address .link_option {display:block;height:27px;padding-left:7px;font-weight:bold;line-height:28px;text-decoration:none;color:#444}
+.inner_userinfo_layer1 .opt_address .link_option:hover {background-color:#ececec}
+.inner_userinfo_layer1 .opt_open {z-index:10;border-color:#a6a6a6}
+.inner_userinfo_layer1 .opt_open .link_selected {background-position:100% -212px}
+.inner_userinfo_layer1 .opt_open .list_opt {display:block}
+.inner_userinfo_layer1 .opt_default .link_selected {font-weight:normal;color:#777}
+.input_layer {float:left;position:relative;margin-right:6px}
+.input_layer .lab_info {position:absolute;top:10px;left:11px;height:16px;line-height:14px;color:#777}
+.input_layer .tf_layer {width:301px;height:29px;padding:2px 0 0 10px;border:1px solid #c4c4c4;font-weight:bold;line-height:28px}
+.inner_userinfo_layer1 .input_on .lab_info {display:none}
+.inner_userinfo_layer1 .input_on .tf_layer {border-color:#5a94fd}
+
+/* 우편번호 결과 레이어 */
+.result_address {padding-top:29px}
+.result_address .emph_address {font-weight:bold;color:#3784e3}
+.result_address .txt_address {letter-spacing:-1px}
+.result_address .tbl_head {height:21px;margin-top:8px;padding-top:8px;border-top:1px solid #b4b4b4;border-bottom:1px solid #dcdcdc;line-height:14px;color:#666;background-color:#fbfbfb;letter-spacing:-1px;text-align:center}
+.result_address .tbl_head .tit_head {float:left}
+.result_address .tbl_head .tit_head1 {width:454px}
+.result_address .tbl_head .tit_head2 {width:86px;padding-right:15px}
+.result_address .tbl_body {overflow:hidden;overflow-y:scroll;height:293px;border-bottom:1px solid #c5c5c5} /* 2014-06-24 수정/UPTUSERSVC-846 */
+.result_address .tbl {width:100%}
+.result_address .tbl td {height:58px;border-bottom:1px solid #e9e9e9}
+.result_address .tbl .cont_code {border-left:1px solid #e9e9e9;text-align:center}
+.result_address .tbl .info_g {padding-left:9px}
+.result_address .tbl .ico_street {display:inline-block;width:34px;height:12px;border:1px solid #6f97d9;font-size:11px;line-height:13px;color:#fff;background-color:#789fde;letter-spacing:-1px;text-align:center}
+.result_address .tbl .ico_lotnum {display:inline-block;width:34px;height:12px;border:1px solid #a7acb8;font-size:11px;line-height:13px;color:#fff;background-color:#b4b7bf;letter-spacing:-1px;text-align:center}
+.result_address .info_g .link_g {padding-left:5px}
+.result_address .info_lotnum .link_g {color:#888}
+.result_address .info_noresult {padding:60px 0 20px;color:#555;text-align:center}
+.result_address .ico_noresult {display:block;width:46px;height:46px;margin:0 auto;background-position:0 -125px}
+.result_address .emph_noresult {display:block;padding:18px 0 10px;font-weight:bold;font-size:14px;line-height:16px;color:#333;letter-spacing:-1px}
+.result_address .link_juso {color:#3784e3}
+.userinfo_layer .result_btn {padding-top:14px}
+
+/* 해외 주소 검색 레이어 */
+.inner_userinfo_layer1 .search_foreign .tf_layer {width:479px}
+.input_layer .list_suggest {display:none;position:absolute;left:0;top:33px;width:489px;border:1px solid #a5a6ac;border-top:0 none;background-color:#fff}
+.input_layer .list_suggest .link_suggest {display:block;padding:7px 10px;text-decoration:none;line-height:18px}
+.input_layer .list_suggest .link_suggest:hover {background-color:#ececec}
+.input_layer .list_suggest .emph_suggest {color:#ea4e43}
+.inner_userinfo_layer1 .suggest_open {z-index:10;border-color:#656565}
+.inner_userinfo_layer1 .suggest_open .tf_layer {border-color:#5a94fd}
+.inner_userinfo_layer1 .suggest_open .list_suggest {display:block}
+.result_address .list_country {overflow:hidden;overflow-y:scroll;height:200px;margin-top:8px;border-top:1px solid #b4b4b4;border-bottom:1px solid #c5c5c5}
+.result_address .list_country li {padding:13px 6px 12px;border-bottom:1px solid #e9e9e9;font-weight:bold;line-height:14px}
+.result_address .list_country .fst {border-top:1px solid #fbfbfb}
+
+/* 2015-01-20 수정시작 */
+/* 레이어 */
+.inner_myinfo_layer {width:297px;padding:41px 39px 48px;border:1px solid #444;text-align:left;letter-spacing:-1px;background-color:#fff}
+.inner_myinfo_layer .tit_layer {font-size:14px;line-height:24px}
+.inner_myinfo_layer .emph_info {font-weight:bold}
+.inner_myinfo_layer .desc_info {margin-top:3px;padding-bottom:5px;line-height:20px;color:#777}
+.inner_myinfo_layer .btn_process {width:100%;margin-top:20px;text-align:center}
+.inner_myinfo_layer .btn_process .btn_comm {height:38px}
+.inner_myinfo_layer .btn_ok {width:64px;background-position:-420px 0}
+.inner_myinfo_layer .btn_continue {width:94px;background-position:-250px 0}
+.inner_myinfo_layer .btn_cancel {width:64px;margin-left:5px;background-position:-350px 0}
+.inner_myinfo_layer .btn_close {position:absolute;right:16px;top:16px;display:block;width:22px;height:22px;background-position:-240px -80px;text-indent:-9999px;cursor:pointer}
+/* 2015-01-20 수정끝 */
+
+/* 2014-08-06 추가 시작 */
+/* 애플리케이션 비번 레이어 */
+.dimmed_layer {position:absolute;top:0;left:0;width:100%;background-color:#000;opacity:0.5}
+.inner_set_layer2 .tit_layer {font-size:16px;letter-spacing:-1px}
+.inner_set_layer2 .desc_layer {margin-top:11px;color:#57595c}
+.inner_set_layer2 .desc_layer .emph_info {font-weight:bold}
+.inner_set_layer2 .ex_howto .txt_howto {margin-top:0;margin-bottom:21px;font-size:14px}
+.inner_set_layer2 .btn_confirm {display:block;width:92px;height:42px;margin:25px auto;background-position:0 -360px}
+.ex_howto .info_ex2 .bg_user {width:119px;height:23px;background-position:0 -1250px} /* 2014-08-14 수정 */
+.ex_howto .info_ex2 .txt_exinput {background-position:0 -1290px}
+
+/* 2015-08-31 추가시작 */
+/* 레이어추가 */
+.dimmed_layer {position:fixed;left:0;top:0;z-index:9999999;width:100%;height:100%;background-color:#000;opacity:0.5;filter:alpha(opacity=50)}
+.userinfo_layer {position:absolute;left:50%;z-index:9999999}
+.inner_myinfo_layer .layer_body {font-size:12px;font-weight:normal;letter-spacing:0}
+.inner_myinfo_layer {width:297px;padding:41px 39px 43px;border:1px solid #444;text-align:left;background-color:#fff}
+.inner_myinfo_layer .btn_process {width:100%;margin-top:20px;text-align:center}
+.inner_myinfo_layer .btn_process .btn_find {display:inline-block;height:38px}
+.inner_myinfo_protector {width:319px;padding:38px 38px 29px;text-align:center}
+.inner_myinfo_type1 {width:602px;color:#444}
+.inner_myinfo_type1 .tit_personal {display:block;padding-bottom:20px;border-bottom:1px solid #d2d2d2;font-size:16px}
+.inner_myinfo_type1 .txt_personal {display:block;margin-top:10px;letter-spacing:-1px}
+.inner_myinfo_type1 .info_agreement {padding-top:35px;}
+.inner_myinfo_type1 .tit_agreement {font-weight:bold;color:#333}
+.inner_myinfo_type1 .tbl_agreement {width:100%;margin-top:5px;border-collapse:collapse;border-spacing:0;border-bottom:1px solid #d2d2d2;letter-spacing:-1px}
+.inner_myinfo_type1 .tbl_agreement th {height:37px;border:1px solid #d2d2d2;border-right:0 none;border-left:0 none;text-align:center;color:#888;background-color:#f3f3f3}
+.inner_myinfo_type1 .tbl_agreement td {padding:21px 15px 18px;border-right:1px solid #d2d2d2;border-bottom:1px solid #d2d2d2;color:#666}
+.inner_myinfo_type1 .tbl_agreement td.lst {border-right:0 none}
+.inner_myinfo_type1 .tbl_agreement .td_top {vertical-align:top}
+.inner_myinfo_type1 .tbl_agreement .td_special {background-color:#f8f8f8}
+.inner_myinfo_type1 .txt_agreement {display:inline-block;padding-top:5px}
+.inner_myinfo_type1 .btn_process {margin:54px 0 1px;font-family:Dotum,'돋움',Helvetica,AppleSDGothicNeo,Arial,sans-serif}
+.inner_myinfo_type1 .btn_process .btn_ok {width:64px;height:38px;border:1px solid #4b7ed6;border-radius:3px;font-weight:bold;font-size:13px;line-height:38px;background-color:#508cf7;color:#fff}
+
+/* 레이어_실명확인 */
+.inner_myinfo_type2 {width:319px;padding:44px 38px 36px;text-align:center}
+.inner_myinfo_type2 .tit_layer {color:#333;font-size:16px;line-height:28px;letter-spacing:-1px}
+.inner_myinfo_type2 .tit_agree {display:inline-block;padding-top:17px}
+.inner_myinfo_type2 .txt_layer {margin-top:18px;font-size:12px;letter-spacing:-1px}
+.inner_myinfo_type2 .btn_process {margin:29px 0 0 -6px;font-family:Dotum,'돋움',Helvetica,AppleSDGothicNeo,Arial,sans-serif}
+.inner_myinfo_type2 .btn_process .btn_ok {width:64px;height:38px;border:1px solid #4b7ed6;border-radius:3px;font-weight:bold;font-size:13px;line-height:38px;background-color:#508cf7;color:#fff}
+.inner_myinfo_type2 .btn_process .btn_cancel {width:64px;height:38px;margin:0 3px 0 0;border:1px solid #c6c6c6;border-radius:3px;color:#444;font-weight:bold;font-size:12px;line-height:38px}
+.inner_myinfo_type2 .btn_close {background-position:0 0}
+.inner_myinfo_type2 .body_type1 .btn_process {margin-top:24px;margin-bottom:8px}
+/* 2015-08-31 추가 끝 */
+
+
+
+/* 2014-08-14 삭제 시작 */
+/* 2단계인증 캠페인 */
+/* .cont_campaign .tit_intro {display:block;font-size:16px;color:#323540;text-align:center;letter-spacing:-1px}
+.cont_campaign .tit_intro .inner_intro {overflow:hidden;display:inline-block;color:#388af2}
+.cont_campaign .tit_intro .txt_id {float:left;font-size:14px;color:#388af2;text-decoration:underline}
+.cont_campaign .tit_intro .txt_intro {display:inline-block;overflow:hidden;width:260px;height:17px;margin-left:8px;background-position:0 -1465px}
+.cont_campaign .tit_campaign {width:545px;height:34px;margin:10px auto 49px;background-position:0 -1495px}
+.cont_campaign .campaign_certi {overflow:hidden;width:978px;margin:0 auto;border:1px solid #cbced7;background-color:#fbfbfb}
+.cont_campaign .info_campaign {float:left;width:382px;margin:49px 0 21px;;padding:0 55px 21px 50px;border-right:1px solid #e0e1e6}
+.cont_campaign .info_browser {border-right:0 none;border-left:1px solid #fff}
+.cont_campaign .tit_apppw {width:209px;height:22px;background-position:0 -1540px}
+.cont_campaign .tit_browser {width:222px;height:22px;background-position:0 -1570px}
+.cont_campaign .desc_campaign {height:98px;margin-top:20px;color:#57595c}
+.cont_campaign .desc_apppw {width:377px;height:50px;margin:49px auto 0;background-position:0 -1600px}
+.cont_campaign .desc_browser {width:296px;height:50px;margin:49px auto 0;background-position:0 -1670px}
+.cont_campaign .ex_howto {width:287px;height:166px;margin:0 auto;padding:8px 0 0 50px;background:url(https://i1.daumcdn.net/id/member/2014/bg_pwcamp.gif) no-repeat 0 0}
+.cont_campaign .ex_browser {width:303px;height:164px;padding:18px 0 0 20px;background:url(https://i1.daumcdn.net/id/member/2014/bg_pwcamp2.gif) no-repeat 0 0}
+.cont_campaign .info_ex2 .txt_exinput {height:33px;background-position:0 -1330px}
+.ex_howto .txt_occupied {display:block;font-weight:bold;line-height:20px;letter-spacing:-1px;color:#444}
+.ex_howto .txt_browser {color:#444;letter-spacing:-1px}
+.ex_howto .txt_browser .txt_email {color:#939393}
+.cont_campaign .notice_campaign {position:relative;margin:30px 0 27px}
+.cont_campaign .notice_campaign .desc_once {position:absolute;right:21px;top:14px;width:140px;height:13px;background-position:0 -1725px}
+.cont_campaign .btn_campaign {display:block;width:160px;height:44px;margin:0 auto;background-position:-100px -360px} */
+/* 2014-08-14 삭제 끝 */
+
+/* 2014-08-06 추가 끝 */
+
+/* 2014-11-20 수정추가 */
+/* 내정보관리_이름변경 */
+.namecheck_way {width:100%}
+.namecheck_way .list_way {overflow:hidden;height:100%;padding:23px 0;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;background-color:#fbfbfb;letter-spacing:-1px/* ;padding:27px 0 0 57px */}
+.list_way li {overflow:hidden;float:left;padding-bottom:15px;text-align:center}
+.list_way .tit_comm {display:inline-block;height:24px;margin:15px 0 13px} /* 2014-11-20 */
+.list_way .item_phone {width:471px;padding-left:20px;border-right:1px solid #eee}
+.list_way .item_ipin {width:443px;padding-right:43px}
+.item_phone .tit_comm {width:151px;background-position:0 -1825px}
+.item_ipin .tit_comm {width:174px;background-position:0 -1850px}
+.list_way .desc_g {display:block;margin-bottom:19px;color:#666;line-height:20px}
+.list_way .btn_accredit {width:97px;height:38px;background-position:-275px -400px}
+.namecheck_way .wrap_btn {padding:0;margin:23px 0 20px}
+.namecheck_way .wrap_btn link_prev {margin:0}
+.namecheck_way .desc_namecheck {padding-left:13px;color:#777;background-position: 5px 9px;}/* 2014-11-20-v1 */
+.namecheck_way .emph_b:hover {text-decoration:none}/* 2014-11-20-v1 */
+/* .namecheck_way .emph_namecheck {color:#4b88f7;text-decoration:underline} 2014-11-20-v1 */
+/* //2014-11-20 수정끝 */
+
+/* 2014-12-30 추가시작 */
+/* 레이어_이름변경 */
+/* .inner_myinfo_layer {width:297px;padding:41px 39px 43px;border:1px solid #444;text-align:left;background-color:#fff}
+.inner_myinfo_layer .tit_layer {font-size:14px;line-height:24px;color:#222}
+.inner_myinfo_layer .tit_namecheck {letter-spacing:-1px}
+.inner_myinfo_layer .txt_layer {color:#666;font-size:14px;line-height:21px}
+.inner_myinfo_layer .tit_mismatch {display:block;padding:22px 0 50px;text-align:center}
+.inner_myinfo_layer .emph_info {font-weight:bold;color:#4b88f7;letter-spacing:0}
+.inner_myinfo_layer .desc_info {margin-top:3px;padding-bottom:5px;line-height:20px;color:#666;letter-spacing:0}
+.inner_myinfo_layer .btn_process {width:100%;margin-top:20px;text-align:center}
+.inner_myinfo_layer .btn_process .btn_find {display:inline-block;height:38px}
+.inner_myinfo_layer .btn_ok {width:64px;background-position:-230px -150px}
+.inner_myinfo_layer .btn_continue {width:94px;background-position:0 0}
+.inner_myinfo_layer .btn_cancel {width:64px;margin-left:5px;background-position:-350px 0}
+.inner_myinfo_layer .btn_close {position:absolute;right:16px;top:16px;display:block;width:22px;height:22px;background-position:-380px 0;text-indent:-9999px;cursor:pointer}
+.inner_myinfo_layer .btn_numnot {width:169px;background-position:-200px -50px}
+.inner_myinfo_layer .btn_send {width:119px;margin-left:5px;background-position:-300px -150px}
+.web_font button {font-family:'NanumGothic','나눔고딕','Nanum Gothic','Malgun Gothic','맑은 고딕',Dotum,돋움,Helvetica,AppleSDGothicNeo,Arial,sans-serif}
+
+.inner_myinfo_type2 {width:319px;padding:38px 38px 42px;text-align:center}
+.inner_myinfo_type2 .tit_layer {color:#333;font-size:20px;line-height:28px;letter-spacing:-1px}
+.inner_myinfo_type2 .tit_agree {display:inline-block;padding-top:17px}
+.inner_myinfo_type2 .txt_layer {margin-top:23px;letter-spacing:-1px}
+.inner_myinfo_type2 .btn_process {margin:29px 0 0 -6px;font-family:'NanumGothic','나눔고딕','Nanum Gothic','Malgun Gothic','맑은 고딕',Dotum,돋움,Helvetica,AppleSDGothicNeo,Arial,sans-serif} 
+.inner_myinfo_type2 .btn_process .btn_ok {width:97px;height:40px;color:#fff;font-weight:bold;font-size:15px;background-color:#508cf7}
+.inner_myinfo_type2 .btn_process .btn_cancel {width:97px;height:40px;border:1px solid #c3c4c8;color:#444;font-weight:bold;font-size:15px}
+.inner_myinfo_type2 .btn_close {background-position:0 0}
+.inner_myinfo_type2 .body_type1 {margin-top:16px}
+.inner_myinfo_type2 .body_type1 .btn_process {margin-top:36px;margin-bottom:8px}  */
+/* 2014-12-30 추가끝 */
+
+
+
+/* Nanum Gothic (Korean) https://www.google.com/fonts/earlyaccess */
+/* 2015-03-11
+@font-face {
+   font-family:'Nanum Gothic';
+   font-style:normal;
+   font-weight:400;
+   src:url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix),
+   url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff');
+}
+@font-face {
+   font-family:'Nanum Gothic';
+   font-style:normal;
+   font-weight:700;
+   src:url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.eot?#iefix),
+   url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.woff) format('woff');
+}
+@font-face {
+   font-family:'Nanum Gothic';
+   font-style:normal;
+   font-weight:800;
+   src:url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.eot?#iefix),
+   url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff) format('woff');
+}
+.web_font {font-family:'NanumGothic','나눔고딕','Nanum Gothic','Malgun Gothic','맑은 고딕',Dotum,돋움,Helvetica,AppleSDGothicNeo,Arial,sans-serif}
+*/
+
+.ico_infoagree {display:inline-block;background:url(https://i1.daumcdn.net/id/member/2014/ico_infoagree.png) no-repeat}
+/* 내정보관리_개인정보 이용현황 */
+/* 개인정보 이용현황 레이아웃 */
+#daumContent {overflow:hidden;width:978px;margin:0 auto}
+#mSnb {overflow:hidden;float:left;width:198px;height:100%;padding:41px 0 0}
+#mSnb .tit_infoagree {display:block;width:125px;height:80px;background-position:0 -170px} /* 2015-03-11 */
+#mSnb .bg_bar {display:inline-block;width:29px;height:1px;margin-left:5px;background-color:#ccc}
+#mSnb .txt_infoagree {display:block;margin:30px 0 20px 3px;color:#666;line-height:21px;letter-spacing:-1px}/* 2014-11-20-v1 */
+#mSnb .link_home {display:block;width:129px;height:39px;margin-left:3px;border:1px solid #cecece;color:#444;font-size:13px;line-height:39px;text-align:center;text-decoration:none}
+.web_infomanage {text-align:left}
+.web_infomanage #mArticle {overflow:hidden;float:left;width:780px}
+.cont_status {margin:46px 0 51px} /* 2015-03-11 */
+.list_tab {overflow:hidden}
+.list_tab li {float:left;width:193px;margin-right:4px;font-weight:bold} /* 2014-11-20-v1 */
+.list_tab .link_tab {display:block;height:47px;color:#666;font-weight:normal;font-size:15px;line-height:47px;background-color:#efefef;text-align:center;letter-spacing:-0.06em;;text-decoration:none} /* 2015-03-11 정 */
+.list_tab .fst {width:191px}
+.list_tab .lst {width:191px;margin:0}
+.list_tab .on .link_tab {color:#fff;background-color:#4989f4}
+.list_tab .on .txt_tab{margin-left:-12px;padding-left:24px;background:url(https://i1.daumcdn.net/id/member/2014/ico_on.png) 0 2px no-repeat}
+/* 개인정보 이용현황_수집및이용 */
+.info_tab {overflow:hidden} /* 2014-11-20-v1 */
+.ico_dot {background:url(https://i1.daumcdn.net/id/member/2014/ico_dot.gif) no-repeat}
+
+/* .txt_notice {display:block;padding-left:13px;margin:33px 0 14px;font-size:13px;color:#666;background-position:5px 9px} 2014-11-20-v1 */
+/* 2015-01-02 추가시작 */
+/* .list_notice {margin:33px 0 14px} */
+.list_notice {margin:32px 0 16px}/* 2015-03-11 */
+.list_notice .txt_notice {display:block;padding-left:14px;font-size:13px;color:#666;background-position:5px 9px}/* 2015-03-11 */
+/* 2015-01-02 추가끝 */
+
+.tbl_history {border-bottom:1px solid #dfdfdf}
+.tbl_history th, .tbl_history td {padding:18px 36px 20px 16px;font-size:12px;line-height:19px;vertical-align:top;letter-spacing:-0.06em;font-family:Dotum,'돋움',sans-serif}/*  2014-11-20-v1 */ /* 2015-03-11 */
+.tbl_history th {color:#323336}
+.tbl_history .th_l {padding:19px 0 17px 13px;text-align:left}/* 2015-03-11 */
+.tbl_history td {color:#666;line-height:20px}
+.tbl_history .right {padding-left:28px}/* 2015-03-11 추가  */
+/* .tbl_history .bg_history {background:url(https://i1.daumcdn.net/id/member/2014/bg_history.gif) 0 100% no-repeat} */
+.tbl_history .bg_history {background:url(https://i1.daumcdn.net/id/member/2014/bg_history_150102.gif) 0 100% repeat-x}
+.tbl_history .th_tit {height:37px;border-top:1px solid #ccc;border-bottom:1px solid #dfdfdf;background-color:#fcfcfc;color:#888}
+.tbl_history .th_tit th {padding:10px 0 8px 0;font-weight:normal;color:#888;text-align:center}/* 2015-03-11 */
+.tbl_history .lst {padding-top:14px;padding-bottom:16px}/* 2015-03-11 추가  */
+/* .tbl_history .th_tit .tit_service {padding-left:43px} 2015-03-11 삭제  */
+/* 2015-01-02 수정시작 */
+/* .tbl_history .th_tit .tit_option {padding-left:132px} */
+/* .tbl_history .th_tit .tit_object {padding-left:30px} */
+/* .tbl_history .th_tit .tit_option {padding-left:100px} 
+.tbl_history .th_tit .tit_object {padding-left:106px} 2015-03-11 삭제  */
+/* 2015-01-02 수정끝 */
+.tbl_history .txt_choice {display:block;margin-top:1px}
+.tbl_history .tit_sub {color:#4b7ef0}
+
+/* 탭2(제3자제공) */
+/* .tbl_history_type2 .bg_history {background:url(https://i1.daumcdn.net/id/member/2014/bg_history_type1.gif) 0 100% no-repeat} */
+/* .tbl_history_type2 .th_tit .tit_service {padding-left:43px}
+.tbl_history_type2 .th_tit .tit_option {padding-left:66px}
+.tbl_history_type2 .th_tit .tit_company {padding-left:39px}
+.tbl_history_type2 .th_tit .tit_object {padding-left:133px} 2015-03-11 삭제 */
+.tbl_history_type2 .cell_info {display:block} /* 2015-01-22 UPTTRDRFM-104 추가 */
+.tbl_history_type2 .ico_dot {padding-left:7px;background-position:0 8px} /* 2015-01-23 UPTTRDRFM-104 추가 */
+/* 2015-03-11 추가 시작 */
+.tbl_history_type2 .th_l {padding:19px 0 13px 13px}
+.tbl_history_type2 td {padding:19px 36px 18px 13px}
+/* 2015-03-11 추가  */
+
+.tbl .col_145 {width:145px} /* 2015-03-11 */
+.tbl .col_490 {width:490px}
+.tbl .col_138 {width:138px}
+.tbl .col_136 {width:136px}/* 2015-03-11 */
+.tbl .col_188 {width:188px} /* 2015-03-11 */
+.tbl .col_153 {width:153px} /* 2014-12-18 */
+.tbl .col_310 {width:310px} /* 2015-03-11 */
+.tbl .col_480 {width:480px} /* 2015-01-02-V1 */ /* 2015-03-11 */
+.tbl .col_155 {width:155px} /* 2015-01-02-V1 */ /* 2015-03-11 */
+
+.tbl .col_250 {width:250px}
+.tbl .col_252 {width:252px}
+.tbl .col_306 {width:306px}
+.tbl .col_170 {width:170px}
+
+.tbl .col_142 {width:142px}
+.tbl .col_234 {width:234px}
+.tbl .col_193 {width:193px}
+.tbl .col_229 {width:229px}
+.tbl .col_180 {width:180px}
+
+
+/* 개인정보 이용현황_수집및이용_제공내역없음 */
+.desc_infoagree {display:block;overflow:hidden;padding:92px 0 157px;border-top:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;text-align:center;font-weight:bold;font-size:18px;color:#999;letter-spacing:-1px}/* 2015-03-11 수정 */
+.desc_infoagree .ico_none {display:block;width:56px;height:56px;margin:0 auto 14px;background-position: 0 0}/* 2015-03-11 수정 */
+/* //2014-11-20 추가끝 */
+
+/* 2014-12-16 추가시작 */
+/* 페이징 */
+.cont_status .paging_comm {margin-top:18px}
+.paging_comm {font-weight:bold;font-size:14px;line-height:16px;text-align:center;vertical-align:top}/* 2015-03-11 수정 */
+.paging_comm .ico_comm {display:inline-block;border:0 none;color:#393d48;text-decoration:none;text-indent:0}
+/* 2014-12-16 추가끝 */
+/* 2015-01-02-V1 수정시작 */
+.paging_comm .btn_prev {padding-left:22px;background-position:0 -1123px}
+.paging_comm .btn_next {padding-right:21px;background-position:100% -1148px}
+.paging_comm span.btn_prev {background-position:0 -1073px;color:#898f9c}
+.paging_comm span.btn_next {background-position:100% -1098px;color:#898f9c}
+.paging_comm .txt_bar {display:inline-block;width:1px;height:13px;margin:1px 6px 0 9px;background:url(https://i1.daumcdn.net/id/member/2014/txt_bar.gif) no-repeat;text-indent:-9999px} /* 2014-12-12 */
+/* 2015-01-02-V1 수정끝 */
+
+/* 미니다음 개별레이아웃 */
+#wrapMinidaum {position:absolute;top:0;left:50%;width:978px;margin-left:-489px}
+
+
+/* 계정연결 동의 레이어 2015-03-26 다시 추가 */
+/* 2015-02-25 추가 시작 */
+.userinfo_layer .inner_myinfo_kakaorel {width:625px;padding:0}
+.inner_myinfo_kakaorel .layer_body {overflow:hidden;padding:34px 36px 0} /* 2015-03-02 정 */
+.inner_myinfo_kakaorel .tit_layer {display:block;font-weight:bold;font-size:16px;line-height:28px;letter-spacing:-2px;color:#444} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .tit_layer2 {display:block;margin:18px 0 6px;font-size:13px;line-height:21px;letter-spacing:-1px;color:#444} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .tit_margin {margin-top:25px} /* 2015-03-05 수정   */
+.inner_myinfo_kakaorel .tit_margin2 {margin-top:36px} /* 2015-03-05 추가   */
+.inner_myinfo_kakaorel .list_layer {padding:13px 0 9px 15px;background-color:#f8f8f8} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .list_layer li {margin-bottom:2px;font-size:13px;letter-spacing:-1px;color:#666}
+.inner_myinfo_kakaorel .ico_dot {display:inline-block;margin-right:3px;font-weight:bold;color:#666}
+.inner_myinfo_kakaorel .box_list {overflow:hidden}
+.inner_myinfo_kakaorel .list_layer2 {float:left;width:275px;padding-bottom:11px;border-bottom:1px solid #e8e8e8} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .list_layer2 dt {height:33px;margin-bottom:10px;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;font-weight:bold;font-size:13px;letter-spacing:-1px;line-height:32px;color:#444;text-align:center;background-color:#f8f8f8} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .list_layer2 dd {margin-bottom:2px;font-size:13px;letter-spacing:-1px;color:#666}
+.inner_myinfo_kakaorel .list_layer2.lst {overflow:hidden;float:left;width:276px;border-left:1px solid #e8e8e8}
+.inner_myinfo_kakaorel .list_layer2.lst dd {padding-left:7px} /* 2015-03-02 수정  */
+.inner_myinfo_kakaorel .txt_desc {font-size:13px;line-height:21px;letter-spacing:-1px;color:#666} /* 2015-03-05 수정  */
+.inner_myinfo_kakaorel .txt_line {text-decoration:underline}
+.inner_myinfo_kakaorel .layer_foot {padding:32px 45px 50px 35px} /* 2015-03-02 수정  */
+.inner_myinfo_kakaorel .txt_info {margin-bottom:36px;font-size:13px;letter-spacing:-1px;color:#444} /* 2015-03-02 수정  */
+.inner_myinfo_kakaorel .txt_emph {color:#3d88ee}
+/* 2015-02-25  추가  끝 */

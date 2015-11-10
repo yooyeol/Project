@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@page import="java.sql.*"%>
+<%@page import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	alert("수정 되었습니다.")
+	location.href = "mypage1.jsp";
+</script>
+</head>
+<body>
+<% 
+request.setCharacterEncoding("utf-8");
+
+String id = session.getAttribute("studentID").toString();
+
+String addr1 = request.getParameter("memberZipCode");
+String addr2 = request.getParameter("memberAddr");
+
+
+String sql = "";
+
+Connection conn = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+
+try {
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+ } catch (ClassNotFoundException e) {
+    out.println("class not found");
+ } catch (Exception etc) {
+    out.println("etc exception");
+    out.println(etc.getMessage());
+ }
+ try {
+	  
+    String url = "jdbc:mysql://localhost:3306/mysql";
+    String userId = "root";
+    String userPass = "mysql";
+
+    conn = DriverManager.getConnection(url, userId, userPass);
+
+    sql = "update student set stud_addr1=?, stud_addr2=? where stud_id=?";
+
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setString(1, addr1);
+    pstmt.setString(2, addr2);
+    pstmt.setString(3, id);
+    pstmt.executeUpdate();
+    
+  
+
+
+
+ } catch (SQLException e) {
+    System.out.print(e.getMessage());
+ } finally {
+    if (rs != null)
+       rs.close();
+    pstmt.close();
+    conn.close();
+ }
+
+
+%>
+</body>
+</html>

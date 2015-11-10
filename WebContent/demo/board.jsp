@@ -3,9 +3,7 @@
 <%@page import="board.BoardBean"%>
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="bMgr" class="board.BoardMgr" /> 
-<%
-	String uri = request.getContextPath();
-%>
+
 
 <%-- <%
 	String uri = request.getContextPath();
@@ -18,11 +16,11 @@
 <html>
 <head>
 <title>요기조기 게시판</title>
-<link href="<%=uri %>css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="<%=uri %>css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -271,7 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<section class="accordation_menu">
 								<div>
 									<input id="label-1" name="lida" type="radio" checked="">
-									<label for="label-1" id="item1"><i class="ferme"> </i>Popular
+									<label for="label-1" id="item1"><i class="ferme"> </i>Recent
 										Posts<i class="icon-plus-sign i-right1"></i><i
 										class="icon-minus-sign i-right2"></i></label>
 									<div class="content" id="a1">
@@ -284,7 +282,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												
 													<div class="popular-post-grid">
 												<%
-				  vlist = bMgr.getBoardList(keyField, keyWord, start, end);
+				  vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
 				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
 				  if (vlist.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
@@ -293,7 +291,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				
 					<%
-						  for (int i = 0;i<numPerPage; i++) {
+						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
 							BoardBean bean = vlist.get(i);
 							int num = bean.getNum();
@@ -313,12 +311,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="single.html"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
 															<p>
-																<%=content %><a class="span_link" href="boardDetail.jsp"><span
-																	class="glyphicon glyphicon-comment"></span>3 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
+															
+															<span class="glyphicon glyphicon-time"></span><%=regdate%>	
+															<span>조회수 : <%=count%></span>
+										
+										<a class="span_link1" href="javascript:comment('<%=num%>')">
+										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+											
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-heart-empty"></span> 0</a>
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-thumbs-down"></span> 0</a>
+															</p>
+															
+															<p>
+																<%=content %>
 															</p>
 														</div>
 														

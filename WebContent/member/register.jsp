@@ -75,44 +75,8 @@ function zipCheck(){
 <body style="height:1500px">
 </head>
 <body>
-<%-- <%@include file="../demo/mainHeader.jsp" %> --%>
-<%-- 
-<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="header">
-		<div class="header-top">
-			<div class="wrap">
-				
-				<div class="num">
-					<p> Call us : 032 2352 782</p>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<div class="header-bottom">
-			<div class="logo text-center">
-			
-		
-			
-				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
-			
-			</div> 
-			
-	
-		
-		</div>
-	</div>
-	
-	<div class="header-top">
-			<div class="wrap">
-				
-				<div class="num">
-					<p> Call us : 032 2352 782</p>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</nav> --%>
-	
+
+
 		<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
@@ -145,53 +109,8 @@ function zipCheck(){
 			<!--/.navbar-header-->
 		
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					 <li><a href="main.jsp">Home</a></li>
-						<li ><a href="course.jsp">GO TRAVELING</a></li>
-				 		<li ><a href="notify.jsp">공지사항</a></li>
-						<li><a href="board.jsp">게시판</a></li>
-					  <li class="dropdown">
-						<a href="mypage.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
-						<ul class="dropdown-menu multi-column columns-2">
-							<div class="row">
-								<div class="col-sm-4">
-									<ul class="multi-column-dropdown">
-										<li><a href="mypage.jsp.html">내 정보 조회</a></li>
-										<li class="divider"></li>
-										<li><a href="memberUpdate.jsp">회원정보 수정</a></li>
-									    <li class="divider"></li>
-										<li><a href="memberCourse.jsp">나의 경로 보기</a></li>
-										<li class="divider"></li>
-										<li><a href="memberPreCourse.jsp">경로 바구니</a></li>
-										<li class="divider"></li>
-										<li><a href="memberOut.jsp">탈퇴하기</a></li>
-									</ul>
-								</div>
-								
-							</div>
-						</ul>
-					</li>
-					
-				</ul>
-				<div class="search">
-					<!-- start search-->
-				    <div class="search-box">
-					    <div id="sb-search" class="sb-search">
-							<form>
-								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
-								<input class="sb-search-submit" type="submit" value="">
-								<span class="sb-icon-search"> </span>
-							</form>
-						</div>
-				    </div>
-					<!-- search-scripts -->
-					<script src="js/classie.js"></script>
-					<script src="js/uisearch.js"></script>
-						<script>
-							new UISearch( document.getElementById( 'sb-search' ) );
-						</script>
-					<!-- //search-scripts -->
-					</div>
+			
+			
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -214,7 +133,7 @@ function zipCheck(){
     
     
     
-    <div class="container">
+    <div  style="margin: 5%" class="container">
         <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
                 <div class="page-header">
@@ -291,8 +210,9 @@ function zipCheck(){
     </div>
     </div>
     </div>
-    
-    
+<div class="clearfix"></div>
+
+    <%@include file="../demo/mainFooter.jsp" %>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#defaultForm').formValidation({
