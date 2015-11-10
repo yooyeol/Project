@@ -16,7 +16,7 @@
 <% 
 request.setCharacterEncoding("utf-8");
 
-String id = session.getAttribute("studentID").toString();
+String id = session.getAttribute("idKey").toString();
 
 String addr1 = request.getParameter("memberZipCode");
 String addr2 = request.getParameter("memberAddr");
@@ -38,13 +38,13 @@ try {
  }
  try {
 	  
-    String url = "jdbc:mysql://localhost:3306/mysql";
+    String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
     String userId = "root";
-    String userPass = "mysql";
+    String userPass = "root";
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "update student set stud_addr1=?, stud_addr2=? where stud_id=?";
+    sql = "update member set memberZipCode=?, memberAddr=? where memberEmail=?";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, addr1);

@@ -7,13 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript">
+	alert("탈퇴 되었습니다.")
+	location.href = "LoginMain.jsp";
+</script>
 </head>
 <body>
 <% 
 request.setCharacterEncoding("utf-8");
 
-String id = session.getAttribute("studentID").toString();
+String id = session.getAttribute("idKey").toString();
 
 
 
@@ -34,13 +37,13 @@ try {
  }
  try {
 	  
-    String url = "jdbc:mysql://localhost:3306/mysql";
+    String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
     String userId = "root";
-    String userPass = "mysql";
+    String userPass = "root";
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "delete from STUDENT where STUD_ID = ?";
+    sql = "delete from member where memberEmail = ?";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id);

@@ -95,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li class="divider"></li>
 										<li><a href="mypage2.jsp">비밀번호변경</a></li>
 									    <li class="divider"></li>
-										<li><a href="business.html">회원탈퇴</a></li>
+										<li><a href="mypage3.jsp">회원탈퇴</a></li>
 										<li class="divider"></li>
 										<li><a href="business.html">경로바구니</a></li>
 										<li class="divider"></li>

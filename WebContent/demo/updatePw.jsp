@@ -13,11 +13,9 @@
 <% 
 request.setCharacterEncoding("utf-8");
 
-String id = session.getAttribute("studentID").toString();
+String id = session.getAttribute("idKey").toString();
 
 String password = request.getParameter("newPassword");
-
-System.out.print(password);
 
 
 String sql = "";
@@ -37,13 +35,13 @@ try {
  }
  try {
 	  
-    String url = "jdbc:mysql://localhost:3306/mysql";
+    String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
     String userId = "root";
-    String userPass = "mysql";
+    String userPass = "root";
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "update student set stud_pw=? where stud_id=?";
+    sql = "update member set memberPass=password(?) where memberEmail=?";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, password);
