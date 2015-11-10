@@ -47,6 +47,7 @@ $(document).ready(function(){
 	}
 	function send(){
 		window.opener.document.getElementById("startPath").innerHTML = document.getElementById("address").value;
+		window.opener.startAddressInsert(document.getElementById("address").value);
 		self.close();
 	}
 	

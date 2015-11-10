@@ -9,6 +9,7 @@ var mapLatLng = [];
 var mapPath=[];
 var userTourPath;
 var index;
+var test;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
@@ -25,7 +26,10 @@ $(document).ready(function(){
 	//출발지 선택 시
 	$("#startSelect").click(function(){
 		var url = "startSelect.jsp?check=y";
-		window.open(url,"","width=520 height=550");
+		popup = window.open(url,"","width=520 height=550");
+		/*popup.onbeforeunload = function(){
+			startAddress = document.getElementById("startPath").innerHTML;
+		}*/
 	});
 	//콘텐츠 타입(셀렉터) 선택 시
 	$("#contentType").change(function(){
@@ -39,6 +43,11 @@ $(document).ready(function(){
 		}
 	});
 });
+//시작주소 값 넣기
+function startAddressInsert(e){
+	var startAddress = e;
+	geocodeAddress(startAddress);
+}
 
 //콘텐츠 타입 선택 시 호출되는 Ajax
 function requestAjax(str1, str2){
@@ -83,12 +92,17 @@ function detailPage(TourSiteContentID){
 //경로추가 버튼을 클릭했을 때 실행
 $(document).on('click',".addition",function(){
 	var TourSiteContentID = $(this).attr("id");
+	//alert(TourSiteContentID);
 	requestTour(TourSiteContentID);
 });
 //삭제 버튼을 클릭했을 때 실행
 $(document).on("click",".delete",function(){
 	$(this).parent().remove();
 });
+//list 클릭시
+$(document).on("click",".list-group-item",function(){
+	test = $(this).index();
+})
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
 function requestTour(TourSiteContentID){
@@ -106,9 +120,10 @@ function requestTour(TourSiteContentID){
 }
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
-	var tableList = '<tr><td id="'+jsonObject.datas[0].TourSiteContentID+'">'
-		+ jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></span></td></tr>';
-	$("#addListTable").append(tableList)
+	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>'
+	$("#addListUl").append(UlList);
+	
+	$("#addListUl").sortable();
 	
 	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
 }
@@ -119,7 +134,6 @@ function moveToLocation(lat, lng){
 }
 //구글맵 마커 추가
 function addMarker(title, lng, lat){
-	index = 0;
 	var image = {
 		    url: '../beachflag.png',
 		    size: new google.maps.Size(20, 32),
@@ -134,9 +148,31 @@ function addMarker(title, lng, lat){
 		title: title,
 		zIndex:index
 	});
+	
+	index++;
 	mapPath.push({lat:Number(lat), lng:Number(lng)});
 	mapLatLng.push(marker);
 	drawLine();
+	moveToLocation(lat, lng);
+}
+//구글맵 출발지 추가
+function geocodeAddress(startAddress){
+	var image = {
+		    url: '../beachflag.png',
+		    size: new google.maps.Size(20, 32),
+		    origin: new google.maps.Point(0, 0),
+		    anchor: new google.maps.Point(0, 32)
+		  };
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'address' : startAddress}, function(results, status){
+		test = results[0].geometry.location.lat();
+		if(status === google.maps.GeocoderStatus.OK){
+			lat = results[0].geometry.location.lat();
+			lng = results[0].geometry.location.lng();
+			addMarker(startAddress, lng, lat);
+			moveToLocation(lat, lng);
+		}
+	});
 }
 //구글맵 마커 삭제
 function removeMarker(){
@@ -188,29 +224,37 @@ function selectAreaCode(areaCode){
 		lat = 36.5928362030;
 		lng = 127.2923752824;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 31){
-		
+	}else if(areaCode == 31){//경기도
+		lat = 37.415001;
+		lng = 127.514834;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 32){
-	
+	}else if(areaCode == 32){//강원도
+		lat = 37.822581;
+		lng = 128.155217;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 33){
-		
+	}else if(areaCode == 33){//충북
+		lat = 37.004968;
+		lng = 127.675831;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 34){
-		
+	}else if(areaCode == 34){//충남
+		lat = 36.719458;
+		lng = 126.797809;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 35){
-		
+	}else if(areaCode == 35){//경북
+		lat = 36.289069;
+		lng = 128.891248;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 36){
-		
+	}else if(areaCode == 36){//경남
+		lat = 35.468862;
+		lng = 128.207345;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 37){
-		
+	}else if(areaCode == 37){//전북
+		lat = 35.715999;
+		lng = 127.156886;
 		moveToLocation(lat, lng);
-	}else if(areaCode == 38){
-		
+	}else if(areaCode == 38){//전남
+		lat = 34.869954;
+		lng = 126.988163;
 		moveToLocation(lat, lng);
 	}else if(areaCode == 39){//제주시
 		lat = 33.3670949954;

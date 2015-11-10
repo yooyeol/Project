@@ -25,7 +25,7 @@
 			헤더
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="row">
 					<div id="map">지역을 먼저 선택해 주세요.</div>
 				</div>
@@ -54,24 +54,15 @@
 				<div class="row">
 				<br/>
 				<form method="post" action="">
-					<table class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>나의 경로</th>
-							</tr>
-						</thead>
-						<tbody id="addListTable">
-							<tr >
-								<td id="startPath">출발지</td>
-							</tr>
-						</tbody>
-					</table>
+					<ol id="addListUl" class="list-group">
+						<li id="startPath" class="list-group-item disabled">출발지</li>
+					</ol>
 					<button type="submit" class="btn btn-danger">경로 저장하기</button>
+					<p id="test"></p>
 				</form>
-					
 				</div>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-6">
 			<div class="pagination">
 				
 			</div>
