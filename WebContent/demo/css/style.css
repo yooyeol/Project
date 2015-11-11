@@ -221,7 +221,7 @@ label{
 	top: 175%;
 }
 .dropdown-menu.columns-2 {
-	min-width: 400px;
+	min-width: 200px;
 }
 .dropdown-menu.columns-3 {
 	min-width: 600px;

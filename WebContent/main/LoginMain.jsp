@@ -4,6 +4,10 @@
 	String uri = request.getContextPath();
 %>
 <!DOCTYPE html>
+<%
+session.removeAttribute("idKey");
+session.invalidate();
+%>
 <html>	
 <head>
 <title>User Login Flat Responsive widget Template :: w3layouts</title>

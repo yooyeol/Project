@@ -56,7 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="wrap">
 				
 				<div class="num">
-					<ul><a href="main/LoginMain.jsp">LOGOUT</a></ul>
+					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="ko" hola_ext_inject="disabled"><head>
     <meta charset="utf-8">
     <title>회원탈퇴 | Daum 내정보</title>
@@ -36,16 +37,16 @@
 .minidaum_service_list {float:left}
 .minidaum_service_list .minidaum_news {padding-right:9px}
 .minidaum_service_list .minidaum_shopping {padding-right:8px}
-.minidaum_service_list .minidaum_new{display:inline-block;overflow:hidden;width:11px;height:12px;margin-left:3px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -160px -270px;text-indent:-3000px;vertical-align:bottom}
+.minidaum_service_list .minidaum_new{display:inline-block;overflow:hidden;width:11px;height:12px;margin-left:3px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -160px -270px;text-indent:-3000px;vertical-align:bottom}
 .minidaum_service_list .minidaum_count * {margin-top:0}
 #minidaumMoreLayer {display:none;position:absolute;top:27px;right:0;overflow:hidden;width:449px;height:223px;font-size:12px;background:#fff none;border:1px solid #444;letter-spacing:0}
 #minidaumMoreLayer.minidaumMoreLayer_open {display:block;z-index:999999}
 #minidaumMoreLayer .minidaum_idx {overflow:hidden;position:absolute;top:16px;width:36px;height:13px;text-indent:-9999px}
-#minidaumMoreLayer .minidaum_idx1 {left:22px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -40px}
-#minidaumMoreLayer .minidaum_idx2 {left:104px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -40px -40px}
-#minidaumMoreLayer .minidaum_idx3 {left:194px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -80px -40px}
-#minidaumMoreLayer .minidaum_idx4 {left:284px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -120px -40px}
-#minidaumMoreLayer .minidaum_idx5 {left:374px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -160px -40px}
+#minidaumMoreLayer .minidaum_idx1 {left:22px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -40px}
+#minidaumMoreLayer .minidaum_idx2 {left:104px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -40px -40px}
+#minidaumMoreLayer .minidaum_idx3 {left:194px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -80px -40px}
+#minidaumMoreLayer .minidaum_idx4 {left:284px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -120px -40px}
+#minidaumMoreLayer .minidaum_idx5 {left:374px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -160px -40px}
 #minidaumMoreLayer .minidaum_list_group {float:left;width:89px;height:176px;margin-top:16px;padding-top:20px;border-left:1px solid #ebeef2}
 #minidaumMoreLayer .minidaum_list_group li {float:left;overflow:hidden;width:100%;height:22px;line-height:23px;text-indent:13px}
 #minidaumMoreLayer .minidaum_list_group1 li {float:left;overflow:hidden;width:100%;height:22px;line-height:23px;text-indent:21px}
@@ -53,7 +54,7 @@
 #minidaumMoreLayer .minidaum_list_group .last {height:18px}
 #minidaumMoreLayer .minidaum_list_group1 {width:89px;border:none}
 #minidaumMoreLayer .minidaum_list_group5 {width:86px}
-#minidaumMoreLayer .minidaum_list_group .minidaum_all a {padding-right:7px;color:#5279b4;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -147px;text-decoration:underline;letter-spacing:-1px}
+#minidaumMoreLayer .minidaum_list_group .minidaum_all a {padding-right:7px;color:#5279b4;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -147px;text-decoration:underline;letter-spacing:-1px}
 #minidaumMoreLayer.minidaum_custom .minidaum_idx {top:49px}
 #minidaum .minidaum_custom {height:258px}
 #minidaum .minidaum_custom .minidaum_list_group {margin-top:49px}
@@ -63,10 +64,10 @@
 #minidaumRank {float:left;position:relative;overflow:hidden;width:191px;height:19px;margin-top:9px;font-size:12px;letter-spacing:0}
 #minidaumRank .minidaum_rank_tit {display:none;height:0;line-height:0}
 #minidaumRank .minidaum_status {float:left;width:7px;height:12px;margin-right:2px;text-indent:-3000px}
-#minidaumRank .minidaum_up {background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -21px}
-#minidaumRank .minidaum_down {background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -20px -21px}
-#minidaumRank .minidaum_keep {background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -40px -19px}
-#minidaumRank .minidaum_new {width:22px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -60px -20px}
+#minidaumRank .minidaum_up {background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -21px}
+#minidaumRank .minidaum_down {background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -20px -21px}
+#minidaumRank .minidaum_keep {background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -40px -19px}
+#minidaumRank .minidaum_new {width:22px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -60px -20px}
 #minidaumRank .minidaum_rank_list li {float:left;width:100%;padding-left:16px;height:23px;line-height:14px}
 #minidaum .minidaum_rank_open {z-index:999999;width:190px;height:276px;margin-top:6px;font-family:'굴림',gulim,sans-serif;border:1px solid #444;background:#fff none}
 #minidaum .minidaum_rank_open a {font-family:'굴림',gulim,sans-serif}
@@ -84,29 +85,24 @@
 #minidaum .minidaumUserLayer_open .minidaum_shield,
 #minidaum .minidaum_rank_open .minidaum_shield {border:1px solid #fff}
 
-
-
-
-
-
 /* white 버전 */
-body {background:#fff url(http://i1.daumcdn.net/icon/minidaum/common/minibar_v03.gif) repeat-x}
-#btnMinidaumLogin {float:left;overflow:hidden;width:46px;height:21px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -100px 0;text-indent:-9999px;vertical-align:bottom}
+body {background:#fff url(https://i1.daumcdn.net/icon/minidaum/common/minibar_v03.gif) repeat-x}
+#btnMinidaumLogin {float:left;overflow:hidden;width:46px;height:21px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat -100px 0;text-indent:-9999px;vertical-align:bottom}
 #minidaum .minidaum_logo {display:inline;float:left;margin:7px 15px 0 4px}
-#minidaum .minidaum_logo .img_logo {display:block;overflow:hidden;width:45px;height:19px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat;text-indent:-9999px}
-.minidaum_service_list li {float:left;padding:0 8px 0 7px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -129px}
+#minidaum .minidaum_logo .img_logo {display:block;overflow:hidden;width:45px;height:19px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat;text-indent:-9999px}
+.minidaum_service_list li {float:left;padding:0 8px 0 7px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -129px}
 #minidaumRank .minidaum_word {float:left;margin-top:1px;padding-right:6px;line-height:15px;color:#444;white-space:nowrap;letter-spacing:-1px}
 *:first-child+html #minidaumRank .minidaum_word {line-height:14px}
-#minidaumRank .minidaum_rank_list {float:left;width:190px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -407px}
+#minidaumRank .minidaum_rank_list {float:left;width:190px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -407px}
 #minidaumRank .minidaum_num {float:left;line-height:15px;color:#666;font-size:11px;font-family:tahoma}
-#minidaumRank .minidaum_dummy {background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -407px}
+#minidaumRank .minidaum_dummy {background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 0 -407px}
 #minidaumService li a {color:#444}
-#minidaumService #minidaumMore {display:inline;float:left;padding:0 9px 0 7px;font-weight:bold;color:#444;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -75px}
+#minidaumService #minidaumMore {display:inline;float:left;padding:0 9px 0 7px;font-weight:bold;color:#444;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -75px}
 #minidaumService .minidaum_service_list .minidaum_count {padding:0 2px 0 1px;font-weight:bold;color:#3c77eb}
-#minidaumNick {padding-right:9px;line-height:17px;color:#444;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -61px}
+#minidaumNick {padding-right:9px;line-height:17px;color:#444;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -61px}
 *:first-child+html #minidaumNick {line-height:16px}
-#minidaumUser.minidaum_login {padding-right:9px;margin-top:3px;line-height:16px;background:url(http://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -128px}
-</style><script type="text/javascript" async="" src="http://m2.daumcdn.net/tiara/js/td.min.js?v=6199"></script>
+#minidaumUser.minidaum_login {padding-right:9px;margin-top:3px;line-height:16px;background:url(https://i1.daumcdn.net/icon/minidaum/common/minidaum_v16.png) no-repeat 100% -128px}
+</style><script type="text/javascript" async="" src="https://m2.daumcdn.net/tiara/js/td.min.js?v=6199"></script>
 
       
  
@@ -174,7 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="num">
-					<ul><a href="main/LoginMain.jsp">LOGOUT</a></ul>
+					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -230,7 +226,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- start search-->
 				    <div class="search-box">
 					    <div id="sb-search" class="sb-search">
-							<form>
+						<!-- 여기 폼 지웠어유... <form>  --> 
 								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
 								<input class="sb-search-submit" type="submit" value="">
 								<span class="sb-icon-search"> </span>
@@ -260,11 +256,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="breaking_news">
 				<h2>공지사항</h2>
 			</div>
-			<div class="marquee"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
+			<div class="marquee"><div style="width: 100000px; margin-left: 1383px; animation: marqueeAnimation-7366917 9.17932s linear 1s infinite running;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
 				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;The standard chunk of Lorem Ipsum used since the 1500s is reproduced..</a></div>
 				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;At vero eos et accusamus et iusto qui blanditiis praesentium voluptatum deleniti atque..</a></div>
 				<div class="clearfix"></div>
-			</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+			</div></div></div>
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>
@@ -287,7 +283,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
-        <hr class="hide">
+ <hr class="hide">
     <div id="daumContent" role="main">    
       <div id="cMain">
         <div id="mArticle">
@@ -299,12 +295,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               <h3 class="tit_comm tit_outagree">회원탈퇴에 앞서 유의사항 및 안내를 반드시 읽고 진행해 주세요!</h3>
             </div>
           </div>
-          <form action="out.jsp" method="post">
+          <form action="out.jsp?action=agree-check" method="post">
 
             <div class="info_agree">
               
               <div class="info_user">
-                <strong class="tit_agree">Daum 아이디는 재사용 및 복구 불가 안내</strong>
+                <strong class="tit_agree">아이디 재사용 및 복구 불가 안내</strong>
                 <span class="txt_agree">회원탈퇴 진행 시 본인을 포함한 타인 모두 <em class="emph_g">아이디 재사용이나 복구가 불가능합니다.</em><br>
                 신중히 선택하신 후 결정해주세요.</span>
                 <span class="check_notice">
@@ -367,8 +363,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               </div>
             </div>
             <div class="wrap_btn">
-              
-              <button type="submit" class="btn_comm btn_confirm"><span class="screen_out">탈퇴</span></button>
+              <button class="btn_comm btn_confirm" type="submit"><span class="screen_out">탈퇴</span></button>
             </div>
           </form>
           
@@ -396,7 +391,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- // daumContent -->
 <hr class="hide">
 	<!-- // daumFoot -->
-
 
 </div>
 <script type="text/javascript">
@@ -469,8 +463,6 @@ $(document).ready(function(){
   
 });    
 </script>
-
-
 
 
 

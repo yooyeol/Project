@@ -273,7 +273,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="num">
-					<ul><a href="main/LoginMain.jsp">LOGOUT</a></ul>
+					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -359,11 +359,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="breaking_news">
 				<h2>공지사항</h2>
 			</div>
-			<div class="marquee"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;"><div style="width: 100000px; margin-left: 870px; animation: marqueeAnimation-7164934 584.713s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
+			<div class="marquee"><div style="width: 100000px; margin-left: 1383px; animation: marqueeAnimation-7366917 9.17932s linear 1s infinite running;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
 				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;The standard chunk of Lorem Ipsum used since the 1500s is reproduced..</a></div>
 				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;At vero eos et accusamus et iusto qui blanditiis praesentium voluptatum deleniti atque..</a></div>
 				<div class="clearfix"></div>
-			</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+			</div></div></div>
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>
@@ -402,7 +402,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		String id = session.getAttribute("idKey").toString();
 		
 		
-		String sql = "select memberEmail,memberTel,memberZipCode,memberAddr from member where memberEmail=?";
+		String sql = "select memberEmail,MemberName,memberTel,memberZipCode,memberAddr from member where memberEmail=?";
 		
 
 		Connection conn = null;
@@ -428,18 +428,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-				String subemail = "";
-				String subphone = "";
-				String subaddr1 = "";
-				String subaddr2 = "";
+			String subemail = "";
+			String subname = "";
+			String subphone = "";
+			String subaddr1 = "";
+			String subaddr2 = "";
 				
 
 				while (rs.next()) {
 					
 					subemail = rs.getString(1);
-					subphone = rs.getString(2);
-					subaddr1 = rs.getString(3);
-					subaddr2 = rs.getString(4);
+					subname = rs.getString(2);
+					subphone = rs.getString(3);
+					subaddr1 = rs.getString(4);
+					subaddr2 = rs.getString(5);
 					
 					
 	%> 
@@ -454,6 +456,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 
+
+
+<div class="set_myinfo clear_g">
+		<div class="cont_myinfo">
+		<dl class="list_myinfo">
+			<dt class="txt_comm txt_name">이름</dt>
+			<dd class="desc_myinfo"><%=subname%></dd>			
+		</dl>
+
+	</div>
+</div>
  
 	
 
@@ -564,7 +577,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<dd class="desc_myinfo  txt_none">수신안함</dd>
 		</dl>
 	</div>
-	<a href="" class="btn_comm link_modify">정보수정</a>
+	
 </div>
 
 			</div><!--// mArticle -->
