@@ -12,10 +12,10 @@
 <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=uri%>/map/mapChange/js/mapTabJs.js"></script>
 <script src="<%=uri%>/map/mapChange/js/paging.js"></script>
+<script src="<%=uri%>/map/mapChange/js/jquery-ui.js"></script>
 
 </head>
 <body>
@@ -55,9 +55,9 @@
 				<div class="row">
 				<br/>
 				<form method="post" action="">
-					<ol id="addListUl" class="list-group">
+					<ul id="addListUl" class="list-group">
 						<li id="startPath" class="list-group-item disabled">출발지</li>
-					</ol>
+					</ul>
 					<button type="submit" class="btn btn-danger">경로 저장하기</button>
 					<p id="test"></p>
 				</form>

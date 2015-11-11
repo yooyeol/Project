@@ -7,7 +7,15 @@ public class MemberBean {
 	private String memberTel;
 	private String memberAddr;
 	private String memberZipCode;
+	private int memberId;
 	
+	
+	public int getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
 	public String getMemberEmail() {
 		return memberEmail;
 	}

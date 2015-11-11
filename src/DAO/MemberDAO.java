@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import Bean.MemberBean;
@@ -25,20 +27,24 @@ public class MemberDAO {
 		}
 	}
 	//이름 가져오기
-	public String getName(String email){
+	public ArrayList<MemberBean> getName(String email){
+		ArrayList<MemberBean> list = new ArrayList<MemberBean>();
 		String name = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT MemberName FROM member where MemberEmail=?";
+		String sql = "SELECT MemberID, MemberName, MemberEmail FROM member where MemberEmail=?";
 		try{
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()){
-				name = rs.getString(1);
+				MemberBean bean = new MemberBean();
+				bean.setMemberId(rs.getInt(1));
+				bean.setMemberName(rs.getString(2));
+				bean.setMemberEmail(rs.getString(3));
+				list.add(bean);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -46,7 +52,7 @@ public class MemberDAO {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		
-		return name;
+		return list;
 	}
 	
 	//중복검사

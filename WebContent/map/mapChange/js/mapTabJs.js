@@ -80,7 +80,7 @@ function listAdd(jsonObject){
 	//리스트 페이징(잘 안되고 있음)
 	$('#tourList').paging({
 		limit:21,
-		acrivePage:1
+		activePage:1
 	});
 }
 //리스트의 관광지를 클릭했을 때 나오는 상세 페이지
@@ -98,12 +98,10 @@ $(document).on('click',".addition",function(){
 //삭제 버튼을 클릭했을 때 실행
 $(document).on("click",".delete",function(){
 	$(this).parent().remove();
+	var listIndex = $(this).parent().index();
+	deleteMarkers(listIndex);
 });
-//list 클릭시
-$(document).on("click",".list-group-item",function(){
-	test = $(this).index();
-	alert(test);
-})
+
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
 function requestTour(TourSiteContentID){
@@ -125,9 +123,27 @@ function tourListAdd(jsonObject){
 	$("#addListUl").append(UlList);
 	
 	//list 드래그 시 sortable(애니메이션 방식)
-	$("#addListUl").sortable();
+	$("#addListUl").sortable({
+		start: function(event, ui) {
+	        ui.item.startPos = ui.item.index();
+	    },
+	    stop: function(event, ui) {
+	        console.log("Start position: " + ui.item.startPos);
+	        console.log("New position: " + ui.item.index());
+	        alert(ui.item.startPos+"/"+ui.item.index());
+	    }
+	});
 	
 	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
+}
+//구글맵에 마커를 전부 추가해주는 배열
+function setMapOnAll(){
+	for(var i=0;i<mapLatLng.length;i++){
+		
+	}
+}
+function deleteMarkers(listIndex){
+	
 }
 //구글맵 지역이동
 function moveToLocation(lat, lng){
@@ -137,7 +153,7 @@ function moveToLocation(lat, lng){
 //구글맵 마커 추가
 function addMarker(title, lng, lat){
 	var image = {
-		    url: '../beachflag.png',
+		    url: '../beachflag2.png',
 		    size: new google.maps.Size(20, 32),
 		    origin: new google.maps.Point(0, 0),
 		    anchor: new google.maps.Point(0, 32)
