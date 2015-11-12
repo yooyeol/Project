@@ -12,10 +12,10 @@
 <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=uri%>/map/mapChange/js/mapTabJs.js"></script>
 <script src="<%=uri%>/map/mapChange/js/paging.js"></script>
+<script src="<%=uri%>/map/mapChange/js/jquery-ui.js"></script>
 
 </head>
 <body>
@@ -25,9 +25,10 @@
 			헤더
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="row">
 					<div id="map">지역을 먼저 선택해 주세요.</div>
+					<div id="right-panel"></div>
 				</div>
 				<div class="row" align="center">
 				<br/>
@@ -54,24 +55,15 @@
 				<div class="row">
 				<br/>
 				<form method="post" action="">
-					<table class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>나의 경로</th>
-							</tr>
-						</thead>
-						<tbody id="addListTable">
-							<tr >
-								<td id="startPath">출발지</td>
-							</tr>
-						</tbody>
-					</table>
+					<ul id="addListUl" class="list-group">
+						<li id="startPath" class="list-group-item disabled">출발지</li>
+					</ul>
 					<button type="submit" class="btn btn-danger">경로 저장하기</button>
+					<p id="test"></p>
 				</form>
-					
 				</div>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-6">
 			<div class="pagination">
 				
 			</div>

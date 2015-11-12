@@ -26,7 +26,7 @@ public class MapDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public JSONObject getDetailPage(String sql){
 		JSONObject result = null;
 		JSONArray dataArray = null;
