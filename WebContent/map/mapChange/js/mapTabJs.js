@@ -1,6 +1,3 @@
-/**
- * https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple?hl=ko
- */
 var map;
 var marker;
 var lat, lng;
@@ -97,11 +94,13 @@ $(document).on('click',".addition",function(){
 });
 //삭제 버튼을 클릭했을 때 실행
 $(document).on("click",".delete",function(){
-	$(this).parent().remove();
-	var listIndex = $(this).parent().index();
+	var listIndex = $(this).parent().prevAll().length;
+	console.log(listIndex);
 	deleteMarkers(listIndex);
+	$(this).parent().remove();
+	console.log("버튼 클릭된 곳 : "+listIndex);
+	
 });
-
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
 function requestTour(TourSiteContentID){
@@ -130,7 +129,6 @@ function tourListAdd(jsonObject){
 	    stop: function(event, ui) {
 	        console.log("Start position: " + ui.item.startPos);
 	        console.log("New position: " + ui.item.index());
-	        alert(ui.item.startPos+"/"+ui.item.index());
 	    }
 	});
 	
@@ -139,11 +137,23 @@ function tourListAdd(jsonObject){
 //구글맵에 마커를 전부 추가해주는 배열
 function setMapOnAll(){
 	for(var i=0;i<mapLatLng.length;i++){
-		
+		mapLatLng[i].setMap(map);
 	}
 }
+function clearMarkers(){
+	setMapOnAll(null);
+}
+//마커 삭제
 function deleteMarkers(listIndex){
-	
+	clearMarkers();
+	for(var i=listIndex;i<mapLatLng.length;i++){
+		mapLatLng[i] = mapLatLng[i+1];
+		mapPath[i] = mapPath[i+1];
+	}
+	mapPath.pop();
+	mapLatLng.pop();
+	drawLine();
+	setMapOnAll();
 }
 //구글맵 지역이동
 function moveToLocation(lat, lng){
@@ -183,7 +193,6 @@ function geocodeAddress(startAddress){
 		  };
 	var geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'address' : startAddress}, function(results, status){
-		test = results[0].geometry.location.lat();
 		if(status === google.maps.GeocoderStatus.OK){
 			lat = results[0].geometry.location.lat();
 			lng = results[0].geometry.location.lng();
@@ -192,10 +201,7 @@ function geocodeAddress(startAddress){
 		}
 	});
 }
-//구글맵 마커 삭제
-function removeMarker(){
-	
-}
+
 //구글맵 경로 선
 function drawLine(){
 	userTourPath = new google.maps.Polyline({
