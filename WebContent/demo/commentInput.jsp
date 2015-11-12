@@ -58,7 +58,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script> -->
 </head>
 <body>
+<%String num=request.getParameter("num");
 
+%>
 		<div class="coment-form"  method="post" action="commentInputProc.jsp" enctype="multipart/form-data">
 				<h2 >Leave your comment</h2></br>
 					
@@ -68,7 +70,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 <div class="form-group" style="padding:14px;">
                                       <textarea id="textArea" class="form-control"  name="content"> </textarea>
                                     </div>
-						<input type="submit" value="Submit Comment" onClick="javascript:location.href='boardDetail.jsp'">
+                                    
+                          <input type="hidden" name="num" value="<%=num %>"    >   
+                         
+  
+						<input type="submit" value="Submit Comment" >
 					</form>
 				</div>	
 				

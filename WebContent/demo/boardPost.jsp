@@ -147,7 +147,7 @@ $(document).ready(function(){
                                     <button style="margin: 5px;"class="btn btn-primary pull-right" type="button" onclick="javascript:location.href='board.jsp'">목록보기</button>
                                     
 					
-									<input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>">
+									<input type="hidden" name="MemberEmail" value="<%=session.getAttribute("idKey")%>">
                                   </form>
                               </div>
                      
