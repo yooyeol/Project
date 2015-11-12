@@ -24,7 +24,7 @@ public class BoardMgr {
 	private static final String  SAVEFOLDER = "E:/boardIMG";
 	
 	
-	private static final String ENCTYPE = "euc-kr";
+	private static final String ENCTYPE = "UTF-8";
 	private static int MAXSIZE = 5*1024*1024;
 
 	public BoardMgr() {
@@ -46,29 +46,23 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select * from tblboard order by ref desc, pos limit ?, ?";
+				sql = "select * from message order by MessagePostDate desc limit ?, ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
-			} else {
-				sql = "select * from  tblboard where " + keyField + " like ? ";
-				sql += "order by ref desc, pos limit ? , ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "%" + keyWord + "%");
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, end);
-			}
+			} 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardBean bean = new BoardBean();
-				bean.setNum(rs.getInt("num"));
-				bean.setName(rs.getString("name"));
-				bean.setSubject(rs.getString("subject"));
-				bean.setPos(rs.getInt("pos"));
-				bean.setRef(rs.getInt("ref"));
-				bean.setDepth(rs.getInt("depth"));
-				bean.setRegdate(rs.getString("regdate"));
-				bean.setReadCount(rs.getInt("count"));
+				bean.setMessageID(rs.getInt("MessageID"));
+				bean.setMessageTitle(rs.getString("MessageTitle"));
+				bean.setMessageContent(rs.getString("MessageContent"));
+				bean.setMessagePostDate(rs.getString("MessagePostDate"));
+				bean.setMessageClick(rs.getInt("MessageClick"));
+				bean.setMessageGoodCount(rs.getInt("MessageGoodCount"));
+				bean.setMessagePoorCount(rs.getInt("MessagePoorCount"));
+				bean.setMemberEmail(rs.getString("MemberEmail"));
+				
 				vlist.add(bean);
 			}
 		} catch (Exception e) {
@@ -89,10 +83,10 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select count(num) from tblboard";
+				sql = "select count(MessageID) from message";
 				pstmt = con.prepareStatement(sql);
 			} else {
-				sql = "select count(num) from  tblboard where " + keyField + " like ? ";
+				sql = "select count(MessageID) from  message where " + keyField + " like ? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + keyWord + "%");
 			}
@@ -119,7 +113,7 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			con = pool.getConnection();
-			sql = "select max(num)  from message";
+			sql = "select max(MessageID)  from message";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			/*int ref = 1;
@@ -139,15 +133,18 @@ public class BoardMgr {
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}*/
-			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MessageGoodCount,MessagePoorCount,MemberID,MessageCount,TourCourseID)";
-			sql += "values(?, ?, now(), ?, 0, 0, ?, 0, ?)";
+			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID)";
+			sql += "values(?, ?, now(), ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("MessageTitle"));
 			pstmt.setString(2, content);
 			pstmt.setInt(3, Integer.parseInt(multi.getParameter("MessageSiteGrade")));
-			pstmt.setString(4, multi.getParameter("MemberID"));
-			pstmt.setString(5, multi.getParameter("TourCourseID"));
+			pstmt.setString(4, multi.getParameter("MemberEmail"));
+			pstmt.setString(5, multi.getParameter("MemberID"));
 			
+			
+			/*pstmt.setInt(6, Integer.parseInt(multi.getParameter("TourCourseID")));
+			이거 추가해야함*/
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -157,7 +154,198 @@ public class BoardMgr {
 		}
 	}
 	
-	public void insertPicture(HttpServletRequest req) {
+	
+	// 게시물 리턴
+		public BoardBean getBoard(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			BoardBean bean = new BoardBean();
+			try {
+				con = pool.getConnection();
+				sql = "select * from message where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					bean.setMessageID(rs.getInt("MessageID"));
+					bean.setMemberEmail(rs.getString("memberEmail"));
+					bean.setMessageTitle(rs.getString("messageTitle"));
+					bean.setMessageContent(rs.getString("messageContent"));
+					bean.setMessagePostDate(rs.getString("messagePostDate"));
+					bean.setMessagePoorCount(rs.getInt("messagePoorCount"));
+					bean.setMessageGoodCount(rs.getInt("messageGoodCount"));
+					bean.setMessageClick(rs.getInt("messageClick"));
+					
+					/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
+					System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
+					bean.setFilesize(rs.getInt("filesize"));
+					bean.setIp(rs.getString("ip"));
+					*/
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return bean;
+		}
+
+		// 조회수 증가
+		public void upreadCount(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "update message set MessageClick=MessageClick+1 where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
+		
+		//좋아요 증가
+		public void upGoodCount(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "update message set MessageGoodCount=MessageGoodCount+1 where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
+		
+	
+		public void insertComment(HttpServletRequest req) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			MultipartRequest multi = null;
+			int filesize = 0;
+			String filename = null;
+			try {
+				con = pool.getConnection();
+				sql = "select max(ReplyID)  from reply";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				int ref = 1;
+				if (rs.next())
+					ref = rs.getInt(1) + 1;
+			
+				multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
+						new DefaultFileRenamePolicy());
+
+				
+				String content = multi.getParameter("content");
+				int MessageID = Integer.parseInt(multi.getParameter("num"));
+			
+				/*`ReplyID` int(15) NOT NULL AUTO_INCREMENT,
+	  `ReplyContent` text,
+	  `ReplyPostDate` date DEFAULT NULL,
+	  `MemberID` int(10) DEFAULT NULL,
+	  `MessageID` int(10) DEFAULT NULL,*/
+				sql = "insert reply(ReplyContent,MessageID,ReplyPostDate)";
+				sql += "values(?,?,now())";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,content);
+				pstmt.setInt(2,MessageID);
+			
+				
+			/*	pstmt.setInt(2,MemberID);*/
+				
+				
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		}
+		
+		// 코멘트 리스트
+		public Vector<BoardBean> getCommentList() {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			Vector<BoardBean> commentList = new Vector<BoardBean>();
+			try {
+				con = pool.getConnection();
+				/*sql이 없자나*/
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BoardBean bean = new BoardBean();
+					bean.setReplyID(rs.getInt("ReplyID"));
+					bean.setReplyContent(rs.getString("ReplyContent"));
+					bean.setReplyPostDate(rs.getString("ReplyPostDate"));
+					bean.setMemberID(rs.getInt("MemberID"));
+					bean.setMessageID(rs.getInt("MessageID"));
+					
+					commentList.add(bean);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return commentList;
+		}
+		
+		// 댓글 리턴
+				public BoardBean getComment(int num) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = null;
+					BoardBean bean = new BoardBean();
+					try {
+						con = pool.getConnection();
+						sql = "select * from reply where MessageID=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, num);
+						rs = pstmt.executeQuery();
+						if (rs.next()) {
+							bean.setReplyID(rs.getInt("ReplyID"));
+							bean.setReplyContent(rs.getString("ReplyContent"));
+							bean.setReplyPostDate(rs.getString("ReplyPostDate"));
+							bean.setMemberID(rs.getInt("MemberID"));
+							bean.setMessageID(rs.getInt("MessageID"));
+							
+							/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
+							System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
+							bean.setFilesize(rs.getInt("filesize"));
+							bean.setIp(rs.getString("ip"));
+							*/
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt, rs);
+					}
+					return bean;
+				}
+		
+		
+		
+		
+		
+	/*public void insertPicture(HttpServletRequest req) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -167,7 +355,7 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			
-		/*	
+			
 			CREATE TABLE `messagepicture` (
 					  `MessagePictureID` int(18) NOT NULL AUTO_INCREMENT,
 					  `MessagePictureURL` text,
@@ -176,7 +364,7 @@ public class BoardMgr {
 					  KEY `fk_messagepicture_message` (`MessageID`),
 					  CONSTRAINT `fk_messagepicture_message` FOREIGN KEY (`MessageID`) REFERENCES `message` (`MessageID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-		*/
+		
 			
 			con = pool.getConnection();
 			sql = "select max(MessagePictureID)  from messagepicture";
@@ -196,9 +384,9 @@ public class BoardMgr {
 				filesize = (int) multi.getFile("filename").length();
 			}
 			String URL = multi.getParameter("imageURL");
-		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
-			}*/
+			}
 			sql = "insert messagepicture(MessagePictureURL)";
 			sql += "values(?)";
 			pstmt = con.prepareStatement(sql);
@@ -237,11 +425,11 @@ public class BoardMgr {
 			String content = multi.getParameter("content");
 			String MessageID = multi.getParameter("num");
 			
-		/*	`ReplyID` int(15) NOT NULL AUTO_INCREMENT,
+			`ReplyID` int(15) NOT NULL AUTO_INCREMENT,
   `ReplyContent` text,
   `ReplyPostDate` date DEFAULT NULL,
   `MemberID` int(10) DEFAULT NULL,
-  `MessageID` int(10) DEFAULT NULL,*/
+  `MessageID` int(10) DEFAULT NULL,
 			sql = "insert reply(ReplyContent,MessageID)";
 			sql += "values(?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -262,79 +450,10 @@ public class BoardMgr {
 	
 	
 	
-	// 게시물 리턴
-	public BoardBean getBoard(int num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		BoardBean bean = new BoardBean();
-		try {
-			con = pool.getConnection();
-			sql = "select * from tblboard where num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				bean.setNum(rs.getInt("num"));
-				bean.setName(rs.getString("name"));
-				bean.setSubject(rs.getString("subject"));
-				bean.setContent(rs.getString("content"));
-				bean.setPos(rs.getInt("pos"));
-				bean.setRef(rs.getInt("ref"));
-				bean.setDepth(rs.getInt("depth"));
-				bean.setRegdate(rs.getString("regdate"));
-				bean.setPass(rs.getString("pass"));
-				bean.setReadCount(rs.getInt("count"));
-				bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
-				System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
-				bean.setFilesize(rs.getInt("filesize"));
-				bean.setIp(rs.getString("ip"));
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return bean;
-	}
+	
+	
 
-	// 조회수 증가
-	public void upCount(int num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		try {
-			con = pool.getConnection();
-			sql = "update tblboard set count=count+1 where num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-	}
-
-	//좋아요 증가
-	public void upHeart(int num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		try {
-			con = pool.getConnection();
-			sql = "update tblboard set heart=heart+1 where num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-	}
+	
 	// 게시물 삭제
 	public void deleteBoard(int num) {
 		Connection con = null;
@@ -496,11 +615,11 @@ public class BoardMgr {
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
-	}
+	}*/
 	
 	//main
 	public static void main(String[] args) {
-		new BoardMgr().post1000();
+		/*new BoardMgr().post1000();*/
 		System.out.println("SUCCESS");
 	}
 }

@@ -3,6 +3,6 @@
 <jsp:useBean id="bMgr" class="board.BoardMgr"/>
 <%
 	  bMgr.insertComment(request);
-	  response.sendRedirect("boardDetail.jsp");
+	  response.sendRedirect("board.jsp");
 	
 %>
