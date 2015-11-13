@@ -273,7 +273,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="wrap">
 				
 				<div class="num">
-					<p> Call us : 032 2352 782</p>
+					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -283,10 +283,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 		
 			
-				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
+				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
 				<div class="memberStatus" style="float: right;margin:5px;">
-			<h4><%=session.getAttribute("idKey") %>님. 환영합니다.<h4>
-			</div>
+			<h4>carasota@gmail.com님. 환영합니다.</h4><h4>
+			</h4></div>
 			</div> 
 			
 			<div class="navigation">
@@ -306,8 +306,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					 <li><a href="main.jsp">Home</a></li>
-						<li ><a href="course.jsp">GO TRAVELING</a></li>
-				 		<li ><a href="notify.jsp">공지사항</a></li>
+						<li><a href="course.jsp">GO TRAVELING</a></li>
+				 		<li><a href="notify.jsp">공지사항</a></li>
 						<li><a href="board.jsp">게시판</a></li>
 					  <li class="dropdown">
 						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
@@ -354,7 +354,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
+			<!--/.navbar-collapse-->
+	 <!--/.navbar-->
+			</nav></div>
+		
+		</div>
+	</div>
+	</nav>
+	<div class="wrap">
+		<div class="move-text">
+			<div class="breaking_news">
+				<h2>공지사항</h2>
+			</div>
+			<div class="marquee"><div style="width: 100000px; margin-left: 1370px; animation: marqueeAnimation-1795152 6.18248s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
+				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;게시판디비가 없는듯</a></div>
+				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;어허허허헣</a></div>
+				<div class="clearfix"></div>
+			</div></div></div>
+			<div class="clearfix"></div>
+			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
+			<script>
+			  $('.marquee').marquee({ pauseOnHover: true });
+			  //@ sourceURL=pen.js
+			</script>
+		</div>
+	</div>
 
 
 	<!-- content-section-starts-here -->

@@ -171,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="wrap">
 				
 				<div class="num">
-					<p> Call us : 032 2352 782</p>
+					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -213,13 +213,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="row">
 								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage1.jsp">내 정보 조회</a></li>
+										<li><a href="mypage1.jsp">회원정보</a></li>
 										<li class="divider"></li>
-										<li><a href="mypage2.jsp">회원정보 수정</a></li>
+										<li><a href="mypage2.jsp">비밀번호변경</a></li>
 									    <li class="divider"></li>
-										<li><a href="mypage3.jsp">탈퇴하기</a></li>
+										<li><a href="mypage3.jsp">회원탈퇴</a></li>
 										<li class="divider"></li>
-										<li><a href="mypage4.jsp">나의 경로보기</a></li>
+										<li><a href="mypage4.jsp">경로조회</a></li>
 										<li class="divider"></li>
 										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
