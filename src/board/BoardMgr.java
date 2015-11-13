@@ -228,7 +228,7 @@ public class BoardMgr {
 			}
 		}
 		
-	
+	/*´ñ±ÛÀÔ·Â*/
 		public void insertComment(HttpServletRequest req) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -246,24 +246,31 @@ public class BoardMgr {
 				if (rs.next())
 					ref = rs.getInt(1) + 1;
 			
+				
+				/*sql="select MemberID from member";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				int MemberID = rs.getInt(1);*/
+				
 				multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
 						new DefaultFileRenamePolicy());
 
 				
 				String content = multi.getParameter("content");
 				int MessageID = Integer.parseInt(multi.getParameter("num"));
-			
+				int MemberID=Integer.parseInt(multi.getParameter("MemberID"));
+				
 				/*`ReplyID` int(15) NOT NULL AUTO_INCREMENT,
 	  `ReplyContent` text,
 	  `ReplyPostDate` date DEFAULT NULL,
 	  `MemberID` int(10) DEFAULT NULL,
 	  `MessageID` int(10) DEFAULT NULL,*/
-				sql = "insert reply(ReplyContent,MessageID,ReplyPostDate)";
-				sql += "values(?,?,now())";
+				sql = "insert reply(ReplyContent,MessageID,ReplyPostDate,MemberID)";
+				sql += "values(?,?,now(),?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,content);
 				pstmt.setInt(2,MessageID);
-			
+				pstmt.setInt(3,MemberID);
 				
 			/*	pstmt.setInt(2,MemberID);*/
 				
@@ -287,14 +294,15 @@ public class BoardMgr {
 			Vector<BoardBean> commentList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ? order by ReplyPostDate desc";
+				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					BoardBean bean = new BoardBean();
-					bean.setReplyID(rs.getInt("replyID"));
+					
 					bean.setMessageID(rs.getInt("messageID"));
+					bean.setMemberName(rs.getString("memberName"));
 					bean.setReplyContent(rs.getString("ReplyContent"));
 					bean.setReplyPostDate(rs.getString("ReplyPostDate"));
 				
@@ -318,7 +326,7 @@ public class BoardMgr {
 					BoardBean bean = new BoardBean();
 					try {
 						con = pool.getConnection();
-						sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ?";
+						sql = "select * from reply where MessageID=?";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setInt(1, num);
 						rs = pstmt.executeQuery();

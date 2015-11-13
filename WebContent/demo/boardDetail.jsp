@@ -369,7 +369,7 @@ Vector<BoardBean> commentList = null;
 					
 					<div class="media response-info">
 						<div class="media-left response-text-left">
-								
+			
 			<%
 			commentList = bMgr.getCommentList(num);
 				  listSize = commentList.size();//브라우저 화면에 보여질 게시물갯수
@@ -381,7 +381,7 @@ Vector<BoardBean> commentList = null;
 			<%
 					for (int i = 0;i<listSize; i++) {
 							BoardBean commentbean = commentList.get(i);
-							int commentNum=commentbean.getReplyID();
+							int commentNum=commentbean.getMessageID();
 							BoardBean beanComment = bMgr.getComment(commentNum);//게시물 가져오기
 							String comment = commentbean.getReplyContent();
 							String commentDate=commentbean.getReplyPostDate();
@@ -395,11 +395,8 @@ Vector<BoardBean> commentList = null;
 			
 				
 							<div class="col-md-2">
-							<a href="#">
-								<img style="width: 80px"class="media-object" src="images/c1.jpg" alt=""/>
-							</a>
+							<h4><bold>[ <%=memberName%> ]</h4>
 							
-							<h5><a href="#"><%=memberName%></a></h5>
 						</div>
 						<div class="media-body response-text-right">
 							<span style="font-size:17px ;"> <%=comment %></span>
@@ -431,12 +428,12 @@ Vector<BoardBean> commentList = null;
                                       <textarea id="textArea" class="form-control"  name="content"> </textarea>
                                  
                                     </div>
-                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
+                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("memberIdKey")%>"> 
                                    
 						<input type="submit" value="Submit Comment" ">
 					</form>
 					
-					
+					<%-- 
 					<form name="postFrm" method="post" action="commentInput.jsp" enctype="multipart/form-data">
 						
 						 <input type="hidden" id="num" name="num" value="<%=num%>">
@@ -446,7 +443,7 @@ Vector<BoardBean> commentList = null;
                          <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
                                    
 						<input type="submit" value="Submit Comment" ">
-					</form>
+					</form> --%>
 					
 					
 				</div>	

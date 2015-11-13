@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
+<title>요기조기 댓글달기</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
@@ -72,6 +72,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     
                           <input type="hidden" name="num" value="<%=num %>"    >   
+                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("memberIdKey")%>">
+                         <input type="hidden" name="MemberName" value="<%=session.getAttribute("nameKey")%>">
                          
   
 						<input type="submit" value="Submit Comment" >
