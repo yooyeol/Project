@@ -54,7 +54,7 @@
 				</div>
 				<div class="row">
 				<br/>
-				<form method="post" action="">
+				<form method="post" action="setTourCourse.jsp">
 					<ul id="addListUl" class="list-group">
 						<li id="startPath" class="list-group-item disabled">출발지</li>
 					</ul>

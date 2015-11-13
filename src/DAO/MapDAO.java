@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -27,7 +28,7 @@ public class MapDAO {
 		}
 	}
 
-	public JSONObject getDetailPage(String sql){
+	public JSONObject getDetailPage(HashMap<String, String> sqlMap, String TourSiteContentID, String ContentTypeID){
 		JSONObject result = null;
 		JSONArray dataArray = null;
 		JSONObject data = null;
@@ -37,8 +38,13 @@ public class MapDAO {
 		ResultSet rs = null;
 		try{
 			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sqlMap.get(ContentTypeID));
+			pstmt.setInt(1, Integer.parseInt(ContentTypeID));
+			pstmt.setInt(2, Integer.parseInt(TourSiteContentID));
+			rs = pstmt.executeQuery();
 			
+			result = new JSONObject();
+			dataArray = new JSONArray();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -84,7 +90,6 @@ public class MapDAO {
 				dataArray.add(data);
 			}
 			result.put("datas", dataArray);
-			System.out.println(size);
 			System.out.println(result);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -132,6 +137,7 @@ public class MapDAO {
 				//System.out.println("TourSiteMapY : " + rs.getString(5));
 				data.put("TourSiteFirstImage", rs.getString(6));
 				//System.out.println("TourSiteFirstImage : " + rs.getString(6));
+				data.put("ContentTypeID", rs.getString(7));
 				dataArray.add(data);
 			}
 			result.put("datas", dataArray);
@@ -185,7 +191,6 @@ public class MapDAO {
 		return result;
 	}
 
-	
 	public Vector<MapBean> getmapList(String area){
 		Vector<MapBean> mapList = new Vector<MapBean>();
 		Connection con = null;

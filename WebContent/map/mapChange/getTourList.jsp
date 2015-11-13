@@ -11,7 +11,7 @@
 	int firstIndex = lastIndex - 20;
 	String index = String.valueOf(firstIndex) + ", " + String.valueOf(lastIndex);
 	System.out.println("page : " + paging); */
-	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=?";
+	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage, ContentTypeID FROM toursite WHERE TourSiteAreaCode=? AND ContentTypeID=?";
 	String result = listGet.getJSONObject(sql, areaCode, contentType).toString();
 %>
 <%=result%>

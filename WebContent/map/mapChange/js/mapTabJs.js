@@ -66,7 +66,7 @@ function listAdd(jsonObject){
 	var tableList = "";
 	for(var i in jsonObject.datas){
 		tableList += '<tr><td rowspan="3" class="col-lg-3"><img src="' 
-			+ jsonObject.datas[i].TourSiteFirstImage+'"/></td></tr><tr><td><a href="javascript:detailPage('+ jsonObject.datas[i].TourSiteContentID +')">'
+			+ jsonObject.datas[i].TourSiteFirstImage+'"/></td></tr><tr><td><a href="javascript:detailPage('+ jsonObject.datas[i].TourSiteContentID +','+jsonObject.datas[i].ContentTypeID+')">'
 			+ jsonObject.datas[i].TourSiteTitle+'</a><button id="'+jsonObject.datas[i].TourSiteContentID+'" class="btn btn-default addition">경로추가</button></td></tr><tr><td>'
 			+ jsonObject.datas[i].TourSiteAddr+'<input class="'
 			+ jsonObject.datas[i].TourSiteContentID+'" value="'+jsonObject.datas[i].TourSiteMapX+'" type="hidden"/><input class="'
@@ -81,8 +81,8 @@ function listAdd(jsonObject){
 	});
 }
 //리스트의 관광지를 클릭했을 때 나오는 상세 페이지
-function detailPage(TourSiteContentID){
-	var url = "detailPage.jsp?contentID="+TourSiteContentID;
+function detailPage(TourSiteContentID, ContentTypeID){
+	var url = "mapDetailPage.jsp?contentID="+TourSiteContentID+"&contentTypeID="+ContentTypeID;
 	window.open(url,"","width=520 height=550");
 }
 
@@ -183,6 +183,17 @@ function addMarker(title, lng, lat){
 	drawLine();
 	moveToLocation(lat, lng);
 }
+//전체 마커 
+function setMarkers(){
+	var image = {
+		    url: '../beachflag2.png',
+		    size: new google.maps.Size(20, 32),
+		    origin: new google.maps.Point(0, 0),
+		    anchor: new google.maps.Point(0, 32)
+	};	
+	
+}
+
 //구글맵 출발지 추가
 function geocodeAddress(startAddress){
 	var image = {
@@ -295,6 +306,4 @@ function initMap() {
 	    center: {lat: 37.5661932511, lng: 126.9827595315},
 	    zoom: 10
 	  });
-	  directionsDisplay.setMap(map);
-	  directionsDisplay.setPanel(document.getElementById("right-panel"));
 }
