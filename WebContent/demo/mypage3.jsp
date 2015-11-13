@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String uri = request.getContextPath();
+%>
+    
+    
 <!DOCTYPE html>
 
 <html lang="ko" hola_ext_inject="disabled"><head>
     <meta charset="utf-8">
-    <title>회원탈퇴 | Daum 내정보</title>
+    <title>회원탈퇴 </title>
       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <link rel="stylesheet" type="text/css" href="content/my.css"> 
 <script charset="utf-8" type="text/javascript" src="https://s1.daumcdn.net/svc/original/U03/cssjs/minidaum/pc/minidaum-a.white.min.js"></script><style>/* minidaum common */
@@ -158,27 +163,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 	<!-- header-section-starts-here -->
+	
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
 			<div class="wrap">
-				<div class="top-menu">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="privacy-policy.html">Privacy Policy</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
-					</ul>
-				</div>
+				
 				<div class="num">
-					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
+					<p> Call us : 032 2352 782</p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="header-bottom">
 			<div class="logo text-center">
-				<a href="index.html"><img src="images/logo.jpg" alt=""></a>
+			
+		
+			
+				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
+				<div class="memberStatus" style="float: right;margin:5px;">
+			<h4><%=session.getAttribute("idKey") %>님. 환영합니다.<h4>
 			</div>
+			</div> 
+			
 			<div class="navigation">
 				<nav class="navbar navbar-default" role="navigation">
 		   <div class="wrap">
@@ -196,24 +204,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					 <li><a href="main.jsp">Home</a></li>
-						<li><a href="sports.html">GO TRAVELING</a></li>
-				 		<li><a href="sports.html">공지사항</a></li>
-						<li><a href="boardMain.jsp">게시판</a></li>
+						<li ><a href="course.jsp">GO TRAVELING</a></li>
+				 		<li ><a href="notify.jsp">공지사항</a></li>
+						<li><a href="board.jsp">게시판</a></li>
 					  <li class="dropdown">
-						<a href="business.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">마이페이지<b class="caret"></b></a>
+						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
 							<div class="row">
 								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage1.jsp">회원정보</a></li>
+										<li><a href="mypage1.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
-										<li><a href="mypage2.jsp">비밀번호변경</a></li>
+										<li><a href="mypage2.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>
-										<li><a href="mypage3.jsp">회원탈퇴</a></li>
+										<li><a href="mypage3.jsp">탈퇴하기</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">경로바구니</a></li>
+										<li><a href="mypage4.jsp">나의 경로보기</a></li>
 										<li class="divider"></li>
-										<li><a href="shortcodes.html">Short codes</a></li>
+										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
 								</div>
 								
@@ -226,7 +234,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- start search-->
 				    <div class="search-box">
 					    <div id="sb-search" class="sb-search">
-						<!-- 여기 폼 지웠어유... <form>  --> 
+							<form>
 								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
 								<input class="sb-search-submit" type="submit" value="">
 								<span class="sb-icon-search"> </span>
@@ -246,21 +254,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<!--/.navbar-collapse-->
 	 <!--/.navbar-->
-			</nav></div>
+			</div>
 		
 		</div>
 	</div>
-	<!-- header-section-ends-here -->
+	</nav>
 	<div class="wrap">
 		<div class="move-text">
 			<div class="breaking_news">
 				<h2>공지사항</h2>
 			</div>
-			<div class="marquee"><div style="width: 100000px; margin-left: 1383px; animation: marqueeAnimation-7366917 9.17932s linear 1s infinite running;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
-				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;The standard chunk of Lorem Ipsum used since the 1500s is reproduced..</a></div>
-				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;At vero eos et accusamus et iusto qui blanditiis praesentium voluptatum deleniti atque..</a></div>
+			<div class="marquee">
+				<div class="marquee1"><a class="breaking" href="single.html">>>게시판디비가 없는듯</a></div>
+				<div class="marquee2"><a class="breaking" href="single.html">>>어허허허헣</a></div>
 				<div class="clearfix"></div>
-			</div></div></div>
+			</div>
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>

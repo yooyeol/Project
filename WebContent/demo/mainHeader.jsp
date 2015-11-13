@@ -123,17 +123,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage.jsp">내 정보 조회</a></li>
+										<li><a href="mypage1.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
-										<li><a href="memberUpdate.jsp">회원정보 수정</a></li>
+										<li><a href="mypage2.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>
-										<li><a href="memberCourse.jsp">나의 경로 보기</a></li>
+										<li><a href="mypage3.jsp">탈퇴하기</a></li>
 										<li class="divider"></li>
-										<li><a href="memberPreCourse.jsp">경로 바구니</a></li>
+										<li><a href="mypage4.jsp">나의 경로보기</a></li>
 										<li class="divider"></li>
-										<li><a href="memberOut.jsp">탈퇴하기</a></li>
+										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
 								</div>
 								

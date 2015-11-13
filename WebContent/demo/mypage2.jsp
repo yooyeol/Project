@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko" hola_ext_inject="disabled"><head>
     <meta charset="utf-8">
-    <title>비밀번호 변경 | Daum 내정보</title>
+    <title>회원정보 수정 페이지</title>
       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <link rel="stylesheet" type="text/css" href="content/change.css"> 
 <script charset="utf-8" type="text/javascript" src="https://s1.daumcdn.net/svc/original/U03/cssjs/minidaum/pc/minidaum-a.white.min.js"></script><style>/* minidaum common */

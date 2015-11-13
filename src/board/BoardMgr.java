@@ -294,7 +294,7 @@ public class BoardMgr {
 			Vector<BoardBean> commentList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ?";
+				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ? order by ReplyPostDate asc";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();

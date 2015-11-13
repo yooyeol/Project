@@ -47,6 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <!--/script-->
+
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -55,6 +56,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 </script>
+
+
+<script src="js/countControl.js"></script>
+
+
 <body style="height:1500px">
 
 
@@ -104,6 +110,9 @@ Vector<BoardBean> vlist = null;
 		 document.downFrm.submit();
 	}
 </script>
+
+
+
 
 </head>
 <body>
@@ -312,12 +321,12 @@ Vector<BoardBean> vlist = null;
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					<span> ||| 게시자 평점 : </span>
 					
-					<button id=read type="submit" class="btn btn-default btn-lg" name="good" onclick="<%bMgr.upGoodCount(num);%>">
+					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>" onclick="javascript:comment('<%=num%>')">
 					
- 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
+ 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" ></span> 좋아요
 					</button>
 					
-					<button type="submit" class="btn btn-default btn-lg" name="bad">
+					<button id=upPoorCount type="submit" class="btn btn-default btn-lg" name="bad">
  						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
 					</button>
 					<button type="submit" class="btn btn-default btn-lg" name="cart">
