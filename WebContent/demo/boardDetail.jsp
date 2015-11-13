@@ -1,10 +1,10 @@
 <%@page import="javafx.scene.web.WebView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
- --%>
+ <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean>
+ 
 <%@page import="board.BoardBean"%>
-
+<%@page import="java.util.Vector"%>
 <%@ page import="java.io.*,java.util.zip.*" %>
 <jsp:useBean id="bMgr" class="board.BoardMgr" />
 <!DOCTYPE html>
@@ -58,28 +58,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body style="height:1500px">
 
 
-<%
-	  request.setCharacterEncoding("UTF-8");
-out.print(request.getParameter("num"));
-int num=Integer.parseInt(request.getParameter("num"));
-	  String nowPage = request.getParameter("nowPage");
-	  String keyField = request.getParameter("keyField");
-	  String keyWord = request.getParameter("keyWord");
-	  bMgr.upCount(num);//조회수 증가
+<%	
 
- BoardBean bean = bMgr.getBoard(num);//게시물 가져오기
-	  String name = bean.getName();
-	  String subject = bean.getSubject();
-      String regdate = bean.getRegdate();
-	  String content = bean.getContent();
-	  String filename = bean.getFilename();
-	  
-	  int filesize = bean.getFilesize();
-	  String ip = bean.getIp();
-	  int count = bean.getReadCount();
-	  session.setAttribute("bean", bean);//게시물을 세션에 저장
+request.setCharacterEncoding("UTF-8");
+
+int num=Integer.parseInt(request.getParameter("num"));
+String nowPage = request.getParameter("nowPage");
+String keyField = request.getParameter("keyField");
+String keyWord = request.getParameter("keyWord");
+
+
+BoardBean bean = bMgr.getBoard(num);//게시물 가져오기
+bMgr.upreadCount(num);
+String name = bean.getMemberEmail();
+String subject = bean.getMessageTitle();
+String postdate = bean.getMessagePostDate();
+String content = bean.getMessageContent();
+String filename = bean.getMessagePictureURL();
+
+/* int count=bean.getMessageClick(); */
+int start=0; //디비의 select 시작번호
+int end=6; //시작번호로 부터 가져올 select 갯수
+
+int listSize=0; //현재 읽어온 게시물의 수
+
+Vector<BoardBean> vlist = null;
+
+/* int filesize = bean.getFilesize();*/
+ session.setAttribute("bean", bean);//게시물을 세션에 저장
 %>
-<title>JSPBoard</title>
+
+
+
+
+<title>요기조기 게시판</title>
 <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
 <script type="text/javascript">
 	function list(){
@@ -97,6 +109,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 <body>
 	<!-- header-section-starts-here -->
 	
+		
 
 
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -136,7 +149,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 					 <li><a href="main.jsp">Home</a></li>
 						<li ><a href="sports.html">GO TRAVELING</a></li>
 				 		<li ><a href="sports.html">공지사항</a></li>
-						<li><a href="boardMain.jsp">게시판</a></li>
+						<li><a href="board.jsp">게시판</a></li>
 					  <li class="dropdown">
 						<a href="mypageMain.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
@@ -224,7 +237,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 					
 					<% if( filename !=null && !filename.equals("")) {%>
   		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
-  		 &nbsp;&nbsp;<font color="blue">(<%=filesize%>KBytes)</font>  
+  		 &nbsp;&nbsp;<%-- <font color="blue">(<%=filesize%>KBytes)</font>   --%>
   		 <%} else{%> 등록된 파일이 없습니다.<%}%>
 					
 				<div class="slider">
@@ -253,105 +266,10 @@ int num=Integer.parseInt(request.getParameter("num"));
 						<img src="<%=filename%>" alt="">
 						
 						<%out.print(request.getParameter("num"));%>
+						
 						<p>뭐너</p>
-					<img src="http://localhost/imgView.jsp" >
-<%-- 						
-<%!  
+					<img src="" >
 
-  void sendImage( HttpServletResponse response , byte[] imgContentsArray ) {       
-
-    ServletOutputStream  svrOut = null ;   BufferedOutputStream outStream = null ;
-
-     try {                  
-
-         svrOut = response.getOutputStream(); 
-
-         outStream =  new BufferedOutputStream( svrOut );                   
-
-         outStream.write(  imgContentsArray, 0, imgContentsArray.length );     
-
-         outStream.flush();                      
-
-       } catch( Exception writeException ) {
-
-         writeException.printStackTrace();
-
-       } finally {
-
-          try {            
-
-             if ( outStream != null ) outStream.close(); 
-
-           } catch( Exception closeException ) {
-
-            closeException.printStackTrace();
-
-           }   
-
-       }
-
-  }
-
-  byte[] readImage() throws Exception
-
-  {   
-    String filePath = "C:/Jsp/myapp/WebContent/ch14/fileupload/aaaaaaaaaa1.jpg" ;     int BUF_SIZE  ;    byte[] buf = null ;   
-
-    DataInputStream in =  null ;
-
-    try {         
-
-    File imgFile= new File(filePath) ;
-
-    BUF_SIZE = (int)imgFile.length() ;   
-
-    buf = new byte[BUF_SIZE] ;  
-
-    in = new DataInputStream(new FileInputStream(imgFile));      
-
-    in.readFully(buf);       
-
-    } finally {
-
-      in.close();
-
-    }
-
-    return   buf;
-
-  }
-
- 
-
-%><% 
-
- 
-
-  try {    
-
-      
-
-     sendImage( response ,  readImage() ) ;
-
-    
-
-   } catch ( Exception e )  {
-
-      e.printStackTrace();
-
-   }
-
-  
-
-%>
-						
-						
-						
-		 --%>				
-							<%-- <%@include file="imgView.jsp" %> --%>
-					<%-- <div col-md-4>
-					<%@include file="imgView.jsp" %>
-					</div> --%>
 					</div>
 				</div>
 				
@@ -394,7 +312,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					<span> ||| 게시자 평점 : </span>
 					
-					<button id=read type="submit" class="btn btn-default btn-lg" name="good" onclick="<%bMgr.upHeart(num);%>">
+					<button id=read type="submit" class="btn btn-default btn-lg" name="good" onclick="<%bMgr.upGoodCount(num);%>">
 					
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
 					</button>
@@ -414,7 +332,35 @@ int num=Integer.parseInt(request.getParameter("num"));
 					<div class="clearfix"></div>
 					<!--related-posts-->
 			
-				<!--//related-posts-->
+	<!------------------//related-posts---------------------------------------------------------------->
+
+
+
+<%	
+
+
+/*
+BoardBean beanComment = bMgr.getComment(num);//게시물 가져오기
+
+String name = bean.getMemberEmail(); 
+
+String comment = beanComment.getReplyContent();
+String commentDate=beanComment.getReplyPostDate();
+*/
+/* int count=bean.getMessageClick(); */
+int startComment=0; //디비의 select 시작번호
+int endComment=10; //시작번호로 부터 가져올 select 갯수
+
+Vector<BoardBean> commentList = null;
+%>
+
+
+				
+				
+				
+					
+						
+
 
 				<section class="accordation_menu">
 				<div class="response">
@@ -423,37 +369,49 @@ int num=Integer.parseInt(request.getParameter("num"));
 					
 					<div class="media response-info">
 						<div class="media-left response-text-left">
+								<div class="col-md-8">
+			<%
+			commentList = bMgr.getCommentList();
+				  listSize = commentList.size();//브라우저 화면에 보여질 게시물갯수
+				  if (commentList.isEmpty()) {
+					out.println("댓글 0개 ");
+				  } else {
+			%>
+			
+			<%
+					for (int i = 0;i<listSize; i++) {
+							BoardBean commentbean = commentList.get(i);
+							
+							BoardBean beanComment = bMgr.getComment(num);//게시물 가져오기
+							String comment = beanComment.getReplyContent();
+							String commentDate=beanComment.getReplyPostDate();
+
+									
+							int readcount = bean.getMessageClick();
+							int goodcount=bean.getMessageGoodCount();
+							int poorcount = bean.getMessagePoorCount();
+					%>
+			
+			
+				
+							
 							<a href="#">
 								<img style="width: 80px"class="media-object" src="images/c1.jpg" alt=""/>
 							</a>
-							<h5><a href="#"><%out.print(session.getAttribute("idKey")); %></a></h5>
+							<%out.print(num); %>
+							<h5><a href="#"><%out.print(session.getAttribute("nameKey")); %></a></h5>
 						</div>
 						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<p><%=comment %></p>
 							<ul>
-								<li>Sep 21, 2015</li>
-								<li><a href="single.html">Reply</a></li>
+								<li><%=commentDate %></li>
+								
 							</ul>
-							<div class="media response-info">
-								<div class="media-left response-text-left">
-									<a href="#">
-										<img class="media-object" src="images/c2.jpg" alt=""/>
-									</a>
-									<h5><a href="#">Username</a></h5>
-								</div>
-								<div class="media-body response-text-right">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									<ul>
-										<li>July 17, 2015</li>
-										<li><a href="single.html">Reply</a></li>
-									</ul>		
-								</div>
-								<div class="clearfix"> </div>
-							</div>
+						
 						</div>
 						<div class="clearfix"> </div>
+						<%}} %>
+						
 					</div>
 					<div class="media response-info">
 						<div class="media-left response-text-left">
@@ -528,20 +486,38 @@ int num=Integer.parseInt(request.getParameter("num"));
 				</div>
 				
 				
+				
+				
 	<div class="clearfix"></div>
-				<div class="coment-form"  method="post" action="commentProc.jsp" enctype="multipart/form-data">
+				<div class="coment-form" >
 				<h2 >Leave your comment</h2></br>
 					
 				
 					<form name="postFrm" method="post" action="commentInputProc.jsp" enctype="multipart/form-data">
 						<h4><%out.print("ID : "+session.getAttribute("idKey")); %></h4>
 						 <div class="form-group" style="padding:14px;">
-						 <input type="hidden" id="num" value="<%=num%>">
+						 <input type="hidden" id="num" name="num" value="<%=num%>">
                                       <textarea id="textArea" class="form-control"  name="content"> </textarea>
                                  
                                     </div>
-						<input type="submit" value="Submit Comment" onClick="javascript:location.href='boardDetail.jsp'">
+                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
+                                   
+						<input type="submit" value="Submit Comment" ">
 					</form>
+					
+					
+					<form name="postFrm" method="post" action="commentInput.jsp" enctype="multipart/form-data">
+						
+						 <input type="hidden" id="num" name="num" value="<%=num%>">
+                                     
+                                 
+                                    </div>
+                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
+                                   
+						<input type="submit" value="Submit Comment" ">
+					</form>
+					
+					
 				</div>	
 				
 				
@@ -550,124 +526,193 @@ int num=Integer.parseInt(request.getParameter("num"));
 		</div>
 
 				</div>
-			<div class="col-md-4 side-bar">
-			<div class="first_half">
-			
-			
-				<div class="list_vertical">
-		         	 	<section class="accordation_menu">
-						  <div>
-						    <input id="label-1" name="lida" type="radio" checked/>
-						   <label for="label-1" id="item1"><i class="ferme"> </i>Popular Posts<i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
-						    <div class="content" id="a1">
-						    	<div class="scrollbar" id="style-2">
-								 <div class="force-overflow">
-									<div class="popular-post-grids">
-										<div class="popular-post-grid">
-											<div class="post-img">
-												<a href="single.html"><img src="images/bus2.jpg" alt="" /></a>
-											</div>
-											<div class="post-text">
-												<a class="pp-title" href="single.html"> The section of the mass media industry</a>
-												<p>On Feb 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>3 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="popular-post-grid">
-											<div class="post-img">
-												<a href="single.html"><img src="images/bus1.jpg" alt="" /></a>
-											</div>
-											<div class="post-text">
-												<a class="pp-title" href="single.html"> Lorem Ipsum is simply dummy text printing</a>
-												<p>On Apr 14 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>2 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="popular-post-grid">
-											<div class="post-img">
-												<a href="single.html"><img src="images/bus3.jpg" alt="" /></a>
-											</div>
-											<div class="post-text">
-												<a class="pp-title" href="single.html">There are many variations of Lorem</a>
-												<p>On Jun 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="popular-post-grid">
-											<div class="post-img">
-												<a href="single.html"><img src="images/bus4.jpg" alt="" /></a>
-											</div>
-											<div class="post-text">
-												<a class="pp-title" href="single.html">Sed ut perspiciatis unde omnis iste natus</a>
-												<p>On Jan 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>1 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									</div>
-                                </div>
-                              </div>
-						  </div>
-						  <div>
-						    <input id="label-2" name="lida" type="radio"/>
-						    <label for="label-2" id="item2"><i class="icon-leaf" id="i2"></i>Recent Posts<i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
-						    <div class="content" id="a2">
-						       <div class="scrollbar" id="style-2">
-								   <div class="force-overflow">
-									<div class="popular-post-grids">
-											<div class="popular-post-grid">
-												<div class="post-img">
-													<a href="single.html"><img src="images/tec2.jpg" alt="" /></a>
+				
+				
+				
+				
+				
+			<div style="float:right;"class="col-md-4 side-bar">
+					<div class="first_half">
+						<div class="newsletter">
+
+							<form action="boardPost.jsp">
+
+								<input type="submit" value="POST">
+							</form>
+						</div>
+
+
+					<div class="list_vertical">
+							<section class="accordation_menu">
+								<div>
+									<input id="label-1" name="lida" type="radio" checked="">
+									<label for="label-1" id="item1"><i class="ferme"> </i>Poppular
+										Posts<i class="icon-plus-sign i-right1"></i><i
+										class="icon-minus-sign i-right2"></i></label>
+									<div class="content" id="a1">
+										<div class="scrollbar" id="style-2">
+											<div class="force-overflow">
+												<div class="popular-post-grids">
+													
+					
+						
+												
+													<div class="popular-post-grid">
+												<%
+				  vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
+				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
+				  if (vlist.isEmpty()) {
+					out.println("등록된 게시물이 없습니다.");
+				  } else {
+			%>
+				
+				
+					<%
+						  for (int i = 0;i<21; i++) {
+							if (i == listSize) break;
+							bean = vlist.get(i);
+							int num1 = bean.getMessageID();
+							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
+							
+							int readcount = bean.getMessageClick();
+							int goodcount=bean.getMessageGoodCount();
+							int poorcount = bean.getMessagePoorCount();
+							
+							if(readcount>10){
+							
+					%>
+		
+														<div class="post-img">
+															<a href="single.html"><img src="images/bus2.jpg"
+																alt=""></a>
+														</div>
+														<div class="post-text">
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<p>
+															
+															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span>조회수 : <%=readcount%></span>
+										
+										<a class="span_link1" href="javascript:comment('<%=num1%>')">
+										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+											
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
+															</p>
+															
+															<p>
+																<%=content %>
+															</p>
+														</div>
+														
+ 		
+														
+														<div class="clearfix"></div>
+														<hr style="width:200px;">
+														<%}}//for%>
+		
+													
+													</div>
+													
+													
+													
 												</div>
-												<div class="post-text">
-													<a class="pp-title" href="single.html"> The section of the mass media industry</a>
-													<p>On Feb 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>3 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="popular-post-grid">
-												<div class="post-img">
-													<a href="single.html"><img src="images/tec1.jpg" alt="" /></a>
-												</div>
-												<div class="post-text">
-													<a class="pp-title" href="single.html"> Lorem Ipsum is simply dummy text printing</a>
-													<p>On Apr 14 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>2 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="popular-post-grid">
-												<div class="post-img">
-													<a href="single.html"><img src="images/tec3.jpg" alt="" /></a>
-												</div>
-												<div class="post-text">
-													<a class="pp-title" href="single.html">There are many variations of Lorem</a>
-													<p>On Jun 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="popular-post-grid">
-												<div class="post-img">
-													<a href="single.html"><img src="images/tec4.jpg" alt="" /></a>
-												</div>
-												<div class="post-text">
-													<a class="pp-title" href="single.html">Sed ut perspiciatis unde omnis iste natus</a>
-													<p>On Jan 25 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>1 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
-												</div>
-												<div class="clearfix"></div>
 											</div>
 										</div>
 									</div>
 								</div>
-						    </div>
-						  </div>
-						  </div>
-						</section>
-					 
-					
-					  </div>
+								<div>
+									<input id="label-2" name="lida" type="radio"> <label
+										for="label-2" id="item2"><i class="icon-leaf" id="i2"></i>Recent
+										Posts<i class="icon-plus-sign i-right1"></i><i
+										class="icon-minus-sign i-right2"></i></label>
+									<div class="content" id="a2">
+										<div class="scrollbar" id="style-2">
+											<div class="force-overflow">
+												<div class="popular-post-grids">
+													<div class="popular-post-grid">
+													
+													
+					<%
+						  for (int i = 0;i<21; i++) {
+							if (i == listSize) break;
+							 bean = vlist.get(i);
+							 int num1 = bean.getMessageID();
+							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
+						
+							int readcount = bean.getMessageClick();
+							int goodcount=bean.getMessageGoodCount();
+							int poorcount = bean.getMessagePoorCount();
+							
+							
+							
+					%>
+													
+													<div class="post-img">
+															<a href="single.html"><img src="images/bus2.jpg"
+																alt=""></a>
+														</div>
+														<div class="post-text">
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<p>
+															
+															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span>조회수 : <%=readcount%></span>
+										
+										<a class="span_link1" href="javascript:comment('<%=num1%>')">
+										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+											
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
+															</p>
+															
+															<p>
+																<%=content %>
+															</p>
+														</div>
+														
+ 		
+														
+														<div class="clearfix"></div>
+														<hr style="width:200px;">
+														<%}//for%>
+													</div>
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+	 
+			<%}//for%>					
+							</section>
+						</div> 
+
+					</div>
+				<!-- 	<div class="side-bar-articles">
+						<div class="side-bar-article">
+							<a href="single.html"></a>
+
+						</div>
+						<div class="side-bar-article">
+							<a href="single.html"></a>
+
+						</div>
+						<div class="side-bar-article">
+							<a href="single.html"></a>
+
+						</div>
+					</div> -->
+				</div>
 				
-					<div class="clearfix"></div>
-			</div>
+				
+				
+				
 			<div class="clearfix"></div>
 		</div>
 		</div>
@@ -763,6 +808,19 @@ int num=Integer.parseInt(request.getParameter("num"));
 		$().UItoTop({ easingType: 'easeOutQuart' });
 });
 </script>
+<form name="downFrm" action="download.jsp" method="post">
+	<input type="hidden" name="filename">
+</form>
+
+<form name="listFrm" method="post">
+	<input type="hidden" name="num" value="<%=num%>">
+	<input type="hidden" name="nowPage" value="<%=nowPage%>">
+	<%if(!(keyWord==null || keyWord.equals("null"))){ %>
+	<input type="hidden" name="keyField" value="<%=keyField%>">
+	<input type="hidden" name="keyWord" value="<%=keyWord%>">
+	<%}%>
+</form>
+
 <a href="#to-top" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!---->
 </body>

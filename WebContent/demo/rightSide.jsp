@@ -135,22 +135,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 
-		<div style="float:right;"class="col-md-4 side-bar">
+			<div style="float:right;"class="col-md-4 side-bar">
 					<div class="first_half">
-						<!-- <div class="newsletter">
+						<div class="newsletter">
 
 							<form action="boardPost.jsp">
 
 								<input type="submit" value="POST">
 							</form>
-						</div> -->
+						</div>
 
 
-						<div class="list_vertical">
+					<div class="list_vertical">
 							<section class="accordation_menu">
 								<div>
 									<input id="label-1" name="lida" type="radio" checked="">
-									<label for="label-1" id="item1"><i class="ferme"> </i>Popular
+									<label for="label-1" id="item1"><i class="ferme"> </i>Poppular
 										Posts<i class="icon-plus-sign i-right1"></i><i
 										class="icon-minus-sign i-right2"></i></label>
 									<div class="content" id="a1">
@@ -163,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												
 													<div class="popular-post-grid">
 												<%
-				  vlist = bMgr.getBoardList(keyField, keyWord, start, end);
+				  vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
 				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
 				  if (vlist.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
@@ -172,19 +172,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				
 					<%
-						  for (int i = 0;i<numPerPage; i++) {
+						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
 							BoardBean bean = vlist.get(i);
-							int num = bean.getNum();
+							int num = bean.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
-							String name = bean.getName();
-							String subject = bean.getSubject();
-							String regdate = bean.getRegdate();
-							String content=beanContent.getContent();
+							String name = bean.getMemberEmail();
+							String subject = bean.getMessageTitle();
+							String postdate = bean.getMessagePostDate();
+							String content=beanContent.getMessageContent();
 							
+							int readcount = bean.getMessageClick();
+							int goodcount=bean.getMessageGoodCount();
+							int poorcount = bean.getMessagePoorCount();
 							
-							int depth = bean.getDepth();
-							int count = bean.getReadCount();
+							if(readcount>10){
+							
 					%>
 		
 														<div class="post-img">
@@ -192,12 +195,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="single.html"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
 															<p>
-																<%=content %><a class="span_link" href="boardDetail.jsp"><span
-																	class="glyphicon glyphicon-comment"></span>3 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
+															
+															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span>조회수 : <%=readcount%></span>
+										
+										<a class="span_link1" href="javascript:comment('<%=num%>')">
+										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+											
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
+															</p>
+															
+															<p>
+																<%=content %>
 															</p>
 														</div>
 														
@@ -205,11 +219,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														
 														<div class="clearfix"></div>
 														<hr style="width:200px;">
-														<%}//for%>
+														<%}}//for%>
 				 <%
- 			}//if
+ 			//if
  		%>
-														
+													
 													</div>
 													
 													
@@ -229,241 +243,74 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<div class="force-overflow">
 												<div class="popular-post-grids">
 													<div class="popular-post-grid">
-														<div class="post-img">
-															<a href="single.html"><img src="images/tec2.jpg"
+													
+													
+					<%
+						  for (int i = 0;i<21; i++) {
+							if (i == listSize) break;
+							BoardBean bean = vlist.get(i);
+							int num = bean.getMessageID();
+							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
+							String name = bean.getMemberEmail();
+							String subject = bean.getMessageTitle();
+							String postdate = bean.getMessagePostDate();
+							String content=beanContent.getMessageContent();
+							
+							int readcount = bean.getMessageClick();
+							int goodcount=bean.getMessageGoodCount();
+							int poorcount = bean.getMessagePoorCount();
+							
+							
+							
+					%>
+													
+													<div class="post-img">
+															<a href="single.html"><img src="images/bus2.jpg"
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="single.html"> The section
-																of the mass media industry</a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
 															<p>
-																On Feb 25 <a class="span_link" href="#"><span
-																	class="glyphicon glyphicon-comment"></span>3 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
+															
+															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span>조회수 : <%=readcount%></span>
+										
+										<a class="span_link1" href="javascript:comment('<%=num%>')">
+										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+											
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
+										<a class="span_link1" href="javascript:">
+										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
+															</p>
+															
+															<p>
+																<%=content %>
 															</p>
 														</div>
+														
+ 		
+														
 														<div class="clearfix"></div>
+														<hr style="width:200px;">
+														<%}}//for%>
 													</div>
-													<div class="popular-post-grid">
-														<div class="post-img">
-															<a href="single.html"><img src="images/tec1.jpg"
-																alt=""></a>
-														</div>
-														<div class="post-text">
-															<a class="pp-title" href="single.html"> Lorem Ipsum
-																is simply dummy text printing</a>
-															<p>
-																On Apr 14 <a class="span_link" href="#"><span
-																	class="glyphicon glyphicon-comment"></span>2 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
-															</p>
-														</div>
-														<div class="clearfix"></div>
-													</div>
-													<div class="popular-post-grid">
-														<div class="post-img">
-															<a href="single.html"><img src="images/tec3.jpg"
-																alt=""></a>
-														</div>
-														<div class="post-text">
-															<a class="pp-title" href="single.html">There are many
-																variations of Lorem</a>
-															<p>
-																On Jun 25 <a class="span_link" href="#"><span
-																	class="glyphicon glyphicon-comment"></span>0 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
-															</p>
-														</div>
-														<div class="clearfix"></div>
-													</div>
-													<div class="popular-post-grid">
-														<div class="post-img">
-															<a href="single.html"><img src="images/tec4.jpg"
-																alt=""></a>
-														</div>
-														<div class="post-text">
-															<a class="pp-title" href="single.html">Sed ut
-																perspiciatis unde omnis iste natus</a>
-															<p>
-																On Jan 25 <a class="span_link" href="#"><span
-																	class="glyphicon glyphicon-comment"></span>1 </a><a
-																	class="span_link" href="#"><span
-																	class="glyphicon glyphicon-eye-open"></span>56 </a>
-															</p>
-														</div>
-														<div class="clearfix"></div>
-													</div>
+												
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							
-
-								<div class="content" id="a3">
-									<div class="scrollbar" id="style-2">
-										<div class="force-overflow">
-											<div class="response">
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>MARCH 21, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>MARCH 26, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>MAY 25, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>FEB 13, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>JAN 28, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>APR 18, 2015</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="media response-info">
-													<div class="media-left response-text-left">
-														<a href="#"> <img class="media-object"
-															src="images/icon1.png" alt="">
-														</a>
-														<h5>
-															<a href="#">Username</a>
-														</h5>
-													</div>
-													<div class="media-body response-text-right">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-															elit,There are many variations of passages of Lorem Ipsum
-															available, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua.</p>
-														<ul>
-															<li>DEC 25, 2014</li>
-															<li><a href="single.html">Reply</a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
+	 <%
+ 		
+ 		%>
+								
 							</section>
-						</div>
+						</div> 
 
 					</div>
-					<div class="side-bar-articles">
+				<!-- 	<div class="side-bar-articles">
 						<div class="side-bar-article">
 							<a href="single.html"></a>
 
@@ -476,8 +323,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a href="single.html"></a>
 
 						</div>
-					</div>
+					</div> -->
 				</div>
+				
 
 
 

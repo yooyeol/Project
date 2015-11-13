@@ -95,8 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 				<a href="main.jsp"><img src="<%=uri %>/demo/images/mainLogo.jpg" alt="" /></a> 
 				<div class="memberStatus" style="float: right;margin:5px;">
-			<h4><%=session.getAttribute("nameKey") %>님. 환영합니다.<h4>
-			<h4><%=session.getAttribute("memberIdKey") %></h4>
+			<h4><%=session.getAttribute("idKey") %>님. 환영합니다.<h4>
 			</div>
 			</div> 
 			

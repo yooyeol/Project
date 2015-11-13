@@ -3,6 +3,8 @@ package board;
 
 public class BoardBean {
 	
+	private String MemberEmail;     
+	
 	private int MessageID;
 	private String MessageTitle;        
 	private String MessageContent;      
@@ -10,107 +12,144 @@ public class BoardBean {
 	private int MessageSiteGrade;            
 	private int MessageGoodCount;        
 	private int MessagePoorCount;        
-	private String MemberID;     
-	private String pass;          
-	private String  ip;
-	private int readCount;   
-	private int heartCount;   
+	private int MemberID;   
+	private int TourCourseID;    
+	private int MessageClick; 
 	
-	private String filename; 
-	private int filesize;
-	private String img;
 	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public int getPos() {
-		return pos;
-	}
-	public void setPos(int pos) {
-		this.pos = pos;
-	}
-	public int getDepth() {
-		return depth;
-	}
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-	public int getRef() {
-		return ref;
-	}
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+	/*picture */
+	private int MessagePictureID; 
+	private String MessagePictureURL; 
+	
+	/*comment*/
+	private int ReplyID; 
+	private String ReplyContent;
+	private String ReplyPostDate;
+	
+	/*coount*/
+	private int readCount;
+	private int goodCount;
+	private int poorCount;
+	
 	public int getReadCount() {
 		return readCount;
 	}
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
-	public int getHeartCount() {
-		return heartCount;
+	public int getGoodCount() {
+		return goodCount;
 	}
-	public void getHeartCount(int heartCount) {
-		this.heartCount = heartCount;
+	public void setGoodCount(int goodCount) {
+		this.goodCount = goodCount;
+	}
+	public int getPoorCount() {
+		return poorCount;
+	}
+	public void setPoorCount(int poorCount) {
+		this.poorCount = poorCount;
+	}
+	public String getMemberEmail() {
+		return MemberEmail;
+	}
+	public int getMessageID() {
+		return MessageID;
+	}
+	public String getMessageTitle() {
+		return MessageTitle;
+	}
+	public String getMessageContent() {
+		return MessageContent;
+	}
+	public String getMessagePostDate() {
+		return MessagePostDate;
+	}
+	public int getMessageSiteGrade() {
+		return MessageSiteGrade;
+	}
+	public int getMessageGoodCount() {
+		return MessageGoodCount;
+	}
+	public int getMessagePoorCount() {
+		return MessagePoorCount;
+	}
+	public int getMemberID() {
+		return MemberID;
+	}
+	public int getTourCourseID() {
+		return TourCourseID;
+	}
+	public int getMessageClick() {
+		return MessageClick;
+	}
+	public int getMessagePictureID() {
+		return MessagePictureID;
+	}
+	public String getMessagePictureURL() {
+		return MessagePictureURL;
+	}
+	public int getReplyID() {
+		return ReplyID;
+	}
+	public String getReplyContent() {
+		return ReplyContent;
+	}
+	public String getReplyPostDate() {
+		return ReplyPostDate;
 	}
 	
-	public String getFilename() {
-		return filename;
+	
+	
+	public void setMemberEmail(String memberEmail) {
+		MemberEmail = memberEmail;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setMessageID(int messageID) {
+		MessageID = messageID;
+	}
+	public void setMessageTitle(String messageTitle) {
+		MessageTitle = messageTitle;
+	}
+	public void setMessageContent(String messageContent) {
+		MessageContent = messageContent;
+	}
+	public void setMessagePostDate(String messagePostDate) {
+		MessagePostDate = messagePostDate;
+	}
+	public void setMessageSiteGrade(int messageSiteGrade) {
+		MessageSiteGrade = messageSiteGrade;
+	}
+	public void setMessageGoodCount(int messageGoodCount) {
+		MessageGoodCount = messageGoodCount;
+	}
+	public void setMessagePoorCount(int messagePoorCount) {
+		MessagePoorCount = messagePoorCount;
+	}
+	public void setMemberID(int memberID) {
+		MemberID = memberID;
+	}
+	public void setTourCourseID(int tourCourseID) {
+		TourCourseID = tourCourseID;
+	}
+	public void setMessageClick(int messageClick) {
+		MessageClick = messageClick;
+	}
+	public void setMessagePictureID(int messagePictureID) {
+		MessagePictureID = messagePictureID;
+	}
+	public void setMessagePictureURL(String messagePictureURL) {
+		MessagePictureURL = messagePictureURL;
+	}
+	public void setReplyID(int replyID) {
+		ReplyID = replyID;
+	}
+	public void setReplyContent(String replyContent) {
+		ReplyContent = replyContent;
+	}
+	public void setReplyPostDate(String replyPostDate) {
+		ReplyPostDate = replyPostDate;
 	}
 	
-	public int getFilesize() {
-		return filesize;
-	}
-	public void setFilesize(int filesize) {
-		this.filesize = filesize;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}  
+	
+	
 	
 }
