@@ -273,7 +273,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="wrap">
 				
 				<div class="num">
-					<ul><a href="../main/LoginMain.jsp">LOGOUT</a></ul>
+						<ul><span style="color: white"><%=session.getAttribute("nameKey")%> 님 환영합니다.</sapn>&nbsp;&nbsp;&nbsp;<a style="color: white"  href="../main/LoginMain.jsp" ><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></ul>
+				
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -285,7 +286,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
 				<div class="memberStatus" style="float: right;margin:5px;">
-			<h4>carasota@gmail.com님. 환영합니다.</h4><h4>
+			
 			</h4></div>
 			</div> 
 			
@@ -374,7 +375,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>
-			  $('.marquee').marquee({ pauseOnHover: true });
+			  $('.marquee').marquee({ pauseOnHover: true, 
+				speed:11000  
+			  });
 			  //@ sourceURL=pen.js
 			</script>
 		</div>

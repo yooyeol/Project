@@ -511,6 +511,12 @@ Vector<BoardBean> commentList = null;
 							int num1 = bean.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
 							
+							String name1 = bean.getMemberEmail();
+							String subject1 = bean.getMessageTitle();
+							String postdate1 = bean.getMessagePostDate();
+							String content1=bean.getMessageContent();
+							
+							
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
@@ -524,10 +530,10 @@ Vector<BoardBean> commentList = null;
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
 															<p>
 															
-															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num1%>')">
@@ -540,7 +546,7 @@ Vector<BoardBean> commentList = null;
 															</p>
 															
 															<p>
-																<%=content %>
+																<%=content1 %>
 															</p>
 														</div>
 														
@@ -573,12 +579,18 @@ Vector<BoardBean> commentList = null;
 													
 													
 					<%
-						  for (int i = 0;i<21; i++) {
+					 for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
-							 bean = vlist.get(i);
-							 int num1 = bean.getMessageID();
+							bean = vlist.get(i);
+							int num1 = bean.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
-						
+							
+							String name1 = bean.getMemberEmail();
+							String subject1 = bean.getMessageTitle();
+							String postdate1 = bean.getMessagePostDate();
+							String content1=bean.getMessageContent();
+							
+							
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
@@ -592,10 +604,10 @@ Vector<BoardBean> commentList = null;
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
 															<p>
 															
-															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num1%>')">
@@ -608,7 +620,7 @@ Vector<BoardBean> commentList = null;
 															</p>
 															
 															<p>
-																<%=content %>
+																<%=content1 %>
 															</p>
 														</div>
 														
