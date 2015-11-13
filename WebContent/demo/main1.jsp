@@ -97,9 +97,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									    <li class="divider"></li>
 										<li><a href="mypage3.jsp">회원탈퇴</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">경로바구니</a></li>
+										<li><a href="mypage4.jsp">경로조회</a></li>
 										<li class="divider"></li>
-										<li><a href="shortcodes.html">Short codes</a></li>
+										<li><a href="shortcodes.html">경로바구니</a></li>
 									</ul>
 								</div>
 								
