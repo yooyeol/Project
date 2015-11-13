@@ -47,6 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <!--/script-->
+
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -55,6 +56,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 </script>
+
+
+<script src="js/countControl.js"></script>
+
+
 <body style="height:1500px">
 
 
@@ -104,6 +110,9 @@ Vector<BoardBean> vlist = null;
 		 document.downFrm.submit();
 	}
 </script>
+
+
+
 
 </head>
 <body>
@@ -312,12 +321,12 @@ Vector<BoardBean> vlist = null;
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					<span> ||| 게시자 평점 : </span>
 					
-					<button id=read type="submit" class="btn btn-default btn-lg" name="good" onclick="<%bMgr.upGoodCount(num);%>">
+					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>" onclick="javascript:comment('<%=num%>')">
 					
- 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> 좋아요
+ 						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" ></span> 좋아요
 					</button>
 					
-					<button type="submit" class="btn btn-default btn-lg" name="bad">
+					<button id=upPoorCount type="submit" class="btn btn-default btn-lg" name="bad">
  						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
 					</button>
 					<button type="submit" class="btn btn-default btn-lg" name="cart">
@@ -369,9 +378,9 @@ Vector<BoardBean> commentList = null;
 					
 					<div class="media response-info">
 						<div class="media-left response-text-left">
-								<div class="col-md-8">
+			
 			<%
-			commentList = bMgr.getCommentList();
+			commentList = bMgr.getCommentList(num);
 				  listSize = commentList.size();//브라우저 화면에 보여질 게시물갯수
 				  if (commentList.isEmpty()) {
 					out.println("댓글 0개 ");
@@ -381,11 +390,11 @@ Vector<BoardBean> commentList = null;
 			<%
 					for (int i = 0;i<listSize; i++) {
 							BoardBean commentbean = commentList.get(i);
-							
-							BoardBean beanComment = bMgr.getComment(num);//게시물 가져오기
-							String comment = beanComment.getReplyContent();
-							String commentDate=beanComment.getReplyPostDate();
-
+							int commentNum=commentbean.getMessageID();
+							BoardBean beanComment = bMgr.getComment(commentNum);//게시물 가져오기
+							String comment = commentbean.getReplyContent();
+							String commentDate=commentbean.getReplyPostDate();
+							String memberName=commentbean.getMemberName();
 									
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
@@ -394,93 +403,21 @@ Vector<BoardBean> commentList = null;
 			
 			
 				
+							<div class="col-md-2">
+							<h4><bold>[ <%=memberName%> ]</h4>
 							
-							<a href="#">
-								<img style="width: 80px"class="media-object" src="images/c1.jpg" alt=""/>
-							</a>
-							<%out.print(num); %>
-							<h5><a href="#"><%out.print(session.getAttribute("nameKey")); %></a></h5>
 						</div>
 						<div class="media-body response-text-right">
-							<p><%=comment %></p>
-							<ul>
-								<li><%=commentDate %></li>
-								
-							</ul>
-						
+							<span style="font-size:17px ;"> <%=comment %></span>
+							<p style="float: right;"> 게시일 : <%=commentDate %></p>
+							
 						</div>
 						<div class="clearfix"> </div>
+						<hr style="width:100%;color:blue;">
 						<%}} %>
 						
 					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c3.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>June 21, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>		
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c4.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>Mar 28, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>
-							<div class="media response-info">
-								<div class="media-left response-text-left">
-									<a href="#">
-										<img class="media-object" src="images/c5.jpg" alt=""/>
-									</a>
-									<h5><a href="#">Username</a></h5>
-								</div>
-								<div class="media-body response-text-right">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									<ul>
-										<li>Feb 19, 2015</li>
-										<li><a href="single.html">Reply</a></li>
-									</ul>		
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c6.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>Jan 20, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>		
-						</div>
-						<div class="clearfix"> </div>
-					</div>
+					
 				</div>	
 				</section>
 				</div>
@@ -500,12 +437,12 @@ Vector<BoardBean> commentList = null;
                                       <textarea id="textArea" class="form-control"  name="content"> </textarea>
                                  
                                     </div>
-                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
+                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("memberIdKey")%>"> 
                                    
 						<input type="submit" value="Submit Comment" ">
 					</form>
 					
-					
+					<%-- 
 					<form name="postFrm" method="post" action="commentInput.jsp" enctype="multipart/form-data">
 						
 						 <input type="hidden" id="num" name="num" value="<%=num%>">
@@ -515,7 +452,7 @@ Vector<BoardBean> commentList = null;
                          <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
                                    
 						<input type="submit" value="Submit Comment" ">
-					</form>
+					</form> --%>
 					
 					
 				</div>	
@@ -574,6 +511,12 @@ Vector<BoardBean> commentList = null;
 							int num1 = bean.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
 							
+							String name1 = bean.getMemberEmail();
+							String subject1 = bean.getMessageTitle();
+							String postdate1 = bean.getMessagePostDate();
+							String content1=bean.getMessageContent();
+							
+							
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
@@ -587,10 +530,10 @@ Vector<BoardBean> commentList = null;
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
 															<p>
 															
-															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num1%>')">
@@ -603,7 +546,7 @@ Vector<BoardBean> commentList = null;
 															</p>
 															
 															<p>
-																<%=content %>
+																<%=content1 %>
 															</p>
 														</div>
 														
@@ -636,12 +579,18 @@ Vector<BoardBean> commentList = null;
 													
 													
 					<%
-						  for (int i = 0;i<21; i++) {
+					 for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
-							 bean = vlist.get(i);
-							 int num1 = bean.getMessageID();
+							bean = vlist.get(i);
+							int num1 = bean.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
-						
+							
+							String name1 = bean.getMemberEmail();
+							String subject1 = bean.getMessageTitle();
+							String postdate1 = bean.getMessagePostDate();
+							String content1=bean.getMessageContent();
+							
+							
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
@@ -655,10 +604,10 @@ Vector<BoardBean> commentList = null;
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
 															<p>
 															
-															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
+															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num1%>')">
@@ -671,7 +620,7 @@ Vector<BoardBean> commentList = null;
 															</p>
 															
 															<p>
-																<%=content %>
+																<%=content1 %>
 															</p>
 														</div>
 														
