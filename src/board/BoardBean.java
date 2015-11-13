@@ -2,6 +2,9 @@ package board;
 
 
 public class BoardBean {
+	/*member*/
+	
+	private String MemberName;
 	
 	private String MemberEmail;     
 	
@@ -31,6 +34,14 @@ public class BoardBean {
 	private int goodCount;
 	private int poorCount;
 	
+	
+	
+	public String getMemberName() {
+		return MemberName;
+	}
+	public void setMemberName(String memberName) {
+		MemberName = memberName;
+	}
 	public int getReadCount() {
 		return readCount;
 	}

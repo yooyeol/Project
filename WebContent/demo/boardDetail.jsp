@@ -369,9 +369,9 @@ Vector<BoardBean> commentList = null;
 					
 					<div class="media response-info">
 						<div class="media-left response-text-left">
-								<div class="col-md-8">
+								
 			<%
-			commentList = bMgr.getCommentList();
+			commentList = bMgr.getCommentList(num);
 				  listSize = commentList.size();//브라우저 화면에 보여질 게시물갯수
 				  if (commentList.isEmpty()) {
 					out.println("댓글 0개 ");
@@ -381,11 +381,11 @@ Vector<BoardBean> commentList = null;
 			<%
 					for (int i = 0;i<listSize; i++) {
 							BoardBean commentbean = commentList.get(i);
-							
-							BoardBean beanComment = bMgr.getComment(num);//게시물 가져오기
-							String comment = beanComment.getReplyContent();
-							String commentDate=beanComment.getReplyPostDate();
-
+							int commentNum=commentbean.getReplyID();
+							BoardBean beanComment = bMgr.getComment(commentNum);//게시물 가져오기
+							String comment = commentbean.getReplyContent();
+							String commentDate=commentbean.getReplyPostDate();
+							String memberName=commentbean.getMemberName();
 									
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
@@ -394,93 +394,24 @@ Vector<BoardBean> commentList = null;
 			
 			
 				
-							
+							<div class="col-md-2">
 							<a href="#">
 								<img style="width: 80px"class="media-object" src="images/c1.jpg" alt=""/>
 							</a>
-							<%out.print(num); %>
-							<h5><a href="#"><%out.print(session.getAttribute("nameKey")); %></a></h5>
+							
+							<h5><a href="#"><%=memberName%></a></h5>
 						</div>
 						<div class="media-body response-text-right">
-							<p><%=comment %></p>
-							<ul>
-								<li><%=commentDate %></li>
-								
-							</ul>
-						
+							<span style="font-size:17px ;"> <%=comment %></span>
+							<p style="float: right;"> 게시일 : <%=commentDate %></p>
+							
 						</div>
 						<div class="clearfix"> </div>
+						<hr style="width:100%;color:blue;">
 						<%}} %>
 						
 					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c3.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>June 21, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>		
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c4.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>Mar 28, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>
-							<div class="media response-info">
-								<div class="media-left response-text-left">
-									<a href="#">
-										<img class="media-object" src="images/c5.jpg" alt=""/>
-									</a>
-									<h5><a href="#">Username</a></h5>
-								</div>
-								<div class="media-body response-text-right">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									<ul>
-										<li>Feb 19, 2015</li>
-										<li><a href="single.html">Reply</a></li>
-									</ul>		
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="media response-info">
-						<div class="media-left response-text-left">
-							<a href="#">
-								<img class="media-object" src="images/c6.jpg" alt=""/>
-							</a>
-							<h5><a href="#">Username</a></h5>
-						</div>
-						<div class="media-body response-text-right">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<ul>
-								<li>Jan 20, 2015</li>
-								<li><a href="single.html">Reply</a></li>
-							</ul>		
-						</div>
-						<div class="clearfix"> </div>
-					</div>
+					
 				</div>	
 				</section>
 				</div>

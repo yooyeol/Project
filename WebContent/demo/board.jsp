@@ -257,9 +257,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  				<!-- 페이징 및 블럭 처리 End-->
 				
  		
-				
-				
-				
 											
 				</div>
 				

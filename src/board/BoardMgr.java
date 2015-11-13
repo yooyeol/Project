@@ -279,7 +279,7 @@ public class BoardMgr {
 		}
 		
 		// 코멘트 리스트
-		public Vector<BoardBean> getCommentList() {
+		public Vector<BoardBean> getCommentList(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -287,15 +287,17 @@ public class BoardMgr {
 			Vector<BoardBean> commentList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				/*sql이 없자나*/
+				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ? order by ReplyPostDate desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					BoardBean bean = new BoardBean();
-					bean.setReplyID(rs.getInt("ReplyID"));
+					bean.setReplyID(rs.getInt("replyID"));
+					bean.setMessageID(rs.getInt("messageID"));
 					bean.setReplyContent(rs.getString("ReplyContent"));
 					bean.setReplyPostDate(rs.getString("ReplyPostDate"));
-					bean.setMemberID(rs.getInt("MemberID"));
-					bean.setMessageID(rs.getInt("MessageID"));
+				
 					
 					commentList.add(bean);
 				}
@@ -316,16 +318,15 @@ public class BoardMgr {
 					BoardBean bean = new BoardBean();
 					try {
 						con = pool.getConnection();
-						sql = "select * from reply where MessageID=?";
+						sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ?";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setInt(1, num);
 						rs = pstmt.executeQuery();
 						if (rs.next()) {
-							bean.setReplyID(rs.getInt("ReplyID"));
+							
 							bean.setReplyContent(rs.getString("ReplyContent"));
 							bean.setReplyPostDate(rs.getString("ReplyPostDate"));
-							bean.setMemberID(rs.getInt("MemberID"));
-							bean.setMessageID(rs.getInt("MessageID"));
+							
 							
 							/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 							System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));

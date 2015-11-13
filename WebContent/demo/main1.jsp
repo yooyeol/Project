@@ -150,7 +150,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>
-			  $('.marquee').marquee({ pauseOnHover: true });
+			  $('.marquee').marquee({ pauseOnHover: true,
+				  						speed:9000});
 			  //@ sourceURL=pen.js
 			</script>
 		</div>
