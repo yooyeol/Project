@@ -27,32 +27,6 @@ public class MapDAO {
 			e.printStackTrace();
 		}
 	}
-
-	public JSONObject getDetailPage(HashMap<String, String> sqlMap, String TourSiteContentID, String ContentTypeID){
-		JSONObject result = null;
-		JSONArray dataArray = null;
-		JSONObject data = null;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try{
-			con = pool.getConnection();
-			pstmt = con.prepareStatement(sqlMap.get(ContentTypeID));
-			pstmt.setInt(1, Integer.parseInt(ContentTypeID));
-			pstmt.setInt(2, Integer.parseInt(TourSiteContentID));
-			rs = pstmt.executeQuery();
-			
-			result = new JSONObject();
-			dataArray = new JSONArray();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			pool.freeConnection(con, pstmt, rs);
-		}
-		
-		return result;
-	}
 	
 	@SuppressWarnings("unchecked")
 	public JSONObject getJSONObject(String sql, String tourSiteContentID){

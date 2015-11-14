@@ -1,7 +1,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray" %>
-<jsp:useBean id="getDetail" class="DAO.MapDAO"></jsp:useBean>
+<jsp:useBean id="getDetail" class="DAO.DetailDAO"></jsp:useBean>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -18,11 +18,10 @@
 	sqlMap.put("38","SELECT * FROM toursite, info, detailshoppinginfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailshoppinginfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
 	sqlMap.put("39","SELECT * FROM toursite, info, detailfoodinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailfoodinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
 
-	String result = getDetail.getDetailPage(sqlMap, TourSiteContentID, ContentTypeID).toString();
 %>
 <!-- 
 	SQL
-	관광지(12) detailtourinfo : SELECT * FROM toursite, info, detailtourinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailtourinfo.TourSiteContentID AND toursite.ContentTypeID=12
+	관광지(12) detailtourinfo : SELECT * FROM toursite, info, detailtourinfo, image where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailtourinfo.TourSiteContentID AND toursite.TourSiteContentID=image.TourSiteContentID AND toursite.ContentTypeID=12 AND toursite.TourSiteContentID=125266;
 	문화시설(14) detailcultureinfo : SELECT * FROM toursite, info, detailcultureinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailcultureinfo.TourSiteContentID AND toursite.ContentTypeID=14
 	축제공연행사(15) detaileventinfo : SELECT * FROM toursite, info, detaileventinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detaileventinfo.TourSiteContentID AND toursite.ContentTypeID=15
 	여행코스(25) detailcourseinfo : SELECT * FROM toursite, info, detailcourseinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailcourseinfo.TourSiteContentID AND toursite.ContentTypeID=25
@@ -51,7 +50,7 @@
   <h2>Dynamic Tabs</h2>
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">기본정보</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu1">기본정보</a></li>
     <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
     <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
   </ul>
@@ -65,7 +64,7 @@
       </table>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
+      <h3>기본정보</h3>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
     <div id="menu2" class="tab-pane fade">
