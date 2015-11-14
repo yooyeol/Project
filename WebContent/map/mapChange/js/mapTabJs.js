@@ -118,8 +118,10 @@ function requestTour(TourSiteContentID){
 }
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
-	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>'
+	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>';
+	var inputList = '<input id="'+jsonObject.datas[0].TourSiteContentID+'" value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
 	$("#addListUl").append(UlList);
+	$("#addListUl").prepend(inputList);
 	
 	//list 드래그 시 sortable(애니메이션 방식)
 	$("#addListUl").sortable({

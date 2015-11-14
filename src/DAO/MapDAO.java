@@ -27,6 +27,11 @@ public class MapDAO {
 			e.printStackTrace();
 		}
 	}
+	public boolean insertTourPath(){
+		boolean flag = false;
+		
+		return flag;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public JSONObject getJSONObject(String sql, String tourSiteContentID){

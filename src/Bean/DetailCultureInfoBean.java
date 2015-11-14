@@ -3,11 +3,11 @@ package Bean;
 //문화시설 디테일
 public class DetailCultureInfoBean {
 	private String detailCultureInfoAcconCountCulture;
-	private String detailCultureInfoChkBabyCarrageCulture;
+	private String detailCultureInfoChkBabyCarriageCulture;
 	private String detailCultureInfoChkCreditCardCulture;
 	private String detailCultureInfoChkPetCulture;
 	private String detailCultureInfoDiscountInfo;
-	private String detailCultureInfoCenterCulture;
+	private String detailCultureInfoInfoCenterCulture;
 	private String detailCultureInfoParkingCulture;
 	private String detailCultureInfoParkingFee;
 	private String detailCultureInfoRestDateCulture;
@@ -38,11 +38,12 @@ public class DetailCultureInfoBean {
 	public void setDetailCultureInfoAcconCountCulture(String detailCultureInfoAcconCountCulture) {
 		this.detailCultureInfoAcconCountCulture = detailCultureInfoAcconCountCulture;
 	}
-	public String getDetailCultureInfoChkBabyCarrageCulture() {
-		return detailCultureInfoChkBabyCarrageCulture;
+	
+	public String getDetailCultureInfoChkBabyCarriageCulture() {
+		return detailCultureInfoChkBabyCarriageCulture;
 	}
-	public void setDetailCultureInfoChkBabyCarrageCulture(String detailCultureInfoChkBabyCarrageCulture) {
-		this.detailCultureInfoChkBabyCarrageCulture = detailCultureInfoChkBabyCarrageCulture;
+	public void setDetailCultureInfoChkBabyCarriageCulture(String detailCultureInfoChkBabyCarriageCulture) {
+		this.detailCultureInfoChkBabyCarriageCulture = detailCultureInfoChkBabyCarriageCulture;
 	}
 	public String getDetailCultureInfoChkCreditCardCulture() {
 		return detailCultureInfoChkCreditCardCulture;
@@ -62,11 +63,11 @@ public class DetailCultureInfoBean {
 	public void setDetailCultureInfoDiscountInfo(String detailCultureInfoDiscountInfo) {
 		this.detailCultureInfoDiscountInfo = detailCultureInfoDiscountInfo;
 	}
-	public String getDetailCultureInfoCenterCulture() {
-		return detailCultureInfoCenterCulture;
+	public String getDetailCultureInfoInfoCenterCulture() {
+		return detailCultureInfoInfoCenterCulture;
 	}
-	public void setDetailCultureInfoCenterCulture(String detailCultureInfoCenterCulture) {
-		this.detailCultureInfoCenterCulture = detailCultureInfoCenterCulture;
+	public void setDetailCultureInfoInfoCenterCulture(String detailCultureInfoInfoCenterCulture) {
+		this.detailCultureInfoInfoCenterCulture = detailCultureInfoInfoCenterCulture;
 	}
 	public String getDetailCultureInfoParkingCulture() {
 		return detailCultureInfoParkingCulture;

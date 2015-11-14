@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String uri = request.getContextPath();
 %>
@@ -54,11 +53,11 @@
 				</div>
 				<div class="row">
 				<br/>
-				<form method="post" action="setTourCourse.jsp">
+				<form id="subFrm" name="subFrm" method="post" action="setTourCourse.jsp">
 					<ul id="addListUl" class="list-group">
 						<li id="startPath" class="list-group-item disabled">출발지</li>
 					</ul>
-					<button type="submit" class="btn btn-danger">경로 저장하기</button>
+					<button id="subBtn" type="submit" class="btn btn-danger">경로 저장하기</button>
 					<p id="test"></p>
 				</form>
 				</div>
