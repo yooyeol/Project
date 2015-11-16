@@ -22,7 +22,7 @@ $(document).ready(function(){
 		xhttp.send();
 		xhttp.onreadystatechange = function() {
 		    if (xhttp.readyState == 4 && xhttp.status == 200) {
-		    	alert("�씠 寃뚯떆臾쇱쓣 醫뗭븘�빀�땲�떎.");
+		    	alert("이 게시물을 좋아합니다.");
 		    }
 		};
 	}
@@ -34,7 +34,7 @@ $(document).ready(function(){
 		xhttp.send();
 		xhttp.onreadystatechange = function() {
 		    if (xhttp.readyState == 4 && xhttp.status == 200) {
-		    	alert("�씠 寃뚯떆臾쇱쓣 �떕�뼱 �빀�땲�떎.");
+		    	alert("이 게시물을 싫어합니다.");
 		    }
 		};
 	}

@@ -38,9 +38,26 @@ public class BoardBean {
 	private String TourCourseDate;
 	private int TourCourseSequence;
 	private int TourSiteContentID;
+	private int MemberGroup;
+	
+	/*tourSite*/
+	private String TourSiteTitle;
 	
 	
 	
+	
+	public String getTourSiteTitle() {
+		return TourSiteTitle;
+	}
+	public void setTourSiteTitle(String tourSiteTitle) {
+		TourSiteTitle = tourSiteTitle;
+	}
+	public int getMemberGroup() {
+		return MemberGroup;
+	}
+	public void setMemberGroup(int memberGroup) {
+		MemberGroup = memberGroup;
+	}
 	public String getTourCourseDate() {
 		return TourCourseDate;
 	}

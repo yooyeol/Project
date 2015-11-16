@@ -6,6 +6,5 @@
 <%
 	int MessageID = Integer.parseInt(request.getParameter("MessageID"));
 	int MemberID=Integer.parseInt(request.getParameter("MemberID"));
-	upCount.upGoodCount(MessageID,MemberID);
-	
+	upCount.upPoorCount(MessageID,MemberID);
 %>

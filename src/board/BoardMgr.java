@@ -55,6 +55,7 @@ public class BoardMgr {
 				bean.setTourCourseDate(rs.getString("tourCourseDate"));
 				bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
 				bean.setTourSiteContentID(rs.getInt("tourSiteContentID"));
+				bean.setMemberGroup(rs.getInt("MemberGroup"));
 				
 				courseList.add(bean);
 			}
@@ -166,14 +167,16 @@ public class BoardMgr {
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}*/
-			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID)";
-			sql += "values(?, ?, now(), ?, ?, ?)";
+			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID,MemberGroup)";
+			sql += "values(?, ?, now(), ?, ?, ?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("MessageTitle"));
 			pstmt.setString(2, content);
 			pstmt.setInt(3, Integer.parseInt(multi.getParameter("MessageSiteGrade")));
 			pstmt.setString(4, multi.getParameter("MemberEmail"));
-			pstmt.setString(5, multi.getParameter("MemberID"));
+			pstmt.setInt(5,Integer.parseInt(multi.getParameter("MemberID")));
+			pstmt.setInt(6,Integer.parseInt(multi.getParameter("memberGroup")));
+			
 			
 			
 			/*pstmt.setInt(6, Integer.parseInt(multi.getParameter("TourCourseID")));
@@ -216,12 +219,17 @@ public class BoardMgr {
 					bean.setMessageGoodCount(rs.getInt("messageGoodCount"));
 					bean.setMessageClick(rs.getInt("messageClick"));
 					bean.setMessageSiteGrade(rs.getInt("messageSiteGrade"));
+					bean.setMemberID(rs.getInt("memberID"));
+					bean.setMemberGroup(rs.getInt("memberGroup"));
 					/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 					System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
 					bean.setFilesize(rs.getInt("filesize"));
 					bean.setIp(rs.getString("ip"));
 					*/
 				}
+				
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -230,8 +238,36 @@ public class BoardMgr {
 			return bean;
 		}
 
-		
-		
+		//코스리턴 리스트(boardDetail용)
+		public Vector<BoardBean> getMemberCourse(int memberID,int memberGroup) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			Vector<BoardBean> memberCourseList = new Vector<BoardBean>();
+			try {
+				con = pool.getConnection();
+				sql = "select toursite.TourSiteTitle,tourcourse.TourCourseID from toursite,tourcourse where toursite.TourSiteContentID=tourcourse.TourSiteContentID and tourcourse.MemberID=? and tourcourse.MemberGroup=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, memberID);
+				pstmt.setInt(2, memberGroup);
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BoardBean bean = new BoardBean();
+					
+					bean.setTourSiteTitle(rs.getString("tourSiteTitle"));
+					bean.setTourCourseID(rs.getInt("tourCourseID"));
+					
+					memberCourseList.add(bean);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return memberCourseList;
+		}
 		
 		
 		// 조회수 증가
@@ -265,7 +301,7 @@ public class BoardMgr {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
-				System.out.println("좋아증가");
+				
 			
 				
 				sql="select checkGood from prefer where MessageID=?";

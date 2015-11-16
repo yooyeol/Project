@@ -260,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
 							
-							
+							if(readcount<10){
 							
 					%>
 													
@@ -293,7 +293,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														
 														<div class="clearfix"></div>
 														<hr style="width:200px;">
-														<%}}//for%>
+														<%}}}//for%>
 													</div>
 												
 												</div>

@@ -71,9 +71,10 @@ request.setCharacterEncoding("UTF-8");
 int num=Integer.parseInt(request.getParameter("num"));
 String nowPage = request.getParameter("nowPage");
 String keyField = request.getParameter("keyField");
-String keyWord = request.getParameter("keyWord");
+String keyWord = request.getParameter("keyWord");/* 
 
-
+int memberID=Integer.parseInt(session.getAttribute("memberIdKey").toString());
+ */
 BoardBean bean = bMgr.getBoard(num);//게시물 가져오기
 bMgr.upreadCount(num);
 String name = bean.getMemberEmail();
@@ -81,6 +82,9 @@ String subject = bean.getMessageTitle();
 String postdate = bean.getMessagePostDate();
 String content = bean.getMessageContent();
 String filename = bean.getMessagePictureURL();
+int memberID=bean.getMemberID();
+int memberGroup=bean.getMemberGroup();
+
 int courseScore=bean.getMessageSiteGrade();
 /* int count=bean.getMessageClick(); */
 int start=0; //디비의 select 시작번호
@@ -89,7 +93,7 @@ int end=6; //시작번호로 부터 가져올 select 갯수
 int listSize=0; //현재 읽어온 게시물의 수
 
 Vector<BoardBean> vlist = null;
-
+Vector<BoardBean> memberCourseList=null;
 /* int filesize = bean.getFilesize();*/
  session.setAttribute("bean", bean);//게시물을 세션에 저장
 %>
@@ -323,9 +327,30 @@ Vector<BoardBean> vlist = null;
 			
 					<div class="blog-posts">
 					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
+					</br>
+					<%
+					memberCourseList = bMgr.getMemberCourse(memberID,memberGroup);
+				  listSize = memberCourseList.size();//브라우저 화면에 보여질 게시물갯수
+				  if (memberCourseList.isEmpty()) {
+					out.println("경로없음 ");
+				  } else {
+			%>
+			
+			<%
+					for (int i = 0;i<listSize; i++) {
+							BoardBean coursebean = memberCourseList.get(i);
+							String siteTitle = coursebean.getTourSiteTitle();
+							int courseID=bean.getTourCourseID();
+					%>
+					
+					<span style="font-size: 25px;font-weight: bold;"><%=siteTitle %> &nbsp;</span>
+			<%}} %>
+					
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
 					<span> ||| 게시자 평점 : <%=courseScore%> 점</span>
+					</div>
 					
+					<div>
 					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>">
 					<input id=GoodmemberID type="hidden" name="GoodmemberID" value="<%=session.getAttribute("memberIdKey")%>"> 
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" ></span> 좋아요
@@ -599,7 +624,7 @@ Vector<BoardBean> commentList = null;
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
 							
-							
+							if(readcount<10){
 							
 					%>
 													
@@ -632,7 +657,7 @@ Vector<BoardBean> commentList = null;
 														
 														<div class="clearfix"></div>
 														<hr style="width:200px;">
-														<%}//for%>
+														<%}}//for%>
 													</div>
 												
 												</div>

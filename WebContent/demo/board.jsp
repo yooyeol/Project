@@ -118,6 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	function read(num){
 		document.readFrm.num.value=num;
+		
 		document.readFrm.action="boardDetail.jsp";
 		document.readFrm.submit();
 	}
@@ -417,17 +418,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<%
 						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
-							BoardBean bean = vlist.get(i);
-							int num = bean.getMessageID();
+							BoardBean beanRight = vlist.get(i);
+							int num = beanRight.getMessageID();
 							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
-							String name = bean.getMemberEmail();
-							String subject = bean.getMessageTitle();
-							String postdate = bean.getMessagePostDate();
-							String content=beanContent.getMessageContent();
+							String name = beanRight.getMemberEmail();
+							String subject = beanRight.getMessageTitle();
+							String postdate = beanRight.getMessagePostDate();
+							String content=beanRight.getMessageContent();
 							
-							int readcount = bean.getMessageClick();
-							int goodcount=bean.getMessageGoodCount();
-							int poorcount = bean.getMessagePoorCount();
+							int readcount = beanRight.getMessageClick();
+							int goodcount=beanRight.getMessageGoodCount();
+							int poorcount = beanRight.getMessagePoorCount();
 							
 							if(readcount>10){
 							
@@ -491,19 +492,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<%
 						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
-							BoardBean bean = vlist.get(i);
-							int num = bean.getMessageID();
-							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
-							String name = bean.getMemberEmail();
-							String subject = bean.getMessageTitle();
-							String postdate = bean.getMessagePostDate();
-							String content=beanContent.getMessageContent();
+							BoardBean beanRight = vlist.get(i);
+							int num = beanRight.getMessageID();
+							BoardBean beanbean = bMgr.getBoard(num);//게시물 가져오기
+							String name = beanRight.getMemberEmail();
+							String subject = beanRight.getMessageTitle();
+							String postdate = beanRight.getMessagePostDate();
+							String content=beanRight.getMessageContent();
 							
-							int readcount = bean.getMessageClick();
-							int goodcount=bean.getMessageGoodCount();
-							int poorcount = bean.getMessagePoorCount();
+							int readcount = beanRight.getMessageClick();
+							int goodcount=beanRight.getMessageGoodCount();
+							int poorcount = beanRight.getMessagePoorCount();
 							
-							
+							if(readcount<=10){
 							
 					%>
 													
@@ -536,7 +537,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														
 														<div class="clearfix"></div>
 														<hr style="width:200px;">
-														<%}}//for%>
+														<%}}}//for%>
 													</div>
 												
 												</div>
@@ -618,6 +619,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<input type="hidden" name="nowPage" value="1">
 	</form>
 	<form name="readFrm" method="get">
+		
 		<input type="hidden" name="num" > 
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="keyField" value="<%=keyField%>"> 

@@ -176,6 +176,8 @@ $(document).ready(function(){
                                     
 					
 									<input type="hidden" name="MemberEmail" value="<%=session.getAttribute("idKey")%>">
+									<input type="hidden" name="MemberID" value="<%=session.getAttribute("memberIdKey")%>">
+									
                                   </form>
                               </div>
                      
