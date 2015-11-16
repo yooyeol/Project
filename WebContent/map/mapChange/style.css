@@ -14,7 +14,7 @@ path.region:hover {
     fill: #ff6347;
 }
 #map {
-    height: 500px;
+    height: 400px;
     width:100%;
 }
 .delete{

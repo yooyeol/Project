@@ -8,8 +8,14 @@ public class MemberBean {
 	private String memberAddr;
 	private String memberZipCode;
 	private int memberId;
+	private int memberGroup;
 	
-	
+	public int getMemberGroup() {
+		return memberGroup;
+	}
+	public void setMemberGroup(int memberGroup) {
+		this.memberGroup = memberGroup;
+	}
 	public int getMemberId() {
 		return memberId;
 	}

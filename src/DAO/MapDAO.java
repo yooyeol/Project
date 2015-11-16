@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.sql.Date;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -27,10 +24,30 @@ public class MapDAO {
 			e.printStackTrace();
 		}
 	}
-	public boolean insertTourPath(){
-		boolean flag = false;
-		
-		return flag;
+	public int insertTourPath(int memberId, String[] tourPath, int courseGroup){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO tourcourse(MemberID, TourCourseDate, TourCourseSequence, TourSiteContentID, TourCourseGroup) VALUES(?,curdate(),?,?,?)";
+		int result = 0;
+		try{
+			con = pool.getConnection();
+			System.out.println("tourPath.length : "+tourPath.length);
+			for(int i=0;i<tourPath.length;i++){
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, memberId);
+				pstmt.setInt(2, i);
+				pstmt.setInt(3, Integer.parseInt(tourPath[i]));
+				pstmt.setInt(4, courseGroup);
+				if(pstmt.execute()){
+					result++;
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt);
+		}
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -50,8 +67,6 @@ public class MapDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, tourSiteContentID);
 			rs = pstmt.executeQuery();
-			ResultSetMetaData metaData = rs.getMetaData();
-			int size = metaData.getColumnCount();
 
 			result = new JSONObject();
 			dataArray = new JSONArray();

@@ -63,22 +63,19 @@ function requestAjax(str1, str2){
 }
 //콘텐츠 타입 선택시 호출되는 Ajax에서 오른쪽 리스트 추가하는 부분
 function listAdd(jsonObject){
+	$("#tourListDiv").children().remove();
 	var tableList = "";
+	tableList += '<table id="tourList" class="table table-bordered table-hover"><thead><tr><th class="col-lg-3">이미지</th><th class="col-lg-7">상세정보</th><th class="col-lg-2">추가</th></tr></thead><tbody id="listTable">';
 	for(var i in jsonObject.datas){
-		tableList += '<tr><td rowspan="3" class="col-lg-3"><img src="' 
-			+ jsonObject.datas[i].TourSiteFirstImage+'"/></td></tr><tr><td><a href="javascript:detailPage('+ jsonObject.datas[i].TourSiteContentID +','+jsonObject.datas[i].ContentTypeID+')">'
-			+ jsonObject.datas[i].TourSiteTitle+'</a><button id="'+jsonObject.datas[i].TourSiteContentID+'" class="btn btn-default addition">경로추가</button></td></tr><tr><td>'
-			+ jsonObject.datas[i].TourSiteAddr+'<input class="'
-			+ jsonObject.datas[i].TourSiteContentID+'" value="'+jsonObject.datas[i].TourSiteMapX+'" type="hidden"/><input class="'
-			+ jsonObject.datas[i].TourSiteContentID+'" value="'+jsonObject.datas[i].TourSiteMapY+'" type="hidden"/></td></tr>';
-//		tableList += '<li id=\"'+jsonObject.datas[i].TourSiteContentID+'\" class="list-group-item" value="'+ jsonObject.datas[i].TourSiteContentID+'">' + jsonObject.datas[i].TourSiteTitle + '<span class="glyphicon glyphicon-plus add" style="float:right;"></span></li>';
+		tableList += '<tr><td class="col-lg-3"><img src="'+jsonObject.datas[i].TourSiteFirstImage+'"/></td>'
+			+'<td class="col-lg-7"><a href="javascript:detailPage('+jsonObject.datas[i].TourSiteContentID+','+jsonObject.datas[i].ContentTypeID+')">'+jsonObject.datas[i].TourSiteTitle+'</a></br>'+jsonObject.datas[i].TourSiteAddr+'</td>'
+			+'<td class="col-lg-2"><button id="'+jsonObject.datas[i].TourSiteContentID+'" class="btn btn-default addition">경로추가</button></td></tr>';
 	}
-	document.getElementById("listTable").innerHTML = tableList;
+	tableList += '</tbody></table>';
+	console.log(tableList);
+	$("#tourListDiv").append(tableList);
 	//리스트 페이징(잘 안되고 있음)
-	$('#tourList').paging({
-		limit:21,
-		activePage:1
-	});
+	$('#tourList').DataTable();
 }
 //리스트의 관광지를 클릭했을 때 나오는 상세 페이지
 function detailPage(TourSiteContentID, ContentTypeID){
@@ -92,6 +89,7 @@ $(document).on('click',".addition",function(){
 	//alert(TourSiteContentID);
 	requestTour(TourSiteContentID);
 });
+
 //삭제 버튼을 클릭했을 때 실행
 $(document).on("click",".delete",function(){
 	var listIndex = $(this).parent().prevAll().length;
@@ -99,7 +97,6 @@ $(document).on("click",".delete",function(){
 	deleteMarkers(listIndex);
 	$(this).parent().remove();
 	console.log("버튼 클릭된 곳 : "+listIndex);
-	
 });
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
@@ -119,9 +116,9 @@ function requestTour(TourSiteContentID){
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
 	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>';
-	var inputList = '<input id="'+jsonObject.datas[0].TourSiteContentID+'" value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
+	var inputList = '<input value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
 	$("#addListUl").append(UlList);
-	$("#addListUl").prepend(inputList);
+	$("#inputStart").append(inputList);
 	
 	//list 드래그 시 sortable(애니메이션 방식)
 	$("#addListUl").sortable({
@@ -131,71 +128,23 @@ function tourListAdd(jsonObject){
 	    stop: function(event, ui) {
 	        console.log("Start position: " + ui.item.startPos);
 	        console.log("New position: " + ui.item.index());
+	        /*var temp = mapLatLng[ui.item.startPos];
+	        mapLatLng[ui.item.startPos] = mapLatLng[ui.item.index()];
+	        mapLatLng[ui.item.index()] = temp;
+	        
+	        var tempPath = mapPath[ui.item.startPos];
+	        mapPath[ui.item.startPos] = mapPath[ui.item.index()];
+	        mapPath[ui.item.index()] = tempPath;*/
 	    }
 	});
-	
-	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
-}
-//구글맵에 마커를 전부 추가해주는 배열
-function setMapOnAll(){
-	for(var i=0;i<mapLatLng.length;i++){
-		mapLatLng[i].setMap(map);
-	}
-}
-function clearMarkers(){
-	setMapOnAll(null);
-}
-//마커 삭제
-function deleteMarkers(listIndex){
-	clearMarkers();
-	for(var i=listIndex;i<mapLatLng.length;i++){
-		mapLatLng[i] = mapLatLng[i+1];
-		mapPath[i] = mapPath[i+1];
-	}
-	mapPath.pop();
-	mapLatLng.pop();
-	drawLine();
-	setMapOnAll();
+	moveToLocation(jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY)
+	//addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
 }
 //구글맵 지역이동
 function moveToLocation(lat, lng){
 	var center = new google.maps.LatLng(lat, lng);
 	map.panTo(center);
 }
-//구글맵 마커 추가
-function addMarker(title, lng, lat){
-	var image = {
-		    url: '../beachflag2.png',
-		    size: new google.maps.Size(20, 32),
-		    origin: new google.maps.Point(0, 0),
-		    anchor: new google.maps.Point(0, 32)
-		  };
-	
-	marker = new google.maps.Marker({
-		position : {lat:Number(lat),lng:Number(lng)},
-		map : map,
-		icon: image,
-		title: title,
-		zIndex: zindex
-	});
-	
-	mapPath.push({index:zindex , lat:Number(lat), lng:Number(lng)});
-	zindex++;
-	mapLatLng.push(marker);
-	drawLine();
-	moveToLocation(lat, lng);
-}
-//전체 마커 
-function setMarkers(){
-	var image = {
-		    url: '../beachflag2.png',
-		    size: new google.maps.Size(20, 32),
-		    origin: new google.maps.Point(0, 0),
-		    anchor: new google.maps.Point(0, 32)
-	};	
-	
-}
-
 //구글맵 출발지 추가
 function geocodeAddress(startAddress){
 	var image = {
@@ -215,6 +164,60 @@ function geocodeAddress(startAddress){
 	});
 }
 
+
+//구글맵에 마커를 전부 추가해주는 배열
+function setMapOnAll(){
+	for(var i=0;i<mapLatLng.length;i++){
+		mapLatLng[i].setMap(map);
+	}
+}
+function clearMarkers(){
+	setMapOnAll(null);
+}
+function showMarkers(){
+	setMapOnAll(map);
+}
+//마커 순서 변경
+function changeMarker(){
+	
+}
+//마커 삭제
+function deleteMarkers(listIndex){
+	clearMarkers();
+	for(var i=listIndex;i<mapLatLng.length;i++){
+		mapLatLng[i] = mapLatLng[i+1];
+		mapPath[i] = mapPath[i+1];
+	}
+	mapPath.pop();
+	mapLatLng.pop();
+	drawLine();
+	setMapOnAll();
+}
+//구글맵 마커 추가
+function addMarker(title, lng, lat){
+	var image = {
+		    url: '../beachflag2.png',
+		    size: new google.maps.Size(20, 32),
+		    origin: new google.maps.Point(0, 0),
+		    anchor: new google.maps.Point(0, 32)
+		  };
+	
+	marker = new google.maps.Marker({
+		position : {lat:Number(lat),lng:Number(lng)},
+		map : map,
+		icon: image,
+		title: title,
+		zIndex: zindex
+	});
+	
+	mapPath.push({lat:Number(lat), lng:Number(lng)});
+	mapLatLng.push(marker);
+	zindex++;
+	drawLine();
+	moveToLocation(lat, lng);
+}
+
+
 //구글맵 경로 선
 function drawLine(){
 	userTourPath = new google.maps.Polyline({
@@ -224,7 +227,14 @@ function drawLine(){
 		strokeOpacity:1.0,
 		strokeWeight:2
 	});
+	removeLine();
+	addLine(userTourPath);
+}
+function addLine(userTourPath){
 	userTourPath.setMap(map);
+}
+function removeLine(){
+	userTourPath.setMap(null);
 }
 
 //지역 선택 시 구글맵 이동을 위한 좌표 구분
@@ -302,10 +312,13 @@ function selectAreaCode(areaCode){
 
 //구글맵 생성
 function initMap() {
-	var directionsDisplay = new google.maps.DirectionsRenderer;
-	var directionsService = new google.maps.DirectionsService;
-	  map = new google.maps.Map(document.getElementById('map'), {
+	 var directionsDisplay = new google.maps.DirectionsRenderer;
+	 var directionsService = new google.maps.DirectionsService;
+	 map = new google.maps.Map(document.getElementById('map'), {
 	    center: {lat: 37.5661932511, lng: 126.9827595315},
 	    zoom: 10
 	  });
+	 directionsDisplay.setMap(map);
+	 directionsDisplay.setPanel(document.getElementById("right-panel"));
+
 }

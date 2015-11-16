@@ -8,10 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>경로 설정하기</title>
 <link rel="stylesheet" href="<%=uri%>/map/mapChange/style.css"/>
-<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=uri%>/map/mapChange/js/jquery.dataTables.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="<%=uri%>/map/mapChange/js/jquery.dataTables.min.js"></script>
 <script src="<%=uri%>/map/mapChange/js/mapTabJs.js"></script>
 <script src="<%=uri%>/map/mapChange/js/paging.js"></script>
 <script src="<%=uri%>/map/mapChange/js/jquery-ui.js"></script>
@@ -24,7 +26,7 @@
 			헤더
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-5">
 				<div class="row">
 					<div id="map">지역을 먼저 선택해 주세요.</div>
 					<div id="right-panel"></div>
@@ -57,30 +59,26 @@
 					<ul id="addListUl" class="list-group">
 						<li id="startPath" class="list-group-item disabled">출발지</li>
 					</ul>
+					<div id="inputStart"></div>
 					<button id="subBtn" type="submit" class="btn btn-danger">경로 저장하기</button>
 					<p id="test"></p>
 				</form>
 				</div>
 			</div>
-			<div class="col-lg-6">
-			<div class="pagination">
-				
-			</div>
-				<table id="tourList" class="table table-bordered table-hover ">
+			<div id="tourListDiv" class="col-lg-7">
+				<table class="table table-bordered table-hover ">
 					<thead>
 						<tr>
-							<th colspan="3">여행지</th>
+							<th class="col-lg-3">이미지</th>
+							<th class="col-lg-7">상세정보</th>
+							<th class="col-lg-2">추가</th>
 						</tr>
 					</thead>
 					<tbody id="listTable">
 						<tr>
-							<td rowspan="3" class="col-lg-3">1*1</td>
-						</tr>
-						<tr>
-							<td>테스트<span class="glyphicon glyphicon-plus addition"></span></td>
-						</tr>
-						<tr>
-							<td>주소</td>
+							<td></td>
+							<td>지역검색 > 출발지 입력 > 타입선택 순</td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>

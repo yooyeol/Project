@@ -29,11 +29,10 @@ public class MemberDAO {
 	//이름 가져오기
 	public ArrayList<MemberBean> getName(String email){
 		ArrayList<MemberBean> list = new ArrayList<MemberBean>();
-		String name = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT MemberID, MemberName, MemberEmail FROM member where MemberEmail=?";
+		String sql = "SELECT MemberID, MemberName, MemberEmail, MemberGroup FROM member where MemberEmail=?";
 		try{
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -44,6 +43,7 @@ public class MemberDAO {
 				bean.setMemberId(rs.getInt(1));
 				bean.setMemberName(rs.getString(2));
 				bean.setMemberEmail(rs.getString(3));
+				bean.setMemberGroup(rs.getInt(4));
 				list.add(bean);
 			}
 		}catch(Exception e){
@@ -153,6 +153,19 @@ public class MemberDAO {
 			pool.freeConnection(con,pstmt,rs);
 		}
 		
+		return flag;
+	}
+	//로그아웃 시 그룹 증가
+	public boolean groupUp(int group, int memberId){
+		boolean flag = false;
+		try{
+			con = pool.getConnection();
+			sql = "UPDATE member SET MemberGroup = "+group+" WHERE MemberID = "+memberId;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt);
+		}
 		return flag;
 	}
 	

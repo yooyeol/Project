@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import org.json.simple.JSONArray;
@@ -498,12 +499,5 @@ public class DetailDAO {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return result;
-	}
-	
-	public static void main(String args[]){
-		DetailDAO d = new DetailDAO();
-		HashMap<String, String> sqlMap = new HashMap<String, String>();
-		sqlMap.put("12", "SELECT * FROM toursite, info, detailtourinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailtourinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-		System.out.println("getDetailTourInfo : "+d.getDetailObject(sqlMap, "125266", "12"));
 	}
 }

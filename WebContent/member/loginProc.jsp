@@ -9,10 +9,12 @@
 	ArrayList<MemberBean> list = mMgr.getName(email);
 	String name = null;
 	int id = 0;
+	int group = 0;
 	for(int i=0;i<list.size();i++){
 		MemberBean bean = list.get(i);
 		name = bean.getMemberName();
 		id = bean.getMemberId();
+		group = bean.getMemberGroup();
 	}
 	boolean flag = mMgr.loginMember(email, pass);
 	String uri = request.getContextPath();
@@ -24,6 +26,7 @@
 		session.setAttribute("idKey", email);
 		session.setAttribute("nameKey",name);
 		session.setAttribute("memberIdKey", id);
+		session.setAttribute("groupKey", group);
 %>
 		<script>
 		alert("<%=msg%>");
