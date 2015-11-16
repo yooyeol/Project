@@ -81,7 +81,7 @@ String subject = bean.getMessageTitle();
 String postdate = bean.getMessagePostDate();
 String content = bean.getMessageContent();
 String filename = bean.getMessagePictureURL();
-
+int courseScore=bean.getMessageSiteGrade();
 /* int count=bean.getMessageClick(); */
 int start=0; //디비의 select 시작번호
 int end=6; //시작번호로 부터 가져올 select 갯수
@@ -119,15 +119,14 @@ Vector<BoardBean> vlist = null;
 	<!-- header-section-starts-here -->
 	
 		
-
-
-	<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
 			<div class="wrap">
 				
 				<div class="num">
-					<p> Call us : 032 2352 782</p>
+						<ul><span style="color: white"><%=session.getAttribute("nameKey")%> 님 환영합니다.</sapn>&nbsp;&nbsp;&nbsp;<a style="color: white"  href="../main/LoginMain.jsp" ><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></ul>
+				
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -135,8 +134,12 @@ Vector<BoardBean> vlist = null;
 		<div class="header-bottom">
 			<div class="logo text-center">
 			
-				<a href="main.jsp"><img " src="images/mainLogo.jpg" alt="" /></a> 
-				
+		
+			
+				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
+				<div class="memberStatus" style="float: right;margin:5px;">
+			
+			</h4></div>
 			</div> 
 			
 			<div class="navigation">
@@ -156,24 +159,24 @@ Vector<BoardBean> vlist = null;
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					 <li><a href="main.jsp">Home</a></li>
-						<li ><a href="sports.html">GO TRAVELING</a></li>
-				 		<li ><a href="sports.html">공지사항</a></li>
+						<li><a href="course.jsp">GO TRAVELING</a></li>
+				 		<li><a href="notify.jsp">공지사항</a></li>
 						<li><a href="board.jsp">게시판</a></li>
 					  <li class="dropdown">
-						<a href="mypageMain.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
+						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="business.html">내 정보 조회</a></li>
+										<li><a href="mypage1.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">회원정보 수정</a></li>
+										<li><a href="mypage2.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>
-										<li><a href="business.html">나의 경로 보기</a></li>
+										<li><a href="mypage3.jsp">탈퇴하기</a></li>
 										<li class="divider"></li>
-										<li><a href="business.html">경로 바구니</a></li>
+										<li><a href="mypage4.jsp">나의 경로보기</a></li>
 										<li class="divider"></li>
-										<li><a href="shortcodes.html">탈퇴하기</a></li>
+										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
 								</div>
 								
@@ -206,7 +209,7 @@ Vector<BoardBean> vlist = null;
 			</div>
 			<!--/.navbar-collapse-->
 	 <!--/.navbar-->
-			</div>
+			</nav></div>
 		
 		</div>
 	</div>
@@ -216,20 +219,22 @@ Vector<BoardBean> vlist = null;
 			<div class="breaking_news">
 				<h2>공지사항</h2>
 			</div>
-			<div class="marquee">
-				<div class="marquee1"><a class="breaking" href="single.html">>>The standard chunk of Lorem Ipsum used since the 1500s is reproduced..</a></div>
-				<div class="marquee2"><a class="breaking" href="single.html">>>At vero eos et accusamus et iusto qui blanditiis praesentium voluptatum deleniti atque..</a></div>
+			<div class="marquee"><div style="width: 100000px; margin-left: 1370px; animation: marqueeAnimation-1795152 6.18248s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
+				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;게시판디비가 없는듯</a></div>
+				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;어허허허헣</a></div>
 				<div class="clearfix"></div>
-			</div>
+			</div></div></div>
 			<div class="clearfix"></div>
 			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
 			<script>
-			  $('.marquee').marquee({ pauseOnHover: true });
+			  $('.marquee').marquee({ pauseOnHover: true, 
+				speed:11000  
+			  });
 			  //@ sourceURL=pen.js
 			</script>
 		</div>
 	</div>
-	</nav>
+
 	<!-- header-section-ends-here ---------------------------------------------------------------------->
 	
 	
@@ -315,18 +320,18 @@ Vector<BoardBean> vlist = null;
 						
 				
 					
-					
+			
 					<div class="blog-posts">
 					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
-					<span> ||| 게시자 평점 : </span>
+					<span> ||| 게시자 평점 : <%=courseScore%> 점</span>
 					
-					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>" onclick="javascript:comment('<%=num%>')">
-					
+					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>">
+					<input id=GoodmemberID type="hidden" name="GoodmemberID" value="<%=session.getAttribute("memberIdKey")%>"> 
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" ></span> 좋아요
 					</button>
 					
-					<button id=upPoorCount type="submit" class="btn btn-default btn-lg" name="bad">
+					<button id=upPoorCount type="submit" class="btn btn-default btn-lg" name="bad" value="<%=num %>">
  						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
 					</button>
 					<button type="submit" class="btn btn-default btn-lg" name="cart">
@@ -336,7 +341,6 @@ Vector<BoardBean> vlist = null;
 					</div>
 					
 
- 	
 					
 					<div class="clearfix"></div>
 					<!--related-posts-->

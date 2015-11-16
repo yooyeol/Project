@@ -34,8 +34,31 @@ public class BoardBean {
 	private int goodCount;
 	private int poorCount;
 	
+	/*tourCourse*/
+	private String TourCourseDate;
+	private int TourCourseSequence;
+	private int TourSiteContentID;
 	
 	
+	
+	public String getTourCourseDate() {
+		return TourCourseDate;
+	}
+	public void setTourCourseDate(String tourCourseDate) {
+		TourCourseDate = tourCourseDate;
+	}
+	public int getTourCourseSequence() {
+		return TourCourseSequence;
+	}
+	public void setTourCourseSequence(int tourCourseSequence) {
+		TourCourseSequence = tourCourseSequence;
+	}
+	public int getTourSiteContentID() {
+		return TourSiteContentID;
+	}
+	public void setTourSiteContentID(int tourSiteContentID) {
+		TourSiteContentID = tourSiteContentID;
+	}
 	public String getMemberName() {
 		return MemberName;
 	}

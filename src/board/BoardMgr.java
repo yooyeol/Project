@@ -21,7 +21,7 @@ public class BoardMgr {
 
 	private DBConnectionMgr pool;/*
 	private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/ch14/fileupload";*/
-	private static final String  SAVEFOLDER = "E:/boardIMG";
+	private static final String  SAVEFOLDER = "boardIMG";
 	
 	
 	private static final String ENCTYPE = "UTF-8";
@@ -34,7 +34,39 @@ public class BoardMgr {
 			e.printStackTrace();
 		}
 	}
-
+//코스리스트
+	public Vector<BoardBean> getTourCourse(int memberID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<BoardBean> courseList = new Vector<BoardBean>();
+		try {
+			con = pool.getConnection();
+			sql = "SELECT * FROM tourcourse WHERE MemberID = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, memberID);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				BoardBean bean = new BoardBean();
+				
+				bean.setMemberID(rs.getInt("memberID"));
+				bean.setTourCourseID(rs.getInt("tourCourseID"));
+				bean.setTourCourseDate(rs.getString("tourCourseDate"));
+				bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
+				bean.setTourSiteContentID(rs.getInt("tourSiteContentID"));
+				
+				courseList.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return courseList;
+	}
+	
+	
 	// 게시판 리스트
 	public Vector<BoardBean> getBoardList(String keyField, String keyWord,
 			int start, int end) {
@@ -116,10 +148,11 @@ public class BoardMgr {
 			sql = "select max(MessageID)  from message";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			/*int ref = 1;
+			int ref = 1;
 			if (rs.next())
-				ref = rs.getInt(1) + 1;*/
+				ref = rs.getInt(1) + 1;
 			File file = new File(SAVEFOLDER);
+			System.out.println(file.getAbsolutePath());
 			if (!file.exists())
 				file.mkdirs();
 			multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
@@ -145,6 +178,11 @@ public class BoardMgr {
 			
 			/*pstmt.setInt(6, Integer.parseInt(multi.getParameter("TourCourseID")));
 			이거 추가해야함*/
+			pstmt.executeUpdate();
+			
+			sql="insert prefer(messageID) values(?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,ref);
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -177,7 +215,7 @@ public class BoardMgr {
 					bean.setMessagePoorCount(rs.getInt("messagePoorCount"));
 					bean.setMessageGoodCount(rs.getInt("messageGoodCount"));
 					bean.setMessageClick(rs.getInt("messageClick"));
-					
+					bean.setMessageSiteGrade(rs.getInt("messageSiteGrade"));
 					/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 					System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
 					bean.setFilesize(rs.getInt("filesize"));
@@ -192,6 +230,10 @@ public class BoardMgr {
 			return bean;
 		}
 
+		
+		
+		
+		
 		// 조회수 증가
 		public void upreadCount(int num) {
 			Connection con = null;
@@ -211,13 +253,111 @@ public class BoardMgr {
 		}
 		
 		//좋아요 증가
-		public void upGoodCount(int num) {
+		public void upGoodCount(int num, int memberID) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
+			ResultSet rs = null;
 			String sql = null;
+			MultipartRequest multi = null;
 			try {
 				con = pool.getConnection();
 				sql = "update message set MessageGoodCount=MessageGoodCount+1 where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+				System.out.println("좋아증가");
+			
+				
+				sql="select checkGood from prefer where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				rs= pstmt.executeQuery();
+				
+				int checkVal=5;
+				if (rs.next())
+					checkVal = rs.getInt(1);
+				
+				System.out.println(checkVal);
+				if(checkVal==0||checkVal==2){
+					sql="update prefer set checkGood=1,MemberID=? where MessageID=? ";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, memberID);
+					pstmt.setInt(2, num);
+					pstmt.executeUpdate();
+					
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt,rs);
+			}
+		}
+		
+		//싫어요 증가
+		public void upPoorCount(int num,int memberID) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "update message set MessagePoorCount=MessagePoorCount+1 where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+				
+				sql="select checkGood from prefer where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				rs= pstmt.executeQuery();
+				
+				int checkVal=5;
+				if (rs.next())
+					checkVal = rs.getInt(1);
+				
+				System.out.println(checkVal);
+				if(checkVal==0||checkVal==1){
+					sql="update prefer set checkGood=2,MemberID=? where MessageID=? ";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, memberID);
+					pstmt.setInt(2, num);
+					pstmt.executeUpdate();
+					
+				}
+				
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt,rs);
+			}
+		}
+		
+		//카운트 체크
+		
+	/*
+		public void checkPrefer(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				
+				sql="select checkGood where MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				rs= pstmt.executeQuery();
+				
+				int checkVal=0;
+				
+				if(rs.getInt(1)==0)
+				
+				sql = "update prefer set checkGood=1 where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
@@ -228,6 +368,7 @@ public class BoardMgr {
 			}
 		}
 		
+		*/
 	/*댓글입력*/
 		public void insertComment(HttpServletRequest req) {
 			Connection con = null;

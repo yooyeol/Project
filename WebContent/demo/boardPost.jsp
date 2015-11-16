@@ -85,7 +85,7 @@ $(document).ready(function(){
             <div class="col-md-12" >
            
                          
-                              <div class="well" style="padding-bottom: 50px;"> 
+                                  <div class="well" style="padding-bottom: 50px;"> 
                                    <form class="form-horizontal" role="form" name="postFrm" method="post" action="boardPostProc.jsp" enctype="multipart/form-data">
                                     <h3><bold>What's New</h3></br>
                                      <div class="form-group" style="padding-left: 14px;padding-bottom:0;">
@@ -102,8 +102,36 @@ $(document).ready(function(){
                                       <textarea id="textArea" class="form-control"  name="MessageContent" style="height: 600px;"> </textarea> 
                                     </div>
                                     
+                                    <div class="form-group" style="padding:14px;">
+                                    <select name="courseDate" onchange="showCourse(this.value)">
+                                    <option value="">경로선택하기</option>
+                                   <option value="<%=session.getAttribute("memberIdKey")%>">여행경로 보기</option> 
+                                    </select>
+                                    <div id="txtHint">여행 경로를 골라 주세요..</div>
+                                    </div>
+                                   <script >
+                                   function showCourse(str){
+                                	   var xhttp;
+                                	   if(str==""){
+                                		   document.getElementById("txtHint").innerHTML="";
+                                		   return;
+                                	   }
+                                	   
+                                	   xhttp=new XMLHttpRequest();
+                                	   xhttp.onreadystatechange=function(){
+                                		   if(xhttp.readyState==4&&xhttp.status==200){
+                                			   document.getElementById("txtHint").innerHTML=xhttp.responseText;
+                                		   }
+                                	   };
+                                	   xhttp.open("GET", "getTourCourse.jsp?MemberID="+str,true);
+                                	   xhttp.send();
+                                   }
+                                   
+                                   </script>
+                                   
                                    
                                        <div class="btn-group" role="group" aria-label="...">
+                                       
   										<button type="button" class="btn btn-default">
   											<span class="glyphicon glyphicon-map-marker" aria-hidden="true" name="TourCourseID"></span> 경로등록
   										</button>
@@ -151,6 +179,7 @@ $(document).ready(function(){
                                   </form>
                               </div>
                      
+         
          
           
     
