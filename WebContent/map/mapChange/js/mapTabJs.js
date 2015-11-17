@@ -44,6 +44,11 @@ $(document).ready(function(){
 function startAddressInsert(e){
 	var startAddress = e;
 	geocodeAddress(startAddress);
+	var radioListAdd = '<label class="radio-inline">'
+		+'<input type="radio" name="startRadio" value="'+startAddress+'"/>'
+		+'출발지'
+		+'</label>';
+	$("#radioGroup1").append(radioListAdd);
 }
 
 //콘텐츠 타입 선택 시 호출되는 Ajax
@@ -74,7 +79,7 @@ function listAdd(jsonObject){
 	tableList += '</tbody></table>';
 	console.log(tableList);
 	$("#tourListDiv").append(tableList);
-	//리스트 페이징(잘 안되고 있음)
+	//테이블 페이징
 	$('#tourList').DataTable();
 }
 //리스트의 관광지를 클릭했을 때 나오는 상세 페이지
@@ -86,7 +91,6 @@ function detailPage(TourSiteContentID, ContentTypeID){
 //경로추가 버튼을 클릭했을 때 실행
 $(document).on('click',".addition",function(){
 	var TourSiteContentID = $(this).attr("id");
-	//alert(TourSiteContentID);
 	requestTour(TourSiteContentID);
 });
 
@@ -120,6 +124,14 @@ function tourListAdd(jsonObject){
 	$("#addListUl").append(UlList);
 	$("#inputStart").append(inputList);
 	
+	//라디오 버튼 추가부분
+	var radioListAdd = '<label class="radio-inline">'
+		+'<input type="radio" name="startRadio" value="'+jsonObject.datas[0].TourSiteAddr+'"/>'
+		+jsonObject.datas[0].TourSiteTitle
+		+'</label>';
+	$("#radioGroup1").append(radioListAdd);
+	$("#radioGroup2").append(radioListAdd);
+	
 	//list 드래그 시 sortable(애니메이션 방식)
 	$("#addListUl").sortable({
 		start: function(event, ui) {
@@ -137,8 +149,7 @@ function tourListAdd(jsonObject){
 	        mapPath[ui.item.index()] = tempPath;*/
 	    }
 	});
-	moveToLocation(jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY)
-	//addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
+	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);
 }
 //구글맵 지역이동
 function moveToLocation(lat, lng){
@@ -163,7 +174,6 @@ function geocodeAddress(startAddress){
 		}
 	});
 }
-
 
 //구글맵에 마커를 전부 추가해주는 배열
 function setMapOnAll(){
@@ -190,7 +200,6 @@ function deleteMarkers(listIndex){
 	}
 	mapPath.pop();
 	mapLatLng.pop();
-	drawLine();
 	setMapOnAll();
 }
 //구글맵 마커 추가
@@ -213,28 +222,7 @@ function addMarker(title, lng, lat){
 	mapPath.push({lat:Number(lat), lng:Number(lng)});
 	mapLatLng.push(marker);
 	zindex++;
-	drawLine();
 	moveToLocation(lat, lng);
-}
-
-
-//구글맵 경로 선
-function drawLine(){
-	userTourPath = new google.maps.Polyline({
-		path:mapPath,
-		geodesic:true,
-		strokeColor:'#FF0000',
-		strokeOpacity:1.0,
-		strokeWeight:2
-	});
-	removeLine();
-	addLine(userTourPath);
-}
-function addLine(userTourPath){
-	userTourPath.setMap(map);
-}
-function removeLine(){
-	userTourPath.setMap(null);
 }
 
 //지역 선택 시 구글맵 이동을 위한 좌표 구분
@@ -318,7 +306,5 @@ function initMap() {
 	    center: {lat: 37.5661932511, lng: 126.9827595315},
 	    zoom: 10
 	  });
-	 directionsDisplay.setMap(map);
-	 directionsDisplay.setPanel(document.getElementById("right-panel"));
 
 }
