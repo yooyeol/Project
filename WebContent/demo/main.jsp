@@ -79,7 +79,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	<!-- footer-section-starts-here -->
-	<%@include file="mainFooter.jsp" %>
+	<%@include file="mainFooter.jsp"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
 				/*
