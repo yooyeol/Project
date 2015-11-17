@@ -44,11 +44,6 @@ $(document).ready(function(){
 function startAddressInsert(e){
 	var startAddress = e;
 	geocodeAddress(startAddress);
-	var radioListAdd = '<label class="radio-inline">'
-		+'<input type="radio" name="startRadio" value="'+startAddress+'"/>'
-		+'출발지'
-		+'</label>';
-	$("#radioGroup1").append(radioListAdd);
 }
 
 //콘텐츠 타입 선택 시 호출되는 Ajax
@@ -103,6 +98,11 @@ $(document).on("click",".delete",function(){
 	console.log("버튼 클릭된 곳 : "+listIndex);
 });
 
+$(document).on("click",".tourList",function(){
+	alert($(this).prevAll());
+	alert($(this).prevAll().index());
+});
+
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
 function requestTour(TourSiteContentID){
 	xhttp = new XMLHttpRequest();
@@ -119,18 +119,10 @@ function requestTour(TourSiteContentID){
 }
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
-	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>';
+	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item tourList" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>';
 	var inputList = '<input value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
 	$("#addListUl").append(UlList);
 	$("#inputStart").append(inputList);
-	
-	//라디오 버튼 추가부분
-	var radioListAdd = '<label class="radio-inline">'
-		+'<input type="radio" name="startRadio" value="'+jsonObject.datas[0].TourSiteAddr+'"/>'
-		+jsonObject.datas[0].TourSiteTitle
-		+'</label>';
-	$("#radioGroup1").append(radioListAdd);
-	$("#radioGroup2").append(radioListAdd);
 	
 	//list 드래그 시 sortable(애니메이션 방식)
 	$("#addListUl").sortable({
@@ -140,13 +132,6 @@ function tourListAdd(jsonObject){
 	    stop: function(event, ui) {
 	        console.log("Start position: " + ui.item.startPos);
 	        console.log("New position: " + ui.item.index());
-	        /*var temp = mapLatLng[ui.item.startPos];
-	        mapLatLng[ui.item.startPos] = mapLatLng[ui.item.index()];
-	        mapLatLng[ui.item.index()] = temp;
-	        
-	        var tempPath = mapPath[ui.item.startPos];
-	        mapPath[ui.item.startPos] = mapPath[ui.item.index()];
-	        mapPath[ui.item.index()] = tempPath;*/
 	    }
 	});
 	addMarker(jsonObject.datas[0].TourSiteTitle, jsonObject.datas[0].TourSiteMapX, jsonObject.datas[0].TourSiteMapY);

@@ -56,32 +56,6 @@
 				<div class="row" style="width:90%; margin:20px;">
 				<br/>
 				<form id="subFrm" name="subFrm" method="post" action="setTourCourse.jsp">
-					<div class="row">
-						<h3><span class="label label-default">경로탐색</span></h3>
-						<div id="radioGroup1" class="btn-group">
-							<label class="label label-default">
-							출발지
-							</label>
-							&nbsp;&nbsp;&nbsp;
-						</div>
-					</div>
-					<div class="row">
-						<div id="radioGroup2" class="btn-group">
-							<label class="label label-default">
-							도착지
-							</label>
-							&nbsp;&nbsp;&nbsp;
-							<label class="radio-inline">
-								<input type="radio" name="endRadio"/>Option 1
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="endRadio"/>Option 2
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="endRadio"/>Option 3
-							</label>
-						</div>
-					</div>
 					<br/>
 					<ul id="addListUl" class="list-group">
 						<li id="startPath" class="list-group-item disabled">출발지</li>
