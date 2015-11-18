@@ -247,7 +247,7 @@ public class BoardMgr {
 			Vector<BoardBean> memberCourseList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "select toursite.TourSiteTitle,tourcourse.TourCourseID from toursite,tourcourse where toursite.TourSiteContentID=tourcourse.TourSiteContentID and tourcourse.MemberID=? and tourcourse.MemberGroup=?";
+				sql = "select toursite.TourSiteTitle,tourcourse.TourCourseID,tourcourse.TourCourseSequence from toursite,tourcourse where toursite.TourSiteContentID=tourcourse.TourSiteContentID and tourcourse.MemberID=? and tourcourse.MemberGroup=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
 				pstmt.setInt(2, memberGroup);
@@ -258,7 +258,7 @@ public class BoardMgr {
 					
 					bean.setTourSiteTitle(rs.getString("tourSiteTitle"));
 					bean.setTourCourseID(rs.getInt("tourCourseID"));
-					
+					bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
 					memberCourseList.add(bean);
 				}
 			} catch (Exception e) {
@@ -374,6 +374,38 @@ public class BoardMgr {
 			}
 		}
 		
+		
+		public int insertCart(String[] courseID,String[] courseSequence,int memberID){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "INSERT INTO courseCart(TourCourseID,TourCourseSequence,MemberID) VALUES(?,?,?)";
+			int result = 0;
+			try{
+				con = pool.getConnection();
+			
+				for(int i=0;i<courseID.length;i++){
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, Integer.parseInt(courseID[i]));
+					pstmt.setInt(2, Integer.parseInt(courseSequence[i]));
+					pstmt.setInt(3,memberID );
+					
+					if(pstmt.execute())
+					{result=1;
+					
+					}
+				}
+				sql="insert into courseCart(CartCut) VALUES(00000)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.execute();
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				pool.freeConnection(con, pstmt);
+			}
+			
+			return result;
+		
+		}
 		//카운트 체크
 		
 	/*

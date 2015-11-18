@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
+<title>게시판 상세페이지</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
@@ -59,8 +59,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 <script src="js/countControl.js"></script>
-
-
+<!-- <script src="js/getCart.js"></script>
+ -->
 <body style="height:1500px">
 
 
@@ -91,7 +91,8 @@ int start=0; //디비의 select 시작번호
 int end=6; //시작번호로 부터 가져올 select 갯수
 
 int listSize=0; //현재 읽어온 게시물의 수
-
+int courseID=0;
+int courseSequence=0;
 Vector<BoardBean> vlist = null;
 Vector<BoardBean> memberCourseList=null;
 /* int filesize = bean.getFilesize();*/
@@ -328,9 +329,23 @@ Vector<BoardBean> memberCourseList=null;
 					<div class="blog-posts">
 					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
 					</br>
+					
 					<%
+				/* 	불러온 코스ID저장할 리스트 */
+					/* Vector<BoardBean> resultList = null;
+					resultList.
+					 */
+					%>
+					
+					
+					<%
+					int [] setCourseID;
+					int [] setSequence;
+					
 					memberCourseList = bMgr.getMemberCourse(memberID,memberGroup);
 				  listSize = memberCourseList.size();//브라우저 화면에 보여질 게시물갯수
+				setCourseID=new int[listSize];
+				setSequence=new int[listSize];  
 				  if (memberCourseList.isEmpty()) {
 					out.println("경로없음 ");
 				  } else {
@@ -340,10 +355,20 @@ Vector<BoardBean> memberCourseList=null;
 					for (int i = 0;i<listSize; i++) {
 							BoardBean coursebean = memberCourseList.get(i);
 							String siteTitle = coursebean.getTourSiteTitle();
-							int courseID=bean.getTourCourseID();
+							 courseID=coursebean.getTourCourseID();
+							 courseSequence=coursebean.getTourCourseSequence();
+							setCourseID[i]=courseID;
+							setSequence[i]=courseSequence;
 					%>
 					
 					<span style="font-size: 25px;font-weight: bold;"><%=siteTitle %> &nbsp;</span>
+					<span style="font-size: 25px;font-weight: bold;"><%=courseID %> &nbsp;</span>
+					<span style="font-size: 25px;font-weight: bold;"><%=courseSequence %> &nbsp;</span>
+					
+					<input type="hidden" id="courseID" name="courseID" value="<%=courseID%>">
+					<input type="hidden" id="listsize" value="<%=listSize %>">
+					
+					
 			<%}} %>
 					
 					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
@@ -359,9 +384,26 @@ Vector<BoardBean> memberCourseList=null;
 					<button id=upPoorCount type="submit" class="btn btn-default btn-lg" name="bad" value="<%=num %>">
  						 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 별로
 					</button>
-					<button type="submit" class="btn btn-default btn-lg" name="cart">
+					
+					<form id=setCart  method="post"  action="getCart.jsp">
+					<button id=getCart type="submit" class="btn btn-default btn-lg" >
+					<input type="hidden" id="listsize" name="listSize" value="<%=listSize %>">
+					<%for(int j=0;j<listSize;j++){
+					courseID=setCourseID[j];
+					courseSequence=setSequence[j];
+					%>
+						<input type="hidden" id="courseID" name="courseID" value="<%=courseID%>">
+						<input type="hidden" id="courseSequence" name="courseSequence" value="<%=courseSequence%>">
+						<%-- <input type="hidden" name="memberID" value="<%=session.getAttribute("memberIdKey") %>"> --%>
+					<%-- 	<input type="hidden" name="memberGroup" value="<%=memberGroup %>"> --%>
+						
+					
+					<%}%>
+					
  						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
 					</button>
+					</form>
+					
 					</h2>
 					</div>
 					

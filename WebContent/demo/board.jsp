@@ -6,12 +6,6 @@
 <jsp:useBean id="bMgr" class="board.BoardMgr" /> 
 
 
-<%-- <%
-	String uri = request.getContextPath();
-%>
-   --%>  
-<%-- <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean> --%>
-
 
 <!DOCTYPE html>
 <html>
@@ -145,8 +139,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 	<!-- header-section-starts-here -->
-	
-<nav class="navbar navbar-default navbar-fixed-top">
+ <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
 			<div class="wrap">
@@ -240,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		
 		</div>
 	</div>
-	</nav>
+	</nav> 
 	<div class="wrap">
 		<div class="move-text">
 			<div class="breaking_news">
