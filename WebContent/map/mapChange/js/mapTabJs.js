@@ -7,6 +7,7 @@ var mapPath=[];
 var userTourPath;
 var zindex=1, index = 1;
 var test;
+var endPoint, startPoint;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
@@ -98,10 +99,12 @@ $(document).on("click",".delete",function(){
 	console.log("버튼 클릭된 곳 : "+listIndex);
 });
 
-$(document).on("click",".tourList",function(){
-	alert($(this).prevAll());
-	alert($(this).prevAll().index());
-});
+//리스트 클릭 시 출발지,도착지 변수 넣기
+/*$(document).on("click",".tourList",function(){
+	endPath = $(this).children().eq(0).attr("value");
+	startPath = $(this).parent().children().eq($(this).index()-1).children().eq(0).attr("value");
+	alert(startPath +" / "+endPath);
+});*/
 
 //경로추가 되었을 때 실행되는 Ajax(내가 가는 여행지 목록에 추가하기 위한 검색작업)
 function requestTour(TourSiteContentID){
@@ -119,7 +122,7 @@ function requestTour(TourSiteContentID){
 }
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
-	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item tourList" >'+jsonObject.datas[0].TourSiteTitle+'<span class="glyphicon glyphicon-remove-circle delete"></li>';
+	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item tourList" >'+jsonObject.datas[0].TourSiteTitle+'<label class="tourSiteAddr" value="'+jsonObject.datas[0].TourSiteAddr+'" /><span class="glyphicon glyphicon-remove-circle delete"></li>';
 	var inputList = '<input value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
 	$("#addListUl").append(UlList);
 	$("#inputStart").append(inputList);
@@ -284,12 +287,34 @@ function selectAreaCode(areaCode){
 }
 
 //구글맵 생성
-function initMap() {
-	 var directionsDisplay = new google.maps.DirectionsRenderer;
-	 var directionsService = new google.maps.DirectionsService;
+function initMap() { 
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var directionsService = new google.maps.DirectionsService;
 	 map = new google.maps.Map(document.getElementById('map'), {
 	    center: {lat: 37.5661932511, lng: 126.9827595315},
 	    zoom: 10
 	  });
+	
+	 directionsDisplay.setMap(map);
+	 
+	 $(document).on('click','.tourList',function(){
+		endPoint = $(this).children().eq(0).attr("value");
+		startPoint = $(this).parent().children().eq($(this).index()-1).children().eq(0).attr("value");
+			
+		 calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
+	 });
+}
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint){
+	directionsService.route({
+		origin: startPoint,
+		destination: endPoint,
+		travelMode: google.maps.TravelMode.TRANSIT
+	},function(){
+		if(status === google.maps.DirectionsStatus.OK){
+			directionsDisplay.setDirections(response);
+		}else{
+			window.alert('Directions request failed due to '+status);
+		}
+	});
 }

@@ -81,6 +81,8 @@ public class MapDAO {
 				System.out.println("TourSiteMapX : " + rs.getString(3));
 				data.put("TourSiteMapY", rs.getString(4));
 				System.out.println("TourSiteMapY : " + rs.getString(4));
+				data.put("TourSiteAddr", rs.getString(5));
+				System.out.println("TourSiteMapY : " + rs.getString(5));
 				dataArray.add(data);
 			}
 			result.put("datas", dataArray);
