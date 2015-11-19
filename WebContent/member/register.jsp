@@ -31,8 +31,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
 <!-- web-fonts -->
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='styleseet' type'text/css'>
   
   
@@ -82,9 +82,7 @@ function zipCheck(){
 		<div class="header-top">
 			<div class="wrap">
 				
-				<div class="num">
-					<p> Call us : 032 2352 782</p>
-				</div>
+				
 				<div class="clearfix"></div>
 			</div>
 		</div>

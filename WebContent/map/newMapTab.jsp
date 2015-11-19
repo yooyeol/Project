@@ -7,16 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>경로 설정하기</title>
-<link rel="stylesheet" href="<%=uri%>/map/mapChange/style.css"/>
+<link rel="stylesheet" href="<%=uri%>/map/style.css"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=uri%>/map/mapChange/js/jquery.dataTables.min.css">
+<link rel="stylesheet" href="<%=uri%>/map/js/jquery.dataTables.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="<%=uri%>/map/mapChange/js/jquery.dataTables.min.js"></script>
-<script src="<%=uri%>/map/mapChange/js/mapTabJs.js"></script>
-<script src="<%=uri%>/map/mapChange/js/paging.js"></script>
-<script src="<%=uri%>/map/mapChange/js/jquery-ui.js"></script>
+<script src="<%=uri%>/map/js/jquery.dataTables.min.js"></script>
+<script src="<%=uri%>/map/js/mapTabJs.js"></script>
+<script src="<%=uri%>/map/js/paging.js"></script>
+<script src="<%=uri%>/map/js/jquery-ui.js"></script>
 
 </head>
 <body>

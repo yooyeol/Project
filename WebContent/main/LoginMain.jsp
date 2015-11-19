@@ -14,7 +14,7 @@ session.invalidate();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <meta name="keywords" content="User Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
-<link href="<%=uri %>/cssLogin/style.css" rel='stylesheet' type='text/css' />
+<link href="<%=uri %>/css/loginStyle.css" rel='stylesheet' type='text/css' />
 <!--web-fonts-->
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 

@@ -6,11 +6,6 @@
 <%
 	String areaCode = request.getParameter("areaCode");
 	String contentType = request.getParameter("contentType");
-/*  String paging = request.getParameter("paging");
-	int lastIndex = Integer.parseInt(paging) * 20;
-	int firstIndex = lastIndex - 20;
-	String index = String.valueOf(firstIndex) + ", " + String.valueOf(lastIndex);
-	System.out.println("page : " + paging); */
 	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteAddr, TourSiteMapX, TourSiteMapY, TourSiteFirstImage, ContentTypeID FROM TOURSITE WHERE TourSiteAreaCode=? AND ContentTypeID=?";
 	String result = listGet.getJSONObject(sql, areaCode, contentType).toString();
 %>

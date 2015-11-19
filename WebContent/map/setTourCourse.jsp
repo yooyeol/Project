@@ -8,9 +8,7 @@
 	String uri = request.getContextPath();
 	String[] tourPath = request.getParameterValues("tourPath");
 	int memberId = Integer.parseInt(session.getAttribute("memberIdKey").toString());
-	//int memberId = Integer.parseInt("1");
-	int courseGroup =  Integer.parseInt(session.getAttribute("groupKey").toString());
-	//int courseGroup = Integer.parseInt("0");
+	int courseGroup =  Integer.parseInt(session.getAttribute("groupKey").toString());;
 	int result = setCourse.insertTourPath(memberId, tourPath, courseGroup);
 	courseGroup += 1;
 	session.setAttribute("groupKey", courseGroup);
