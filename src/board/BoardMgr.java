@@ -43,7 +43,7 @@ public class BoardMgr {
 		Vector<BoardBean> courseList = new Vector<BoardBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM tourcourse WHERE MemberID = ? ";
+			sql = "SELECT * FROM TUORCOURSE WHERE MemberID = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memberID);
 			rs = pstmt.executeQuery();
@@ -55,7 +55,7 @@ public class BoardMgr {
 				bean.setTourCourseDate(rs.getString("tourCourseDate"));
 				bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
 				bean.setTourSiteContentID(rs.getInt("tourSiteContentID"));
-				bean.setMemberGroup(rs.getInt("MemberGroup"));
+				bean.setMemberGroup(rs.getInt("TourCourseGroup"));
 				
 				courseList.add(bean);
 			}
@@ -80,7 +80,7 @@ public class BoardMgr {
 			try {
 				con = pool.getConnection();
 				
-				sql = "select from courseCart,tourcourse where courseCart.TourCourseID=tourcourse.TourCourseID AND tourcourse.MemberID=2 AND tourcourse.MemberGroup=0;";
+				sql = "select from COURSECART,TOURCOURSE where COURSECART.TourCourseID=TOURCOURSE.TourCourseID AND TOURCOURSE.MemberID=2 AND tourcourse.MemberGroup=0;";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
 				rs = pstmt.executeQuery();
@@ -174,7 +174,7 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select * from message order by MessagePostDate desc limit ?, ?";
+				sql = "select * from MESSAGE order by MessagePostDate desc limit ?, ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
@@ -211,10 +211,10 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select count(MessageID) from message";
+				sql = "select count(MessageID) from MESSAGE";
 				pstmt = con.prepareStatement(sql);
 			} else {
-				sql = "select count(MessageID) from  message where " + keyField + " like ? ";
+				sql = "select count(MessageID) from  MESSAGE where " + keyField + " like ? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + keyWord + "%");
 			}
@@ -241,7 +241,7 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			con = pool.getConnection();
-			sql = "select max(MessageID)  from message";
+			sql = "select max(MessageID)  from MESSAGE";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			int ref = 1;
@@ -262,7 +262,7 @@ public class BoardMgr {
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}*/
-			sql = "insert message(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID,MemberGroup)";
+			sql = "insert MESSAGE(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID,MemberGroup)";
 			sql += "values(?, ?, now(), ?, ?, ?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("MessageTitle"));
@@ -278,7 +278,7 @@ public class BoardMgr {
 			이거 추가해야함*/
 			pstmt.executeUpdate();
 			
-			sql="insert prefer(messageID) values(?)";
+			sql="insert PREFER(messageID) values(?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,ref);
 			pstmt.executeUpdate();
@@ -300,7 +300,7 @@ public class BoardMgr {
 			BoardBean bean = new BoardBean();
 			try {
 				con = pool.getConnection();
-				sql = "select * from message where MessageID=?";
+				sql = "select * from MESSAGE where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
@@ -342,7 +342,7 @@ public class BoardMgr {
 			Vector<BoardBean> memberCourseList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "select toursite.TourSiteTitle,tourcourse.TourCourseID,tourcourse.TourCourseSequence from toursite,tourcourse where toursite.TourSiteContentID=tourcourse.TourSiteContentID and tourcourse.MemberID=? and tourcourse.MemberGroup=?";
+				sql = "select TOURSITE.TourSiteTitle,TOURCOURSE.TourCourseID,TOURCOURSE.TourCourseSequence from TOURSITE,TOURCOURSE where TOURSITE.TourSiteContentID=TOURCOURSE.TourSiteContentID and TOURCOURSE.MemberID=? and TOURCOURSE.TourCourseGroup=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
 				pstmt.setInt(2, memberGroup);
@@ -372,7 +372,7 @@ public class BoardMgr {
 			String sql = null;
 			try {
 				con = pool.getConnection();
-				sql = "update message set MessageClick=MessageClick+1 where MessageID=?";
+				sql = "update MESSAGE set MessageClick=MessageClick+1 where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
@@ -392,14 +392,14 @@ public class BoardMgr {
 			MultipartRequest multi = null;
 			try {
 				con = pool.getConnection();
-				sql = "update message set MessageGoodCount=MessageGoodCount+1 where MessageID=?";
+				sql = "update MESSAGE set MessageGoodCount=MessageGoodCount+1 where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
 				
 			
 				
-				sql="select checkGood from prefer where MessageID=?";
+				sql="select checkGood from PREFER where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs= pstmt.executeQuery();
@@ -410,7 +410,7 @@ public class BoardMgr {
 				
 				System.out.println(checkVal);
 				if(checkVal==0||checkVal==2){
-					sql="update prefer set checkGood=1,MemberID=? where MessageID=? ";
+					sql="update PREFER set checkGood=1,MemberID=? where MessageID=? ";
 					pstmt = con.prepareStatement(sql);
 					
 					pstmt.setInt(1, memberID);
@@ -435,12 +435,12 @@ public class BoardMgr {
 			String sql = null;
 			try {
 				con = pool.getConnection();
-				sql = "update message set MessagePoorCount=MessagePoorCount+1 where MessageID=?";
+				sql = "update MESSAGE set MessagePoorCount=MessagePoorCount+1 where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
 				
-				sql="select checkGood from prefer where MessageID=?";
+				sql="select checkGood from PREFER where MessageID=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs= pstmt.executeQuery();
@@ -451,7 +451,7 @@ public class BoardMgr {
 				
 				System.out.println(checkVal);
 				if(checkVal==0||checkVal==1){
-					sql="update prefer set checkGood=2,MemberID=? where MessageID=? ";
+					sql="update PREFER set checkGood=2,MemberID=? where MessageID=? ";
 					pstmt = con.prepareStatement(sql);
 					
 					pstmt.setInt(1, memberID);
@@ -473,7 +473,7 @@ public class BoardMgr {
 		public int insertCart(String[] courseID,String[] courseSequence,int memberID){
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "INSERT INTO courseCart(TourCourseID,TourCourseSequence,MemberID) VALUES(?,?,?)";
+			String sql = "INSERT INTO COURSECART(TourCourseID,TourCourseSequence,MemberID) VALUES(?,?,?)";
 			int result = 0;
 			try{
 				con = pool.getConnection();
@@ -489,7 +489,7 @@ public class BoardMgr {
 					
 					}
 				}
-				sql="insert into courseCart(CartCut) VALUES(00000)";
+				sql="insert into COURSECART(CartCut) VALUES(00000)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.execute();
 			}catch(Exception e){
@@ -543,7 +543,7 @@ public class BoardMgr {
 			String filename = null;
 			try {
 				con = pool.getConnection();
-				sql = "select max(ReplyID)  from reply";
+				sql = "select max(ReplyID)  from REPLY";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				int ref = 1;
@@ -569,7 +569,7 @@ public class BoardMgr {
 	  `ReplyPostDate` date DEFAULT NULL,
 	  `MemberID` int(10) DEFAULT NULL,
 	  `MessageID` int(10) DEFAULT NULL,*/
-				sql = "insert reply(ReplyContent,MessageID,ReplyPostDate,MemberID)";
+				sql = "insert REPLY(ReplyContent,MessageID,ReplyPostDate,MemberID)";
 				sql += "values(?,?,now(),?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,content);
@@ -598,7 +598,7 @@ public class BoardMgr {
 			Vector<BoardBean> commentList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM member m, reply r WHERE m.MemberID = r.MemberID AND r.MessageID = ? order by ReplyPostDate asc";
+				sql = "SELECT m.MemberName,r.ReplyContent,r.ReplyPostDate,r.MessageID FROM MEMBER m, REPLY r WHERE m.MemberID = r.MemberID AND r.MessageID = ? order by ReplyPostDate asc";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
@@ -630,7 +630,7 @@ public class BoardMgr {
 					BoardBean bean = new BoardBean();
 					try {
 						con = pool.getConnection();
-						sql = "select * from reply where MessageID=?";
+						sql = "select * from REPLY where MessageID=?";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setInt(1, num);
 						rs = pstmt.executeQuery();
