@@ -28,11 +28,7 @@
 	
 	JSONParser jsonParser = new JSONParser();
 	JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonStr);
-/* 	System.out.println("test : " + jsonObject);
-	System.out.println("testSize : " + jsonObject.size()); */
 	JSONArray jsonArray = (JSONArray) jsonObject.get("datas");
-/* 	System.out.println("testArray : " + jsonArray);
-	System.out.println("testArraySize : " + jsonArray.size()); */
 	
 	
 	for(int i=0;i<jsonArray.size();i++){

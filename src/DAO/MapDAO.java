@@ -27,7 +27,7 @@ public class MapDAO {
 	public int insertTourPath(int memberId, String[] tourPath, int courseGroup){
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO tourcourse(MemberID, TourCourseDate, TourCourseSequence, TourSiteContentID, TourCourseGroup) VALUES(?,curdate(),?,?,?)";
+		String sql = "INSERT INTO TOURCOURSE(MemberID, TourCourseDate, TourCourseSequence, TourSiteContentID, TourCourseGroup, TourCourseAddr) VALUES(?,curdate(),?,?,?,(SELECT TourSiteAddr FROM YogiJogi.TOURSITE WHERE TourSiteContentID=?))";
 		int result = 0;
 		try{
 			con = pool.getConnection();
@@ -38,6 +38,7 @@ public class MapDAO {
 				pstmt.setInt(2, i);
 				pstmt.setInt(3, Integer.parseInt(tourPath[i]));
 				pstmt.setInt(4, courseGroup);
+				pstmt.setInt(5, Integer.parseInt(tourPath[i]));
 				if(pstmt.execute()){
 					result++;
 				}

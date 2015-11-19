@@ -157,7 +157,7 @@ public class MemberDAO {
 		
 		return flag;
 	}
-	//로그아웃 시 그룹 증가
+	//경로추가 시 그룹 증가
 	public boolean groupUp(int group, int memberId ){
 		boolean flag = false;
 		try{
