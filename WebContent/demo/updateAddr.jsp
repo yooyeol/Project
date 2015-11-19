@@ -38,19 +38,20 @@ try {
  }
  try {
 	  
-    String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
-    String userId = "root";
-    String userPass = "root";
+    String url = "jdbc:mysql://kitri.iptime.org:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8";
+    String userId = "yogijogi";
+    String userPass = "yogijogi";
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "update member set memberZipCode=?, memberAddr=? where memberEmail=?";
+    sql = "update MEMBER set memberZipCode=?, memberAddr=? where memberEmail=?";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, addr1);
     pstmt.setString(2, addr2);
     pstmt.setString(3, id);
     pstmt.executeUpdate();
+    
     
   
 

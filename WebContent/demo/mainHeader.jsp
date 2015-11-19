@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.sql.*"%>
+	<%@page import="java.util.*"%>
 
 <%
 	String uri = request.getContextPath();
@@ -8,16 +10,17 @@
 <%-- <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean> --%>
 
 
+
+
 <!DOCTYPE html>
 <html> 
 <head>
-
 <title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
-<link href="<%=uri%>/demo/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<%=uri%>/demo/js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="<%=uri%>/demo/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   
  
-<script src="<%=uri%>/demo/js/responsiveslides.min.js"></script>
+<script src="js/responsiveslides.min.js"></script>
 	<script>
 		$(function () {
 		  $("#slider").responsiveSlides({
@@ -46,8 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  });
 		});
 	</script>
-	<script type="text/javascript" src="<%=uri%>/demo/js/move-top.js"></script>
-<script type="text/javascript" src="<%=uri%>/demo/js/easing.js"></script>
+	<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
 <!--/script-->
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -76,6 +79,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<!-- header-section-starts-here -->
 	
+	<%
+		String id = session.getAttribute("idKey").toString();
+		String member = session.getAttribute("memberIdKey").toString();
+		
+		
+		String sql = "select DISTINCT(tourCourseGroup) from TOURCOURSE where MemberID=?"; 
+		
+		
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (ClassNotFoundException e) {
+			out.println("class not found");
+		} catch (Exception etc) {
+			out.println("etc exception");
+			out.println(etc.getMessage());
+		}
+		try {
+
+			String url = "jdbc:mysql://kitri.iptime.org:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8";
+			String userId = "yogijogi";
+			String userPass = "yogijogi";
+
+			conn = DriverManager.getConnection(url, userId, userPass);
+
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member);
+			rs = pstmt.executeQuery();
+			int subcourse = 0;
+		
+				
+			%> 
+	
 
 
 	
@@ -96,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 		
 			
-				<a href="<%=uri%>/main.jsp"><img src="<%=uri%>/demo/images/mainLogo.jpg" alt=""></a> 
+				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
 			
 			</div> 
 			
@@ -132,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									    <li class="divider"></li>
 										<li><a href="mypage3.jsp">탈퇴하기</a></li>
 										<li class="divider"></li>
-										<li><a href="mypage4.jsp">나의 경로보기</a></li>
+										<li><a href="#" data-toggle="modal" data-target="#myModal">나의 경로보기</a></li>
 										<li class="divider"></li>
 										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
@@ -192,6 +232,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</script>
 		</div>
 	</div>
+	
+
+	
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">경로를 선택해 주세요</h4>
+        </div>
+        <div class="modal-body">
+        	<%
+			
+						while (rs.next()) {
+							
+							subcourse = rs.getInt(1);
+
+							
+							 %>
+							 
+							<form id="course" action="mypageCourse.jsp" method="post">
+          					<button name="course" class="btn btn-default" type="submit" value="<%=subcourse%>">나만의 경로-<%=subcourse %></button>
+      						</form>
+      						
+      					
+      						
+   <%
+						}
+   %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <%
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//out.println("SQLException : " + e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+	%> 	
 	
 	</body>
 	</html>

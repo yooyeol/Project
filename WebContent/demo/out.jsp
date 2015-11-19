@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	alert("탈퇴 되었습니다.")
-	location.href = "LoginMain.jsp";
+	location.href = "../main/LoginMain.jsp";
 </script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 request.setCharacterEncoding("utf-8");
 
 String id = session.getAttribute("idKey").toString();
-
+String member = session.getAttribute("memberIdKey").toString();
 
 
 String sql = "";
@@ -37,16 +37,16 @@ try {
  }
  try {
 	  
-    String url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8";
-    String userId = "root";
-    String userPass = "root";
+    String url = "jdbc:mysql://kitri.iptime.org:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8";
+    String userId = "yogijogi";
+    String userPass = "yogijogi";
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "delete from member where memberEmail = ?";
+    sql = "delete from member where MemberID = ?";
 
     pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, id);
+    pstmt.setString(1, member);
     pstmt.executeUpdate();
     
   
