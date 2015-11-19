@@ -7,14 +7,14 @@
 	request.setCharacterEncoding("UTF-8");
 	String uri = request.getContextPath();
 	String[] tourPath = request.getParameterValues("tourPath");
-	String memberId = session.getAttribute("memberIdKey").toString();
+	int memberId = Integer.parseInt(session.getAttribute("memberIdKey").toString());
 	//int memberId = Integer.parseInt("1");
-	String courseGroup = session.getAttribute("groupKey").toString();
+	int courseGroup =  Integer.parseInt(session.getAttribute("groupKey").toString());
 	//int courseGroup = Integer.parseInt("0");
-	int result = setCourse.insertTourPath(Integer.parseInt(memberId), tourPath, Integer.parseInt(courseGroup));
+	int result = setCourse.insertTourPath(memberId, tourPath, courseGroup);
 	courseGroup += 1;
 	session.setAttribute("groupKey", courseGroup);
-	setMember.groupUp(Integer.parseInt(courseGroup), Integer.parseInt(memberId));
+	setMember.groupUp(courseGroup, memberId);
 %>
 <%
 	if(result != 0){

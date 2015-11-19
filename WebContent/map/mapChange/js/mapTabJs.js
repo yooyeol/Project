@@ -3,10 +3,7 @@ var marker;
 var lat, lng;
 var popup;
 var mapLatLng = [];
-var mapPath=[];
-var userTourPath;
-var zindex=1, index = 1;
-var test;
+var zindex=1;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
@@ -14,7 +11,6 @@ var test;
   });
 } */
 $(document).ready(function(){
-	test = document.getElementsByClassName("tourList");
 	
 	//지역 선택 시
 	$("#areaSelect").click(function(){
@@ -163,34 +159,6 @@ function geocodeAddress(startAddress){
 		}
 	});
 }
-
-//구글맵에 마커를 전부 추가해주는 배열
-function setMapOnAll(){
-	for(var i=0;i<mapLatLng.length;i++){
-		mapLatLng[i].setMap(map);
-	}
-}
-function clearMarkers(){
-	setMapOnAll(null);
-}
-function showMarkers(){
-	setMapOnAll(map);
-}
-//마커 순서 변경
-function changeMarker(){
-	
-}
-//마커 삭제
-function deleteMarkers(listIndex){
-	clearMarkers();
-	for(var i=listIndex;i<mapLatLng.length;i++){
-		mapLatLng[i] = mapLatLng[i+1];
-		mapPath[i] = mapPath[i+1];
-	}
-	mapPath.pop();
-	mapLatLng.pop();
-	setMapOnAll();
-}
 //구글맵 마커 추가
 function addMarker(title, lng, lat){
 	var image = {
@@ -207,8 +175,6 @@ function addMarker(title, lng, lat){
 		title: title,
 		zIndex: zindex
 	});
-	
-	mapPath.push({lat:Number(lat), lng:Number(lng)});
 	mapLatLng.push(marker);
 	zindex++;
 	moveToLocation(lat, lng);
