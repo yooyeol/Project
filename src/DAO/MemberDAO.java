@@ -32,7 +32,7 @@ public class MemberDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT MemberID, MemberName, MemberEmail, MemberGroup FROM member where MemberEmail=?";
+		String sql = "SELECT MemberID, MemberName, MemberEmail, MemberGroup,MemberCart FROM MEMBER where MemberEmail=?";
 		try{
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -44,6 +44,8 @@ public class MemberDAO {
 				bean.setMemberName(rs.getString(2));
 				bean.setMemberEmail(rs.getString(3));
 				bean.setMemberGroup(rs.getInt(4));
+				bean.setMemberCart(rs.getInt(5));
+				
 				list.add(bean);
 			}
 		}catch(Exception e){
@@ -141,7 +143,7 @@ public class MemberDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "select MemberEmail, MemberPass from member where MemberEmail=? and MemberPass=PASSWORD(?)";
+			sql = "select MemberEmail, MemberPass from MEMBER where MemberEmail=? and MemberPass=PASSWORD(?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, pass);

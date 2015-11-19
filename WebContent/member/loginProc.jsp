@@ -10,11 +10,14 @@
 	String name = null;
 	int id = 0;
 	int group = 0;
+	int cartGroup=0;
 	for(int i=0;i<list.size();i++){
 		MemberBean bean = list.get(i);
 		name = bean.getMemberName();
 		id = bean.getMemberId();
 		group = bean.getMemberGroup();
+		cartGroup = bean.getMemberCart();
+		
 	}
 	boolean flag = mMgr.loginMember(email, pass);
 	String uri = request.getContextPath();
@@ -27,6 +30,7 @@
 		session.setAttribute("nameKey",name);
 		session.setAttribute("memberIdKey", id);
 		session.setAttribute("groupKey", group);
+		session.setAttribute("memberCart", cartGroup);
 %>
 		<script>
 		alert("<%=msg%>");

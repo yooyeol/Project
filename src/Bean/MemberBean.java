@@ -9,7 +9,14 @@ public class MemberBean {
 	private String memberZipCode;
 	private int memberId;
 	private int memberGroup;
+	private int memberCart;
 	
+	public int getMemberCart() {
+		return memberCart;
+	}
+	public void setMemberCart(int memberCart) {
+		this.memberCart = memberCart;
+	}
 	public int getMemberGroup() {
 		return memberGroup;
 	}

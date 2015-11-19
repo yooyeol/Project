@@ -43,9 +43,23 @@ public class BoardBean {
 	/*tourSite*/
 	private String TourSiteTitle;
 	
+	/*courseCart*/
+	private int CartCut;
+	private int CartIndex;
 	
 	
-	
+	public int getCartIndex() {
+		return CartIndex;
+	}
+	public void setCartIndex(int cartIndex) {
+		CartIndex = cartIndex;
+	}
+	public int getCartCut() {
+		return CartCut;
+	}
+	public void setCartCut(int cartCut) {
+		CartCut = cartCut;
+	}
 	public String getTourSiteTitle() {
 		return TourSiteTitle;
 	}

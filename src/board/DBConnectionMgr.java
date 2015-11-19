@@ -40,7 +40,7 @@ public class DBConnectionMgr {
     /*private String _driver = "org.gjt.mm.mysql.Driver",
     */
     private String _driver ="com.mysql.jdbc.Driver",
-    _url = "jdbc:mysql://kitri.iptime.org:3306/eztour?useUnicode=true&characterEncoding=UTF-8",
+    _url = "jdbc:mysql://kitri.iptime.org:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8",
     /*		_url = "jdbc:mysql://192.168.25.42:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8",
     */
     _user = "root",
