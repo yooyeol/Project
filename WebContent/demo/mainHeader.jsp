@@ -82,12 +82,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<%
 		String id = session.getAttribute("idKey").toString();
 		String member = session.getAttribute("memberIdKey").toString();
-		
-		
+
 		String sql = "select DISTINCT(tourCourseGroup) from TOURCOURSE where MemberID=?"; 
 		
-		
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -100,26 +97,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			out.println(etc.getMessage());
 		}
 		try {
-
 			String url = "jdbc:mysql://kitri.iptime.org:3306/YogiJogi?useUnicode=true&characterEncoding=UTF-8";
 			String userId = "yogijogi";
 			String userPass = "yogijogi";
-
 			conn = DriverManager.getConnection(url, userId, userPass);
-
-
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member);
 			rs = pstmt.executeQuery();
 			int subcourse = 0;
-		
-				
-			%> 
-	
-
-
-	
-
+%>
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="header-top">
@@ -143,15 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="navigation">
 				<nav class="navbar navbar-default" role="navigation">
 		   <div class="wrap">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				
-			</div>
+
 			<!--/.navbar-header-->
 		
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

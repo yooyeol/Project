@@ -30,10 +30,12 @@
 	JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonStr);
 	JSONArray jsonArray = (JSONArray) jsonObject.get("datas");
 	
-	
 	for(int i=0;i<jsonArray.size();i++){
 		JSONObject jsonValue = (JSONObject)jsonArray.get(i);
  		System.out.println("testJsonValue : "+jsonValue);
+ 		for(int j=0;j<colName.size();j++){
+ 			System.out.println("jsonGet : " + jsonValue.get(colName.get(j)));
+ 		}
 	}
 
 %> 

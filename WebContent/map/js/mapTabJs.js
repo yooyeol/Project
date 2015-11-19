@@ -166,9 +166,7 @@ function deleteMarkers(listIndex){
 	clearMarkers();
 	for(var i=listIndex;i<mapLatLng.length;i++){
 		mapLatLng[i] = mapLatLng[i+1];
-		mapPath[i] = mapPath[i+1];
 	}
-	mapPath.pop();
 	mapLatLng.pop();
 	setMapOnAll();
 }
@@ -189,7 +187,6 @@ function addMarker(title, lng, lat){
 		zIndex: zindex
 	});
 	
-	mapPath.push({lat:Number(lat), lng:Number(lng)});
 	mapLatLng.push(marker);
 	zindex++;
 	moveToLocation(lat, lng);
