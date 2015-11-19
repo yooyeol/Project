@@ -158,7 +158,7 @@ public class MemberDAO {
 		return flag;
 	}
 	//로그아웃 시 그룹 증가
-	public boolean groupUp(int group, int memberId){
+	public boolean groupUp(int group, int memberId ){
 		boolean flag = false;
 		try{
 			con = pool.getConnection();
@@ -170,5 +170,21 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+	
+	
+	//장바구니추가시 멤버카트 증가
+	public boolean memberCartUp(int memberCart, int memberId ){
+		boolean flag = false;
+		try{
+			con = pool.getConnection();
+			sql = "UPDATE MEMBER SET MemberCart = "+memberCart+" WHERE MemberID = "+memberId;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	
 	
 }
