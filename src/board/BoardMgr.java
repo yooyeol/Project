@@ -43,7 +43,7 @@ public class BoardMgr {
 		Vector<BoardBean> courseList = new Vector<BoardBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM TUORCOURSE WHERE MemberID = ? ";
+			sql = "SELECT * FROM TOURCOURSE WHERE MemberID = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memberID);
 			rs = pstmt.executeQuery();
@@ -270,7 +270,7 @@ public class BoardMgr {
 			pstmt.setInt(3, Integer.parseInt(multi.getParameter("MessageSiteGrade")));
 			pstmt.setString(4, multi.getParameter("MemberEmail"));
 			pstmt.setInt(5,Integer.parseInt(multi.getParameter("MemberID")));
-			pstmt.setInt(6,Integer.parseInt(multi.getParameter("TourCourseGroup")));
+			pstmt.setInt(6,Integer.parseInt(multi.getParameter("memberGroup")));
 			
 			
 			
@@ -470,10 +470,10 @@ public class BoardMgr {
 		}
 		
 		
-		public int insertCart(String[] courseID,int memberID){
+		public int insertCart(String[] courseID,int memberID,int CartGroup){
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "INSERT INTO COURSECART(TourCourseID,MemberID) VALUES(?,?)";
+			String sql = "INSERT INTO COURSECART(TourCourseID,MemberID,CartGroup) VALUES(?,?,?)";
 			int result = 0;
 			try{
 				con = pool.getConnection();
@@ -482,15 +482,15 @@ public class BoardMgr {
 					pstmt = con.prepareStatement(sql);
 					pstmt.setInt(1, Integer.parseInt(courseID[i]));
 					pstmt.setInt(2,memberID );
+					pstmt.setInt(3,CartGroup);
+					
 					
 					if(pstmt.execute())
 					{result=1;
 					
 					}
 				}
-				sql="insert into COURSECART(CartCut) VALUES(00000)";
-				pstmt = con.prepareStatement(sql);
-				pstmt.execute();
+				
 			}catch(Exception e){
 				e.printStackTrace();
 			}finally{

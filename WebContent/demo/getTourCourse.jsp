@@ -53,7 +53,7 @@ int result;
 							 tourCourseDate=bean.getTourCourseDate();
 							 tourSiteContentID=bean.getTourSiteContentID();
 							sequence=bean.getTourCourseSequence();
-							 MemberGroup=bean.getMemberGroup();
+							 MemberGroup=bean.getTourCourseGroup();
 					%>
 					
 					<h4>코스ID : <%=tourCourseID %> | courseDate: <%=tourCourseDate %> | tourSiteContentID : <%=tourSiteContentID %> |memberGroup: <%=MemberGroup %>

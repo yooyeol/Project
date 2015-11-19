@@ -23,7 +23,7 @@
  	
  	}
 
-	int result=board.insertCart(courseID,courseSequence,memberID);
+	int result=board.insertCart(courseID,memberID,memberCart);
 	memberCart +=1;
 	session.setAttribute("memberCart", memberCart);
 	member.memberCartUp(memberCart, memberID);
