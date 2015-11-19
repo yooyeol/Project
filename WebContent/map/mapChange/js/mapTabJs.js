@@ -7,7 +7,6 @@ var mapPath=[];
 var userTourPath;
 var zindex=1, index = 1;
 var test;
-var endPoint, startPoint;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
@@ -15,6 +14,8 @@ var endPoint, startPoint;
   });
 } */
 $(document).ready(function(){
+	test = document.getElementsByClassName("tourList");
+	
 	//지역 선택 시
 	$("#areaSelect").click(function(){
 		var url="svgMap.jsp";
@@ -298,10 +299,9 @@ function initMap() {
 	 directionsDisplay.setMap(map);
 	 
 	 $(document).on('click','.tourList',function(){
-		endPoint = $(this).children().eq(0).attr("value");
-		startPoint = $(this).parent().children().eq($(this).index()-1).children().eq(0).attr("value");
-			
-		 calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
+		var endPoint = $(this).children().eq(0).attr("value");
+		var startPoint = $(this).parent().children().eq($(this).index()-1).children().eq(0).attr("value");
+		calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
 	 });
 }
 
@@ -310,7 +310,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoi
 		origin: startPoint,
 		destination: endPoint,
 		travelMode: google.maps.TravelMode.TRANSIT
-	},function(){
+	},function(response, status){
 		if(status === google.maps.DirectionsStatus.OK){
 			directionsDisplay.setDirections(response);
 		}else{
