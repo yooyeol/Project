@@ -163,6 +163,8 @@ public class MemberDAO {
 		try{
 			con = pool.getConnection();
 			sql = "UPDATE member SET MemberGroup = "+group+" WHERE MemberID = "+memberId;
+			pstmt = con.prepareStatement(sql);
+			pstmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -178,6 +180,9 @@ public class MemberDAO {
 		try{
 			con = pool.getConnection();
 			sql = "UPDATE MEMBER SET MemberCart = "+memberCart+" WHERE MemberID = "+memberId;
+			pstmt = con.prepareStatement(sql);
+			pstmt.executeUpdate();
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -162,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-body">
 		<div class="wrap">
 			<h2>경로만들기</h2>
-		
+		<% %>
 			<div class="clearfix"></div>
 		</div>
 	</div>
