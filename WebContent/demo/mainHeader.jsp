@@ -13,11 +13,11 @@
 <head>
 
 <title>Express News a Entertainment Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
-<link href="<%=uri%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="<%=uri%>/demo/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<%=uri%>/js/jquery.min.js"></script>
+<script src="<%=uri%>/demo/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="<%=uri%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="<%=uri%>/demo/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   
  
-<script src="<%=uri%>/js/responsiveslides.min.js"></script>
+<script src="<%=uri%>/demo/js/responsiveslides.min.js"></script>
 	<script>
 		$(function () {
 		  $("#slider").responsiveSlides({
@@ -46,8 +46,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  });
 		});
 	</script>
-	<script type="text/javascript" src="<%=uri%>/js/move-top.js"></script>
-<script type="text/javascript" src="<%=uri%>/js/easing.js"></script>
+	<script type="text/javascript" src="<%=uri%>/demo/js/move-top.js"></script>
+<script type="text/javascript" src="<%=uri%>/demo/js/easing.js"></script>
 <!--/script-->
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
