@@ -55,7 +55,7 @@ public class BoardMgr {
 				bean.setTourCourseDate(rs.getString("tourCourseDate"));
 				bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
 				bean.setTourSiteContentID(rs.getInt("tourSiteContentID"));
-				bean.setMemberGroup(rs.getInt("TourCourseGroup"));
+				bean.setTourCourseGroup(rs.getInt("TourCourseGroup"));
 				
 				courseList.add(bean);
 			}
@@ -80,7 +80,7 @@ public class BoardMgr {
 			try {
 				con = pool.getConnection();
 				
-				sql = "select from COURSECART,TOURCOURSE where COURSECART.TourCourseID=TOURCOURSE.TourCourseID AND TOURCOURSE.MemberID=2 AND tourcourse.MemberGroup=0;";
+				sql = "select from COURSECART,TOURCOURSE where COURSECART.TourCourseID=TOURCOURSE.TourCourseID AND TOURCOURSE.MemberID=2 AND tourcourse.TourCourseGroup=0;";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
 				rs = pstmt.executeQuery();
@@ -262,7 +262,7 @@ public class BoardMgr {
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}*/
-			sql = "insert MESSAGE(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID,MemberGroup)";
+			sql = "insert MESSAGE(MessageTitle,MessageContent,MessagePostDate,MessageSiteGrade,MemberEmail,MemberID,TourCourseGroup)";
 			sql += "values(?, ?, now(), ?, ?, ?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("MessageTitle"));
@@ -270,7 +270,7 @@ public class BoardMgr {
 			pstmt.setInt(3, Integer.parseInt(multi.getParameter("MessageSiteGrade")));
 			pstmt.setString(4, multi.getParameter("MemberEmail"));
 			pstmt.setInt(5,Integer.parseInt(multi.getParameter("MemberID")));
-			pstmt.setInt(6,Integer.parseInt(multi.getParameter("memberGroup")));
+			pstmt.setInt(6,Integer.parseInt(multi.getParameter("TourCourseGroup")));
 			
 			
 			
@@ -315,7 +315,7 @@ public class BoardMgr {
 					bean.setMessageClick(rs.getInt("messageClick"));
 					bean.setMessageSiteGrade(rs.getInt("messageSiteGrade"));
 					bean.setMemberID(rs.getInt("memberID"));
-					bean.setMemberGroup(rs.getInt("memberGroup"));
+					bean.setTourCourseGroup(rs.getInt("TourCourseGroup"));
 					/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 					System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
 					bean.setFilesize(rs.getInt("filesize"));
@@ -334,7 +334,7 @@ public class BoardMgr {
 		}
 
 		//코스리턴 리스트(boardDetail용)
-		public Vector<BoardBean> getMemberCourse(int memberID,int memberGroup) {
+		public Vector<BoardBean> getMemberCourse(int memberID,int TourCourseGroup) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -345,7 +345,7 @@ public class BoardMgr {
 				sql = "select TOURSITE.TourSiteTitle,TOURCOURSE.TourCourseID,TOURCOURSE.TourCourseSequence from TOURSITE,TOURCOURSE where TOURSITE.TourSiteContentID=TOURCOURSE.TourSiteContentID and TOURCOURSE.MemberID=? and TOURCOURSE.TourCourseGroup=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
-				pstmt.setInt(2, memberGroup);
+				pstmt.setInt(2, TourCourseGroup);
 				
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
@@ -470,10 +470,10 @@ public class BoardMgr {
 		}
 		
 		
-		public int insertCart(String[] courseID,String[] courseSequence,int memberID){
+		public int insertCart(String[] courseID,int memberID){
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "INSERT INTO COURSECART(TourCourseID,TourCourseSequence,MemberID) VALUES(?,?,?)";
+			String sql = "INSERT INTO COURSECART(TourCourseID,MemberID) VALUES(?,?)";
 			int result = 0;
 			try{
 				con = pool.getConnection();
@@ -481,8 +481,7 @@ public class BoardMgr {
 				for(int i=0;i<courseID.length;i++){
 					pstmt = con.prepareStatement(sql);
 					pstmt.setInt(1, Integer.parseInt(courseID[i]));
-					pstmt.setInt(2, Integer.parseInt(courseSequence[i]));
-					pstmt.setInt(3,memberID );
+					pstmt.setInt(2,memberID );
 					
 					if(pstmt.execute())
 					{result=1;

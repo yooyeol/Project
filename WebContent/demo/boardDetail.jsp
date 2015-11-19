@@ -83,7 +83,7 @@ String postdate = bean.getMessagePostDate();
 String content = bean.getMessageContent();
 String filename = bean.getMessagePictureURL();
 int memberID=bean.getMemberID();
-int memberGroup=bean.getMemberGroup();
+int memberGroup=bean.getTourCourseGroup();
 
 int courseScore=bean.getMessageSiteGrade();
 /* int count=bean.getMessageClick(); */
