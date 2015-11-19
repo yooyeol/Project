@@ -83,7 +83,7 @@ public class MemberDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "select ZIPCODE, SIDO, GUNGU, DONG, RI, BLDG, BUNJI from zipcode where DONG like ?";
+			sql = "SELECT ZIPCODE, SIDO, GUNGU, DONG, RI, BLDG, BUNJI FROM ZIPCODE WHERE DONG LIKE ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+dong+"%");
 			rs = pstmt.executeQuery();

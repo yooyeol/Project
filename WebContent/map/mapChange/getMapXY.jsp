@@ -7,7 +7,7 @@
 <%
 
 	String tourSiteContentID = request.getParameter("TourSiteContentID");
-	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteMapX, TourSiteMapY, TourSiteAddr From toursite WHERE TourSiteContentID=?";
+	String sql = "SELECT TourSiteContentID, TourSiteTitle, TourSiteMapX, TourSiteMapY, TourSiteAddr FROM TOURSITE WHERE TourSiteContentID=?";
 	String result = mapGet.getJSONObject(sql, tourSiteContentID).toString();
 
 %>

@@ -14,14 +14,14 @@
 	ArrayList<String> colValue = null;
 	HashMap<String, String> sqlMap = new HashMap<String,String>();
 	
-	sqlMap.put("12","SELECT * FROM toursite, info, detailtourinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailtourinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("14","SELECT * FROM toursite, info, detailcultureinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailcultureinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("15","SELECT * FROM toursite, info, detaileventinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detaileventinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("25","SELECT * FROM toursite, info, detailcourseinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailcourseinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("28","SELECT * FROM toursite, info, detailleportsinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailleportsinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("32","SELECT * FROM toursite, info, detailstayinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailstayinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("38","SELECT * FROM toursite, info, detailshoppinginfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailshoppinginfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");
-	sqlMap.put("39","SELECT * FROM toursite, info, detailfoodinfo where toursite.TourSiteContentID = info.TourSiteContentID AND toursite.TourSiteContentID = detailfoodinfo.TourSiteContentID AND toursite.ContentTypeID=? AND toursite.TourSiteContentID=?");	
+	sqlMap.put("12","SELECT * FROM TOURSITE, INFO, DETAILTOURINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILTOURINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("14","SELECT * FROM TOURSITE, INFO, DETAILCULTUREINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILCULTUREINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("15","SELECT * FROM TOURSITE, INFO, DETAILEVENTINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILEVENTINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("25","SELECT * FROM TOURSITE, INFO, DETAILCOURSEINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILCOURSEINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("28","SELECT * FROM TOURSITE, INFO, DETAILLEPORTSINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILLEPORTSINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("32","SELECT * FROM TOURSITE, INFO, DETAILSTAYINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILSTAYINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("38","SELECT * FROM TOURSITE, INFO, DETAILSHOPPINGINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILSHOPPINGINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");
+	sqlMap.put("39","SELECT * FROM TOURSITE, INFO, DETAILFOODINFO where TOURSITE.TourSiteContentID = INFO.TourSiteContentID AND TOURSITE.TourSiteContentID = DETAILFOODINFO.TourSiteContentID AND TOURSITE.ContentTypeID=? AND TOURSITE.TourSiteContentID=?");	
 	jsonStr = getDetail.getDetailObject(sqlMap, tourSiteContentID, contentTypeID).toString();
 	colName = getDetail.getColumnName();
 	colValue = new ArrayList<String>();
@@ -38,14 +38,6 @@
 	for(int i=0;i<jsonArray.size();i++){
 		JSONObject jsonValue = (JSONObject)jsonArray.get(i);
  		System.out.println("testJsonValue : "+jsonValue);
-		for(int j=0;j<colName.size();j++){
-			colValue.add(jsonValue.get(colName.get(j)).toString());
-		}
-		System.out.println("colValueSize : " + colValue.size());
-		
-		for(int k=0;k<colValue.size();k++){
-			System.out.println("testColValue.get(j) : "+colValue.get(k));
-		}
 	}
 
 %> 
@@ -78,20 +70,7 @@
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <table class="table">
-      	<tbody>
-      		<%
-      			for(int i=0;i<colName.size();i++){
-      		%>
-      			<tr>
-      				<th><%=colName.get(i) %></th>
-      				<td>1</td>
-      			</tr>
-      		<%
-      			}
-      		%>
-      	</tbody>
-      </table>
+    
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>Menu 1</h3>

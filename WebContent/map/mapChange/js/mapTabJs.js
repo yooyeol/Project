@@ -3,6 +3,7 @@ var marker;
 var lat, lng;
 var popup;
 var mapLatLng = [];
+var userTourPath;
 var zindex=1;
 /* function initMap(lat, lng) {//lat : -34.397   lng : 150.644
   map = new google.maps.Map(document.getElementById('map'), {
@@ -11,6 +12,7 @@ var zindex=1;
   });
 } */
 $(document).ready(function(){
+	test = document.getElementsByClassName("tourList");
 	
 	//지역 선택 시
 	$("#areaSelect").click(function(){
@@ -119,7 +121,7 @@ function requestTour(TourSiteContentID){
 }
 //내가가는 여행지 목록에 추가되는 부분
 function tourListAdd(jsonObject){
-	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item tourList" >'+jsonObject.datas[0].TourSiteTitle+'<label class="tourSiteAddr" value="'+jsonObject.datas[0].TourSiteAddr+'" /><span class="glyphicon glyphicon-remove-circle delete"></li>';
+	var UlList = '<li id="'+jsonObject.datas[0].TourSiteContentID+'" class="list-group-item tourList" >'+jsonObject.datas[0].TourSiteTitle+'<label class="tourSiteAddr" value="'+jsonObject.datas[0].TourSiteMapY+', '+jsonObject.datas[0].TourSiteMapX+'" /><span class="glyphicon glyphicon-remove-circle delete"></li>';
 	var inputList = '<input value="'+jsonObject.datas[0].TourSiteContentID+'" name="tourPath" type="hidden" />';
 	$("#addListUl").append(UlList);
 	$("#inputStart").append(inputList);
@@ -159,6 +161,17 @@ function geocodeAddress(startAddress){
 		}
 	});
 }
+//마커 삭제
+function deleteMarkers(listIndex){
+	clearMarkers();
+	for(var i=listIndex;i<mapLatLng.length;i++){
+		mapLatLng[i] = mapLatLng[i+1];
+		mapPath[i] = mapPath[i+1];
+	}
+	mapPath.pop();
+	mapLatLng.pop();
+	setMapOnAll();
+}
 //구글맵 마커 추가
 function addMarker(title, lng, lat){
 	var image = {
@@ -175,6 +188,8 @@ function addMarker(title, lng, lat){
 		title: title,
 		zIndex: zindex
 	});
+	
+	mapPath.push({lat:Number(lat), lng:Number(lng)});
 	mapLatLng.push(marker);
 	zindex++;
 	moveToLocation(lat, lng);
