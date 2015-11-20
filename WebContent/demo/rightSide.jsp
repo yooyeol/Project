@@ -53,6 +53,8 @@ web-fonts
 <%	
 	  request.setCharacterEncoding("UTF-8");
 	  
+	//int num=Integer.parseInt(request.getParameter("num")); 		
+
       int totalRecord=0; //전체레코드수
 	  int numPerPage=6; // 페이지당 레코드 수 
 	  int pagePerBlock=15;  //블럭당 페이지수 
@@ -70,6 +72,8 @@ web-fonts
 
 	String keyWord = "", keyField = "";
 	Vector<BoardBean> vlist = null;
+	 vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
+	 int num1 = 0;
 	if (request.getParameter("keyWord") != null) {
 		keyWord = request.getParameter("keyWord");
 		keyField = request.getParameter("keyField");
@@ -112,7 +116,7 @@ web-fonts
 		 document.readFrm.submit();
 	} 
 	
-	function read(num){
+	function read(num1){
 		document.readFrm.num.value=num;
 		document.readFrm.action="boardDetail.jsp";
 		document.readFrm.submit();
@@ -163,7 +167,7 @@ web-fonts
 												
 													<div class="popular-post-grid">
 												<%
-				  vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
+				 
 				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
 				  if (vlist.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
@@ -175,8 +179,8 @@ web-fonts
 						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
 							BoardBean bean = vlist.get(i);
-							int num = bean.getMessageID();
-							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
+							num1 = bean.getMessageID();
+							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
 							String name = bean.getMemberEmail();
 							String subject = bean.getMessageTitle();
 							String postdate = bean.getMessagePostDate();
@@ -195,13 +199,13 @@ web-fonts
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="board.jsp"> <%=subject %></a>
 															<p>
 															
 															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
 															<span>조회수 : <%=readcount%></span>
 										
-										<a class="span_link1" href="javascript:comment('<%=num%>')">
+										<a class="span_link1" href="javascript:comment('<%=num1%>')">
 										 <span class="glyphicon glyphicon-comment"></span> 0</a>
 											
 										<a class="span_link1" href="javascript:">
@@ -249,8 +253,8 @@ web-fonts
 						  for (int i = 0;i<21; i++) {
 							if (i == listSize) break;
 							BoardBean bean = vlist.get(i);
-							int num = bean.getMessageID();
-							BoardBean beanContent = bMgr.getBoard(num);//게시물 가져오기
+							int num2 = bean.getMessageID();
+							BoardBean beanContent = bMgr.getBoard(num2);//게시물 가져오기
 							String name = bean.getMemberEmail();
 							String subject = bean.getMessageTitle();
 							String postdate = bean.getMessagePostDate();
@@ -269,13 +273,13 @@ web-fonts
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="board.jsp"> <%=subject %></a>
 															<p>
 															
 															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
 															<span>조회수 : <%=readcount%></span>
 										
-										<a class="span_link1" href="javascript:comment('<%=num%>')">
+										<a class="span_link1" href="javascript:comment('<%=num2%>')">
 										 <span class="glyphicon glyphicon-comment"></span> 0</a>
 											
 										<a class="span_link1" href="javascript:">

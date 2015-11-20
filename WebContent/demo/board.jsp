@@ -318,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="board.jsp"> <%=subject %></a>
 															<p>
 															
 															<span class="glyphicon glyphicon-time"></span><%=postdate%>	
@@ -392,7 +392,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																alt=""></a>
 														</div>
 														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject %></a>
+															<a class="pp-title" href="board.jsp"> <%=subject %></a>
 															<p>
 															
 															<span class="glyphicon glyphicon-time"></span><%=postdate%>	

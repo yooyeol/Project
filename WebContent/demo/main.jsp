@@ -57,25 +57,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-body">
 		<div class="wrap">
 			<div class="col-md-8 content-left">
+			<header>
+						<h3 class="title-head">YOGI JOGI 추천 관광지</h3>
+						<br>
+					</header>
+			
 				<div class="slider">
 					<div class="callbacks_wrap">
 						<ul class="rslides" id="slider">
 							<li>
-								<img src="images/3.jpg" alt="">
+								<img src="http://tong.visitkorea.or.kr/cms/resource/69/1978569_image2_1.jpg" alt="">
 								<div class="caption">
-									<a href="single.html">Lorem Ipsum is simply dummy text of the printing and typesetting industry</a>
+									<a href="">거제도</a>
 								</div>
 							</li>
 							<li>
-								<img src="images/2.jpg" alt="">
+								<img src="http://tong.visitkorea.or.kr/cms/resource/49/1617249_image2_1.jpg" alt="">
 								<div class="caption">
-									<a href="single.html">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</a>
+									<a href="">제주도</a>
 								</div>
 							</li>
 							<li>
-								<img src="images/1.jpg" alt="">
+								<img src="http://tong.visitkorea.or.kr/cms/resource/38/218838_image2_1.jpg" alt="">
 								<div class="caption">
-									<a href="single.html">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</a>
+									<a href="">아침고요수목원</a>
 								</div>
 							</li>
 						</ul>

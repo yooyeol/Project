@@ -114,7 +114,7 @@ public class BoardMgr {
 					
 				sql="select tour.TourSiteContentID,tour.TourSiteTitle,course.TourCourseID,cart.MemberID, cart.CartGroup "; 
 				sql+="from TOURSITE tour,TOURCOURSE course, COURSECART cart "; 
-				sql+="where tour.TourSiteContentID=course.TourSiteContentID and course.MemberID=? and cart.TourCourseID=course.TourCourseID and cart.CartGroup=?";
+				sql+="where tour.TourSiteContentID=course.TourSiteContentID and cart.MemberID=? and cart.TourCourseID=course.TourCourseID and cart.CartGroup=?";
 				
 				
 				pstmt = con.prepareStatement(sql);
@@ -666,6 +666,7 @@ public class BoardMgr {
 					ResultSet rs = null;
 					String sql = null;
 					BoardBean bean = new BoardBean();
+					
 					try {
 						con = pool.getConnection();
 						sql = "select * from REPLY where MessageID=?";
@@ -677,6 +678,15 @@ public class BoardMgr {
 							bean.setReplyContent(rs.getString("ReplyContent"));
 							bean.setReplyPostDate(rs.getString("ReplyPostDate"));
 							
+						}
+						
+						sql = "select count(MessageID) from REPLY where MessageID=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, num);
+						rs = pstmt.executeQuery();
+						if (rs.next()) {
+							
+							bean.setCommentCount(rs.getInt(1));
 							
 							/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 							System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
@@ -684,6 +694,8 @@ public class BoardMgr {
 							bean.setIp(rs.getString("ip"));
 							*/
 						}
+						
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
