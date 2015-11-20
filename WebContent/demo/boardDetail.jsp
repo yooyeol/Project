@@ -394,10 +394,7 @@ Vector<BoardBean> memberCourseList=null;
 					%>
 						<input type="hidden" id="courseID" name="courseID" value="<%=courseID%>">
 						<input type="hidden" id="courseSequence" name="courseSequence" value="<%=courseSequence%>">
-						<%-- <input type="hidden" name="memberID" value="<%=session.getAttribute("memberIdKey") %>"> --%>
-					<%-- 	<input type="hidden" name="memberGroup" value="<%=memberGroup %>"> --%>
-						
-					
+				
 					<%}%>
 					
  						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로

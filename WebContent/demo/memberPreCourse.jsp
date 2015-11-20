@@ -58,83 +58,72 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		
 			<div class="privacy-page">
 				<div class="col-md-8">
-		<h3 class="title-head">나의 여행경로</h3>
+		<h3 class="title-head">나의 경로 장바구니 목록</h3>
 			<hr style="border-top:2px solid rgba(189, 155, 96, 0.42) ; width:100%">	
 		<%
 	
 int memberID=Integer.parseInt(session.getAttribute("memberIdKey").toString()); 
 	int listSize=0;
-	bMgr.getCartCourse(memberID);
+	int MaxGroup=0;
+	MaxGroup=bMgr.getMAXGroup(memberID);
+	//bMgr.getCartCourse(memberID,MaxGroup);
 	Vector<BoardBean> cartList = null;
 %>	
-				  <!-- <div class="form-group" style="padding:14px;">
-                                    <button name="courseDate" >
-                                    
-                                    <div id="txtHint">여행 경로를 골라 주세요..</div>
-                                    </div>
-                                   <script >
-                                   $(document).ready(function(){
-                             
-                                		$("#courseDate").click(function(){
-                                			showCourse();
-                                				/*$.ajax({url: "upGoodCount.jsp?messageID="+MessageID});*/
-                                		});
-                                		
-                                   
-                                   function showCourse(){
-                                	   var xhttp;
-                                	   var memberID=
-                                	   xhttp=new XMLHttpRequest();
-                                	   xhttp.onreadystatechange=function(){
-                                		   if(xhttp.readyState==4&&xhttp.status==200){
-                                			  document.getElementById("txtHint").innerHTML=xhttp.responseText; 
-                                		   }
-                                	   };
-                                	   xhttp.open("GET", "getCartCourse.jsp?memberID=",true);
-                                	   xhttp.send();
-                                   };
-                                   });
-                                   
-                                   </script> -->
+			
                                    
                                    <%
 int tourCourseID ;
-
+int [] setTourSiteContentID;                                   
 int tourSiteContentID;
 int sequence;
 int MemberGroup=5;
 int result;
-
-				cartList = bMgr.getCartCourse(memberID);
-				  listSize = cartList.size();//브라우저 화면에 보여질 게시물갯수
+				for(int j=0;j<=MaxGroup;j++){
+					
+				cartList = bMgr.getCartCourse(memberID,j);
+				  listSize = cartList.size();
+				  setTourSiteContentID=new int[listSize];
 				  if (cartList.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
 				  } else {
 			%>
-				
-				
+			
 					<%
 						  for (int i = 0;i<listSize; i++) {
 							
 							BoardBean bean = cartList.get(i);
-							int num = bean.getMessageID();
-							int index=bean.getCartIndex();
+						
 							tourCourseID = bean.getTourCourseID();
-							 
+							 String tourSiteTitle=bean.getTourSiteTitle();
 							 tourSiteContentID=bean.getTourSiteContentID();
-							sequence=bean.getTourCourseSequence();
-							
+							int courseGroup =bean.getTourCourseGroup();
+							setTourSiteContentID[i]=tourSiteContentID;
 					%>
 					
-					<h4><%=index %>코스ID : <%=tourCourseID %> | sequence : <%=sequence %> 
+					<h4> TourCourseID: <%=tourCourseID %> | tourSiteTitle: <%=tourSiteTitle %> &nbsp; courseGroup: <%=courseGroup %> MemberID: <%=memberID %>  
 					</h4>
-<%}}%>
+<%}%>
+	<form action="setCourseTest.jsp">
+	<%for(int t=0;t<listSize;t++){
+		tourSiteContentID=setTourSiteContentID[t];
+	%>
+	<input type="hidden" name="tourSiteID" value=<%=tourSiteContentID %>>
+	<%} %>
+	
+	
+	<button type="submit">setCourseTest.jsp 로 이동</button>	
+	</form>							
+	<%			  }}%>
 				
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 </div>
+
+
+
+
 <!--------- 푸터 시작 ----------------------------->
 <%@include file="mainFooter.jsp" %>
 
