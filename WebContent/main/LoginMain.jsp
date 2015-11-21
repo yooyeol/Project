@@ -36,7 +36,7 @@ session.invalidate();
 					<input type="text" name="email" class="text" value="Input your E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" >
 					<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 				</div>
-					<input type="submit"value="GO" >
+					<input type="submit"value="GO">
 			</form>
 	</div>
 

@@ -163,17 +163,15 @@ function geocodeAddress(startAddress){
 }
 //마커 삭제
 function deleteMarkers(listIndex){
-	clearMarkers();
 	for(var i=listIndex;i<mapLatLng.length;i++){
 		mapLatLng[i] = mapLatLng[i+1];
 	}
 	mapLatLng.pop();
-	setMapOnAll();
 }
 //구글맵 마커 추가
 function addMarker(title, lng, lat){
 	var image = {
-		    url: '../beachflag2.png',
+		    url: 'beachflag2.png',
 		    size: new google.maps.Size(20, 32),
 		    origin: new google.maps.Point(0, 0),
 		    anchor: new google.maps.Point(0, 32)
@@ -277,9 +275,15 @@ function initMap() {
 	 directionsDisplay.setMap(map);
 	 
 	 $(document).on('click','.tourList',function(){
+		var firstStartPoint = $("#startPath").text();
 		var endPoint = $(this).children().eq(0).attr("value");
 		var startPoint = $(this).parent().children().eq($(this).index()-1).children().eq(0).attr("value");
-		calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
+		var clickPoint = $(this).index();
+		if(clickPoint == 1){
+			calculateAndDisplayRoute(directionsService, directionsDisplay, firstStartPoint, endPoint);
+		}else{
+			calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
+		}
 	 });
 }
 

@@ -29,12 +29,17 @@
 	JSONParser jsonParser = new JSONParser();
 	JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonStr);
 	JSONArray jsonArray = (JSONArray) jsonObject.get("datas");
+
+	for(int i=0;i<colName.size();i++){
+		System.out.println(colName.get(i).contains("Info"));
+	}
 	
 	for(int i=0;i<jsonArray.size();i++){
 		JSONObject jsonValue = (JSONObject)jsonArray.get(i);
- 		System.out.println("testJsonValue : "+jsonValue);
+ 		//System.out.println("testJsonValue : "+jsonValue);
  		for(int j=0;j<colName.size();j++){
- 			System.out.println("jsonGet : " + jsonValue.get(colName.get(j)));
+ 			//System.out.println("jsonGet : " + jsonValue.get(colName.get(j)));
+ 			colValue.add(jsonValue.get(colName.get(j)).toString());
  		}
 	}
 
@@ -68,7 +73,7 @@
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-    
+
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>Menu 1</h3>
