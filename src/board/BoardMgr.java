@@ -66,31 +66,70 @@ public class BoardMgr {
 		}
 		return courseList;
 	}
+	
+	//장바구니 group max
+	public int getMAXGroup(int memberID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int MaxCount = 0;
+		try {
+			con = pool.getConnection();
+			sql="select max(CartGroup) from COURSECART where MemberID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, memberID);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				MaxCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return MaxCount;
+	}
 	//장바구니리스트
-		public Vector<BoardBean> getCartCourse(int memberID) {
+		public Vector<BoardBean> getCartCourse(int memberID,int MaxGroup) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = null;
-			int count=0;
-			int index=0;
-			int indexArr [];
-			int num=0;
+			
 			Vector<BoardBean> cartList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
 				
-				sql = "select from COURSECART,TOURCOURSE where COURSECART.TourCourseID=TOURCOURSE.TourCourseID AND TOURCOURSE.MemberID=2 AND tourcourse.TourCourseGroup=0;";
+				/*
+				
+				sql="select max(CartGroup) from COURSECART";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					num=rs.getInt(1);
+					System.out.println(num);
+					}*/
+					
+					
+				sql="select tour.TourSiteContentID,tour.TourSiteTitle,course.TourCourseID,cart.MemberID, cart.CartGroup "; 
+				sql+="from TOURSITE tour,TOURCOURSE course, COURSECART cart "; 
+				sql+="where tour.TourSiteContentID=course.TourSiteContentID and cart.MemberID=? and cart.TourCourseID=course.TourCourseID and cart.CartGroup=?";
+				
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
+				pstmt.setInt(2, MaxGroup);
+				
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					BoardBean bean = new BoardBean();
+					bean.setTourSiteContentID(rs.getInt("tourSiteContentID"));
+					bean.setTourSiteTitle(rs.getString("tourSiteTitle"));
+					bean.setTourCourseID(rs.getInt("TourCourseID"));
+					bean.setMemberID(rs.getInt("MemberID"));
+					bean.setTourCourseGroup(rs.getInt("CartGroup"));
 					
-					bean.setTourCourseID(rs.getInt("tourCourseID"));
-					bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
-					bean.setCartIndex(rs.getInt("cartIndex"));
-					index=rs.getInt("cartIndex");
 					cartList.add(bean);
 				}
 				/*sql="select count(CartCut) from courseCart where CartCut=0";
@@ -627,6 +666,7 @@ public class BoardMgr {
 					ResultSet rs = null;
 					String sql = null;
 					BoardBean bean = new BoardBean();
+					
 					try {
 						con = pool.getConnection();
 						sql = "select * from REPLY where MessageID=?";
@@ -638,6 +678,15 @@ public class BoardMgr {
 							bean.setReplyContent(rs.getString("ReplyContent"));
 							bean.setReplyPostDate(rs.getString("ReplyPostDate"));
 							
+						}
+						
+						sql = "select count(MessageID) from REPLY where MessageID=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, num);
+						rs = pstmt.executeQuery();
+						if (rs.next()) {
+							
+							bean.setCommentCount(rs.getInt(1));
 							
 							/*bean.setFilename(SAVEFOLDER+"/"+rs.getString("filename"));
 							System.out.println(SAVEFOLDER+"/"+rs.getString("filename"));
@@ -645,6 +694,8 @@ public class BoardMgr {
 							bean.setIp(rs.getString("ip"));
 							*/
 						}
+						
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {

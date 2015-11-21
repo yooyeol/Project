@@ -28,7 +28,14 @@ public class BoardBean {
 	private int ReplyID; 
 	private String ReplyContent;
 	private String ReplyPostDate;
+	private int commentCount;
 	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	/*coount*/
 	private int readCount;
 	private int goodCount;

@@ -122,123 +122,8 @@ Vector<BoardBean> memberCourseList=null;
 </head>
 <body>
 	<!-- header-section-starts-here -->
-	
-		
-<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="header">
-		<div class="header-top">
-			<div class="wrap">
-				
-				<div class="num">
-						<ul><span style="color: white"><%=session.getAttribute("nameKey")%> 님 환영합니다.</sapn>&nbsp;&nbsp;&nbsp;<a style="color: white"  href="../main/LoginMain.jsp" ><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></ul>
-				
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<div class="header-bottom">
-			<div class="logo text-center">
-			
-		
-			
-				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
-				<div class="memberStatus" style="float: right;margin:5px;">
-			
-			</h4></div>
-			</div> 
-			
-			<div class="navigation">
-				<nav class="navbar navbar-default" role="navigation">
-		   <div class="wrap">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				
-			</div>
-			<!--/.navbar-header-->
-		
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					 <li><a href="main.jsp">Home</a></li>
-						<li><a href="course.jsp">GO TRAVELING</a></li>
-				 		<li><a href="notify.jsp">공지사항</a></li>
-						<li><a href="board.jsp">게시판</a></li>
-					  <li class="dropdown">
-						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
-						<ul class="dropdown-menu multi-column columns-2">
-							<div class="row">
-								<div class="col-sm-6">
-									<ul class="multi-column-dropdown">
-										<li><a href="mypage1.jsp">내 정보 조회</a></li>
-										<li class="divider"></li>
-										<li><a href="mypage2.jsp">회원정보 수정</a></li>
-									    <li class="divider"></li>
-										<li><a href="mypage3.jsp">탈퇴하기</a></li>
-										<li class="divider"></li>
-										<li><a href="mypage4.jsp">나의 경로보기</a></li>
-										<li class="divider"></li>
-										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
-									</ul>
-								</div>
-								
-							</div>
-						</ul>
-					</li>
-					
-				</ul>
-				<div class="search">
-					<!-- start search-->
-				    <div class="search-box">
-					    <div id="sb-search" class="sb-search">
-							<form>
-								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
-								<input class="sb-search-submit" type="submit" value="">
-								<span class="sb-icon-search"> </span>
-							</form>
-						</div>
-				    </div>
-					<!-- search-scripts -->
-					<script src="js/classie.js"></script>
-					<script src="js/uisearch.js"></script>
-						<script>
-							new UISearch( document.getElementById( 'sb-search' ) );
-						</script>
-					<!-- //search-scripts -->
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<!--/.navbar-collapse-->
-	 <!--/.navbar-->
-			</nav></div>
-		
-		</div>
-	</div>
-	</nav>
-	<div class="wrap">
-		<div class="move-text">
-			<div class="breaking_news">
-				<h2>공지사항</h2>
-			</div>
-			<div class="marquee"><div style="width: 100000px; margin-left: 1370px; animation: marqueeAnimation-1795152 6.18248s linear 1s infinite;" class="js-marquee-wrapper"><div class="js-marquee" style="margin-right: 0px; float: left;">
-				<div class="marquee1"><a class="breaking" href="single.html">&gt;&gt;게시판디비가 없는듯</a></div>
-				<div class="marquee2"><a class="breaking" href="single.html">&gt;&gt;어허허허헣</a></div>
-				<div class="clearfix"></div>
-			</div></div></div>
-			<div class="clearfix"></div>
-			<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
-			<script>
-			  $('.marquee').marquee({ pauseOnHover: true, 
-				speed:11000  
-			  });
-			  //@ sourceURL=pen.js
-			</script>
-		</div>
-	</div>
+<jsp:include page="mainHeader.jsp"></jsp:include>
+
 
 	<!-- header-section-ends-here ---------------------------------------------------------------------->
 	
@@ -394,10 +279,7 @@ Vector<BoardBean> memberCourseList=null;
 					%>
 						<input type="hidden" id="courseID" name="courseID" value="<%=courseID%>">
 						<input type="hidden" id="courseSequence" name="courseSequence" value="<%=courseSequence%>">
-						<%-- <input type="hidden" name="memberID" value="<%=session.getAttribute("memberIdKey") %>"> --%>
-					<%-- 	<input type="hidden" name="memberGroup" value="<%=memberGroup %>"> --%>
-						
-					
+				
 					<%}%>
 					
  						 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 경로장바구니로
@@ -439,7 +321,11 @@ Vector<BoardBean> commentList = null;
 				
 				
 					
-						
+					<%
+					bMgr.getComment(num)
+					int CommentCount=bMgr.getCommentCount();	
+					
+					%>
 
 
 				<section class="accordation_menu">
@@ -470,6 +356,7 @@ Vector<BoardBean> commentList = null;
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
+							
 					%>
 			
 			
@@ -513,18 +400,6 @@ Vector<BoardBean> commentList = null;
 						<input type="submit" value="Submit Comment" ">
 					</form>
 					
-					<%-- 
-					<form name="postFrm" method="post" action="commentInput.jsp" enctype="multipart/form-data">
-						
-						 <input type="hidden" id="num" name="num" value="<%=num%>">
-                                     
-                                 
-                                    </div>
-                         <input type="hidden" name="MemberID" value="<%=session.getAttribute("idKey")%>"> 
-                                   
-						<input type="submit" value="Submit Comment" ">
-					</form> --%>
-					
 					
 				</div>	
 				
@@ -535,203 +410,8 @@ Vector<BoardBean> commentList = null;
 
 				</div>
 				
-				
-				
-				
-				
-			<div style="float:right;"class="col-md-4 side-bar">
-					<div class="first_half">
-						<div class="newsletter">
-
-							<form action="boardPost.jsp">
-
-								<input type="submit" value="POST">
-							</form>
-						</div>
-
-
-					<div class="list_vertical">
-							<section class="accordation_menu">
-								<div>
-									<input id="label-1" name="lida" type="radio" checked="">
-									<label for="label-1" id="item1"><i class="ferme"> </i>Poppular
-										Posts<i class="icon-plus-sign i-right1"></i><i
-										class="icon-minus-sign i-right2"></i></label>
-									<div class="content" id="a1">
-										<div class="scrollbar" id="style-2">
-											<div class="force-overflow">
-												<div class="popular-post-grids">
-													
-					
-						
-												
-													<div class="popular-post-grid">
-												<%
-				  vlist = bMgr.getBoardList(keyField, keyWord, start, 20);
-				  listSize = vlist.size();//브라우저 화면에 보여질 게시물갯수
-				  if (vlist.isEmpty()) {
-					out.println("등록된 게시물이 없습니다.");
-				  } else {
-			%>
-				
-				
-					<%
-						  for (int i = 0;i<21; i++) {
-							if (i == listSize) break;
-							bean = vlist.get(i);
-							int num1 = bean.getMessageID();
-							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
-							
-							String name1 = bean.getMemberEmail();
-							String subject1 = bean.getMessageTitle();
-							String postdate1 = bean.getMessagePostDate();
-							String content1=bean.getMessageContent();
-							
-							
-							int readcount = bean.getMessageClick();
-							int goodcount=bean.getMessageGoodCount();
-							int poorcount = bean.getMessagePoorCount();
-							
-							if(readcount>10){
-							
-					%>
-		
-														<div class="post-img">
-															<a href="single.html"><img src="images/bus2.jpg"
-																alt=""></a>
-														</div>
-														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
-															<p>
-															
-															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
-															<span>조회수 : <%=readcount%></span>
-										
-										<a class="span_link1" href="javascript:comment('<%=num1%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
-											
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
-															</p>
-															
-															<p>
-																<%=content1 %>
-															</p>
-														</div>
-														
- 		
-														
-														<div class="clearfix"></div>
-														<hr style="width:200px;">
-														<%}}//for%>
-		
-													
-													</div>
-													
-													
-													
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<input id="label-2" name="lida" type="radio"> <label
-										for="label-2" id="item2"><i class="icon-leaf" id="i2"></i>Recent
-										Posts<i class="icon-plus-sign i-right1"></i><i
-										class="icon-minus-sign i-right2"></i></label>
-									<div class="content" id="a2">
-										<div class="scrollbar" id="style-2">
-											<div class="force-overflow">
-												<div class="popular-post-grids">
-													<div class="popular-post-grid">
-													
-													
-					<%
-					 for (int i = 0;i<21; i++) {
-							if (i == listSize) break;
-							bean = vlist.get(i);
-							int num1 = bean.getMessageID();
-							BoardBean beanContent = bMgr.getBoard(num1);//게시물 가져오기
-							
-							String name1 = bean.getMemberEmail();
-							String subject1 = bean.getMessageTitle();
-							String postdate1 = bean.getMessagePostDate();
-							String content1=bean.getMessageContent();
-							
-							
-							int readcount = bean.getMessageClick();
-							int goodcount=bean.getMessageGoodCount();
-							int poorcount = bean.getMessagePoorCount();
-							
-							if(readcount<10){
-							
-					%>
-													
-													<div class="post-img">
-															<a href="single.html"><img src="images/bus2.jpg"
-																alt=""></a>
-														</div>
-														<div class="post-text">
-															<a class="pp-title" href="boardDetail.jsp"> <%=subject1 %></a>
-															<p>
-															
-															<span class="glyphicon glyphicon-time"></span><%=postdate1%>	
-															<span>조회수 : <%=readcount%></span>
-										
-										<a class="span_link1" href="javascript:comment('<%=num1%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
-											
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
-										<a class="span_link1" href="javascript:">
-										 <span class="glyphicon glyphicon-thumbs-down"></span> <%=poorcount %></a>
-															</p>
-															
-															<p>
-																<%=content1 %>
-															</p>
-														</div>
-														
- 		
-														
-														<div class="clearfix"></div>
-														<hr style="width:200px;">
-														<%}}//for%>
-													</div>
-												
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							
-	 
-			<%}//for%>					
-							</section>
-						</div> 
-
-					</div>
-				<!-- 	<div class="side-bar-articles">
-						<div class="side-bar-article">
-							<a href="single.html"></a>
-
-						</div>
-						<div class="side-bar-article">
-							<a href="single.html"></a>
-
-						</div>
-						<div class="side-bar-article">
-							<a href="single.html"></a>
-
-						</div>
-					</div> -->
-				</div>
-				
-				
-				
+				<jsp:include page="rightSide.jsp"></jsp:include>
+	
 				
 			<div class="clearfix"></div>
 		</div>

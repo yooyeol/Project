@@ -117,7 +117,7 @@ public class MemberDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "insert into member(MemberEmail, MemberPass, MemberName, MemberTel, MemberAddr, MemberZipCode) values(?,PASSWORD(?),?,?,?,?)";
+			sql = "insert into MEMBER(MemberEmail, MemberPass, MemberName, MemberTel, MemberAddr, MemberZipCode) values(?,PASSWORD(?),?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getMemberEmail());
 			pstmt.setString(2, bean.getMemberPass());
