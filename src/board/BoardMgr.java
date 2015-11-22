@@ -132,65 +132,6 @@ public class BoardMgr {
 					
 					cartList.add(bean);
 				}
-				/*sql="select count(CartCut) from courseCart where CartCut=0";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-				count=rs.getInt(1);
-				}
-				indexArr =new int [count+1];
-				indexArr[0]=0;
-				
-				sql = "SELECT CartIndex FROM courseCart where CartCut=0 ";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-				for (int i=1;i<=count;i++) {
-				indexArr[i]=rs.getInt(1);
-				System.out.println(indexArr[i]);
-				}
-				
-				
-				}
-				for(int i=0;i<=count;i++)
-				{
-					num=indexArr[1]-1;
-					System.out.println(num);
-					sql = "SELECT * FROM courseCart WHERE MemberID = ? limit ?,?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setInt(1, memberID);
-					pstmt.setInt(2, indexArr[i]);
-					pstmt.setInt(3, num);
-					
-					rs = pstmt.executeQuery();
-					
-					while (rs.next()) {
-						BoardBean bean = new BoardBean();
-						
-						
-						bean.setTourCourseID(rs.getInt("tourCourseID"));
-						bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
-						bean.setCartIndex(rs.getInt("cartIndex"));
-						index=rs.getInt("cartIndex");
-						cartList.add(bean);
-					}
-					
-				}
-				*/
-			/*	sql = "SELECT * FROM courseCart WHERE MemberID = ? ";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, memberID);
-				rs = pstmt.executeQuery();
-				while (rs.next()) {
-					BoardBean bean = new BoardBean();
-					
-					
-					bean.setTourCourseID(rs.getInt("tourCourseID"));
-					bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
-					bean.setCartIndex(rs.getInt("cartIndex"));
-					index=rs.getInt("cartIndex");
-					cartList.add(bean);
-				}*/
 				
 				
 			} catch (Exception e) {

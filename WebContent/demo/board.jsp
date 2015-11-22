@@ -173,6 +173,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							int readcount = bean.getMessageClick();
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
+												
+							BoardBean comment= bMgr.getComment(num);	
+							int commentCount=comment.getCommentCount();			
+							
+		 
 					%>
 					
 						
@@ -197,7 +202,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+										 <span class="glyphicon glyphicon-comment"></span> <%=commentCount %></a>
 											
 										<a class="span_link1" href="javascript:upGoodCount('<%=num%>')">
 										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
@@ -308,7 +313,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							int readcount = beanRight.getMessageClick();
 							int goodcount=beanRight.getMessageGoodCount();
 							int poorcount = beanRight.getMessagePoorCount();
+						
 							
+							BoardBean comment= bMgr.getComment(num);	
+							int commentCount=comment.getCommentCount();			
+						
 							if(readcount>10){
 							
 					%>
@@ -325,7 +334,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+										 <span class="glyphicon glyphicon-comment"></span><%=commentCount %></a>
 											
 										<a class="span_link1" href="javascript:">
 										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
@@ -382,7 +391,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							int readcount = beanRight.getMessageClick();
 							int goodcount=beanRight.getMessageGoodCount();
 							int poorcount = beanRight.getMessagePoorCount();
-							
+						
+							BoardBean comment= bMgr.getComment(num);	
+							int commentCount=comment.getCommentCount();			
+						
 							if(readcount<=10){
 							
 					%>
@@ -399,7 +411,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+										 <span class="glyphicon glyphicon-comment"></span> <%=commentCount %></a>
 											
 										<a class="span_link1" href="javascript:">
 										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>

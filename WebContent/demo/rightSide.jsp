@@ -190,6 +190,10 @@ web-fonts
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
 							
+
+							BoardBean comment= bMgr.getComment(num1);	
+							int commentCount=comment.getCommentCount();			
+						
 							if(readcount>10){
 							
 					%>
@@ -206,7 +210,7 @@ web-fonts
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num1%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+										 <span class="glyphicon glyphicon-comment"></span> <%=commentCount %></a>
 											
 										<a class="span_link1" href="javascript:">
 										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>
@@ -264,6 +268,10 @@ web-fonts
 							int goodcount=bean.getMessageGoodCount();
 							int poorcount = bean.getMessagePoorCount();
 							
+
+							BoardBean comment= bMgr.getComment(num1);	
+							int commentCount=comment.getCommentCount();			
+						
 							if(readcount<10){
 							
 					%>
@@ -280,7 +288,7 @@ web-fonts
 															<span>조회수 : <%=readcount%></span>
 										
 										<a class="span_link1" href="javascript:comment('<%=num2%>')">
-										 <span class="glyphicon glyphicon-comment"></span> 0</a>
+										 <span class="glyphicon glyphicon-comment"></span> <%=commentCount %></a>
 											
 										<a class="span_link1" href="javascript:">
 										 <span class="glyphicon glyphicon-heart-empty"></span> <%=goodcount %></a>

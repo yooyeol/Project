@@ -322,16 +322,16 @@ Vector<BoardBean> commentList = null;
 				
 					
 					<%
-					bMgr.getComment(num)
-					int CommentCount=bMgr.getCommentCount();	
 					
+					bMgr.getComment(num);	
+					int commentCount=bean.getCommentCount();			
 					%>
-
+ 
 
 				<section class="accordation_menu">
 				<div class="response">
 				<div class="scrollbar" id="style-2">
-				 <label for="label-1" id="item1"><i class="ferme"> </i>Responses<i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
+				 <label for="label-1" id="item1"><i class="ferme"> </i>Responses &nbsp;&nbsp;&nbsp;댓글 수 :<%=commentCount %> <i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
 					
 					<div class="media response-info">
 						<div class="media-left response-text-left">
@@ -340,7 +340,7 @@ Vector<BoardBean> commentList = null;
 			commentList = bMgr.getCommentList(num);
 				  listSize = commentList.size();//브라우저 화면에 보여질 게시물갯수
 				  if (commentList.isEmpty()) {
-					out.println("댓글 0개 ");
+					out.println("댓글이 없습니다.");
 				  } else {
 			%>
 			
