@@ -169,17 +169,13 @@ Vector<BoardBean> memberCourseList=null;
 						</ul> --%>
 						
 						<img src="file://C:/Jsp/myapp/WebContent/ch14/fileupload/dogg.jpg" alt="">
-						
-						<%out.print(request.getParameter("num"));%>
-						
-						<p>뭐너</p>
-					<img src="" >
+				
 
 					</div>
 				</div>
 				
 						
-				<div  style="padding: 15px;" class="row related-posts">
+				<div  style="padding: 15px;border:1px solid #BDBBBB; margin-bottom: 3em;" class="row related-posts">
 					<p class="artext"><%=content%></p>
 					
 							
@@ -277,15 +273,6 @@ Vector<BoardBean> memberCourseList=null;
 <%	
 
 
-/*
-BoardBean beanComment = bMgr.getComment(num);//게시물 가져오기
-
-String name = bean.getMemberEmail(); 
-
-String comment = beanComment.getReplyContent();
-String commentDate=beanComment.getReplyPostDate();
-*/
-/* int count=bean.getMessageClick(); */
 int startComment=0; //디비의 select 시작번호
 int endComment=10; //시작번호로 부터 가져올 select 갯수
 
@@ -304,9 +291,9 @@ Vector<BoardBean> commentList = null;
 					%>
  
 
-				<section class="accordation_menu">
+				<section  class="accordation_menu">
 				<div class="response">
-				<div class="scrollbar1" id="style-2">
+				<div style="border:1px solid #BDBBBB;"class="scrollbar1" id="style-2">
 				 <label for="label-1" id="item1"><i class="ferme"> </i>Responses &nbsp;&nbsp;&nbsp;댓글 수 :<%=commentCount %> <i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
 					
 					<div class="media response-info">
@@ -357,10 +344,7 @@ Vector<BoardBean> commentList = null;
 				</div>
 				
 				
-				<form>
-				<button style="float: right;" class="btn btn-default btn-lg">게시글 지우기</button>
 				
-				</form>
 				
 	<div class="clearfix"></div>
 				<div class="coment-form" >
@@ -389,6 +373,7 @@ Vector<BoardBean> commentList = null;
 
 				</div>
 				
+			
 				<jsp:include page="rightSide.jsp"></jsp:include>
 	
 				

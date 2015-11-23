@@ -251,16 +251,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                    </script>
                                    
                                    
-                                       <div class="btn-group" role="group" aria-label="...">
-                                       
-  										<button type="button" class="btn btn-default">
-  											<span class="glyphicon glyphicon-map-marker" aria-hidden="true" name="TourCourseID"></span> 경로등록
-  										</button>
- 									<!-- 	<button type="button" class="btn btn-default" name="filename" size="50" maxlength="50" onchange="readURL(this);">
- 											 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> 사진업로드
- 										</button> -->
-									</div>
-									
+                                 
 									
 									
 

@@ -23,7 +23,7 @@ public class BoardMgr {
 
 	private DBConnectionMgr pool;/*
 	private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/ch14/fileupload";*/
-	private static final String  SAVEFOLDER = "http://localhost:8080/testfinal/boardIMG";
+	private static final String  SAVEFOLDER = "boardIMG";
 	
 	
 	private static final String ENCTYPE = "UTF-8";
@@ -255,16 +255,17 @@ public class BoardMgr {
 			pstmt.setInt(6,Integer.parseInt(multi.getParameter("memberGroup")));
 			pstmt.executeUpdate();
 			
-			
+	/*		
 			sql="insert MESSAGEPICTURE (MessagePictureURL,MessageID)";
 			sql+="values(?,?)";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString
+			pstmt.setString(1,multi.getFilesystemName("filename"));
+			pstmt.setInt(2, ref);
+			pstmt.executeUpdate();
 			
 			
 			
-			
-			
+			*/
 			sql="insert PREFER(messageID) values(?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,ref);
@@ -276,6 +277,124 @@ public class BoardMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 	}
+	
+	// 게시물 입력
+		public void insertBoardText(HttpServletRequest req) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			MultipartRequest multi = null;
+			int filesize = 0;
+			String filename = null;
+			try {
+				con = pool.getConnection();
+				sql = "select max(MessageID)  from MESSAGE";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				int ref = 1;
+				if (rs.next())
+					ref = rs.getInt(1) + 1;
+				File file = new File(SAVEFOLDER);
+				System.out.println(file.getAbsolutePath());
+				if (!file.exists())
+					file.mkdirs();
+				multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
+						new DefaultFileRenamePolicy());
+
+				if (multi.getFilesystemName("filename") != null) {
+					filename = multi.getFilesystemName("filename");
+					filesize = (int) multi.getFile("filename").length();
+				}
+				String content = multi.getParameter("MessageContent");
+			/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+					content = UtilMgr.replace(content, "<", "&lt;");
+				}*/
+				sql = "insert MESSAGE(MessageTitle,MessageContent,MessagePostDate,MemberEmail,MemberID)";
+				sql += "values(?, ?, now(),  ?, ?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, multi.getParameter("MessageTitle"));
+				pstmt.setString(2, content);
+			
+				pstmt.setString(3, multi.getParameter("MemberEmail"));
+				pstmt.setInt(4,Integer.parseInt(multi.getParameter("MemberID")));
+				
+				pstmt.executeUpdate();
+				
+		/*		
+				sql="insert MESSAGEPICTURE (MessagePictureURL,MessageID)";
+				sql+="values(?,?)";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1,multi.getFilesystemName("filename"));
+				pstmt.setInt(2, ref);
+				pstmt.executeUpdate();
+				
+				
+				
+				*/
+				sql="insert PREFER(messageID) values(?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,ref);
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		}
+	
+	// 게시물 -사진입력
+	public void insertIMG(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		MultipartRequest multi = null;
+		int filesize = 0;
+		String filename = null;
+		try {
+			con = pool.getConnection();
+			sql = "select max(MessageID)  from MESSAGE";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int ref = 1;
+			if (rs.next())
+				ref = rs.getInt(1) + 1;
+			File file = new File(SAVEFOLDER);
+			System.out.println(file.getAbsolutePath());
+			if (!file.exists())
+				file.mkdirs();
+			multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
+					new DefaultFileRenamePolicy());
+
+			if (multi.getFilesystemName("filename") != null) {
+				filename = multi.getFilesystemName("filename");
+				filesize = (int) multi.getFile("filename").length();
+			}
+		
+		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+				content = UtilMgr.replace(content, "<", "&lt;");
+			}*/
+			
+			
+			sql="insert MESSAGEPICTURE (MessagePictureURL,MessageID)";
+			sql+="values(?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,multi.getFilesystemName("filename"));
+			pstmt.setInt(2, ref);
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+	}
+	
+	
 	
 	
 	// 게시물 리턴
