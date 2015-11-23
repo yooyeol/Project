@@ -17,6 +17,8 @@ import javax.servlet.jsp.PageContext;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import DBConn.DBConnectionMgr;
+
 public class BoardMgr {
 
 	private DBConnectionMgr pool;/*
