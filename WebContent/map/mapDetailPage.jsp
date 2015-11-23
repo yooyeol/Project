@@ -38,11 +38,10 @@
 		JSONObject jsonValue = (JSONObject)jsonArray.get(i);
  		//System.out.println("testJsonValue : "+jsonValue);
  		for(int j=0;j<colName.size();j++){
- 			//System.out.println("jsonGet : " + jsonValue.get(colName.get(j)));
- 			colValue.add(jsonValue.get(colName.get(j)).toString());
+ 			System.out.println("jsonGet : " + jsonValue.get(colName.get(j)));
+ 			//colValue.add(jsonValue.get(colName.get(j)).toString());
  		}
 	}
-
 %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -56,9 +55,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=uri%>/map/mapChange/js/detailPage.js"></script>
-<script type="text/javascript">
-
-</script>
 
 </head>
 <body>

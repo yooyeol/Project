@@ -31,8 +31,10 @@ $(document).ready(function(){
 	//콘텐츠 타입(셀렉터) 선택 시
 	$("#contentType").change(function(){
 		$("#listTable").contents().empty();
-		if($("#contentType option:selected").val == "col0"){
-			
+		if($("#contentType option:selected").val() == "col0"){
+			$("#tourListDiv").children().remove();
+			var tableList = "<table><tr><td>검색 결과가 없습니다.</td></tr></table>";
+			document.getElementById("tourListDiv").innerHTML = tableList;
 		}else{
 			var str1 = $("#areaCode").val();
 			var str2 = $("#contentType option:selected").val();
