@@ -85,7 +85,7 @@ String filename = bean.getMessagePictureURL();
 int memberID=bean.getMemberID();
 String member=bean.getMemberEmail();
 int memberGroup=bean.getTourCourseGroup();
-
+int message=bean.getMessageID();
 int courseScore=bean.getMessageSiteGrade();
 /* int count=bean.getMessageClick(); */
 int start=0; //디비의 select 시작번호
@@ -375,7 +375,23 @@ Vector<BoardBean> commentList = null;
 				
 			
 				<jsp:include page="rightSide.jsp"></jsp:include>
-	
+				<!-- 
+				<div style="float:right;"class="col-md-4 side-bar">
+					<div class="first_half"> -->
+						<div class="newsletter1">
+
+							<form id="boardOut" method="post"  action="boardOut.jsp">
+								
+								 <input type="hidden" id="boardOut" name="boardOut" value="<%=message %>">
+								 <input type="hidden" name="memberID" value="<%=session.getAttribute("memberIdKey")%>">
+								 <input type="submit" id="boardOut" name="boardOut" value="게시글 지우기">
+							</form>
+						</div>
+				
+			<!-- 	</div>
+				</div> -->
+				
+			
 				
 			<div class="clearfix"></div>
 		</div>

@@ -766,9 +766,31 @@ h3.side-title-head {
     text-align: center;
     margin-left: -5px;
 }
+.newsletter1 input[type="submit"] {
+    color: #fff;
+    font-size: 0.9em;
+    width: 30.5%;
+    border: none;
+    padding: 12px 0;
+    outline: none;
+    background: #D86767;
+    text-transform: uppercase;
+    text-align: center;
+    margin-left: 30px;
+}
+
+
+
 .newsletter input[type="submit"]:hover {
 	background-color:#84754e;
 }
+
+.newsletter1 input[type="submit"]:hover {
+	background-color:#84754e;
+}
+
+
+
 .newsletter {
     padding: 15px;
     border: 1px solid #F5F5F5;

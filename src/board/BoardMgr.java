@@ -278,7 +278,7 @@ public class BoardMgr {
 		}
 	}
 	
-	// 게시물 입력
+	// 게시물 입력 - Text만 입력했을시
 		public void insertBoardText(HttpServletRequest req) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -392,6 +392,33 @@ public class BoardMgr {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
+	}
+	
+	//게시물 삭제
+	
+	public int deleteBoard(int memberID,int MessageID ) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int result = 0;
+		try {
+			con = pool.getConnection();
+			
+				sql = "delete from MESSAGE where MemberID=? and MessageID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, memberID);
+				pstmt.setInt(2, MessageID);
+				
+		
+			 result= pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return result;
 	}
 	
 	
