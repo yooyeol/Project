@@ -43,7 +43,7 @@ try {
 
     conn = DriverManager.getConnection(url, userId, userPass);
 
-    sql = "delete from member where MemberID = ?";
+    sql = "delete from MEMBER where MemberID = ?";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, member);

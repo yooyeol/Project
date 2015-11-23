@@ -49,7 +49,14 @@ public class BoardBean {
 	
 	/*tourSite*/
 	private String TourSiteTitle;
+	private String TourSiteFirstImage;
 	
+	public String getTourSiteFirstImage() {
+		return TourSiteFirstImage;
+	}
+	public void setTourSiteFirstImage(String tourSiteFirstImage) {
+		TourSiteFirstImage = tourSiteFirstImage;
+	}
 	/*courseCart*/
 	private int CartCut;
 	private int CartIndex;

@@ -1210,6 +1210,13 @@ a.pp-title:hover {
 	width:100%;
 	overflow-y: scroll;
 }
+
+.scrollbar1{
+	float: left;
+	height:380px;
+	width:100%;
+	overflow-y: scroll;
+}
 .force-overflow
 {
 	min-height: 330px;

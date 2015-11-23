@@ -83,6 +83,7 @@ String postdate = bean.getMessagePostDate();
 String content = bean.getMessageContent();
 String filename = bean.getMessagePictureURL();
 int memberID=bean.getMemberID();
+String member=bean.getMemberEmail();
 int memberGroup=bean.getTourCourseGroup();
 
 int courseScore=bean.getMessageSiteGrade();
@@ -167,7 +168,7 @@ Vector<BoardBean> memberCourseList=null;
 							</li>
 						</ul> --%>
 						
-						<img src="<%=filename%>" alt="">
+						<img src="file://C:/Jsp/myapp/WebContent/ch14/fileupload/dogg.jpg" alt="">
 						
 						<%out.print(request.getParameter("num"));%>
 						
@@ -178,55 +179,27 @@ Vector<BoardBean> memberCourseList=null;
 				</div>
 				
 						
-				<div class="row related-posts">
+				<div  style="padding: 15px;" class="row related-posts">
+					<p class="artext"><%=content%></p>
 					
-					<div class="col-xs-6 col-md-3 related-grids">
-						<a href="single.html" class="thumbnail">
-							<img src="images/f2.jpg" alt=""/>
-						</a>
-						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
-					</div>	
-					<div class="col-xs-6 col-md-3 related-grids">
-						<a href="single.html" class="thumbnail">
-							<img src="images/f1.jpg" alt=""/>
-						</a>
-						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
-					</div>
-					<div class="col-xs-6 col-md-3 related-grids">
-						<a href="single.html" class="thumbnail">
-							<img src="images/f3.jpg" alt=""/>
-						</a>
-						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
-					</div>
-					<div class="col-xs-6 col-md-3 related-grids">
-						<a href="single.html" class="thumbnail">
-							<img src="images/f6.jpg" alt=""/>
-						</a>
-						<h5><a href="single.html">Lorem Ipsum is simply</a></h5>
-					</div>					
+							
 				</div>
 				
-					<p class="artext"><%=content%></p>
+					
 						
 				
 					
 			
 					<div class="blog-posts">
-					<img src="images/3.jpg" alt=""/><!----------- 여행경로 위치 ---------------->
-					</br>
-					
-					<%
-				/* 	불러온 코스ID저장할 리스트 */
-					/* Vector<BoardBean> resultList = null;
-					resultList.
-					 */
-					%>
-					
-					
+					<!-- <img src="images/3.jpg" alt=""/>--------- 여행경로 위치 -------------- -->
+					<div>
+					<label style="width: 730px;background: #84754e;color: #fff;font-size: 17px;padding:10px;" class="label label-info"><%=member %>님의 여행경로 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  게시자 평점 : <%=courseScore%> 점</label>
+				
+					 </div>
 					<%
 					int [] setCourseID;
 					int [] setSequence;
-					
+					String imgName;
 					memberCourseList = bMgr.getMemberCourse(memberID,memberGroup);
 				  listSize = memberCourseList.size();//브라우저 화면에 보여질 게시물갯수
 				setCourseID=new int[listSize];
@@ -242,25 +215,28 @@ Vector<BoardBean> memberCourseList=null;
 							String siteTitle = coursebean.getTourSiteTitle();
 							 courseID=coursebean.getTourCourseID();
 							 courseSequence=coursebean.getTourCourseSequence();
+							 imgName=coursebean.getTourSiteFirstImage();
 							setCourseID[i]=courseID;
 							setSequence[i]=courseSequence;
 					%>
-					
-					<span style="font-size: 25px;font-weight: bold;"><%=siteTitle %> &nbsp;</span>
-					<span style="font-size: 25px;font-weight: bold;"><%=courseID %> &nbsp;</span>
-					<span style="font-size: 25px;font-weight: bold;"><%=courseSequence %> &nbsp;</span>
-					
+						<div style="margin-top: 15px;margin-bottom: 15px " class="col-xs-6 col-md-3 related-grids">
+						<a href="single.html" class="thumbnail">
+							<img src=<%=imgName %> alt=""/>
+						</a>
+						<h5><a href="single.html"><span style="font-size: 18px;font-weight: bold;"><%=siteTitle %></span></a></h5>
+					</div>
+			
 					<input type="hidden" id="courseID" name="courseID" value="<%=courseID%>">
 					<input type="hidden" id="listsize" value="<%=listSize %>">
 					
 					
 			<%}} %>
 					
-					</br></br><h2><%out.print(session.getAttribute("idKey")); %>님의 여행경로
-					<span> ||| 게시자 평점 : <%=courseScore%> 점</span>
+					
+			<!-- 		
 					</div>
 					
-					<div>
+					<div> -->
 					<button id=upGoodCount type="submit" class="btn btn-default btn-lg" name="good" value="<%=num %>">
 					<input id=GoodmemberID type="hidden" name="GoodmemberID" value="<%=session.getAttribute("memberIdKey")%>"> 
  						 <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" ></span> 좋아요
@@ -330,7 +306,7 @@ Vector<BoardBean> commentList = null;
 
 				<section class="accordation_menu">
 				<div class="response">
-				<div class="scrollbar" id="style-2">
+				<div class="scrollbar1" id="style-2">
 				 <label for="label-1" id="item1"><i class="ferme"> </i>Responses &nbsp;&nbsp;&nbsp;댓글 수 :<%=commentCount %> <i class="icon-plus-sign i-right1"></i><i class="icon-minus-sign i-right2"></i></label>
 					
 					<div class="media response-info">
@@ -381,7 +357,10 @@ Vector<BoardBean> commentList = null;
 				</div>
 				
 				
+				<form>
+				<button style="float: right;" class="btn btn-default btn-lg">게시글 지우기</button>
 				
+				</form>
 				
 	<div class="clearfix"></div>
 				<div class="coment-form" >

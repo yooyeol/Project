@@ -23,7 +23,7 @@ public class BoardMgr {
 
 	private DBConnectionMgr pool;/*
 	private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/ch14/fileupload";*/
-	private static final String  SAVEFOLDER = "boardIMG";
+	private static final String  SAVEFOLDER = "http://localhost:8080/testfinal/boardIMG";
 	
 	
 	private static final String ENCTYPE = "UTF-8";
@@ -236,10 +236,10 @@ public class BoardMgr {
 			multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,
 					new DefaultFileRenamePolicy());
 
-			/*if (multi.getFilesystemName("filename") != null) {
+			if (multi.getFilesystemName("filename") != null) {
 				filename = multi.getFilesystemName("filename");
 				filesize = (int) multi.getFile("filename").length();
-			}*/
+			}
 			String content = multi.getParameter("MessageContent");
 		/*	if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
@@ -253,12 +253,17 @@ public class BoardMgr {
 			pstmt.setString(4, multi.getParameter("MemberEmail"));
 			pstmt.setInt(5,Integer.parseInt(multi.getParameter("MemberID")));
 			pstmt.setInt(6,Integer.parseInt(multi.getParameter("memberGroup")));
-			
-			
-			
-			/*pstmt.setInt(6, Integer.parseInt(multi.getParameter("TourCourseID")));
-			이거 추가해야함*/
 			pstmt.executeUpdate();
+			
+			
+			sql="insert MESSAGEPICTURE (MessagePictureURL,MessageID)";
+			sql+="values(?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString
+			
+			
+			
+			
 			
 			sql="insert PREFER(messageID) values(?)";
 			pstmt = con.prepareStatement(sql);
@@ -324,7 +329,7 @@ public class BoardMgr {
 			Vector<BoardBean> memberCourseList = new Vector<BoardBean>();
 			try {
 				con = pool.getConnection();
-				sql = "select TOURSITE.TourSiteTitle,TOURCOURSE.TourCourseID,TOURCOURSE.TourCourseSequence from TOURSITE,TOURCOURSE where TOURSITE.TourSiteContentID=TOURCOURSE.TourSiteContentID and TOURCOURSE.MemberID=? and TOURCOURSE.TourCourseGroup=?";
+				sql = "select TOURSITE.TourSiteTitle,TOURCOURSE.TourCourseID,TOURCOURSE.TourCourseSequence,TOURSITE.TourSiteFirstImage  from TOURSITE,TOURCOURSE where TOURSITE.TourSiteContentID=TOURCOURSE.TourSiteContentID and TOURCOURSE.MemberID=? and TOURCOURSE.TourCourseGroup=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memberID);
 				pstmt.setInt(2, TourCourseGroup);
@@ -336,6 +341,7 @@ public class BoardMgr {
 					bean.setTourSiteTitle(rs.getString("tourSiteTitle"));
 					bean.setTourCourseID(rs.getInt("tourCourseID"));
 					bean.setTourCourseSequence(rs.getInt("tourCourseSequence"));
+					bean.setTourSiteFirstImage(rs.getString("TourSiteFirstImage"));
 					memberCourseList.add(bean);
 				}
 			} catch (Exception e) {
