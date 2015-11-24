@@ -30,7 +30,7 @@
 <label id="test"></label>
 	<div class="container-fluid">
 		<div class="row">
-		<%-- <jsp:include page="../demo/mainHeader.jsp"></jsp:include> --%>
+		<jsp:include page="../demo/mainHeader.jsp"></jsp:include>
  		</div>
 		<div class="row">
 			<div class="col-lg-5">

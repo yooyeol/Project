@@ -80,7 +80,7 @@
 		
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					 <li><a href="main.jsp">Home</a></li>
+					 <li><a href="<%=uri%>/demo/main.jsp">Home</a></li>
 						<!-- <li><a href="course.jsp">GO TRAVELING</a></li> -->
 						<li><a href="<%=uri%>/map/newMapTab.jsp">GO TRAVELING</a></li>
 				 		<li><a href="notify.jsp">공지사항</a></li>
