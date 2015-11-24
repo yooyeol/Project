@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.Date" %>
 <jsp:useBean id="setCourse" class="DAO.MapDAO"></jsp:useBean>
-<<jsp:useBean id="setMember" class="DAO.MemberDAO"></jsp:useBean>
+<jsp:useBean id="setMember" class="DAO.MemberDAO"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String uri = request.getContextPath();
@@ -19,6 +19,7 @@
 %>
 	<script>
 		alert("경로가 저장 되었습니다.");
+		location.href("<%=uri%>/demo/main.jsp");
 	</script>
 <%
 	}else{

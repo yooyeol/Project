@@ -162,7 +162,7 @@ public class MemberDAO {
 		boolean flag = false;
 		try{
 			con = pool.getConnection();
-			sql = "UPDATE member SET MemberGroup = "+group+" WHERE MemberID = "+memberId;
+			sql = "UPDATE MEMBER SET MemberGroup = "+group+" WHERE MemberID = "+memberId;
 			pstmt = con.prepareStatement(sql);
 			pstmt.executeUpdate();
 		}catch(Exception e){

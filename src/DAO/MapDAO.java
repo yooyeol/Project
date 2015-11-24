@@ -39,10 +39,9 @@ public class MapDAO {
 				pstmt.setInt(3, Integer.parseInt(tourPath[i]));
 				pstmt.setInt(4, courseGroup);
 				pstmt.setInt(5, Integer.parseInt(tourPath[i]));
-				if(pstmt.execute()){
-					result++;
-				}
+				result += pstmt.executeUpdate();
 			}
+			System.out.println("result : "+result);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

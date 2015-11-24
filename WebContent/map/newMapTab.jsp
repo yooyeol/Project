@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
-	String uri = request.getContextPath();
+	String url = request.getContextPath();
+	String urlHeader = url+"/demo/mainHeader.jsp";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,22 +9,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>경로 설정하기</title>
-<link rel="stylesheet" href="<%=uri%>/map/style.css"/>
+<link rel="stylesheet" href="<%=url%>/map/style.css"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=uri%>/map/js/jquery.dataTables.min.css">
+<link rel="stylesheet" href="<%=url%>/map/js/jquery.dataTables.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="<%=uri%>/map/js/jquery.dataTables.min.js"></script>
-<script src="<%=uri%>/map/js/mapTabJs.js"></script>
-<script src="<%=uri%>/map/js/paging.js"></script>
-<script src="<%=uri%>/map/js/jquery-ui.js"></script>
+<script src="<%=url%>/map/js/jquery.dataTables.min.js"></script>
+<script src="<%=url%>/map/js/mapTabJs.js"></script>
+<script src="<%=url%>/map/js/paging.js"></script>
+<script src="<%=url%>/map/js/jquery-ui.js"></script>
 
 </head>
 <body>
+<%=session.getAttribute("idKey") %>		
+<%=session.getAttribute("nameKey") %>		
+<%=session.getAttribute("memberIdKey") %>
+<%=session.getAttribute("groupKey") %>
+<%=session.getAttribute("memberCart") %>		
 <label id="test"></label>
 	<div class="container-fluid">
 		<div class="row">
+		<%-- <jsp:include page="../demo/mainHeader.jsp"></jsp:include> --%>
  		</div>
 		<div class="row">
 			<div class="col-lg-5">

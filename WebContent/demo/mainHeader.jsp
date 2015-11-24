@@ -6,12 +6,6 @@
 <%
 	String uri = request.getContextPath();
 %>
-
-<%-- <jsp:useBean id="mMgr" class="DAO.MemberDAO"></jsp:useBean> --%>
-
-
-
-
 <!DOCTYPE html>
 <html> 
 <head>
@@ -68,18 +62,14 @@
 			<div class="wrap">
 				
 				<div class="num">
-					<ul><span style="color: white"><%=session.getAttribute("nameKey")%> 님 환영합니다.</sapn>&nbsp;&nbsp;&nbsp;<a style="color: white"  href="../main/LoginMain.jsp" ><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></ul>
+					<ul><span style='color: white;'><%=session.getAttribute("nameKey")%> 님 환영합니다.</span>&nbsp;&nbsp;&nbsp;<a style="color: white"  href="../main/LoginMain.jsp" ><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></ul>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="header-bottom">
 			<div class="logo text-center">
-			
-		
-			
-				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a> 
-			
+				<a href="main.jsp"><img src="/testfinal/demo/images/mainLogo.jpg" alt=""></a>
 			</div> 
 			
 			<div class="navigation">
@@ -92,24 +82,24 @@
 				<ul class="nav navbar-nav">
 					 <li><a href="main.jsp">Home</a></li>
 						<!-- <li><a href="course.jsp">GO TRAVELING</a></li> -->
-						<li><a href="../map/newMapTab.jsp">GO TRAVELING</a></li>
+						<li><a href="<%=uri%>/map/newMapTab.jsp">GO TRAVELING</a></li>
 				 		<li><a href="notify.jsp">공지사항</a></li>
-						<li><a href="board.jsp">게시판</a></li>
+						<li><a href="<%=uri%>/demo/board.jsp">게시판</a></li>
 					  <li class="dropdown">
 						<a href="mypage1.jsp" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-2">
 							<div class="row">
 								<div class="col-sm-6">
 									<ul class="multi-column-dropdown">
-										<li><a href="mypage1.jsp">내 정보 조회</a></li>
+										<li><a href="<%=uri%>/demo/mypage1.jsp">내 정보 조회</a></li>
 										<li class="divider"></li>
-										<li><a href="mypage2.jsp">회원정보 수정</a></li>
+										<li><a href="<%=uri%>/demo/mypage2.jsp">회원정보 수정</a></li>
 									    <li class="divider"></li>
-										<li><a href="mypage3.jsp">탈퇴하기</a></li>
+										<li><a href="<%=uri%>/demo/mypage3.jsp">탈퇴하기</a></li>
 										<li class="divider"></li>
 										<li><a href="#" data-toggle="modal" data-target="#myModal">나의 경로보기</a></li>
 										<li class="divider"></li>
-										<li><a href="memberPreCourse.jsp">경로바구니</a></li>
+										<li><a href="<%=uri%>/demo/memberPreCourse.jsp">경로바구니</a></li>
 									</ul>
 								</div>
 								
