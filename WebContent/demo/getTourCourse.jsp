@@ -6,9 +6,11 @@
     <%@page import="org.json.simple.*" %>
     <%@page import="org.json.simple.parser.*" %>
 <%
-	
-	int MemberID=Integer.parseInt(request.getParameter("MemberID"));
+int memberID=Integer.parseInt(session.getAttribute("memberIdKey").toString()); 
+	//int MemberID=Integer.parseInt(request.getParameter("MemberID"));
+	int MemberGroup=Integer.parseInt(request.getParameter("MemberGroup"));
 	int listSize=0;
+	int MaxGroup=0;
 	// board.getTourCourse(MemberID); 
 	Vector<BoardBean> courseList = null;
 %>
@@ -32,14 +34,11 @@ int tourCourseID ;
 String tourCourseDate;
 int tourSiteContentID;
 int sequence;
-int MemberGroup=5;
+
 int result;
 
-				MemberGroup=board.getMAXTourGroup(MemberID);
-				System.out.println("멤버그룹"+MemberGroup);
-				for(int j=0;j<MemberGroup;j++){
-					courseList=board.getTourCourse(MemberID, j);	
 			
+					courseList=board.getTourCourse(memberID, MemberGroup);	
 				  listSize = courseList.size();//브라우저 화면에 보여질 게시물갯수
 				  if (courseList.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
@@ -61,14 +60,16 @@ int result;
 					
 					<h4>코스ID : <%=tourCourseID %> | courseDate: <%=tourCourseDate %> | tourSiteContentID : <%=tourSiteContentID %> |memberGroup: <%=MemberGroup %>
 					</h4>
+					
 <%}%>
+
 	<form action="boardPostProc.jsp">
 
-	<input type="hidden" name="memberGroup" value=<%=MemberGroup %>/>	
+	<input type="hidden" name="memberGroup" value=<%=MemberGroup %>>	
 	<button type="submit">경로등록하기</button>	
-	<%=MemberGroup%>			
+		
 	</form>				
-		<%		  }} %>
+		<%		  } %>
 		
 		
 		

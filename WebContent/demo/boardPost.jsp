@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <jsp:useBean id="board" class="board.BoardMgr"></jsp:useBean>
+    <%@page import="board.BoardBean"%>
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
@@ -224,14 +225,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     
                                     <div class="form-group" style="padding:14px;">
+                                    <%
+                                    int memberID=Integer.parseInt(session.getAttribute("memberIdKey").toString()); 
+                                    int Max=board.getMAXTourGroup(memberID); 
+                                   
+                                    %>
+                                    
                                     <select name="courseDate" onchange="showCourse(this.value)">
                                     <option value="">경로선택하기</option>
-                                   <option value="<%=session.getAttribute("memberIdKey")%>">여행경로 보기</option> 
+                                  <%for(int i=0;i<=Max;i++){ %>
+                                   <option value="<%=i%>"> <%=i %>번 여행경로 보기</option> 
+                                	<%} %>
+                                	
                                     </select>
                                     <div id="txtHint">여행 경로를 골라 주세요..</div>
                                     </div>
                                    <script >
                                    function showCourse(str){
+                                	  
                                 	   var xhttp;
                                 	   if(str==""){
                                 		   document.getElementById("txtHint").innerHTML="";
@@ -239,13 +250,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 	   }
                                 	   
                                 	   xhttp=new XMLHttpRequest();
+                                	 
+                                	   xhttp.open("GET", "getTourCourse.jsp?MemberGroup="+str);
+                                	   xhttp.send();
                                 	   xhttp.onreadystatechange=function(){
                                 		   if(xhttp.readyState==4&&xhttp.status==200){
                                 			   document.getElementById("txtHint").innerHTML=xhttp.responseText;
                                 		   }
                                 	   };
-                                	   xhttp.open("GET", "getTourCourse.jsp?MemberID="+str,true);
-                                	   xhttp.send();
                                    }
                                    
                                    </script>
