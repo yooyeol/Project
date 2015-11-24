@@ -66,7 +66,7 @@ int result;
 	<form action="boardPostProc.jsp">
 
 	<input type="hidden" name="memberGroup" value=<%=MemberGroup %>>	
-	<button type="submit">경로등록하기</button>	
+	<!-- <button type="submit">경로등록하기</button>	 -->
 		
 	</form>				
 		<%		  } %>
