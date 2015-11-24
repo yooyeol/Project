@@ -37,7 +37,7 @@ public class BoardMgr {
 		}
 	}
 //코스리스트
-	public Vector<BoardBean> getTourCourse(int memberID) {
+	public Vector<BoardBean> getTourCourse(int memberID,int Group) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -45,9 +45,11 @@ public class BoardMgr {
 		Vector<BoardBean> courseList = new Vector<BoardBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM TOURCOURSE WHERE MemberID = ? ";
+			sql = "SELECT * FROM TOURCOURSE WHERE MemberID = ? and TourCourseGroup=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memberID);
+			pstmt.setInt(2, Group);
+			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardBean bean = new BoardBean();
@@ -68,6 +70,32 @@ public class BoardMgr {
 		}
 		return courseList;
 	}
+	
+	//투어코스 group max
+		public int getMAXTourGroup(int memberID) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int MaxCount = 0;
+			try {
+				con = pool.getConnection();
+				sql="select max(TourCourseGroup) from TOURCOURSE where MemberID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, memberID);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					MaxCount = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return MaxCount;
+		}
+	
+	
 	
 	//장바구니 group max
 	public int getMAXGroup(int memberID) {
@@ -617,12 +645,12 @@ public class BoardMgr {
 					pstmt.setInt(1, Integer.parseInt(courseID[i]));
 					pstmt.setInt(2,memberID );
 					pstmt.setInt(3,CartGroup);
+					result=pstmt.executeUpdate();
 					
-					
-					if(pstmt.execute())
+					/*if(pstmt.execute())
 					{result=1;
 					
-					}
+					}*/
 				}
 				
 			}catch(Exception e){

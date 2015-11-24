@@ -9,7 +9,7 @@
 	
 	int MemberID=Integer.parseInt(request.getParameter("MemberID"));
 	int listSize=0;
-	board.getTourCourse(MemberID);
+	// board.getTourCourse(MemberID); 
 	Vector<BoardBean> courseList = null;
 %>
 <!DOCTYPE html>
@@ -35,13 +35,16 @@ int sequence;
 int MemberGroup=5;
 int result;
 
-				courseList = board.getTourCourse(MemberID);
+				MemberGroup=board.getMAXTourGroup(MemberID);
+				System.out.println("멤버그룹"+MemberGroup);
+				for(int j=0;j<MemberGroup;j++){
+					courseList=board.getTourCourse(MemberID, j);	
+			
 				  listSize = courseList.size();//브라우저 화면에 보여질 게시물갯수
 				  if (courseList.isEmpty()) {
 					out.println("등록된 게시물이 없습니다.");
 				  } else {
 			%>
-				
 				
 					<%
 						  for (int i = 0;i<listSize; i++) {
@@ -60,10 +63,15 @@ int result;
 					</h4>
 <%}%>
 	<form action="boardPostProc.jsp">
-	<input type="checkbox" name="memberGroup" value="<%=MemberGroup %>"/>	
-	<%=result=MemberGroup%>			
+
+	<input type="hidden" name="memberGroup" value=<%=MemberGroup %>/>	
+	<button type="submit">경로등록하기</button>	
+	<%=MemberGroup%>			
 	</form>				
-		<%		  } %>
+		<%		  }} %>
+		
+		
+		
 
 </body>
 </html>

@@ -31,14 +31,14 @@
 	
 <%if(result==1){ %>
 	<script>
-	alert(" 실패 했습니다.");
-		
+	alert("장바구니에 저장 되었습니다.");
+	history.back();
 	</script>
 <%}
 else{ %>
 	<script>
 		alert(" 실패 했습니다.");
-		alert("장바구니에 저장 되었습니다.");
+		
 		history.back();
 	</script>
 <%}%>
