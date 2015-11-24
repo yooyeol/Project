@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String url = request.getContextPath();
-	String urlHeader = url+"/demo/mainHeader.jsp";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,6 +11,9 @@
 <link rel="stylesheet" href="<%=url%>/map/style.css"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=url%>/map/js/jquery.dataTables.min.css">
+<link href="<%=url%>/demo/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -21,22 +23,21 @@
 <script src="<%=url%>/map/js/jquery-ui.js"></script>
 
 </head>
-<body>
-<%=session.getAttribute("idKey") %>		
-<%=session.getAttribute("nameKey") %>		
-<%=session.getAttribute("memberIdKey") %>
-<%=session.getAttribute("groupKey") %>
-<%=session.getAttribute("memberCart") %>		
+<body>		
 <label id="test"></label>
 	<div class="container-fluid">
 		<div class="row">
 		<jsp:include page="../demo/mainHeader.jsp"></jsp:include>
  		</div>
 		<div class="row">
-			<div class="col-lg-5">
+			<div class="col-lg-7">
 				<div class="row">
-					<div id="map">지역을 먼저 선택해 주세요.</div>
-					<div id="right-panel"></div>
+					<div class="col-lg-8">
+						<div id="map"></div>
+					</div>
+					<div class="col-lg-4">
+						<div id="right-panel"></div>
+					</div>
 				</div>
 				<div class="row" align="center">
 				<br/>
@@ -73,7 +74,7 @@
 				</form>
 				</div>
 			</div>
-			<div id="tourListDiv" class="col-lg-7">
+			<div id="tourListDiv" class="col-lg-5">
 				<table class="table table-bordered table-hover ">
 					<thead>
 						<tr>
@@ -93,7 +94,7 @@
 			</div>
 		</div>
 		<div class="row">
-			푸터
+			<jsp:include page="../demo/mainFooter.jsp"></jsp:include>
 		</div>
 	</div>
 	<form name="mapFrm">

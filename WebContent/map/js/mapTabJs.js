@@ -275,6 +275,7 @@ function initMap() {
 	  });
 	
 	 directionsDisplay.setMap(map);
+	 directionsDisplay.setPanel(document.getElementById("right-panel"));
 	 
 	 $(document).on('click','.tourList',function(){
 		var firstStartPoint = $("#startPath").text();
